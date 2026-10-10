@@ -1,6 +1,7 @@
 """从固定版本的原生 UI 构建可恢复的 WPS 习惯配置包，仅使用标准库。"""
 import copy
 import csv
+import sys
 import json
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -240,6 +241,7 @@ class Builder:
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8")
     records = []
     for module in LAYOUT["modules"]:
         builder = Builder(module)
