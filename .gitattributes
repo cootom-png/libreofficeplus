@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.cmd -text whitespace=cr-at-eol
+*.ps1 -text whitespace=cr-at-eol
+*.zip -text
+*.ui -text whitespace=cr-at-eol

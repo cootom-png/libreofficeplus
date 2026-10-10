@@ -1,0 +1,17 @@
+{
+  "version": "26.2.5.2",
+  "buildid": "cd7284b4cbbfeb507e630c1aac019f4157393acb",
+  "origin": "Windows 安装分发中的 share/config/soffice.cfg/modules，原始文件保存在此目录以供复现。",
+  "files": {
+    "swriter": {
+      "path": "swriter/notebookbar.ui",
+      "sha256": "b5d3949bd1239874e1d0c0049b1c1d5075e215db2217ebf6234af50980394d2f",
+      "upstream_reference": "https://github.com/LibreOffice/core/blob/cd7284b4cbbfeb507e630c1aac019f4157393acb/sw/uiconfig/swriter/ui/notebookbar.ui"
+    },
+    "scalc": {
+      "path": "scalc/notebookbar.ui",
+      "sha256": "95663027bb4325d46522b19259fe47fc85b837b6f92558f6568942b58d535804",
+      "upstream_reference": "https://github.com/LibreOffice/core/blob/cd7284b4cbbfeb507e630c1aac019f4157393acb/sc/uiconfig/scalc/ui/notebookbar.ui"
+    }
+  }
+}

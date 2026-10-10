@@ -1,0 +1,14 @@
+LibreOfficePlus
+
+基于 LibreOffice 26.2.5.2 的 Writer / Calc notebookbar.ui 修改。
+原始项目：The Document Foundation / LibreOffice contributors
+上游：https://github.com/LibreOffice/core
+构建：cd7284b4cbbfeb507e630c1aac019f4157393acb
+原始文件：sw/uiconfig/swriter/ui/notebookbar.ui、sc/uiconfig/scalc/ui/notebookbar.ui
+具体基线校验值见 vendor/libreoffice/SOURCE.json。
+
+本项目修改选项卡顺序、常用按钮布局和中文名称，并增加安装、恢复、构建与验证脚本。
+许可证：Mozilla Public License 2.0，完整文本见 LICENSE（安装包中为 LICENSE.txt）。
+安装包内 ui/ 为修改后的源文件；完整构建源码：https://github.com/cootom-png/libreofficeplus
+
+WPS 名称用于说明习惯参考；未分发 WPS 图标、程序或服务。

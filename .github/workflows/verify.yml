@@ -1,0 +1,24 @@
+name: 配置包验证
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 构建与结构检查
+        shell: powershell
+        run: |
+          python scripts/build.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m unittest discover -s tests
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: 安装、升级和恢复检查
+        shell: powershell
+        run: .\tests\test_installer.ps1
+      - name: 检查生成文件同步
+        shell: powershell
+        run: git diff --exit-code -- package dist

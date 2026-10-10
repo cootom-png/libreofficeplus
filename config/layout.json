@@ -1,0 +1,855 @@
+{
+  "tabs": {
+    "Home": "开始",
+    "Insert": "插入",
+    "Layout": "页面",
+    "References": "引用",
+    "Formula": "公式",
+    "Data": "数据",
+    "Review": "审阅",
+    "View": "视图",
+    "Tools": "工具",
+    "Dev": "工具",
+    "File": "文件"
+  },
+  "modules": {
+    "swriter": {
+      "Insert": [
+        [
+          {
+            "label": "空白页",
+            "command": ".uno:InsertPagebreak"
+          },
+          {
+            "label": "分隔符",
+            "command": ".uno:InsertBreak"
+          },
+          {
+            "label": "页码",
+            "command": ".uno:InsertPageNumberField"
+          },
+          {
+            "label": "页眉",
+            "command": ".uno:InsertPageHeader"
+          },
+          {
+            "label": "页脚",
+            "command": ".uno:InsertPageFooter"
+          }
+        ],
+        [
+          {
+            "label": "表格",
+            "command": ".uno:InsertTable"
+          },
+          {
+            "label": "图片",
+            "command": ".uno:InsertGraphic"
+          },
+          {
+            "label": "文档",
+            "command": ".uno:InsertDoc"
+          },
+          {
+            "label": "形状",
+            "command": ".uno:BasicShapes"
+          },
+          {
+            "label": "文本框",
+            "command": ".uno:DrawText"
+          },
+          {
+            "label": "艺术字",
+            "command": ".uno:FontworkGalleryFloater"
+          },
+          {
+            "label": "图表",
+            "command": ".uno:InsertObjectChart"
+          }
+        ],
+        [
+          {
+            "label": "符号",
+            "command": ".uno:CharmapControl"
+          },
+          {
+            "label": "公式",
+            "command": ".uno:InsertObjectStarMath"
+          }
+        ],
+        [
+          {
+            "label": "批注",
+            "command": ".uno:InsertAnnotation"
+          },
+          {
+            "label": "超链接",
+            "command": ".uno:HyperlinkDialog"
+          },
+          {
+            "label": "书签",
+            "command": ".uno:InsertBookmark"
+          },
+          {
+            "label": "附件",
+            "command": ".uno:InsertObject"
+          }
+        ]
+      ],
+      "Layout": [
+        [
+          {
+            "label": "页边距",
+            "command": ".uno:PageDialog"
+          },
+          {
+            "label": "纸张方向",
+            "command": ".uno:Orientation"
+          },
+          {
+            "label": "纸张大小",
+            "command": ".uno:Size"
+          },
+          {
+            "label": "分栏",
+            "command": ".uno:FormatColumns"
+          },
+          {
+            "label": "文字方向",
+            "command": ".uno:TextdirectionLeftToRight"
+          }
+        ],
+        [
+          {
+            "label": "页面边框",
+            "command": ".uno:BorderDialog"
+          },
+          {
+            "label": "背景（页面设置）",
+            "command": ".uno:PageDialog"
+          },
+          {
+            "label": "水印",
+            "command": ".uno:Watermark"
+          },
+          {
+            "label": "行号",
+            "command": ".uno:LineNumberingDialog"
+          }
+        ],
+        [
+          {
+            "label": "空白页",
+            "command": ".uno:InsertPagebreak"
+          },
+          {
+            "label": "分隔符",
+            "command": ".uno:InsertBreak"
+          },
+          {
+            "label": "章节导航",
+            "command": ".uno:Navigator"
+          }
+        ],
+        [
+          {
+            "label": "页眉",
+            "command": ".uno:InsertPageHeader"
+          },
+          {
+            "label": "页脚",
+            "command": ".uno:InsertPageFooter"
+          },
+          {
+            "label": "页码",
+            "command": ".uno:InsertPageNumberField"
+          }
+        ]
+      ],
+      "References": [
+        [
+          {
+            "label": "目录",
+            "command": ".uno:InsertMultiIndex"
+          },
+          {
+            "label": "更新目录",
+            "command": ".uno:UpdateAllIndexes"
+          },
+          {
+            "label": "目录级别",
+            "command": ".uno:OutlineBullet"
+          }
+        ],
+        [
+          {
+            "label": "插入脚注",
+            "command": ".uno:InsertFootnote"
+          },
+          {
+            "label": "上一条脚注",
+            "command": ".uno:JumpToPrevFootnote"
+          },
+          {
+            "label": "下一条脚注",
+            "command": ".uno:JumpToNextFootnote"
+          },
+          {
+            "label": "插入尾注",
+            "command": ".uno:InsertEndnote"
+          }
+        ],
+        [
+          {
+            "label": "题注",
+            "command": ".uno:InsertCaptionDialog"
+          },
+          {
+            "label": "交叉引用",
+            "command": ".uno:InsertReferenceField"
+          }
+        ],
+        [
+          {
+            "label": "标记索引项",
+            "command": ".uno:InsertIndexesEntry"
+          },
+          {
+            "label": "插入索引",
+            "command": ".uno:InsertMultiIndex"
+          },
+          {
+            "label": "更新索引",
+            "command": ".uno:UpdateAllIndexes"
+          }
+        ],
+        [
+          {
+            "label": "邮件合并",
+            "command": ".uno:MailMergeWizard"
+          }
+        ]
+      ],
+      "Review": [
+        [
+          {
+            "label": "拼写检查",
+            "command": ".uno:SpellingAndGrammarDialog"
+          },
+          {
+            "label": "比较",
+            "command": ".uno:CompareDocuments"
+          },
+          {
+            "label": "朗读",
+            "command": ".uno:ReadAloud"
+          },
+          {
+            "label": "字数统计",
+            "command": ".uno:WordCountDialog"
+          }
+        ],
+        [
+          {
+            "label": "插入批注",
+            "command": ".uno:InsertAnnotation"
+          },
+          {
+            "label": "删除批注",
+            "command": ".uno:DeleteComment"
+          },
+          {
+            "label": "上一条批注",
+            "command": ".uno:PreviousAnnotation"
+          },
+          {
+            "label": "下一条批注",
+            "command": ".uno:NextAnnotation"
+          }
+        ],
+        [
+          {
+            "label": "修订",
+            "command": ".uno:TrackChanges"
+          },
+          {
+            "label": "显示标记",
+            "command": ".uno:ShowTrackedChanges"
+          },
+          {
+            "label": "管理修订",
+            "command": ".uno:AcceptTrackedChanges"
+          },
+          {
+            "label": "接受",
+            "command": ".uno:AcceptTrackedChange"
+          },
+          {
+            "label": "拒绝",
+            "command": ".uno:RejectTrackedChange"
+          }
+        ],
+        [
+          {
+            "label": "翻译",
+            "command": ".uno:Translate"
+          },
+          {
+            "label": "繁转简",
+            "command": ".uno:ChineseConversion"
+          }
+        ],
+        [
+          {
+            "label": "限制编辑",
+            "command": ".uno:NoWpsRestrictEditing"
+          }
+        ]
+      ],
+      "View": [
+        [
+          {
+            "label": "全屏显示",
+            "command": ".uno:FullScreen"
+          },
+          {
+            "label": "阅读模式",
+            "command": ".uno:ReadOnlyDoc"
+          },
+          {
+            "label": "页面",
+            "command": ".uno:PrintLayout"
+          },
+          {
+            "label": "Web版式",
+            "command": ".uno:BrowseView"
+          }
+        ],
+        [
+          {
+            "label": "导航窗格",
+            "command": ".uno:Navigator"
+          },
+          {
+            "label": "标尺",
+            "command": ".uno:Ruler"
+          },
+          {
+            "label": "格式标记",
+            "command": ".uno:ControlCodes"
+          },
+          {
+            "label": "网格线",
+            "command": ".uno:GridVisible"
+          },
+          {
+            "label": "样式窗格",
+            "command": ".uno:DesignerDialog"
+          }
+        ],
+        [
+          {
+            "label": "显示比例",
+            "command": ".uno:Zoom"
+          },
+          {
+            "label": "100%",
+            "command": ".uno:Zoom100Percent"
+          },
+          {
+            "label": "页宽",
+            "command": ".uno:ZoomPageWidth"
+          },
+          {
+            "label": "整页",
+            "command": ".uno:ZoomPage"
+          }
+        ],
+        [
+          {
+            "label": "新建窗口",
+            "command": ".uno:NewWindow"
+          },
+          {
+            "label": "重排窗口",
+            "command": ".uno:ArrangeWindows"
+          }
+        ]
+      ],
+      "Tools": [
+        [
+          {
+            "label": "运行宏",
+            "command": ".uno:RunMacro"
+          },
+          {
+            "label": "宏管理",
+            "command": ".uno:MacroDialog"
+          },
+          {
+            "label": "加载项",
+            "command": ".uno:ExtensionManager"
+          },
+          {
+            "label": "开发工具",
+            "command": ".uno:AvailableToolbars"
+          }
+        ],
+        [
+          {
+            "label": "自动更正",
+            "command": ".uno:AutoCorrectDlg"
+          },
+          {
+            "label": "选项",
+            "command": ".uno:OptionsTreeDialog"
+          },
+          {
+            "label": "自定义",
+            "command": ".uno:ConfigureDialog"
+          }
+        ]
+      ]
+    },
+    "scalc": {
+      "Insert": [
+        [
+          {
+            "label": "数据透视表",
+            "command": ".uno:DataDataPilotRun"
+          },
+          {
+            "label": "数据区域",
+            "command": ".uno:DefineDBName"
+          }
+        ],
+        [
+          {
+            "label": "图片",
+            "command": ".uno:InsertGraphic"
+          },
+          {
+            "label": "文档",
+            "command": ".uno:InsertSheetFromFile"
+          },
+          {
+            "label": "形状",
+            "command": ".uno:BasicShapes"
+          },
+          {
+            "label": "艺术字",
+            "command": ".uno:FontworkGalleryFloater"
+          },
+          {
+            "label": "文本框",
+            "command": ".uno:DrawText"
+          }
+        ],
+        [
+          {
+            "label": "图表",
+            "command": ".uno:InsertObjectChart"
+          },
+          {
+            "label": "迷你图",
+            "command": ".uno:InsertSparkline"
+          }
+        ],
+        [
+          {
+            "label": "超链接",
+            "command": ".uno:HyperlinkDialog"
+          },
+          {
+            "label": "公式",
+            "command": ".uno:InsertObjectStarMath"
+          },
+          {
+            "label": "符号",
+            "command": ".uno:InsertSymbol"
+          },
+          {
+            "label": "附件",
+            "command": ".uno:InsertObject"
+          }
+        ]
+      ],
+      "Layout": [
+        [
+          {
+            "label": "打印预览",
+            "command": ".uno:PrintPreview"
+          },
+          {
+            "label": "页边距",
+            "command": ".uno:PageFormatDialog"
+          },
+          {
+            "label": "纸张方向",
+            "command": ".uno:Orientation"
+          },
+          {
+            "label": "纸张大小",
+            "command": ".uno:Size"
+          },
+          {
+            "label": "打印区域",
+            "command": ".uno:DefinePrintArea"
+          },
+          {
+            "label": "打印缩放",
+            "command": ".uno:PageFormatDialog"
+          }
+        ],
+        [
+          {
+            "label": "打印标题",
+            "command": ".uno:EditPrintArea"
+          },
+          {
+            "label": "页眉页脚",
+            "command": ".uno:EditHeaderAndFooter"
+          },
+          {
+            "label": "打印网格线",
+            "command": ".uno:PageFormatDialog"
+          },
+          {
+            "label": "打印行号列标",
+            "command": ".uno:PageFormatDialog"
+          }
+        ],
+        [
+          {
+            "label": "分页预览",
+            "command": ".uno:PagebreakMode"
+          },
+          {
+            "label": "插入分页符",
+            "command": ".uno:InsertRowBreak"
+          },
+          {
+            "label": "背景",
+            "command": ".uno:PageFormatDialog"
+          }
+        ]
+      ],
+      "Formula": [
+        [
+          {
+            "label": "插入函数",
+            "command": ".uno:FunctionDialog"
+          },
+          {
+            "label": "求和",
+            "command": ".uno:AutoSum"
+          },
+          {
+            "label": "常用函数",
+            "command": ".uno:FunctionBox"
+          }
+        ],
+        [
+          {
+            "label": "名称管理器",
+            "command": ".uno:DefineName"
+          },
+          {
+            "label": "指定名称",
+            "command": ".uno:DefineName"
+          },
+          {
+            "label": "粘贴名称",
+            "command": ".uno:InsertName"
+          }
+        ],
+        [
+          {
+            "label": "追踪引用",
+            "command": ".uno:ShowPrecedents"
+          },
+          {
+            "label": "追踪从属",
+            "command": ".uno:ShowDependents"
+          },
+          {
+            "label": "移去箭头",
+            "command": ".uno:ClearArrows"
+          },
+          {
+            "label": "错误检查",
+            "command": ".uno:ShowErrors"
+          }
+        ],
+        [
+          {
+            "label": "显示公式",
+            "command": ".uno:ToggleFormula"
+          },
+          {
+            "label": "自动重算",
+            "command": ".uno:AutomaticCalculation"
+          },
+          {
+            "label": "重算工作簿",
+            "command": ".uno:CalculateHard"
+          },
+          {
+            "label": "计算工作表",
+            "command": ".uno:Calculate"
+          }
+        ]
+      ],
+      "Data": [
+        [
+          {
+            "label": "数据透视表",
+            "command": ".uno:DataDataPilotRun"
+          }
+        ],
+        [
+          {
+            "label": "筛选",
+            "command": ".uno:DataFilterAutoFilter"
+          },
+          {
+            "label": "全部显示",
+            "command": ".uno:DataFilterRemoveFilter"
+          },
+          {
+            "label": "排序",
+            "command": ".uno:DataSort"
+          }
+        ],
+        [
+          {
+            "label": "重复项",
+            "command": ".uno:HandleDuplicateRecords"
+          },
+          {
+            "label": "分列",
+            "command": ".uno:TextToColumns"
+          },
+          {
+            "label": "有效性",
+            "command": ".uno:Validation"
+          }
+        ],
+        [
+          {
+            "label": "填充",
+            "command": ".uno:FillDown"
+          },
+          {
+            "label": "合并计算",
+            "command": ".uno:DataConsolidate"
+          }
+        ],
+        [
+          {
+            "label": "分类汇总",
+            "command": ".uno:DataSubTotals"
+          },
+          {
+            "label": "创建组",
+            "command": ".uno:Group"
+          },
+          {
+            "label": "取消组合",
+            "command": ".uno:Ungroup"
+          },
+          {
+            "label": "展开",
+            "command": ".uno:ShowDetail"
+          },
+          {
+            "label": "折叠",
+            "command": ".uno:HideDetail"
+          }
+        ],
+        [
+          {
+            "label": "获取外部数据",
+            "command": ".uno:InsertExternalDataSource"
+          },
+          {
+            "label": "刷新数据区域",
+            "command": ".uno:DataAreaRefresh"
+          },
+          {
+            "label": "模拟分析（方案）",
+            "command": ".uno:ScenarioManager"
+          },
+          {
+            "label": "选择数据区域",
+            "command": ".uno:SelectData"
+          }
+        ]
+      ],
+      "Review": [
+        [
+          {
+            "label": "拼写检查",
+            "command": ".uno:SpellingAndGrammarDialog"
+          }
+        ],
+        [
+          {
+            "label": "新建批注",
+            "command": ".uno:InsertAnnotation"
+          },
+          {
+            "label": "删除批注",
+            "command": ".uno:DeleteNote"
+          },
+          {
+            "label": "上一条批注",
+            "command": ".uno:PreviousAnnotation"
+          },
+          {
+            "label": "下一条批注",
+            "command": ".uno:NextAnnotation"
+          },
+          {
+            "label": "显示批注",
+            "command": ".uno:ShowNote"
+          }
+        ],
+        [
+          {
+            "label": "单元格格式（保护）",
+            "command": ".uno:FormatCellDialog"
+          },
+          {
+            "label": "允许编辑区域",
+            "command": ".uno:AllowEditRanges"
+          },
+          {
+            "label": "保护工作表",
+            "command": ".uno:Protect"
+          },
+          {
+            "label": "保护工作簿",
+            "command": ".uno:ToolProtectionDocument"
+          }
+        ],
+        [
+          {
+            "label": "繁转简",
+            "command": ".uno:ChineseConversion"
+          }
+        ]
+      ],
+      "View": [
+        [
+          {
+            "label": "普通",
+            "command": ".uno:NormalViewMode"
+          },
+          {
+            "label": "分页预览",
+            "command": ".uno:PagebreakMode"
+          },
+          {
+            "label": "全屏显示",
+            "command": ".uno:FullScreen"
+          }
+        ],
+        [
+          {
+            "label": "编辑栏",
+            "command": ".uno:InputLineVisible"
+          },
+          {
+            "label": "行号列标",
+            "command": ".uno:ViewRowColumnHeaders"
+          },
+          {
+            "label": "网格线",
+            "command": ".uno:ToggleSheetGrid"
+          },
+          {
+            "label": "样式窗格",
+            "command": ".uno:DesignerDialog"
+          }
+        ],
+        [
+          {
+            "label": "显示比例",
+            "command": ".uno:Zoom"
+          },
+          {
+            "label": "100%",
+            "command": ".uno:Zoom100Percent"
+          }
+        ],
+        [
+          {
+            "label": "冻结窗格",
+            "command": ".uno:FreezePanes"
+          },
+          {
+            "label": "冻结首行",
+            "command": ".uno:FreezePanesRow"
+          },
+          {
+            "label": "冻结首列",
+            "command": ".uno:FreezePanesColumn"
+          },
+          {
+            "label": "拆分窗口",
+            "command": ".uno:SplitWindow"
+          },
+          {
+            "label": "新建窗口",
+            "command": ".uno:NewWindow"
+          }
+        ]
+      ],
+      "Tools": [
+        [
+          {
+            "label": "运行宏",
+            "command": ".uno:RunMacro"
+          },
+          {
+            "label": "宏编辑器",
+            "command": ".uno:BasicIDEAppear"
+          },
+          {
+            "label": "加载项",
+            "command": ".uno:ExtensionManager"
+          },
+          {
+            "label": "开发工具",
+            "command": ".uno:AvailableToolbars"
+          }
+        ],
+        [
+          {
+            "label": "记录单",
+            "command": ".uno:DataForm"
+          },
+          {
+            "label": "选择数据区域",
+            "command": ".uno:SelectData"
+          },
+          {
+            "label": "合并计算",
+            "command": ".uno:DataConsolidate"
+          }
+        ],
+        [
+          {
+            "label": "选项",
+            "command": ".uno:OptionsTreeDialog"
+          },
+          {
+            "label": "自定义",
+            "command": ".uno:ConfigureDialog"
+          }
+        ]
+      ]
+    }
+  }
+}
