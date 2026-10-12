@@ -20,6 +20,9 @@ def build_templates(package):
                  f'style:font-name-asian="宋体" fo:font-size="{size}pt" style:font-size-asian="{size}pt"/></style:default-style>')
         if kind=='spreadsheet':
             default+=f'<style:default-style style:family="table-cell"><style:text-properties style:font-name="宋体" style:font-name-asian="宋体" fo:font-size="{size}pt" style:font-size-asian="{size}pt"/></style:default-style>'
+        if kind=='graphics':
+            # Draw 新建文本框继承 standard 图形样式，不读取文字段落的默认字号。
+            default+=f'<style:style style:name="standard" style:family="graphic"><style:text-properties style:font-name="宋体" style:font-name-asian="宋体" fo:font-size="{size}pt" style:font-size-asian="{size}pt"/></style:style>'
         margin='fo:margin-top="2.54cm" fo:margin-bottom="2.54cm" fo:margin-left="3.18cm" fo:margin-right="3.18cm"' if kind=='text' else 'fo:margin="1.9cm"'
         styles=(f'<office:document-styles {NS} office:version="1.3">{FONT}<office:styles>{default}</office:styles>'
                 f'<office:automatic-styles><style:page-layout style:name="pm1"><style:page-layout-properties fo:page-width="21cm" fo:page-height="29.7cm" style:print-orientation="portrait" {margin}/></style:page-layout></office:automatic-styles>'

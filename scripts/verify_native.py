@@ -124,7 +124,10 @@ def main():
             doc=open_doc(uno.systemPathToFileUrl(str(templates/f'WPS习惯{name}.{extension}')))
             if module=='Writer': valid=doc.Text.createTextCursor().CharHeight==10.5
             elif module=='Calc': valid=doc.Sheets.getByIndex(0).getCellRangeByName('A1').CharHeight==11
-            else: valid=doc.DrawPages.getByIndex(0).Width==21000
+            else:
+                text=doc.createInstance('com.sun.star.drawing.TextShape')
+                doc.DrawPages.getByIndex(0).add(text); text.String='template font'
+                valid=doc.DrawPages.getByIndex(0).Width==21000 and text.CharHeight==11 and text.CharFontNameAsian=='宋体'
             check(module,'可选模板加载',valid)
     finally:
         (args.output/'原生命令验收.json').write_text(json.dumps(results,ensure_ascii=False,indent=2)+'\n','utf8')
