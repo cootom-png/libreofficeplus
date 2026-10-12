@@ -12,18 +12,34 @@ try {
     exit 1
 }
 $controls = @{}
-foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','StatusMessage','Step1','Step2','Step3','Details','Footer','CloseButton') {
+foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','StatusMessage','Step1','Step2','Step3','Checks','Details','Footer','CloseButton') {
     $controls[$name] = $window.FindName($name)
 }
 $operation = if ($Restore) { '恢复' } else { '安装' }
 $window.Title = "LibreOfficePlus · $operation"
+$window.MaxHeight = [Windows.SystemParameters]::WorkArea.Height
+$window.Height = [Math]::Min($window.Height,$window.MaxHeight)
 if ($Restore) {
     $controls.Heading.Text = '恢复原界面，保留你的习惯'
     $controls.Subtitle.Text = '从首次备份还原所选模块的界面与设置'
 }
 $controls.StatusTitle.Text = "正在准备$operation"
 $controls.Details.Text = "所选模块：$Modules`n请等待操作完成，再打开 LibreOffice。"
-$state = [hashtable]::Synchronized(@{ Update=@{ Percent=0; Message='正在启动配置程序…' }; Failure=$null })
+$state = [hashtable]::Synchronized(@{ Update=@{ Percent=0; Message='正在启动配置程序…' }; Checks=@(); Failure=$null })
+$checkTitles = @('运行环境','安装目录','版本兼容','运行状态','用户配置','目录写入','配置包文件','首次备份')
+function Refresh-Checks {
+    $snapshot = @($state.Checks)
+    $titles = @($checkTitles) + @($snapshot | Where-Object { $_.Title -notin $checkTitles } | ForEach-Object { $_.Title } | Select-Object -Unique)
+    $controls.Checks.ItemsSource = @(foreach ($title in $titles) {
+        $result = $snapshot | Where-Object { $_.Title -eq $title } | Select-Object -Last 1
+        $status = if ($result) { $result.State } else { '未检查' }
+        [pscustomobject]@{
+            Title=$title; State=$status; Message=$(if ($result) { $result.Message } elseif ($state.Failure) { '前置检查未通过，本次未执行。' } else { '等待前面的检查完成。' })
+            Color=$(switch ($status) { '通过' { '#128562' }; '需处理' { '#C83939' }; default { '#8795A9' } })
+        }
+    })
+}
+Refresh-Checks
 $job = [PowerShell]::Create()
 $worker = {
     param($CorePath, $State, $RestoreMode, $SelectedModules, $ApplicationPath)
@@ -36,12 +52,15 @@ $worker = {
         & $CorePath -Restore:$RestoreMode -Modules $SelectedModules -LibreOfficePath $ApplicationPath -OnProgress {
             param($Percent, $Message)
             $State.Update = @{ Percent=$Percent; Message=$Message }
+        } -OnCheck {
+            param($Result)
+            $State.Checks = @($State.Checks) + @($Result)
         } | Out-Null
     } catch { $State.Failure = $_.Exception.Message }
     finally { if ($acquired) { $mutex.ReleaseMutex() }; $mutex.Dispose() }
 }
 $null = $job.AddScript($worker.ToString()).AddArgument((Join-Path $PSScriptRoot 'configure.ps1')).AddArgument($state).AddArgument($Restore.IsPresent).AddArgument($Modules).AddArgument($LibreOfficePath)
-$ui = @{ Running=$true; Handle=$null; ExitCode=1 }
+$ui = @{ Running=$true; Handle=$null; ExitCode=1; CheckCount=0 }
 $timer = [Windows.Threading.DispatcherTimer]::new()
 $timer.Interval = [TimeSpan]::FromMilliseconds(80)
 $timer.Add_Tick({
@@ -50,6 +69,7 @@ $timer.Add_Tick({
     $controls.Percent.Text = "$($update.Percent)%"
     $controls.StatusMessage.Text = $update.Message
     $controls.StatusTitle.Text = "正在$operation"
+    if ($ui.CheckCount -ne $state.Checks.Count) { Refresh-Checks; $ui.CheckCount=$state.Checks.Count }
     $stage = if ($update.Percent -lt 30) { 1 } elseif ($update.Percent -lt 95) { 2 } else { 3 }
     foreach ($number in 1..3) {
         $controls["Step$number"].Foreground = if ($number -le $stage) { '#2563EB' } else { '#8795A9' }
@@ -59,12 +79,13 @@ $timer.Add_Tick({
     try { $job.EndInvoke($ui.Handle) | Out-Null }
     catch { if (!$state.Failure) { $state.Failure = $_.Exception.Message } }
     $job.Dispose()
+    Refresh-Checks
     $ui.Running = $false
     $controls.CloseButton.IsEnabled = $true
     $controls.CloseButton.Content = '完成并关闭'
     if ($state.Failure) {
         $controls.StatusTitle.Text = "未能完成$operation"
-        $controls.StatusMessage.Text = '请按下方提示处理后，重新运行配置包。'
+        $controls.StatusMessage.Text = '请查看检查结果及下方原因，处理后重新运行。'
         $controls.Details.Text = $state.Failure
         $controls.Progress.Foreground = '#DC4C4C'
         $controls.Percent.Text = '需要处理'

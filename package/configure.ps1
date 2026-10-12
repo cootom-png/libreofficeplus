@@ -1,12 +1,16 @@
 ﻿param([switch]$Restore, [string]$Modules = 'Writer,Calc,Draw',
       [string]$LibreOfficePath = (Join-Path $env:ProgramFiles 'LibreOffice'),
-      [scriptblock]$OnProgress = { param($Percent, $Message) })
+      [scriptblock]$OnProgress = { param($Percent, $Message) },
+      [scriptblock]$OnCheck = { param($Result) Write-Host "[$($Result.State)] $($Result.Title)：$($Result.Message)" })
 $ErrorActionPreference = 'Stop'
 & $OnProgress 5 '正在检查环境与所选模块…'
 $moduleIds = @{ Writer='swriter'; Calc='scalc'; Draw='sdraw' }
 $moduleNames = @{ swriter='文字'; scalc='表格'; sdraw='绘图' }
 $selected = @($Modules.Split(',') | ForEach-Object { $_.Trim() } | Select-Object -Unique)
-if (!$selected.Count -or @($selected | Where-Object { !$moduleIds.ContainsKey($_) }).Count) { throw 'Modules 只接受 Writer、Calc、Draw，多个模块用英文逗号分隔。' }
+if (!$selected.Count -or @($selected | Where-Object { !$moduleIds.ContainsKey($_) }).Count) {
+    & $OnCheck @{Title='所选模块';State='需处理';Message='只接受 Writer、Calc、Draw，多个模块用英文逗号分隔。'}
+    throw 'Modules 只接受 Writer、Calc、Draw，多个模块用英文逗号分隔。'
+}
 $selectedIds = @($selected | ForEach-Object { $moduleIds[$_] })
 $base = Join-Path $env:APPDATA 'LibreOffice'
 $config = Join-Path $base '4\user\registrymodifications.xcu'
@@ -14,9 +18,55 @@ $backup = Join-Path $base 'wps-ui-backup.xml'
 $uiBackup = Join-Path $base 'wps-ui-files-backup'
 $uiState = Join-Path $uiBackup 'state.json'
 $ns = 'http://openoffice.org/2001/registry'
-if (Get-Process -Name 'soffice','soffice.bin' -ErrorAction SilentlyContinue) { throw '请先保存文档并完全退出 LibreOffice，再运行此配置包。不会强制结束进程。' }
-if (!(Test-Path -LiteralPath $config)) { throw '请先启动并关闭一次 LibreOffice，生成用户配置。' }
-[xml]$doc = Get-Content -LiteralPath $config -Raw -Encoding UTF8
+$checkFailures = [Collections.Generic.List[string]]::new()
+function Check($title, $status, $message) {
+    & $OnCheck @{Title=$title;State=$status;Message=$message}
+    if ($status -eq '需处理') { $checkFailures.Add($message) }
+}
+if ($env:OS -eq 'Windows_NT' -and $PSVersionTable.PSVersion -ge [version]'5.1') {
+    Check '运行环境' '通过' "Windows · PowerShell $($PSVersionTable.PSVersion)"
+} else { Check '运行环境' '需处理' '请在 Windows 中使用 PowerShell 5.1 或更高版本运行配置包。' }
+$executable = Join-Path $LibreOfficePath 'program\soffice.exe'
+$versionFile = Join-Path $LibreOfficePath 'program\version.ini'
+$applicationFound = (Test-Path -LiteralPath $executable -PathType Leaf) -and (Test-Path -LiteralPath $versionFile -PathType Leaf)
+if ($Restore) {
+    Check '安装目录' '不适用' '恢复仅还原用户配置，不要求软件仍安装在原目录。'
+    Check '版本兼容' '不适用' '恢复原界面无需匹配适配版本。'
+} else {
+    if ($applicationFound) { Check '安装目录' '通过' $LibreOfficePath }
+    else { Check '安装目录' '需处理' "未找到完整的 LibreOffice 安装：$LibreOfficePath。请先安装软件；自定义路径请使用 LibreOfficePath 参数。" }
+    try {
+        $build = if (Test-Path -LiteralPath $versionFile -PathType Leaf) {
+            (Get-Content -LiteralPath $versionFile -Encoding UTF8 | Where-Object { $_ -match '^buildid=' }) -replace '^buildid=',''
+        }
+        $detectedVersion = if (Test-Path -LiteralPath $executable -PathType Leaf) { (Get-Item -LiteralPath $executable).VersionInfo.ProductVersion }
+        $buildMatches = $applicationFound -and $build -ceq 'cd7284b4cbbfeb507e630c1aac019f4157393acb'
+        $compatible = $buildMatches -and (!$detectedVersion -or $detectedVersion -eq '26.2.5.2')
+        if (!$detectedVersion) { $detectedVersion = if ($buildMatches) { '26.2.5.2' } else { '无法识别' } }
+        if ($compatible) { Check '版本兼容' '通过' "当前 $detectedVersion · 适配 26.2.5.2，构建匹配。" }
+        else { Check '版本兼容' '需处理' "当前版本：$detectedVersion；本包适配 LibreOffice 26.2.5.2，且须匹配验证过的构建。请使用适配版本或等待对应版本配置包。" }
+    } catch { Check '版本兼容' '需处理' "无法读取版本信息：$($_.Exception.Message)。请检查安装文件和读取权限。" }
+}
+if (Get-Process -Name 'soffice','soffice.bin' -ErrorAction SilentlyContinue) {
+    Check '运行状态' '需处理' '请先保存文档并完全退出 LibreOffice，再运行此配置包。不会强制结束进程。'
+} else { Check '运行状态' '通过' 'LibreOffice 已退出，可以处理用户配置。' }
+try {
+    if (!(Test-Path -LiteralPath $config -PathType Leaf)) { throw '请先启动并关闭一次 LibreOffice，生成用户配置。' }
+    [xml]$doc = Get-Content -LiteralPath $config -Raw -Encoding UTF8
+    if ($doc.DocumentElement.LocalName -ne 'items') { throw '用户配置格式不正确，请修复 LibreOffice 用户配置后重试。' }
+    Check '用户配置' '通过' '已找到并读取当前用户配置。'
+} catch { Check '用户配置' '需处理' $_.Exception.Message }
+if (!$checkFailures.Count) {
+    $probe = Join-Path (Split-Path $config) ('.wps-check-' + [guid]::NewGuid().ToString('N') + '.tmp')
+    try {
+        $stream = [IO.File]::Open($probe,[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::None)
+        $stream.Dispose()
+        [IO.File]::Delete($probe)
+        Check '目录写入' '通过' '当前用户配置目录可写，临时检查文件已清理。'
+    } catch { Check '目录写入' '需处理' "无法写入或清理用户配置目录的检查文件：$($_.Exception.Message)。请检查目录权限或安全软件的拦截记录。" }
+    finally { if (Test-Path -LiteralPath $probe) { Remove-Item -LiteralPath $probe -ErrorAction SilentlyContinue } }
+} else { Check '目录写入' '未检查' '前置检查未通过，尚未测试写入权限。' }
+if ($checkFailures.Count) { throw ($checkFailures -join "`n") }
 & $OnProgress 15 '已读取当前用户配置，正在检查配置包…'
 function Scope($path, $name) {
     if ($path -match 'Writer|com.sun.star.text.TextDocument' -or $name -eq 'ActiveWriter') { return 'Writer' }
@@ -62,6 +112,7 @@ function Valid-File($entry) {
     $entry.Module -in $moduleIds.Values -and ($entry.Path -eq 'ui/notebookbar.ui' -or $entry.Path -cmatch '^popupmenu/[a-z0-9_]+\.xml$')
 }
 $packageFiles = @($selectedIds | ForEach-Object { [pscustomobject]@{Module=$_;Path='ui/notebookbar.ui'} })
+try {
 $menuFiles = ConvertFrom-Json -InputObject (Get-Content -LiteralPath (Join-Path $PSScriptRoot 'profile-files.json') -Raw -Encoding UTF8)
 foreach ($file in $menuFiles) {
     $prefix = "config/soffice.cfg/modules/$($file.Module)/"
@@ -94,8 +145,6 @@ foreach ($setting in $labels) {
     if ((Scope $setting.Path $setting.Name) -in ($selected + 'Shared')) { $changes += ,@($setting.Path,$setting.Name,$setting.Value,$setting.Localized,$setting.Language) }
 }
 if (!$Restore) {
-    $versionFile = Join-Path $LibreOfficePath 'program\version.ini'
-    if (!(Test-Path -LiteralPath $versionFile) -or !(Select-String -LiteralPath $versionFile -Pattern '^buildid=cd7284b4cbbfeb507e630c1aac019f4157393acb$' -Quiet)) { throw '本定制功能区只验证用于 LibreOffice 26.2.5.2，未修改设置。' }
     foreach ($file in $packageFiles | Where-Object { $_.Path -like 'popupmenu/*' }) {
         [xml]$menuCheck = Get-Content -LiteralPath (Join-Path $PSScriptRoot "profile/config/soffice.cfg/modules/$($file.Module)/$($file.Path)") -Raw -Encoding UTF8
         if ($menuCheck.DocumentElement.LocalName -ne 'menupopup' -or $menuCheck.DocumentElement.NamespaceURI -ne 'http://openoffice.org/2001/menu') { throw '菜单文件不完整，未修改设置。' }
@@ -105,6 +154,9 @@ if (!$Restore) {
         if (!$uiCheck.SelectSingleNode('//object[@id="ContextContainer"]')) { throw '功能区文件不完整，未修改设置。' }
     }
 }
+Check '配置包文件' '通过' $(if ($Restore) { '恢复所需清单已读取。' } else { '所选模块的功能区、菜单和设置清单已校验。' })
+} catch { Check '配置包文件' '需处理' "配置包不完整或格式不正确：$($_.Exception.Message)。请重新解压完整 ZIP。"; throw }
+try {
 $uiFiles = @()
 & $OnProgress 30 '正在核对首次备份与恢复记录…'
 if (Test-Path -LiteralPath $uiState) {
@@ -127,6 +179,8 @@ if (Test-Path -LiteralPath $backup) {
     if ($saved.DocumentElement.Name -ne 'backup' -or $version -notin @('1','2','3','4','5','6')) { throw '无法识别配置备份版本，未修改设置。' }
 } elseif ($Restore) { throw '没有找到此配置包的备份。' }
 else { $saved.LoadXml('<backup version="6"><tracked/></backup>'); $version='6' }
+Check '首次备份' '通过' $(if (Test-Path -LiteralPath $backup) { '已找到并校验原备份，将继续保留首次记录。' } else { '未发现旧备份，本次安装将创建首次备份。' })
+} catch { Check '首次备份' '需处理' $_.Exception.Message; throw }
 $tracked = $saved.SelectSingleNode('/backup/tracked')
 if (!$tracked) {
     $tracked = $saved.CreateElement('tracked'); $saved.DocumentElement.AppendChild($tracked) | Out-Null
@@ -243,5 +297,5 @@ if ($Restore) {
         if (Test-Path -LiteralPath $uiState) { Remove-Item -LiteralPath $uiState }
     }
     Write-Host "已恢复模块：$($selected -join '、')。"
-} else { Write-Host "已安装 LibreOfficePlus v6：$($selected -join '、')。请重新打开所选模块。" }
+} else { Write-Host "已安装 LibreOfficePlus v6.1：$($selected -join '、')。请重新打开所选模块。" }
 & $OnProgress 100 '所有步骤已完成。'
