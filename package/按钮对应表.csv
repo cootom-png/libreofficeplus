@@ -31,11 +31,12 @@ swriter,开始,.uno:JustifyPara,Home-JustifyPara,Home-Section-Paragraph,10,保�
 swriter,开始,.uno:LineSpacing,Home-LineSpacing1,Home-Section-Paragraph,11,保留原生控件或增加常用入口
 swriter,开始,.uno:StylesPreview,Home-StylesPreview,Home-Section-Style3,1,保留原生控件或增加常用入口
 swriter,开始,.uno:SearchDialog,WPS-swriter-7,WPS-swriter-3,1,保留原生控件或增加常用入口
-swriter,开始,.uno:SidebarDeck.StyleListDeck,WPS-swriter-19,WPS-swriter-3,2,保留原生控件或增加常用入口
-swriter,开始,.uno:InsertAnnotation,WPS-swriter-21,WPS-swriter-3,3,保留原生控件或增加常用入口
+swriter,开始,.uno:SidebarDeck.StyleListDeck,WPS-swriter-20,WPS-swriter-3,2,保留原生控件或增加常用入口
+swriter,开始,.uno:InsertAnnotation,WPS-swriter-22,WPS-swriter-3,3,保留原生控件或增加常用入口
 swriter,开始,.uno:SelectAll,全选,常用操作/选择,1,菜单入口；行号指上级按钮所在行
-swriter,开始,.uno:FontDialog,字体…,常用操作/格式设置,2,菜单入口；行号指上级按钮所在行
+swriter,开始,.uno:FontDialog,字体（文字外观）…,常用操作/格式设置,2,菜单入口；行号指上级按钮所在行
 swriter,开始,.uno:ParagraphDialog,段落…,常用操作/格式设置,2,菜单入口；行号指上级按钮所在行
+swriter,开始,.uno:SidebarDeck.InspectorDeck,样式检查,常用操作/格式设置,2,菜单入口；行号指上级按钮所在行
 swriter,开始,.uno:PageDialog,页面设置…,常用操作/格式设置,2,菜单入口；行号指上级按钮所在行
 swriter,插入,.uno:InsertPagebreak,分页符,第 1 组/Insert-Section-Pagebreak,1,已安排；待具体文档验证
 swriter,插入,.uno:InsertBreak,分隔符,第 1 组/Insert-Section-Pagebreak,2,已安排；待具体文档验证
@@ -54,7 +55,7 @@ swriter,插入,.uno:InsertObjectStarMath,公式,第 3 组/Insert-Section-Table,2
 swriter,插入,.uno:InsertAnnotation,批注,第 4 组/Insert-Section-Table1,1,已安排；待具体文档验证
 swriter,插入,.uno:HyperlinkDialog,超链接,第 4 组/Insert-Section-Table1,2,已安排；待具体文档验证
 swriter,插入,.uno:InsertBookmark,书签,第 4 组/Insert-Section-Table1,3,已安排；待具体文档验证
-swriter,插入,.uno:InsertObject,附件,第 4 组/Insert-Section-Table1,4,已安排；待具体文档验证
+swriter,插入,.uno:InsertObject,嵌入对象…,第 4 组/Insert-Section-Table1,4,已安排；待具体文档验证
 swriter,页面,.uno:PageDialog,页边距,第 1 组/Layout-Section-File,1,已安排；待具体文档验证
 swriter,页面,.uno:Orientation,纸张方向,第 1 组/Layout-Section-File,2,已安排；待具体文档验证
 swriter,页面,.uno:Size,纸张大小,第 1 组/Layout-Section-File,3,已安排；待具体文档验证
@@ -170,11 +171,14 @@ scalc,开始,.uno:StyleApply?Style:string=Good&FamilyName:string=CellStyles,Home
 scalc,开始,.uno:StyleApply?Style:string=Neutral&FamilyName:string=CellStyles,Home-NeutralStyle,Home-Section-Style2,6,保留原生控件或增加常用入口
 scalc,开始,.uno:StyleApply?Style:string=Bad&FamilyName:string=CellStyles,Home-BadStyle,Home-Section-Style2,7,保留原生控件或增加常用入口
 scalc,开始,.uno:FormatCellDialog,WPS-scalc-3,Home-Section-Style2,8,保留原生控件或增加常用入口
-scalc,开始,.uno:AutoSum,WPS-scalc-16,WPS-scalc-4,1,保留原生控件或增加常用入口
-scalc,开始,.uno:DataSort,WPS-scalc-18,WPS-scalc-4,2,保留原生控件或增加常用入口
-scalc,开始,.uno:DataFilterAutoFilter,WPS-scalc-21,WPS-scalc-4,3,保留原生控件或增加常用入口
-scalc,开始,.uno:SearchDialog,WPS-scalc-28,WPS-scalc-4,4,保留原生控件或增加常用入口
-scalc,开始,.uno:FormatCellDialog,WPS-scalc-30,WPS-scalc-4,5,保留原生控件或增加常用入口
+scalc,开始,.uno:AutoSum,WPS-scalc-23,WPS-scalc-4,1,保留原生控件或增加常用入口
+scalc,开始,.uno:DataSort,WPS-scalc-26,WPS-scalc-4,2,保留原生控件或增加常用入口
+scalc,开始,.uno:DataFilterAutoFilter,WPS-scalc-28,WPS-scalc-4,3,保留原生控件或增加常用入口
+scalc,开始,.uno:SearchDialog,WPS-scalc-35,WPS-scalc-4,4,保留原生控件或增加常用入口
+scalc,开始,.uno:InsertContents?Flags:string=SVD,粘贴值（含文本与计算结果）,常用操作/粘贴选项,1,菜单入口；行号指上级按钮所在行
+scalc,开始,.uno:InsertContents?Flags:string=T,仅粘贴格式,常用操作/粘贴选项,1,菜单入口；行号指上级按钮所在行
+scalc,开始,.uno:PasteOnlyFormula,仅粘贴公式,常用操作/粘贴选项,1,菜单入口；行号指上级按钮所在行
+scalc,开始,.uno:InsertContents,选择性粘贴…,常用操作/粘贴选项,1,菜单入口；行号指上级按钮所在行
 scalc,开始,.uno:FillDown,向下填充,常用操作/填充,1,菜单入口；行号指上级按钮所在行
 scalc,开始,.uno:FillRight,向右填充,常用操作/填充,1,菜单入口；行号指上级按钮所在行
 scalc,开始,.uno:FillUp,向上填充,常用操作/填充,1,菜单入口；行号指上级按钮所在行
@@ -186,7 +190,7 @@ scalc,开始,.uno:FreezePanesColumn,冻结首列,常用操作/冻结,2,菜单入
 scalc,插入,.uno:DataDataPilotRun,数据透视表,第 1 组/Insert-Section-Function,1,已安排；待具体文档验证
 scalc,插入,.uno:DefineDBName,数据区域,第 1 组/Insert-Section-Function,2,已安排；待具体文档验证
 scalc,插入,.uno:InsertGraphic,图片,第 2 组/Insert-Section-Function1,1,已安排；待具体文档验证
-scalc,插入,.uno:InsertSheetFromFile,文档,第 2 组/Insert-Section-Function1,2,已安排；待具体文档验证
+scalc,插入,.uno:InsertSheetFromFile,从文件导入工作表…,第 2 组/Insert-Section-Function1,2,已安排；待具体文档验证
 scalc,插入,.uno:BasicShapes,形状,第 2 组/Insert-Section-Function1,3,已安排；待具体文档验证
 scalc,插入,.uno:FontworkGalleryFloater,艺术字,第 2 组/Insert-Section-Function1,4,已安排；待具体文档验证
 scalc,插入,.uno:DrawText,文本框,第 2 组/Insert-Section-Function1,5,已安排；待具体文档验证
@@ -195,7 +199,7 @@ scalc,插入,.uno:InsertSparkline,迷你图,第 3 组/Insert-Section-Chart,2,已
 scalc,插入,.uno:HyperlinkDialog,超链接,第 4 组/Insert-Section-Chart1,1,已安排；待具体文档验证
 scalc,插入,.uno:InsertObjectStarMath,公式,第 4 组/Insert-Section-Chart1,2,已安排；待具体文档验证
 scalc,插入,.uno:InsertSymbol,符号,第 4 组/Insert-Section-Chart1,3,已安排；待具体文档验证
-scalc,插入,.uno:InsertObject,附件,第 4 组/Insert-Section-Chart1,4,已安排；待具体文档验证
+scalc,插入,.uno:InsertObject,嵌入对象…,第 4 组/Insert-Section-Chart1,4,已安排；待具体文档验证
 scalc,页面,.uno:PrintPreview,打印预览,第 1 组/Layout-Section-File,1,已安排；待具体文档验证
 scalc,页面,.uno:PageFormatDialog,页边距,第 1 组/Layout-Section-File,2,已安排；待具体文档验证
 scalc,页面,.uno:Orientation,纸张方向,第 1 组/Layout-Section-File,3,已安排；待具体文档验证
@@ -209,20 +213,20 @@ scalc,页面,.uno:PageFormatDialog,打印行号列标,第 2 组/Layout-Section-F
 scalc,页面,.uno:PagebreakMode,分页预览,第 3 组/Layout-Section-File2,1,已安排；待具体文档验证
 scalc,页面,.uno:InsertRowBreak,插入分页符,第 3 组/Layout-Section-File2,2,已安排；待具体文档验证
 scalc,页面,.uno:PageFormatDialog,背景,第 3 组/Layout-Section-File2,3,已安排；待具体文档验证
-scalc,公式,.uno:FunctionDialog,插入函数,第 1 组/WPS-scalc-33,1,已安排；待具体文档验证
-scalc,公式,.uno:AutoSum,求和,第 1 组/WPS-scalc-33,2,已安排；待具体文档验证
-scalc,公式,.uno:FunctionBox,常用函数,第 1 组/WPS-scalc-33,3,已安排；待具体文档验证
-scalc,公式,.uno:DefineName,名称管理器,第 2 组/WPS-scalc-36,1,已安排；待具体文档验证
-scalc,公式,.uno:DefineName,指定名称,第 2 组/WPS-scalc-36,2,已安排；待具体文档验证
-scalc,公式,.uno:InsertName,粘贴名称,第 2 组/WPS-scalc-36,3,已安排；待具体文档验证
-scalc,公式,.uno:ShowPrecedents,追踪引用,第 3 组/WPS-scalc-42,1,已安排；待具体文档验证
-scalc,公式,.uno:ShowDependents,追踪从属,第 3 组/WPS-scalc-42,2,已安排；待具体文档验证
-scalc,公式,.uno:ClearArrows,移去箭头,第 3 组/WPS-scalc-42,3,已安排；待具体文档验证
-scalc,公式,.uno:ShowErrors,错误检查,第 3 组/WPS-scalc-42,4,已安排；待具体文档验证
-scalc,公式,.uno:ToggleFormula,显示公式,第 4 组/WPS-scalc-46,1,已安排；待具体文档验证
-scalc,公式,.uno:AutomaticCalculation,自动重算,第 4 组/WPS-scalc-46,2,已安排；待具体文档验证
-scalc,公式,.uno:CalculateHard,重算工作簿,第 4 组/WPS-scalc-46,3,已安排；待具体文档验证
-scalc,公式,.uno:Calculate,计算工作表,第 4 组/WPS-scalc-46,4,已安排；待具体文档验证
+scalc,公式,.uno:FunctionDialog,插入函数,第 1 组/WPS-scalc-38,1,已安排；待具体文档验证
+scalc,公式,.uno:AutoSum,求和,第 1 组/WPS-scalc-38,2,已安排；待具体文档验证
+scalc,公式,.uno:FunctionBox,常用函数,第 1 组/WPS-scalc-38,3,已安排；待具体文档验证
+scalc,公式,.uno:DefineName,名称管理器,第 2 组/WPS-scalc-41,1,已安排；待具体文档验证
+scalc,公式,.uno:DefineName,指定名称,第 2 组/WPS-scalc-41,2,已安排；待具体文档验证
+scalc,公式,.uno:InsertName,粘贴名称,第 2 组/WPS-scalc-41,3,已安排；待具体文档验证
+scalc,公式,.uno:ShowPrecedents,追踪引用,第 3 组/WPS-scalc-47,1,已安排；待具体文档验证
+scalc,公式,.uno:ShowDependents,追踪从属,第 3 组/WPS-scalc-47,2,已安排；待具体文档验证
+scalc,公式,.uno:ClearArrows,移去箭头,第 3 组/WPS-scalc-47,3,已安排；待具体文档验证
+scalc,公式,.uno:ShowErrors,错误检查,第 3 组/WPS-scalc-47,4,已安排；待具体文档验证
+scalc,公式,.uno:ToggleFormula,显示公式,第 4 组/WPS-scalc-51,1,已安排；待具体文档验证
+scalc,公式,.uno:AutomaticCalculation,自动重算,第 4 组/WPS-scalc-51,2,已安排；待具体文档验证
+scalc,公式,.uno:CalculateHard,重算工作簿,第 4 组/WPS-scalc-51,3,已安排；待具体文档验证
+scalc,公式,.uno:Calculate,计算工作表,第 4 组/WPS-scalc-51,4,已安排；待具体文档验证
 scalc,数据,.uno:DataDataPilotRun,数据透视表,第 1 组/Data-Section-Source,1,已安排；待具体文档验证
 scalc,数据,.uno:DataFilterAutoFilter,筛选,第 2 组/Data-Section-Source1,1,已安排；待具体文档验证
 scalc,数据,.uno:DataFilterRemoveFilter,全部显示,第 2 组/Data-Section-Source1,2,已安排；待具体文档验证

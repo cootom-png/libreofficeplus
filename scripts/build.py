@@ -81,7 +81,7 @@ class Builder:
         prop(obj, "visible", "True")
         prop(obj, "action-name", cmd)
         prop(obj, "label", label)
-        prop(obj, "tooltip-text", label)
+        prop(obj, "tooltip-text", item.get("tooltip", label))
         return obj
 
     def toolbar(self, items, large=True):
@@ -117,6 +117,7 @@ class Builder:
         prop(section, "margin-end", "5")
         stack = self.make("GtkBox")
         prop(stack, "orientation", "vertical")
+        prop(stack, "spacing", "4")
         ET.SubElement(section, "child").append(stack)
         for items in rows:
             row = self.make("GtkBox")
@@ -254,9 +255,13 @@ class Builder:
                         prop(obj,'visible','True')
                         prop(obj,'action-name',item['command'])
                         prop(obj,'label',item['label'])
-                        prop(obj,'tooltip-text',item['label'])
+                        prop(obj,'tooltip-text',item.get('tooltip',item['label']))
                     else:
                         prop(obj,'visible','False')
+                # 仅收起已清空的按钮容器，其他原生控制器继续保留。
+                static = ('Box', 'Grid', 'Label', 'Separator', 'SeparatorToolItem', 'Image')
+                if not available and all(o.get('class') in BUTTONS or o.get('class', '').endswith(static) for o in container.iter('object')):
+                    prop(container, 'visible', 'False')
                 for item_index, item in enumerate(group, 1):
                     status = "已安排；待具体文档验证" if item in available else "无已确认对应命令，省略"
                     self.records.append([self.module, LAYOUT["tabs"][tab], item["command"], item["label"],
@@ -322,7 +327,7 @@ def main():
         (PACKAGE / name).write_bytes(("\r\n".join(lines) + "\r\n").encode("ascii"))
     build_templates(PACKAGE)
     profile_files = build_popups(ROOT, PACKAGE)
-    (PACKAGE / "profile-files.json").write_text(json.dumps(profile_files, indent=2) + '\n', encoding="utf-8")
+    (PACKAGE / "profile-files.json").write_text(json.dumps(profile_files, indent=2) + '\n', encoding="utf-8", newline='\n')
     records = []
     for module in LAYOUT["modules"]:
         builder = Builder(module)
@@ -331,17 +336,17 @@ def main():
         builder.write()
         records.extend(builder.records)
     with (PACKAGE / "按钮对应表.csv").open("w", encoding="utf-8-sig", newline="") as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, lineterminator='\n')
         writer.writerow(["模块", "选项卡", "LibreOffice命令", "配置文字或控件ID", "逻辑分组", "组内顺序或菜单所在行", "状态"])
         writer.writerows(records)
     settings = []
     for name in ['labels', 'shortcuts', 'appearance']:
         settings.extend(json.loads((ROOT / f'config/{name}.json').read_text(encoding='utf-8')))
-    (PACKAGE / "设置清单.json").write_text(json.dumps(settings, ensure_ascii=False, indent=2) + '\n', encoding="utf-8")
+    (PACKAGE / "设置清单.json").write_text(json.dumps(settings, ensure_ascii=False, indent=2) + '\n', encoding="utf-8", newline='\n')
     modules = {'com.sun.star.text.TextDocument': 'Writer 文字', 'com.sun.star.sheet.SpreadsheetDocument': 'Calc 表格',
                'com.sun.star.drawing.DrawingDocument': 'Draw 绘图'}
     with (PACKAGE / '快捷键对照表.csv').open('w', encoding='utf-8-sig', newline='') as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, lineterminator='\n')
         writer.writerow(['模块', '快捷键', '动作', 'LibreOffice命令'])
         for entry in json.loads((ROOT / 'config/shortcuts.json').read_text('utf8')):
             writer.writerow([modules[entry['Path'].split('/')[-2]], entry['Shortcut'], entry['Label'], entry['Value']])

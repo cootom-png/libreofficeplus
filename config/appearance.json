@@ -18,5 +18,10 @@
     "Path": "/org.openoffice.Office.Common/Misc",
     "Name": "UseSystemFileDialog",
     "Value": "true"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.ToolbarMode/Applications/Draw/Modes/Tabbed",
+    "Name": "HasMenubar",
+    "Value": "false"
   }
 ]

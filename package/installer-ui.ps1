@@ -5,6 +5,7 @@ try {
     Add-Type -AssemblyName PresentationFramework
     [xml]$layout = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'installer.xaml') -Raw -Encoding UTF8
     $window = [Windows.Markup.XamlReader]::Load([Xml.XmlNodeReader]::new($layout))
+    $version = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'version.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 } catch {
     # 即使界面初始化失败，也在可见对话框中说明原因。
     $shell = New-Object -ComObject WScript.Shell
@@ -12,19 +13,27 @@ try {
     exit 1
 }
 $controls = @{}
-foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','StatusMessage','Step1','Step2','Step3','Checks','Details','Footer','CloseButton') {
+foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','StatusMessage','Step1','Step2','Step3','Checks','Details','Footer','CloseButton','VersionLabel','SelectionPanel','ModuleWriter','ModuleCalc','ModuleDraw','ApplicationPath','FontNotice','TemplatesButton','StartButton') {
     $controls[$name] = $window.FindName($name)
 }
 $operation = if ($Restore) { '恢复' } else { '安装' }
 $window.Title = "LibreOfficePlus · $operation"
 $window.MaxHeight = [Windows.SystemParameters]::WorkArea.Height
 $window.Height = [Math]::Min($window.Height,$window.MaxHeight)
+$controls.VersionLabel.Text = 'v' + $version.Version
+$controls.ApplicationPath.Text = $LibreOfficePath
+foreach ($module in 'Writer','Calc','Draw') { $controls["Module$module"].IsChecked = $Modules.Split(',').Trim() -contains $module }
+$hasFont = @([Windows.Media.Fonts]::SystemFontFamilies | Where-Object { $_.Source -in @('SimSun','宋体') }).Count -gt 0
+$controls.FontNotice.Text = if ($hasFont) { '模板字体：宋体已安装。' } else { '模板字体：未检测到宋体，打开模板时可能使用替代字体。本包不附带字体。' }
 if ($Restore) {
     $controls.Heading.Text = '恢复原界面，保留你的习惯'
     $controls.Subtitle.Text = '从首次备份还原所选模块的界面与设置'
+    $controls.ApplicationPath.IsEnabled = $false
+    $controls.FontNotice.Text = '恢复用户配置无需匹配软件版本或模板字体。'
+    $controls.StartButton.Content = '开始恢复'
 }
-$controls.StatusTitle.Text = "正在准备$operation"
-$controls.Details.Text = "所选模块：$Modules`n请等待操作完成，再打开 LibreOffice。"
+$controls.StatusTitle.Text = "准备$operation"
+$controls.Details.Text = '适配 LibreOffice 26.2.5.2 已验证构建。先保存文档并退出软件；不兼容时检查会阻止安装。'
 $state = [hashtable]::Synchronized(@{ Update=@{ Percent=0; Message='正在启动配置程序…' }; Checks=@(); Failure=$null })
 $checkTitles = @('运行环境','安装目录','版本兼容','运行状态','用户配置','目录写入','配置包文件','首次备份')
 function Refresh-Checks {
@@ -59,8 +68,7 @@ $worker = {
     } catch { $State.Failure = $_.Exception.Message }
     finally { if ($acquired) { $mutex.ReleaseMutex() }; $mutex.Dispose() }
 }
-$null = $job.AddScript($worker.ToString()).AddArgument((Join-Path $PSScriptRoot 'configure.ps1')).AddArgument($state).AddArgument($Restore.IsPresent).AddArgument($Modules).AddArgument($LibreOfficePath)
-$ui = @{ Running=$true; Handle=$null; ExitCode=1; CheckCount=0 }
+$ui = @{ Running=$false; Handle=$null; ExitCode=1; CheckCount=0; Modules=$Modules }
 $timer = [Windows.Threading.DispatcherTimer]::new()
 $timer.Interval = [TimeSpan]::FromMilliseconds(80)
 $timer.Add_Tick({
@@ -100,17 +108,29 @@ $timer.Add_Tick({
         $controls.Percent.Text = '100%'
         $controls.Percent.Foreground = '#12A47B'
         $controls.StatusMessage.Text = '现在可以重新打开 LibreOffice，查看你的界面。'
-        $controls.Details.Text = if ($Restore) { "已恢复：$Modules`n所选模块已还原到首次安装前的设置。" } else { "已配置：$Modules`n首次备份已保留，双击 恢复原界面.vbs 即可恢复。" }
+        $controls.Details.Text = if ($Restore) { "已恢复：$($ui.Modules)`n所选模块已还原到首次安装前的设置。" } else { "已配置：$($ui.Modules)`n首次备份已保留，双击 恢复原界面.vbs 即可恢复。" }
+        if (!$Restore) { $controls.TemplatesButton.Visibility = 'Visible' }
         $controls.Footer.Text = '已完成 · 可以关闭此窗口'
     }
 })
 $controls.CloseButton.Add_Click({ $window.Close() })
+$controls.TemplatesButton.Add_Click({ Start-Process -FilePath 'explorer.exe' -ArgumentList ('"' + (Join-Path $PSScriptRoot 'templates') + '"') })
 $window.Add_Closing({ param($sender,$event) if ($ui.Running) { $event.Cancel=$true } })
-$window.Add_ContentRendered({
+$controls.StartButton.Add_Click({
     if ($ui.Handle) { return }
+    $selected = @('Writer','Calc','Draw' | Where-Object { $controls["Module$_"].IsChecked })
+    if (!$selected.Count) { $controls.StatusMessage.Text = '请至少选择一个模块。'; return }
+    $ui.Modules = $selected -join ','
+    $null = $job.AddScript($worker.ToString()).AddArgument((Join-Path $PSScriptRoot 'configure.ps1')).AddArgument($state).AddArgument($Restore.IsPresent).AddArgument($ui.Modules).AddArgument($controls.ApplicationPath.Text.Trim())
+    $ui.Running = $true
+    $controls.SelectionPanel.Visibility = 'Collapsed'
+    $controls.StartButton.Visibility = 'Collapsed'
+    $controls.CloseButton.IsEnabled = $false
+    $controls.CloseButton.Content = '正在配置…'
     $ui.Handle = $job.BeginInvoke()
     $timer.Start()
 })
+$window.Add_ContentRendered({ $controls.StartButton.Focus() | Out-Null })
 try { $null = $window.ShowDialog() }
-finally { $timer.Stop(); if ($ui.Running) { $job.Dispose() } }
+finally { $timer.Stop(); if (!$ui.Handle -or $ui.Running) { $job.Dispose() } }
 exit $ui.ExitCode

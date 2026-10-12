@@ -4,15 +4,15 @@
     "toolbar_rows": {"ExtTop5": ["Home-SuperScript", "Home-SubScript"], "SectionBottom91": ["Home-DefaultBullet", "Home-DefaultNumbering", "Home-SetOutline", "Home-DecrementIndent1", "Home-IncrementIndent1", "Home-ControlCodes1"]},
     "quick_rows": [
       [{"label": "查找替换", "command": ".uno:SearchDialog"}, {"label": "选择", "menu": [{"label": "全选", "command": ".uno:SelectAll"}]}],
-      [{"label": "格式设置", "menu": [{"label": "字体…", "command": ".uno:FontDialog"}, {"label": "段落…", "command": ".uno:ParagraphDialog"}, {"separator": true}, {"label": "页面设置…", "command": ".uno:PageDialog"}]}, {"label": "样式窗格", "command": ".uno:SidebarDeck.StyleListDeck"}, {"label": "批注", "command": ".uno:InsertAnnotation"}]
+      [{"label": "格式设置", "menu": [{"label": "字体（文字外观）…", "command": ".uno:FontDialog"}, {"label": "段落…", "command": ".uno:ParagraphDialog"}, {"label": "样式检查", "command": ".uno:SidebarDeck.InspectorDeck"}, {"separator": true}, {"label": "页面设置…", "command": ".uno:PageDialog"}]}, {"label": "样式窗格", "command": ".uno:SidebarDeck.StyleListDeck"}, {"label": "批注", "command": ".uno:InsertAnnotation"}]
     ]
   },
   "scalc": {
     "sections": ["Style", "Clipboard", "Format", "Align", "Cell", "Number", "Cell1", "Condition", "Style2", "Quick"],
     "toolbar_rows": {"first6": ["Home-AlignTop", "Home-AlignVCenter", "Home-AlignBottom", "Home-DecrementIndent", "Home-IncrementIndent"]},
     "quick_rows": [
-      [{"label": "填充", "menu": [{"label": "向下填充", "command": ".uno:FillDown"}, {"label": "向右填充", "command": ".uno:FillRight"}, {"label": "向上填充", "command": ".uno:FillUp"}, {"label": "向左填充", "command": ".uno:FillLeft"}, {"separator": true}, {"label": "序列…", "command": ".uno:FillSeries"}]}, {"label": "求和", "command": ".uno:AutoSum"}, {"label": "排序", "command": ".uno:DataSort"}],
-      [{"label": "筛选", "command": ".uno:DataFilterAutoFilter"}, {"label": "冻结", "menu": [{"label": "冻结或取消冻结所选位置", "command": ".uno:FreezePanes"}, {"label": "冻结首行", "command": ".uno:FreezePanesRow"}, {"label": "冻结首列", "command": ".uno:FreezePanesColumn"}]}, {"label": "查找", "command": ".uno:SearchDialog"}, {"label": "单元格格式…", "command": ".uno:FormatCellDialog"}]
+      [{"label": "粘贴选项", "menu": [{"label": "粘贴值（含文本与计算结果）", "command": ".uno:InsertContents?Flags:string=SVD"}, {"label": "仅粘贴格式", "command": ".uno:InsertContents?Flags:string=T"}, {"label": "仅粘贴公式", "command": ".uno:PasteOnlyFormula"}, {"separator": true}, {"label": "选择性粘贴…", "command": ".uno:InsertContents"}]}, {"label": "填充", "menu": [{"label": "向下填充", "command": ".uno:FillDown"}, {"label": "向右填充", "command": ".uno:FillRight"}, {"label": "向上填充", "command": ".uno:FillUp"}, {"label": "向左填充", "command": ".uno:FillLeft"}, {"separator": true}, {"label": "序列…", "command": ".uno:FillSeries"}]}, {"label": "求和", "command": ".uno:AutoSum"}],
+      [{"label": "排序", "command": ".uno:DataSort"}, {"label": "筛选", "command": ".uno:DataFilterAutoFilter"}, {"label": "冻结", "menu": [{"label": "冻结或取消冻结所选位置", "command": ".uno:FreezePanes"}, {"label": "冻结首行", "command": ".uno:FreezePanesRow"}, {"label": "冻结首列", "command": ".uno:FreezePanesColumn"}]}, {"label": "查找", "command": ".uno:SearchDialog"}]
     ]
   },
   "sdraw": {

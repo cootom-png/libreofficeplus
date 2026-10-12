@@ -13,12 +13,13 @@
       <Setter Property="Template">
         <Setter.Value>
           <ControlTemplate TargetType="Button">
-            <Border x:Name="ButtonSurface" Background="{TemplateBinding Background}" CornerRadius="9" Padding="{TemplateBinding Padding}">
+            <Border x:Name="ButtonSurface" Background="{TemplateBinding Background}" CornerRadius="9" Padding="{TemplateBinding Padding}" BorderThickness="2" BorderBrush="Transparent">
               <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
             <ControlTemplate.Triggers>
               <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="ButtonSurface" Property="Opacity" Value="0.85"/></Trigger>
               <Trigger Property="IsEnabled" Value="False"><Setter TargetName="ButtonSurface" Property="Opacity" Value="0.4"/></Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="ButtonSurface" Property="BorderBrush" Value="#8DB5FF"/></Trigger>
             </ControlTemplate.Triggers>
           </ControlTemplate>
         </Setter.Value>
@@ -35,19 +36,31 @@
         <StackPanel>
           <TextBlock Text="LibreOfficePlus" Foreground="White" FontSize="18" FontWeight="SemiBold"/>
           <TextBlock x:Name="Heading" Text="让办公，回到熟悉的节奏" Foreground="White" FontSize="25" FontWeight="SemiBold" Margin="0,15,0,8"/>
-          <TextBlock x:Name="Subtitle" Text="WPS 习惯适配 · 为文字、表格与绘图配置熟悉的界面" Foreground="#D7E5FF" FontSize="12"/>
+          <TextBlock x:Name="Subtitle" Text="文字 · 表格 · 绘图，常用操作更容易找到" Foreground="#D7E5FF" FontSize="12"/>
         </StackPanel>
-        <Border HorizontalAlignment="Right" VerticalAlignment="Top" Background="#30FFFFFF" CornerRadius="11" Padding="10,4"><TextBlock Text="v6.2" Foreground="White" FontSize="11"/></Border>
+        <Border HorizontalAlignment="Right" VerticalAlignment="Top" Background="#30FFFFFF" CornerRadius="11" Padding="10,4"><TextBlock x:Name="VersionLabel" Foreground="White" FontSize="11"/></Border>
       </Grid>
     </Border>
     <Border Grid.Row="1" Margin="24,-12,24,0" Padding="24,22" Background="White" CornerRadius="14" BorderBrush="#E3EAF4" BorderThickness="1">
-      <Grid>
-        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+      <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+      <StackPanel Margin="0,0,12,0">
+        <StackPanel x:Name="SelectionPanel" Margin="0,0,0,20">
+          <TextBlock Text="选择要配置的模块" FontSize="14" FontWeight="SemiBold" Foreground="#172C51"/>
+          <WrapPanel Margin="0,12,0,14">
+            <CheckBox x:Name="ModuleWriter" Content="Writer 文字" Margin="0,0,24,8"/>
+            <CheckBox x:Name="ModuleCalc" Content="Calc 表格" Margin="0,0,24,8"/>
+            <CheckBox x:Name="ModuleDraw" Content="Draw 绘图" Margin="0,0,0,8"/>
+          </WrapPanel>
+          <TextBlock Text="LibreOffice 安装目录" Foreground="#52637E" FontSize="12" Margin="0,0,0,6"/>
+          <TextBox x:Name="ApplicationPath" Padding="8,6" BorderBrush="#D7E1EE"/>
+          <TextBlock x:Name="FontNotice" Foreground="#52637E" FontSize="12" TextWrapping="Wrap" Margin="0,10,0,0" LineHeight="20"/>
+          <TextBlock Text="模板仅供新建文档选择；首次备份将保留，已有文档由你自行打开。" Foreground="#52637E" FontSize="12" TextWrapping="Wrap" Margin="0,6,0,0"/>
+        </StackPanel>
         <Grid>
-          <TextBlock x:Name="StatusTitle" Text="正在准备安装" FontSize="18" FontWeight="SemiBold" Foreground="#172C51"/>
+          <TextBlock x:Name="StatusTitle" Text="准备配置" FontSize="18" FontWeight="SemiBold" Foreground="#172C51"/>
           <TextBlock x:Name="Percent" Text="0%" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#2563EB" FontSize="16" FontWeight="SemiBold"/>
         </Grid>
-        <ProgressBar x:Name="Progress" Grid.Row="1" Height="10" Margin="0,18,0,14" Minimum="0" Maximum="100" Foreground="#2563EB" Background="#EAF0FA" BorderThickness="0">
+        <ProgressBar x:Name="Progress" Height="10" Margin="0,18,0,14" Minimum="0" Maximum="100" Foreground="#2563EB" Background="#EAF0FA" BorderThickness="0">
           <ProgressBar.Template>
             <ControlTemplate TargetType="ProgressBar">
               <Grid x:Name="PART_Track">
@@ -57,14 +70,13 @@
             </ControlTemplate>
           </ProgressBar.Template>
         </ProgressBar>
-        <TextBlock x:Name="StatusMessage" Grid.Row="2" Text="正在启动配置程序…" Foreground="#52637E" FontSize="12" TextWrapping="Wrap" MinHeight="36"/>
-        <UniformGrid Grid.Row="3" Columns="3" Margin="0,8,0,12">
+        <TextBlock x:Name="StatusMessage" Text="选择模块后点击“开始配置”，环境检查结果会逐项显示。" Foreground="#52637E" FontSize="12" TextWrapping="Wrap" MinHeight="36"/>
+        <UniformGrid Columns="3" Margin="0,8,0,12">
           <TextBlock x:Name="Step1" Text="01  检查环境" Foreground="#2563EB" FontSize="12"/>
           <TextBlock x:Name="Step2" Text="02  备份与配置" Foreground="#8795A9" FontSize="12" HorizontalAlignment="Center"/>
           <TextBlock x:Name="Step3" Text="03  完成与整理" Foreground="#8795A9" FontSize="12" HorizontalAlignment="Right"/>
         </UniformGrid>
-        <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Auto" Margin="0,0,0,12">
-          <ItemsControl x:Name="Checks">
+          <ItemsControl x:Name="Checks" Margin="0,0,0,12">
             <ItemsControl.ItemTemplate>
               <DataTemplate>
                 <Border BorderBrush="#EAF0FA" BorderThickness="0,0,0,1" Padding="0,8">
@@ -80,17 +92,21 @@
               </DataTemplate>
             </ItemsControl.ItemTemplate>
           </ItemsControl>
-        </ScrollViewer>
-        <Border Grid.Row="5" Background="#F5F8FD" CornerRadius="9" Padding="14,10" MaxHeight="110">
+        <Border Background="#F5F8FD" CornerRadius="9" Padding="14,10" MaxHeight="110">
           <ScrollViewer VerticalScrollBarVisibility="Auto">
             <TextBlock x:Name="Details" Text="适用模块：Writer 文字 / Calc 表格 / Draw 绘图&#xA;首次备份将妥善保留，可随时恢复原界面。" Foreground="#52637E" FontSize="12" TextWrapping="Wrap" LineHeight="23"/>
           </ScrollViewer>
         </Border>
-      </Grid>
+        <Button x:Name="TemplatesButton" Content="查看新文档模板" Visibility="Collapsed" HorizontalAlignment="Left" Margin="0,12,0,0" FontSize="12"/>
+      </StackPanel>
+      </ScrollViewer>
     </Border>
     <Grid Grid.Row="2" Margin="32,0">
-      <TextBlock x:Name="Footer" Text="本地配置 · 保留首次备份" Foreground="#8795A9" VerticalAlignment="Center" FontSize="11"/>
-      <Button x:Name="CloseButton" Content="正在配置…" IsEnabled="False" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
+      <TextBlock x:Name="Footer" Text="本地配置 · 保留首次备份" Foreground="#8795A9" VerticalAlignment="Center" FontSize="11" MaxWidth="260" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+        <Button x:Name="CloseButton" Content="取消" Background="#E3EAF4" Foreground="#172C51" FontSize="12" Margin="0,0,10,0"/>
+        <Button x:Name="StartButton" Content="开始配置" FontSize="12"/>
+      </StackPanel>
     </Grid>
   </Grid>
 </Window>

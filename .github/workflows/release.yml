@@ -1,0 +1,96 @@
+name: 发布配置包
+on:
+  workflow_dispatch:
+    inputs:
+      release_sha:
+        description: 已合入 main 并通过检查的完整提交 SHA
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: libreofficeplus-release
+  cancel-in-progress: false
+jobs:
+  package:
+    if: github.ref == 'refs/heads/main'
+    runs-on: windows-latest
+    outputs:
+      tag: ${{ steps.metadata.outputs.tag }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ inputs.release_sha }}
+          persist-credentials: false
+      - name: 核对主分支和版本
+        id: metadata
+        shell: pwsh
+        env:
+          RELEASE_SHA: ${{ inputs.release_sha }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ($env:RELEASE_SHA -cnotmatch '^[0-9a-f]{40}$') { throw '必须使用完整提交 SHA' }
+          $head = git rev-parse HEAD
+          $main = gh api "repos/$env:GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha
+          if ($LASTEXITCODE -ne 0 -or $head -cne $env:RELEASE_SHA -or $head -cne $main) { throw '发布提交必须是最新 main' }
+          $version = (Get-Content package/version.json -Raw | ConvertFrom-Json).Version
+          if ($version -cnotmatch '^\d+\.\d+\.\d+$') { throw '版本号不正确' }
+          "tag=v$version" >> $env:GITHUB_OUTPUT
+      - name: 构建和验收
+        shell: powershell
+        run: |
+          python scripts/build.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m unittest discover -s tests
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          .\tests\test_installer.ps1
+          .\tests\test_gui.ps1
+          git diff --exit-code -- package dist
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: 准备唯一发布文件和校验值
+        shell: pwsh
+        env:
+          RELEASE_SHA: ${{ inputs.release_sha }}
+        run: |
+          New-Item -ItemType Directory -Path release | Out-Null
+          $name = 'LibreOfficePlus-WPS界面配置包.zip'
+          Copy-Item -LiteralPath "dist/$name" -Destination release
+          $hash = (Get-FileHash -LiteralPath "release/$name" -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$hash  $name" | Set-Content release/SHA256SUMS.txt -Encoding utf8
+          @{version=(Get-Content package/version.json -Raw | ConvertFrom-Json).Version;commit=$env:RELEASE_SHA;sha256=$hash;file=$name;libreoffice='26.2.5.2';build='cd7284b4cbbfeb507e630c1aac019f4157393acb'} | ConvertTo-Json | Set-Content release/release.json -Encoding utf8
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: verified-release
+          path: release/*
+          if-no-files-found: error
+          retention-days: 7
+  publish:
+    needs: package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ inputs.release_sha }}
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: verified-release
+          path: release
+      - name: 核对文件、主分支与已有版本后发布
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_SHA: ${{ inputs.release_sha }}
+          RELEASE_TAG: ${{ needs.package.outputs.tag }}
+        run: |
+          set -euo pipefail
+          python scripts/check_release.py release "$RELEASE_SHA"
+          main=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)
+          test "$main" = "$RELEASE_SHA"
+          # 已有标签或版本一律拒绝覆盖，保留可验证的回退包。
+          gh api "repos/$GITHUB_REPOSITORY/git/matching-refs/tags/$RELEASE_TAG" > release-tags.json
+          python -c 'import json; assert not json.load(open("release-tags.json")), "发布标签已存在"'
+          gh release create "$RELEASE_TAG" release/* --target "$RELEASE_SHA" --title "LibreOfficePlus $RELEASE_TAG · 常用操作与安装体验改进" --notes-file docs/发布说明-v6.4.md --latest
+          published=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq .object.sha)
+          test "$published" = "$RELEASE_SHA"

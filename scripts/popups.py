@@ -56,6 +56,7 @@ def build_popups(root, package):
         target = package / "profile" / path
         target.parent.mkdir(parents=True, exist_ok=True)
         ET.indent(tree, space="  ")
-        tree.write(target, encoding="utf-8", xml_declaration=True)
+        with target.open('wb') as file:
+            tree.write(file, encoding="utf-8", xml_declaration=True)
         files.append({"Module": module, "Path": path})
     return files

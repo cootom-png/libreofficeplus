@@ -2,25 +2,27 @@
 
 为习惯 WPS 的用户提供 **LibreOffice Writer（文字）、Calc（表格）、Draw（绘图）**的中文功能区、常用操作和可恢复的一键配置包。
 
-当前版本 **v6.3，布局排查与入口纠正版**。以用户提供的 WPS 文字、表格截图为参考，重点调整按钮顺序、分组、常用菜单和键位；Draw 沿用相同的字体、形状、排列与属性栏习惯。它仍使用 LibreOffice 原生界面和文档引擎，**不是 WPS 的逐像素复刻**。
+当前版本 **v6.4.0，常用操作与安装体验改进版**。参考常见办公操作习惯，调整按钮顺序、分组、常用菜单和键位；Draw 沿用相同的字体、形状、排列与属性栏习惯。界面由本项目独立组织，使用 LibreOffice 原生命令、Colibre 图标与文档引擎。
 
 2026-10-12 安装入口更新：修复 `'d'`、`'rshell.exe' 命令截断，并新增图形进度窗口。请重新下载并解压完整配置包，双击新的 `安装.vbs`；原来的首次备份会继续保留。
 
 ## 下载与安装
 
-**[下载 main 已合入版本](https://github.com/cootom-png/libreofficeplus/raw/refs/heads/main/dist/LibreOfficePlus-WPS%E7%95%8C%E9%9D%A2%E9%85%8D%E7%BD%AE%E5%8C%85.zip)**。PR 未合入时，此链接仍提供上一版本；查看本 PR 的 `dist/` 文件可获取待合入配置包。
+**[下载正式发布的配置包](https://github.com/cootom-png/libreofficeplus/releases/latest)**，同页提供 `SHA256SUMS.txt` 和 `release.json`，可核对文件校验值与完整提交。也可[下载 main 已合入版本](https://github.com/cootom-png/libreofficeplus/raw/refs/heads/main/dist/LibreOfficePlus-WPS%E7%95%8C%E9%9D%A2%E9%85%8D%E7%BD%AE%E5%8C%85.zip)。旧 ZIP 文件名为保持下载兼容继续保留。
 
 1. 安装 Windows 版 **LibreOffice 26.2.5.2**，构建 ID 必须为 `cd7284b4cbbfeb507e630c1aac019f4157393acb`。
 2. 首次使用时，先启动并关闭一次 LibreOffice，让软件生成用户配置。
 3. 保存文档，完全退出 LibreOffice。后台仍有进程时安装程序会拒绝修改，不会强制关闭文档。
-4. 解压整个 ZIP，进入 `LibreOfficePlus` 文件夹，双击 **`安装.vbs`**，显示图形进度窗口。
+4. 解压整个 ZIP，进入 `LibreOfficePlus` 文件夹，双击 **`安装.vbs`**。选择模块、查看字体提示及安装路径，点击“开始配置”，再查看逐项环境检查和进度。
 5. 重新打开所需组件，建议最大化窗口查看“开始”页。
 
-默认安装三个模块，写入当前用户配置，通常不需要管理员权限。请保留解压目录和首次备份。
+窗口预选三个模块，可按需取消；至少选择一个模块才能开始。写入当前用户配置，通常不需要管理员权限。模板为可选的新文档起点，完成后可点击“查看新文档模板”，不会自动成为默认模板。请保留解压目录和首次备份。
 
 图形安装和恢复使用蓝白窗口，显示实际操作阶段、进度和完成结果；出现问题时在窗口中说明原因。操作期间请等待完成后再关闭窗口或打开 LibreOffice。`安装.vbs`、`恢复原界面.vbs` 使用 Windows Script Host 启动，不弹出黑色控制台；`.cmd` 保留为命令行入口。若电脑禁用了 Windows Script Host，可继续使用 `.cmd`，无需修改安全策略。
 
 v6.1 在安装过程中逐项显示运行环境、安装目录、版本兼容、软件运行状态、用户配置、目录写入、配置包文件与首次备份，结果保留到关闭窗口。兼容检查展示当前版本和适配版本，仍要求精确匹配 26.2.5.2 的已验证构建；失败项标红并给出处理方法，未执行项明确显示“未检查”。恢复时版本与安装目录显示“不适用”，便于软件升级或卸载后还原原界面。目录写入检查只创建并清理一个临时文件，不代表已诊断所有安全软件策略。
+
+![模块选择界面的 WPF 渲染预览](docs/installer-setup-preview.png)
 
 ![图形安装窗口完成状态的 WPF 渲染预览](docs/installer-preview.png)
 
@@ -44,6 +46,19 @@ powershell.exe -NoProfile -STA -ExecutionPolicy Bypass -WindowStyle Hidden -File
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\configure.ps1 -Modules Writer,Calc,Draw -LibreOfficePath "D:\Apps\LibreOffice"
 ```
+
+## v6.4 常用操作与安装体验
+
+| 区域 | 改进 |
+| --- | --- |
+| Writer | “格式设置”加入样式检查；字体外观与段落设置区分；样式预览说明可能改变缩进和行距 |
+| Calc | “粘贴选项”集中粘贴值、格式、公式与完整设置；值包含文本及公式计算结果，保留目标格式 |
+| 入口名称 | OLE 对象使用“嵌入对象”；导入工作表使用“从文件导入工作表” |
+| 布局 | 常用操作两行增加间距；收起已清空的按钮容器，保留其他原生控制器 |
+| Draw | 默认收起传统菜单栏，右上角菜单仍可访问和重新显示菜单栏；安装与恢复记录此设置 |
+| 安装与发布 | 开始前选择模块和安装路径，提示宋体可用性；固定版本包附完整提交与校验值 |
+
+本轮交付配置层改进。编辑状态相关快捷键、原生弹窗内部布局和多文档标签切换仍在后续计划，详见[适配计划](docs/适配计划.md)。
 
 ## v6.3 布局排查与入口纠正
 
