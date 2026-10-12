@@ -266,25 +266,25 @@
   {
     "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:ChineseConversion",
     "Name": "Label",
-    "Value": "繁简转换",
+    "Value": "简繁转换…",
     "Localized": true
   },
   {
     "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:ChineseConversion",
     "Name": "ContextLabel",
-    "Value": "繁简转换",
+    "Value": "简繁转换…",
     "Localized": true
   },
   {
     "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:ChineseConversion",
     "Name": "PopupLabel",
-    "Value": "繁简转换",
+    "Value": "简繁转换…",
     "Localized": true
   },
   {
     "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:ChineseConversion",
     "Name": "TooltipLabel",
-    "Value": "繁简转换",
+    "Value": "简繁转换…",
     "Localized": true
   },
   {
@@ -597,6 +597,54 @@
     "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:FormatLine",
     "Name": "TooltipLabel",
     "Value": "形状轮廓",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:OutlineBullet",
+    "Name": "Label",
+    "Value": "项目符号和编号…",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:OutlineBullet",
+    "Name": "ContextLabel",
+    "Value": "项目符号和编号…",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:OutlineBullet",
+    "Name": "PopupLabel",
+    "Value": "项目符号和编号…",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:OutlineBullet",
+    "Name": "TooltipLabel",
+    "Value": "项目符号和编号…",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:TextdirectionLeftToRight",
+    "Name": "Label",
+    "Value": "横排文字（从左向右）",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:TextdirectionLeftToRight",
+    "Name": "ContextLabel",
+    "Value": "横排文字（从左向右）",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:TextdirectionLeftToRight",
+    "Name": "PopupLabel",
+    "Value": "横排文字（从左向右）",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:TextdirectionLeftToRight",
+    "Name": "TooltipLabel",
+    "Value": "横排文字（从左向右）",
     "Localized": true
   }
 ]

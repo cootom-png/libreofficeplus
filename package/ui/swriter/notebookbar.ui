@@ -5616,8 +5616,8 @@
                             </child>
                             <child>
                               <object class="GtkToolButton" id="WPS-swriter-37">
-                                <property name="tooltip-text">文字方向</property>
-                                <property name="label">文字方向</property>
+                                <property name="tooltip-text">横排文字（从左向右）</property>
+                                <property name="label">横排文字（从左向右）</property>
                                 <property name="action-name">.uno:TextdirectionLeftToRight</property>
                                 <property name="visible">True</property>
                               </object>
@@ -6888,8 +6888,8 @@
                             </child>
                             <child>
                               <object class="GtkToolButton" id="WPS-swriter-46">
-                                <property name="tooltip-text">目录级别</property>
-                                <property name="label">目录级别</property>
+                                <property name="tooltip-text">项目符号和编号…</property>
+                                <property name="label">项目符号和编号…</property>
                                 <property name="action-name">.uno:OutlineBullet</property>
                                 <property name="visible">True</property>
                               </object>
@@ -7996,8 +7996,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Review-DeleteComment1">
-                                    <property name="tooltip-text">繁转简</property>
-                                    <property name="label">繁转简</property>
+                                    <property name="tooltip-text">简繁转换…</property>
+                                    <property name="label">简繁转换…</property>
                                     <property name="action-name">.uno:ChineseConversion</property>
                                     <property name="visible">True</property>
                                   </object>

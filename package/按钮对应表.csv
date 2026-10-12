@@ -59,7 +59,7 @@ swriter,页面,.uno:PageDialog,页边距,第 1 组/Layout-Section-File,1,已安�
 swriter,页面,.uno:Orientation,纸张方向,第 1 组/Layout-Section-File,2,已安排；待具体文档验证
 swriter,页面,.uno:Size,纸张大小,第 1 组/Layout-Section-File,3,已安排；待具体文档验证
 swriter,页面,.uno:FormatColumns,分栏,第 1 组/Layout-Section-File,4,已安排；待具体文档验证
-swriter,页面,.uno:TextdirectionLeftToRight,文字方向,第 1 组/Layout-Section-File,5,已安排；待具体文档验证
+swriter,页面,.uno:TextdirectionLeftToRight,横排文字（从左向右）,第 1 组/Layout-Section-File,5,已安排；待具体文档验证
 swriter,页面,.uno:BorderDialog,页面边框,第 2 组/Layout-Section-File2,1,已安排；待具体文档验证
 swriter,页面,.uno:PageDialog,背景（页面设置）,第 2 组/Layout-Section-File2,2,已安排；待具体文档验证
 swriter,页面,.uno:Watermark,水印,第 2 组/Layout-Section-File2,3,已安排；待具体文档验证
@@ -72,7 +72,7 @@ swriter,页面,.uno:InsertPageFooter,页脚,第 4 组/Layout-Section-File4,2,已
 swriter,页面,.uno:InsertPageNumberField,页码,第 4 组/Layout-Section-File4,3,已安排；待具体文档验证
 swriter,引用,.uno:InsertMultiIndex,目录,第 1 组/Reference-Section-Index,1,已安排；待具体文档验证
 swriter,引用,.uno:UpdateAllIndexes,更新目录,第 1 组/Reference-Section-Index,2,已安排；待具体文档验证
-swriter,引用,.uno:OutlineBullet,目录级别,第 1 组/Reference-Section-Index,3,已安排；待具体文档验证
+swriter,引用,.uno:OutlineBullet,项目符号和编号…,第 1 组/Reference-Section-Index,3,已安排；待具体文档验证
 swriter,引用,.uno:InsertFootnote,插入脚注,第 2 组/Reference-Section-Index1,1,已安排；待具体文档验证
 swriter,引用,.uno:JumpToPrevFootnote,上一条脚注,第 2 组/Reference-Section-Index1,2,已安排；待具体文档验证
 swriter,引用,.uno:JumpToNextFootnote,下一条脚注,第 2 组/Reference-Section-Index1,3,已安排；待具体文档验证
@@ -97,7 +97,7 @@ swriter,审阅,.uno:AcceptTrackedChanges,管理修订,第 3 组/Review-Section-A
 swriter,审阅,.uno:AcceptTrackedChange,接受,第 3 组/Review-Section-Annotation,4,已安排；待具体文档验证
 swriter,审阅,.uno:RejectTrackedChange,拒绝,第 3 组/Review-Section-Annotation,5,已安排；待具体文档验证
 swriter,审阅,.uno:Translate,翻译,第 4 组/Review-Section-Annotation1,1,已安排；待具体文档验证
-swriter,审阅,.uno:ChineseConversion,繁转简,第 4 组/Review-Section-Annotation1,2,已安排；待具体文档验证
+swriter,审阅,.uno:ChineseConversion,简繁转换…,第 4 组/Review-Section-Annotation1,2,已安排；待具体文档验证
 swriter,审阅,.uno:NoWpsRestrictEditing,限制编辑,第 5 组/Review-Section-TrackChanges,1,无已确认对应命令，省略
 swriter,视图,.uno:FullScreen,全屏显示,第 1 组/View-Section-View,1,已安排；待具体文档验证
 swriter,视图,.uno:ReadOnlyDoc,只读模式,第 1 组/View-Section-View,2,已安排；待具体文档验证
@@ -251,7 +251,7 @@ scalc,审阅,.uno:FormatCellDialog,单元格格式（保护）,第 3 组/Review-
 scalc,审阅,.uno:AllowEditRanges,允许编辑区域,第 3 组/Review-Section-Annotation,2,无已确认对应命令，省略
 scalc,审阅,.uno:Protect,保护工作表,第 3 组/Review-Section-Annotation,3,已安排；待具体文档验证
 scalc,审阅,.uno:ToolProtectionDocument,保护工作簿,第 3 组/Review-Section-Annotation,4,已安排；待具体文档验证
-scalc,审阅,.uno:ChineseConversion,繁转简,第 4 组/Review-Section-Annotation1,1,已安排；待具体文档验证
+scalc,审阅,.uno:ChineseConversion,简繁转换…,第 4 组/Review-Section-Annotation1,1,已安排；待具体文档验证
 scalc,视图,.uno:NormalViewMode,普通,第 1 组/View-Section-View,1,已安排；待具体文档验证
 scalc,视图,.uno:PagebreakMode,分页预览,第 1 组/View-Section-View,2,已安排；待具体文档验证
 scalc,视图,.uno:FullScreen,全屏显示,第 1 组/View-Section-View,3,已安排；待具体文档验证

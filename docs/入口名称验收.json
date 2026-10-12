@@ -1,0 +1,26 @@
+[
+  {
+    "模块": "text.TextDocument",
+    "命令": ".uno:OutlineBullet",
+    "运行时名称": "项目符号和编号…",
+    "通过": true
+  },
+  {
+    "模块": "text.TextDocument",
+    "命令": ".uno:TextdirectionLeftToRight",
+    "运行时名称": "横排文字（从左向右）",
+    "通过": true
+  },
+  {
+    "模块": "text.TextDocument",
+    "命令": ".uno:ChineseConversion",
+    "运行时名称": "简繁转换…",
+    "通过": true
+  },
+  {
+    "模块": "sheet.SpreadsheetDocument",
+    "命令": ".uno:ChineseConversion",
+    "运行时名称": "简繁转换…",
+    "通过": true
+  }
+]
