@@ -116,7 +116,7 @@
             "command": ".uno:FormatColumns"
           },
           {
-            "label": "文字方向",
+            "label": "横排文字（从左向右）",
             "command": ".uno:TextdirectionLeftToRight"
           }
         ],
@@ -178,7 +178,7 @@
             "command": ".uno:UpdateAllIndexes"
           },
           {
-            "label": "目录级别",
+            "label": "项目符号和编号…",
             "command": ".uno:OutlineBullet"
           }
         ],
@@ -296,7 +296,7 @@
             "command": ".uno:Translate"
           },
           {
-            "label": "繁转简",
+            "label": "简繁转换…",
             "command": ".uno:ChineseConversion"
           }
         ],
@@ -736,7 +736,7 @@
         ],
         [
           {
-            "label": "繁转简",
+            "label": "简繁转换…",
             "command": ".uno:ChineseConversion"
           }
         ]

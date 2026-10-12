@@ -348,6 +348,7 @@ def main():
     for source, dest in [("README.md", "使用说明.txt"), ("LICENSE", "LICENSE.txt"),
                          ("NOTICE", "来源说明.txt"), ("docs/验收记录.md", "验证记录.txt"),
                          ("docs/操作习惯.md", "操作习惯.txt"), ("docs/按钮差异.md", "按钮差异.txt"),
+                         ("docs/布局排查.md", "布局排查.txt"),
                          ("docs/适配计划.md", "适配计划.txt"),
                          ("docs/弹窗菜单设计.md", "弹窗菜单设计.txt")]:
         if (ROOT / source).exists():

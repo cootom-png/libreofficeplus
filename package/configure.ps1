@@ -318,5 +318,5 @@ if ($Restore) {
         if (Test-Path -LiteralPath $uiState) { Remove-Item -LiteralPath $uiState }
     }
     Write-Host "已恢复模块：$($selected -join '、')。"
-} else { Write-Host "已安装 LibreOfficePlus v6.2：$($selected -join '、')。请重新打开所选模块。" }
+} else { Write-Host "已安装 LibreOfficePlus v6.3：$($selected -join '、')。请重新打开所选模块。" }
 & $OnProgress 100 '所有步骤已完成。'

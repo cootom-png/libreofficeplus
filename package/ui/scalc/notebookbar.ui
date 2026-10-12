@@ -10217,8 +10217,8 @@
                                 <property name="show_arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Review-ShowAllNotes">
-                                    <property name="tooltip-text">繁转简</property>
-                                    <property name="label">繁转简</property>
+                                    <property name="tooltip-text">简繁转换…</property>
+                                    <property name="label">简繁转换…</property>
                                     <property name="action-name">.uno:ChineseConversion</property>
                                     <property name="visible">True</property>
                                   </object>
