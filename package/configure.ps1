@@ -1,7 +1,10 @@
 ﻿param([switch]$Restore, [string]$Modules = 'Writer,Calc,Draw',
-      [string]$LibreOfficePath = (Join-Path $env:ProgramFiles 'LibreOffice'))
+      [string]$LibreOfficePath = (Join-Path $env:ProgramFiles 'LibreOffice'),
+      [scriptblock]$OnProgress = { param($Percent, $Message) })
 $ErrorActionPreference = 'Stop'
+& $OnProgress 5 '正在检查环境与所选模块…'
 $moduleIds = @{ Writer='swriter'; Calc='scalc'; Draw='sdraw' }
+$moduleNames = @{ swriter='文字'; scalc='表格'; sdraw='绘图' }
 $selected = @($Modules.Split(',') | ForEach-Object { $_.Trim() } | Select-Object -Unique)
 if (!$selected.Count -or @($selected | Where-Object { !$moduleIds.ContainsKey($_) }).Count) { throw 'Modules 只接受 Writer、Calc、Draw，多个模块用英文逗号分隔。' }
 $selectedIds = @($selected | ForEach-Object { $moduleIds[$_] })
@@ -14,6 +17,7 @@ $ns = 'http://openoffice.org/2001/registry'
 if (Get-Process -Name 'soffice','soffice.bin' -ErrorAction SilentlyContinue) { throw '请先保存文档并完全退出 LibreOffice，再运行此配置包。不会强制结束进程。' }
 if (!(Test-Path -LiteralPath $config)) { throw '请先启动并关闭一次 LibreOffice，生成用户配置。' }
 [xml]$doc = Get-Content -LiteralPath $config -Raw -Encoding UTF8
+& $OnProgress 15 '已读取当前用户配置，正在检查配置包…'
 function Scope($path, $name) {
     if ($path -match 'Writer|com.sun.star.text.TextDocument' -or $name -eq 'ActiveWriter') { return 'Writer' }
     if ($path -match 'Calc' -or $name -eq 'ActiveCalc') { return 'Calc' }
@@ -82,6 +86,7 @@ if (!$Restore) {
     }
 }
 $uiFiles = @()
+& $OnProgress 30 '正在核对首次备份与恢复记录…'
 if (Test-Path -LiteralPath $uiState) {
     $uiFiles = ConvertFrom-Json -InputObject (Get-Content -LiteralPath $uiState -Raw -Encoding UTF8)
     if ($uiFiles -isnot [array]) { $uiFiles = @($uiFiles) }
@@ -156,6 +161,7 @@ foreach ($change in $changes) {
     }
 }
 $temp = "$config.wps-ui.tmp"; $doc.Save($temp)
+& $OnProgress 55 '已准备好设置，正在保护现有界面…'
 [xml]$verified = Get-Content -LiteralPath $temp -Raw -Encoding UTF8
 $stage = Join-Path $base ('wps-ui-stage-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $stage | Out-Null
@@ -165,14 +171,18 @@ foreach ($entry in $applyUi) {
     if ($current[$module]) { Copy-Item -LiteralPath $target -Destination (Join-Path $stage "$module.ui") }
 }
 try {
+    $completedUi = 0
     foreach ($entry in $applyUi) {
+        & $OnProgress (60 + [int](25 * $completedUi / [Math]::Max(1,$applyUi.Count))) "正在处理$($moduleNames[$entry.Module])界面…"
         $target=UiPath $entry.Module
         if (!$Restore -or $entry.Existed) {
             $source = if ($Restore) { Join-Path $uiBackup "$($entry.Module).ui" } else { Join-Path $PSScriptRoot "ui\$($entry.Module)\notebookbar.ui" }
             New-Item -ItemType Directory -Path (Split-Path $target) -Force | Out-Null
             Copy-Item -LiteralPath $source -Destination $target -Force
         } elseif (Test-Path -LiteralPath $target) { Remove-Item -LiteralPath $target }
+        $completedUi++
     }
+    & $OnProgress 90 '正在保存设置…'
     Move-Item -LiteralPath $temp -Destination $config -Force
 } catch {
     foreach ($entry in $applyUi) {
@@ -189,6 +199,7 @@ try {
     }
     Remove-Item -LiteralPath $stage
 }
+& $OnProgress 95 '正在整理恢复记录与临时文件…'
 if ($Restore) {
     foreach ($change in $changes) {
         Remove-Setting $saved $change[0] $change[1]
@@ -206,3 +217,4 @@ if ($Restore) {
     }
     Write-Host "已恢复模块：$($selected -join '、')。"
 } else { Write-Host "已安装 LibreOfficePlus v5：$($selected -join '、')。请重新打开所选模块。" }
+& $OnProgress 100 '所有步骤已完成。'
