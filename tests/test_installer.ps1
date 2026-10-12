@@ -9,6 +9,7 @@ $installer = Join-Path $repo 'package\configure.ps1'
 $ns = 'http://openoffice.org/2001/registry'
 New-Item -ItemType Directory -Path $profile,"$fakeInstall\program" -Force | Out-Null
 [IO.File]::WriteAllText("$fakeInstall\program\version.ini", 'buildid=cd7284b4cbbfeb507e630c1aac019f4157393acb')
+[IO.File]::WriteAllText("$fakeInstall\program\soffice.exe", '')
 $initial = @'
 <oor:items xmlns:oor="http://openoffice.org/2001/registry">
 <item oor:path="/org.openoffice.Office.UI.ToolbarMode"><prop oor:name="ActiveWriter" oor:op="fuse"><value>original.ui</value></prop><prop oor:name="Unrelated" oor:op="fuse"><value>keep</value></prop></item>
@@ -76,7 +77,11 @@ try {
     # 仅对隔离配置目录进行文件测试，不访问真实用户配置或结束任何进程。
     function Get-Process { param($Name,$ErrorAction) }
     $progress = [Collections.Generic.List[int]]::new()
-    & $installer -LibreOfficePath $fakeInstall -OnProgress { param($Percent,$Message) $progress.Add($Percent) }
+    $checks = [Collections.Generic.List[object]]::new()
+    & $installer -LibreOfficePath $fakeInstall -OnProgress { param($Percent,$Message) $progress.Add($Percent) } -OnCheck { param($Result) $checks.Add($Result) }
+    if ($checks.Count -ne 8 -or @($checks | Where-Object { $_.State -ne '通过' }).Count) { throw '安装前检查未全部通过' }
+    if (($checks | Where-Object { $_.Title -eq '版本兼容' }).Message -notmatch '26.2.5.2') { throw '未显示适配版本' }
+    if (Get-ChildItem -LiteralPath $profile -Filter '.wps-check-*.tmp') { throw '权限检查文件未清理' }
     if ($progress[0] -ne 5 -or $progress[$progress.Count-1] -ne 100) { throw '安装进度缺少起点或完成状态' }
     for ($index=1; $index -lt $progress.Count; $index++) {
         if ($progress[$index] -lt $progress[$index-1] -or $progress[$index] -gt 100) { throw '安装进度倒退或越界' }
@@ -189,13 +194,49 @@ try {
     [IO.File]::WriteAllText("$fakeInstall\program\version.ini",'buildid=unsupported')
     $before = (Get-FileHash -LiteralPath $config).Hash
     $refused = $false
-    try { & $installer -LibreOfficePath $fakeInstall } catch { $refused = $true }
+    $checks.Clear()
+    try { & $installer -LibreOfficePath $fakeInstall -OnCheck { param($Result) $checks.Add($Result) } } catch { $refused = $true }
     if (!$refused -or (Get-FileHash -LiteralPath $config).Hash -ne $before) { throw '未阻止不匹配版本' }
+    if (($checks | Where-Object { $_.Title -eq '版本兼容' }).State -ne '需处理' -or
+        ($checks | Where-Object { $_.Title -eq '目录写入' }).State -ne '未检查' -or (Test-Path -LiteralPath $backup)) { throw '不兼容版本的检查状态或停止时机错误' }
+
+    # ini 构建匹配，但程序版本不同，也不能显示为兼容。
+    [IO.File]::WriteAllText("$fakeInstall\program\version.ini",'buildid=cd7284b4cbbfeb507e630c1aac019f4157393acb')
+    function Get-Item { param($LiteralPath) [pscustomobject]@{VersionInfo=@{ProductVersion='25.8.0.1'}} }
+    $checks.Clear(); $refused=$false
+    try { & $installer -LibreOfficePath $fakeInstall -OnCheck { param($Result) $checks.Add($Result) } } catch { $refused=$true }
+    finally { Remove-Item Function:\Get-Item }
+    $versionRow=$checks | Where-Object { $_.Title -eq '版本兼容' }
+    if (!$refused -or $versionRow.State -ne '需处理' -or $versionRow.Message -notmatch '25.8.0.1' -or (Test-Path -LiteralPath $backup)) { throw '程序版本不匹配未阻止或未显示实际版本' }
+
+    # 即使程序被升级或卸载，仍可恢复此前安装的界面。
+    [IO.File]::WriteAllText("$fakeInstall\program\version.ini",'buildid=cd7284b4cbbfeb507e630c1aac019f4157393acb')
+    & $installer -LibreOfficePath $fakeInstall -OnCheck { param($Result) }
+    $checks.Clear()
+    & $installer -Restore -LibreOfficePath (Join-Path $fixture 'removed-app') -OnCheck { param($Result) $checks.Add($Result) }
+    if (($checks | Where-Object { $_.Title -eq '版本兼容' }).State -ne '不适用') { throw '恢复不应要求版本兼容' }
+    Check-Restore
+
+    $checks.Clear(); $refused=$false
+    try { & $installer -LibreOfficePath (Join-Path $fixture 'missing-app') -OnCheck { param($Result) $checks.Add($Result) } } catch { $refused=$true }
+    if (!$refused -or ($checks | Where-Object { $_.Title -eq '安装目录' }).State -ne '需处理') { throw '缺失程序未报告' }
+
+    foreach ($badConfig in @('', '<broken>')) {
+        [IO.File]::WriteAllText($config,$badConfig)
+        $checks.Clear(); $refused=$false
+        try { & $installer -LibreOfficePath $fakeInstall -OnCheck { param($Result) $checks.Add($Result) } } catch { $refused=$true }
+        if (!$refused -or ($checks | Where-Object { $_.Title -eq '用户配置' }).State -ne '需处理' -or (Test-Path -LiteralPath $backup)) { throw '无效用户配置未安全停止' }
+        if ((Get-Content -LiteralPath $config -Raw) -ne $badConfig -and $badConfig) { throw '无效用户配置被修改' }
+    }
+    [IO.File]::WriteAllText($config,$initial,[Text.UTF8Encoding]::new($false))
+    $before = (Get-FileHash -LiteralPath $config).Hash
     function Get-Process { param($Name,$ErrorAction) [pscustomobject]@{ ProcessName='soffice' } }
     $refused = $false
-    try { & $installer -Restore } catch { $refused = $true }
+    $checks.Clear()
+    try { & $installer -Restore -OnCheck { param($Result) $checks.Add($Result) } } catch { $refused = $true }
     if (!$refused -or (Get-FileHash -LiteralPath $config).Hash -ne $before) { throw '运行中防护未生效' }
-    Write-Host '通过：不兼容版本和运行中进程防护。'
+    if (($checks | Where-Object { $_.Title -eq '运行状态' }).State -ne '需处理') { throw '运行中状态未显示' }
+    Write-Host '通过：版本、程序缺失、配置损坏和运行状态提示，恢复不受安装版本限制。'
 } finally {
     $env:APPDATA = $originalAppData
     Remove-Item Function:\Get-Process -ErrorAction SilentlyContinue
