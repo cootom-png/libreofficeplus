@@ -260,7 +260,7 @@
   {
     "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:StylesPreview",
     "Name": "TooltipLabel",
-    "Value": "样式",
+    "Value": "段落样式会改变字体、缩进与行距。旧文档出现排版变化时先撤销，再用“格式设置 → 样式检查”查看。",
     "Localized": true
   },
   {
@@ -645,6 +645,78 @@
     "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:TextdirectionLeftToRight",
     "Name": "TooltipLabel",
     "Value": "横排文字（从左向右）",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:InsertObject",
+    "Name": "Label",
+    "Value": "嵌入对象…",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:InsertObject",
+    "Name": "ContextLabel",
+    "Value": "嵌入对象…",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:InsertObject",
+    "Name": "PopupLabel",
+    "Value": "嵌入对象…",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:InsertObject",
+    "Name": "TooltipLabel",
+    "Value": "将文件作为 OLE 对象嵌入或链接到当前文档。",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:InsertSheetFromFile",
+    "Name": "Label",
+    "Value": "从文件导入工作表…",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:InsertSheetFromFile",
+    "Name": "ContextLabel",
+    "Value": "从文件导入工作表…",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:InsertSheetFromFile",
+    "Name": "PopupLabel",
+    "Value": "从文件导入工作表…",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:InsertSheetFromFile",
+    "Name": "TooltipLabel",
+    "Value": "从其他表格文件复制工作表到当前文件。",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Popups/.uno:SidebarDeck.InspectorDeck",
+    "Name": "Label",
+    "Value": "样式检查",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Popups/.uno:SidebarDeck.InspectorDeck",
+    "Name": "ContextLabel",
+    "Value": "样式检查",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Popups/.uno:SidebarDeck.InspectorDeck",
+    "Name": "PopupLabel",
+    "Value": "样式检查",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Popups/.uno:SidebarDeck.InspectorDeck",
+    "Name": "TooltipLabel",
+    "Value": "查看当前文字的段落样式与直接格式。",
     "Localized": true
   },
   {
@@ -864,5 +936,10 @@
     "Path": "/org.openoffice.Office.Common/Misc",
     "Name": "UseSystemFileDialog",
     "Value": "true"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.ToolbarMode/Applications/Draw/Modes/Tabbed",
+    "Name": "HasMenubar",
+    "Value": "false"
   }
 ]

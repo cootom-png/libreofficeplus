@@ -1,25 +1,68 @@
 <?xml version='1.0' encoding='utf-8'?>
 <interface domain="sc">
-  <object class="GtkMenu" id="WPS-scalc-22">
+  <object class="GtkMenu" id="WPS-scalc-29">
     <property name="visible">True</property>
     <child>
-      <object class="GtkMenuItem" id="WPS-scalc-23">
+      <object class="GtkMenuItem" id="WPS-scalc-30">
         <property name="action-name">.uno:FreezePanes</property>
         <property name="label">冻结或取消冻结所选位置</property>
         <property name="visible">True</property>
       </object>
     </child>
     <child>
-      <object class="GtkMenuItem" id="WPS-scalc-24">
+      <object class="GtkMenuItem" id="WPS-scalc-31">
         <property name="action-name">.uno:FreezePanesRow</property>
         <property name="label">冻结首行</property>
         <property name="visible">True</property>
       </object>
     </child>
     <child>
-      <object class="GtkMenuItem" id="WPS-scalc-25">
+      <object class="GtkMenuItem" id="WPS-scalc-32">
         <property name="action-name">.uno:FreezePanesColumn</property>
         <property name="label">冻结首列</property>
+        <property name="visible">True</property>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMenu" id="WPS-scalc-14">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkMenuItem" id="WPS-scalc-15">
+        <property name="action-name">.uno:FillDown</property>
+        <property name="label">向下填充</property>
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="WPS-scalc-16">
+        <property name="action-name">.uno:FillRight</property>
+        <property name="label">向右填充</property>
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="WPS-scalc-17">
+        <property name="action-name">.uno:FillUp</property>
+        <property name="label">向上填充</property>
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="WPS-scalc-18">
+        <property name="action-name">.uno:FillLeft</property>
+        <property name="label">向左填充</property>
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="WPS-scalc-19">
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="WPS-scalc-20">
+        <property name="action-name">.uno:FillSeries</property>
+        <property name="label">序列…</property>
         <property name="visible">True</property>
       </object>
     </child>
@@ -28,41 +71,34 @@
     <property name="visible">True</property>
     <child>
       <object class="GtkMenuItem" id="WPS-scalc-8">
-        <property name="action-name">.uno:FillDown</property>
-        <property name="label">向下填充</property>
+        <property name="action-name">.uno:InsertContents?Flags:string=SVD</property>
+        <property name="label">粘贴值（含文本与计算结果）</property>
         <property name="visible">True</property>
       </object>
     </child>
     <child>
       <object class="GtkMenuItem" id="WPS-scalc-9">
-        <property name="action-name">.uno:FillRight</property>
-        <property name="label">向右填充</property>
+        <property name="action-name">.uno:InsertContents?Flags:string=T</property>
+        <property name="label">仅粘贴格式</property>
         <property name="visible">True</property>
       </object>
     </child>
     <child>
       <object class="GtkMenuItem" id="WPS-scalc-10">
-        <property name="action-name">.uno:FillUp</property>
-        <property name="label">向上填充</property>
+        <property name="action-name">.uno:PasteOnlyFormula</property>
+        <property name="label">仅粘贴公式</property>
         <property name="visible">True</property>
       </object>
     </child>
     <child>
-      <object class="GtkMenuItem" id="WPS-scalc-11">
-        <property name="action-name">.uno:FillLeft</property>
-        <property name="label">向左填充</property>
+      <object class="GtkSeparatorMenuItem" id="WPS-scalc-11">
         <property name="visible">True</property>
       </object>
     </child>
     <child>
-      <object class="GtkSeparatorMenuItem" id="WPS-scalc-12">
-        <property name="visible">True</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkMenuItem" id="WPS-scalc-13">
-        <property name="action-name">.uno:FillSeries</property>
-        <property name="label">序列…</property>
+      <object class="GtkMenuItem" id="WPS-scalc-12">
+        <property name="action-name">.uno:InsertContents</property>
+        <property name="label">选择性粘贴…</property>
         <property name="visible">True</property>
       </object>
     </child>
@@ -4347,13 +4383,24 @@
                         <property name="visible">True</property>
                         <child>
                           <object class="GtkBox" id="WPS-scalc-5">
+                            <property name="spacing">4</property>
                             <property name="orientation">vertical</property>
                             <property name="visible">True</property>
                             <child>
                               <object class="GtkBox" id="WPS-scalc-6">
                                 <property name="visible">True</property>
                                 <child>
-                                  <object class="svtlo-ManagedMenuButton" id="WPS-scalc-14:WPS-scalc-7">
+                                  <object class="svtlo-ManagedMenuButton" id="WPS-scalc-13:WPS-scalc-7">
+                                    <property name="focus-on-click">False</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="valign">center</property>
+                                    <property name="relief">none</property>
+                                    <property name="label">粘贴选项</property>
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="svtlo-ManagedMenuButton" id="WPS-scalc-21:WPS-scalc-14">
                                     <property name="focus-on-click">False</property>
                                     <property name="can-focus">True</property>
                                     <property name="valign">center</property>
@@ -4363,7 +4410,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-15">
+                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-22">
                                     <property name="icon-size">1</property>
                                     <property name="show-arrow">False</property>
                                     <property name="toolbar-style">both-horiz</property>
@@ -4372,7 +4419,7 @@
                                     <property name="can-focus">True</property>
                                     <property name="visible">True</property>
                                     <child>
-                                      <object class="GtkToolButton" id="WPS-scalc-16">
+                                      <object class="GtkToolButton" id="WPS-scalc-23">
                                         <property name="tooltip-text">求和</property>
                                         <property name="label">求和</property>
                                         <property name="action-name">.uno:AutoSum</property>
@@ -4381,8 +4428,13 @@
                                     </child>
                                   </object>
                                 </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkBox" id="WPS-scalc-24">
+                                <property name="visible">True</property>
                                 <child>
-                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-17">
+                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-25">
                                     <property name="icon-size">1</property>
                                     <property name="show-arrow">False</property>
                                     <property name="toolbar-style">both-horiz</property>
@@ -4391,7 +4443,7 @@
                                     <property name="can-focus">True</property>
                                     <property name="visible">True</property>
                                     <child>
-                                      <object class="GtkToolButton" id="WPS-scalc-18">
+                                      <object class="GtkToolButton" id="WPS-scalc-26">
                                         <property name="tooltip-text">排序</property>
                                         <property name="label">排序</property>
                                         <property name="action-name">.uno:DataSort</property>
@@ -4399,41 +4451,6 @@
                                         <property name="valign">center</property>
                                       </object>
                                     </child>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkBox" id="WPS-scalc-19">
-                                <property name="visible">True</property>
-                                <child>
-                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-20">
-                                    <property name="icon-size">1</property>
-                                    <property name="show-arrow">False</property>
-                                    <property name="toolbar-style">both-horiz</property>
-                                    <property name="vexpand">True</property>
-                                    <property name="valign">center</property>
-                                    <property name="can-focus">True</property>
-                                    <property name="visible">True</property>
-                                    <child>
-                                      <object class="GtkToolButton" id="WPS-scalc-21">
-                                        <property name="tooltip-text">筛选</property>
-                                        <property name="label">筛选</property>
-                                        <property name="action-name">.uno:DataFilterAutoFilter</property>
-                                        <property name="visible">True</property>
-                                        <property name="valign">center</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="svtlo-ManagedMenuButton" id="WPS-scalc-26:WPS-scalc-22">
-                                    <property name="focus-on-click">False</property>
-                                    <property name="can-focus">True</property>
-                                    <property name="valign">center</property>
-                                    <property name="relief">none</property>
-                                    <property name="label">冻结</property>
-                                    <property name="visible">True</property>
                                   </object>
                                 </child>
                                 <child>
@@ -4447,16 +4464,27 @@
                                     <property name="visible">True</property>
                                     <child>
                                       <object class="GtkToolButton" id="WPS-scalc-28">
-                                        <property name="tooltip-text">查找</property>
-                                        <property name="label">查找</property>
-                                        <property name="action-name">.uno:SearchDialog</property>
+                                        <property name="tooltip-text">筛选</property>
+                                        <property name="label">筛选</property>
+                                        <property name="action-name">.uno:DataFilterAutoFilter</property>
                                         <property name="visible">True</property>
+                                        <property name="valign">center</property>
                                       </object>
                                     </child>
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-29">
+                                  <object class="svtlo-ManagedMenuButton" id="WPS-scalc-33:WPS-scalc-29">
+                                    <property name="focus-on-click">False</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="valign">center</property>
+                                    <property name="relief">none</property>
+                                    <property name="label">冻结</property>
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-34">
                                     <property name="icon-size">1</property>
                                     <property name="show-arrow">False</property>
                                     <property name="toolbar-style">both-horiz</property>
@@ -4465,10 +4493,10 @@
                                     <property name="can-focus">True</property>
                                     <property name="visible">True</property>
                                     <child>
-                                      <object class="GtkToolButton" id="WPS-scalc-30">
-                                        <property name="tooltip-text">单元格格式…</property>
-                                        <property name="label">单元格格式…</property>
-                                        <property name="action-name">.uno:FormatCellDialog</property>
+                                      <object class="GtkToolButton" id="WPS-scalc-35">
+                                        <property name="tooltip-text">查找</property>
+                                        <property name="label">查找</property>
+                                        <property name="action-name">.uno:SearchDialog</property>
                                         <property name="visible">True</property>
                                       </object>
                                     </child>
@@ -4670,7 +4698,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-131">
+                              <object class="GtkToolButton" id="WPS-scalc-136">
                                 <property name="tooltip-text">数据区域</property>
                                 <property name="label">数据区域</property>
                                 <property name="action-name">.uno:DefineDBName</property>
@@ -4736,8 +4764,8 @@
                                 <property name="show_arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Insert-InsertCell">
-                                    <property name="tooltip-text">文档</property>
-                                    <property name="label">文档</property>
+                                    <property name="tooltip-text">从其他表格文件复制工作表到当前文件。</property>
+                                    <property name="label">从文件导入工作表…</property>
                                     <property name="action-name">.uno:InsertSheetFromFile</property>
                                     <property name="visible">True</property>
                                   </object>
@@ -4747,7 +4775,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-132">
+                                  <object class="GtkToolButton" id="WPS-scalc-137">
                                     <property name="tooltip-text">形状</property>
                                     <property name="label">形状</property>
                                     <property name="action-name">.uno:BasicShapes</property>
@@ -4755,7 +4783,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-133">
+                                  <object class="GtkToolButton" id="WPS-scalc-138">
                                     <property name="tooltip-text">艺术字</property>
                                     <property name="label">艺术字</property>
                                     <property name="action-name">.uno:FontworkGalleryFloater</property>
@@ -4763,7 +4791,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-134">
+                                  <object class="GtkToolButton" id="WPS-scalc-139">
                                     <property name="tooltip-text">文本框</property>
                                     <property name="label">文本框</property>
                                     <property name="action-name">.uno:DrawText</property>
@@ -4837,7 +4865,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-135">
+                              <object class="GtkToolButton" id="WPS-scalc-140">
                                 <property name="tooltip-text">迷你图</property>
                                 <property name="label">迷你图</property>
                                 <property name="action-name">.uno:InsertSparkline</property>
@@ -4914,7 +4942,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-136">
+                                  <object class="GtkToolButton" id="WPS-scalc-141">
                                     <property name="tooltip-text">符号</property>
                                     <property name="label">符号</property>
                                     <property name="action-name">.uno:InsertSymbol</property>
@@ -4922,9 +4950,9 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-137">
-                                    <property name="tooltip-text">附件</property>
-                                    <property name="label">附件</property>
+                                  <object class="GtkToolButton" id="WPS-scalc-142">
+                                    <property name="tooltip-text">将文件作为 OLE 对象嵌入或链接到当前文档。</property>
+                                    <property name="label">嵌入对象…</property>
                                     <property name="action-name">.uno:InsertObject</property>
                                     <property name="visible">True</property>
                                   </object>
@@ -4955,7 +4983,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Insert-Section-Image">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -5009,7 +5037,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Insert-Section-Image1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -5084,7 +5112,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Insert-Section-Reference">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -5138,7 +5166,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Insert-Section-Reference1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -5259,7 +5287,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Insert-Section-DrawText">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -5323,7 +5351,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Insert-Section-Draw">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -5448,7 +5476,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Insert-Section-Draw2">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -5574,7 +5602,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Insert-Section-Symbol">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -5628,7 +5656,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Insert-Section-Symbol1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -5857,7 +5885,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-138">
+                              <object class="GtkToolButton" id="WPS-scalc-143">
                                 <property name="tooltip-text">页边距</property>
                                 <property name="label">页边距</property>
                                 <property name="action-name">.uno:PageFormatDialog</property>
@@ -5865,7 +5893,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-139">
+                              <object class="GtkToolButton" id="WPS-scalc-144">
                                 <property name="tooltip-text">纸张方向</property>
                                 <property name="label">纸张方向</property>
                                 <property name="action-name">.uno:Orientation</property>
@@ -5873,7 +5901,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-140">
+                              <object class="GtkToolButton" id="WPS-scalc-145">
                                 <property name="tooltip-text">纸张大小</property>
                                 <property name="label">纸张大小</property>
                                 <property name="action-name">.uno:Size</property>
@@ -5881,7 +5909,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-141">
+                              <object class="GtkToolButton" id="WPS-scalc-146">
                                 <property name="tooltip-text">打印区域</property>
                                 <property name="label">打印区域</property>
                                 <property name="action-name">.uno:DefinePrintArea</property>
@@ -5891,7 +5919,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-142">
+                              <object class="GtkToolButton" id="WPS-scalc-147">
                                 <property name="tooltip-text">打印缩放</property>
                                 <property name="label">打印缩放</property>
                                 <property name="action-name">.uno:PageFormatDialog</property>
@@ -5940,7 +5968,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-143">
+                              <object class="GtkToolButton" id="WPS-scalc-148">
                                 <property name="tooltip-text">页眉页脚</property>
                                 <property name="label">页眉页脚</property>
                                 <property name="action-name">.uno:EditHeaderAndFooter</property>
@@ -5948,7 +5976,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-144">
+                              <object class="GtkToolButton" id="WPS-scalc-149">
                                 <property name="tooltip-text">打印网格线</property>
                                 <property name="label">打印网格线</property>
                                 <property name="action-name">.uno:PageFormatDialog</property>
@@ -5956,7 +5984,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-145">
+                              <object class="GtkToolButton" id="WPS-scalc-150">
                                 <property name="tooltip-text">打印行号列标</property>
                                 <property name="label">打印行号列标</property>
                                 <property name="action-name">.uno:PageFormatDialog</property>
@@ -6034,7 +6062,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-146">
+                                  <object class="GtkToolButton" id="WPS-scalc-151">
                                     <property name="tooltip-text">背景</property>
                                     <property name="label">背景</property>
                                     <property name="action-name">.uno:PageFormatDialog</property>
@@ -6067,7 +6095,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Layout-Section-Print">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -6123,7 +6151,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Layout-Section-Print1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -6219,7 +6247,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Layout-Section-InsertCell">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -6273,7 +6301,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Layout-Section-RowColumnOperations">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -6347,7 +6375,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Layout-Section-RenameTable">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -6404,7 +6432,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Layout-Section-ShowHide">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -6479,7 +6507,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Layout-Section-Style">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -6536,7 +6564,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Layout-Section-Style1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -6611,7 +6639,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Layout-Section-Group">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -6701,7 +6729,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Layout-Section-Align">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -6777,7 +6805,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Layout-Section-Arrange">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -6867,7 +6895,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Layout-Section-Arrange1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -7060,19 +7088,19 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="sfxlo-PriorityMergedHBox" id="WPS-scalc-32">
+                  <object class="sfxlo-PriorityMergedHBox" id="WPS-scalc-37">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="valign">center</property>
                     <property name="vexpand">True</property>
                     <child>
-                      <object class="VclOptionalBox" id="WPS-scalc-33">
+                      <object class="VclOptionalBox" id="WPS-scalc-38">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-34">
+                          <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-39">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="valign">center</property>
@@ -7081,7 +7109,7 @@
                             <property name="show_arrow">False</property>
                             <property name="icon_size">3</property>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-35">
+                              <object class="GtkToolButton" id="WPS-scalc-40">
                                 <property name="tooltip-text">插入函数</property>
                                 <property name="label">插入函数</property>
                                 <property name="action-name">.uno:FunctionDialog</property>
@@ -7093,7 +7121,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-147">
+                              <object class="GtkToolButton" id="WPS-scalc-152">
                                 <property name="tooltip-text">求和</property>
                                 <property name="label">求和</property>
                                 <property name="action-name">.uno:AutoSum</property>
@@ -7101,7 +7129,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-148">
+                              <object class="GtkToolButton" id="WPS-scalc-153">
                                 <property name="tooltip-text">常用函数</property>
                                 <property name="label">常用函数</property>
                                 <property name="action-name">.uno:FunctionBox</property>
@@ -7123,26 +7151,26 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="VclOptionalBox" id="WPS-scalc-36">
+                      <object class="VclOptionalBox" id="WPS-scalc-41">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <child>
-                          <object class="GtkBox" id="WPS-scalc-37">
+                          <object class="GtkBox" id="WPS-scalc-42">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="valign">center</property>
                             <property name="vexpand">True</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-38">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-43">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">both-horiz</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-39">
+                                  <object class="GtkToolButton" id="WPS-scalc-44">
                                     <property name="tooltip-text">名称管理器</property>
                                     <property name="label">名称管理器</property>
                                     <property name="action-name">.uno:DefineName</property>
@@ -7161,13 +7189,13 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-40">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-45">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">both-horiz</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-41">
+                                  <object class="GtkToolButton" id="WPS-scalc-46">
                                     <property name="tooltip-text">指定名称</property>
                                     <property name="label">指定名称</property>
                                     <property name="action-name">.uno:DefineName</property>
@@ -7179,7 +7207,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-149">
+                                  <object class="GtkToolButton" id="WPS-scalc-154">
                                     <property name="tooltip-text">粘贴名称</property>
                                     <property name="label">粘贴名称</property>
                                     <property name="action-name">.uno:InsertName</property>
@@ -7211,13 +7239,13 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="VclOptionalBox" id="WPS-scalc-42">
+                      <object class="VclOptionalBox" id="WPS-scalc-47">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <child>
-                          <object class="GtkSeparator" id="WPS-scalc-43">
+                          <object class="GtkSeparator" id="WPS-scalc-48">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_top">5</property>
@@ -7232,7 +7260,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-44">
+                          <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-49">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="valign">center</property>
@@ -7241,7 +7269,7 @@
                             <property name="show_arrow">False</property>
                             <property name="icon_size">3</property>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-45">
+                              <object class="GtkToolButton" id="WPS-scalc-50">
                                 <property name="tooltip-text">追踪引用</property>
                                 <property name="label">追踪引用</property>
                                 <property name="action-name">.uno:ShowPrecedents</property>
@@ -7253,7 +7281,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-150">
+                              <object class="GtkToolButton" id="WPS-scalc-155">
                                 <property name="tooltip-text">追踪从属</property>
                                 <property name="label">追踪从属</property>
                                 <property name="action-name">.uno:ShowDependents</property>
@@ -7261,7 +7289,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-151">
+                              <object class="GtkToolButton" id="WPS-scalc-156">
                                 <property name="tooltip-text">移去箭头</property>
                                 <property name="label">移去箭头</property>
                                 <property name="action-name">.uno:ClearArrows</property>
@@ -7269,7 +7297,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-152">
+                              <object class="GtkToolButton" id="WPS-scalc-157">
                                 <property name="tooltip-text">错误检查</property>
                                 <property name="label">错误检查</property>
                                 <property name="action-name">.uno:ShowErrors</property>
@@ -7291,26 +7319,26 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="VclOptionalBox" id="WPS-scalc-46">
+                      <object class="VclOptionalBox" id="WPS-scalc-51">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <child>
-                          <object class="GtkBox" id="WPS-scalc-47">
+                          <object class="GtkBox" id="WPS-scalc-52">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="valign">center</property>
                             <property name="vexpand">True</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-48">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-53">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">both-horiz</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-49">
+                                  <object class="GtkToolButton" id="WPS-scalc-54">
                                     <property name="tooltip-text">显示公式</property>
                                     <property name="label">显示公式</property>
                                     <property name="action-name">.uno:ToggleFormula</property>
@@ -7329,13 +7357,13 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-50">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-55">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">both-horiz</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-51">
+                                  <object class="GtkToolButton" id="WPS-scalc-56">
                                     <property name="tooltip-text">自动重算</property>
                                     <property name="label">自动重算</property>
                                     <property name="action-name">.uno:AutomaticCalculation</property>
@@ -7347,7 +7375,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-153">
+                                  <object class="GtkToolButton" id="WPS-scalc-158">
                                     <property name="tooltip-text">重算工作簿</property>
                                     <property name="label">重算工作簿</property>
                                     <property name="action-name">.uno:CalculateHard</property>
@@ -7355,7 +7383,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-154">
+                                  <object class="GtkToolButton" id="WPS-scalc-159">
                                     <property name="tooltip-text">计算工作表</property>
                                     <property name="label">计算工作表</property>
                                     <property name="action-name">.uno:Calculate</property>
@@ -7384,26 +7412,26 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="VclOptionalBox" id="WPS-scalc-52">
-                        <property name="visible">True</property>
+                      <object class="VclOptionalBox" id="WPS-scalc-57">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <child>
-                          <object class="GtkBox" id="WPS-scalc-53">
+                          <object class="GtkBox" id="WPS-scalc-58">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="valign">center</property>
                             <property name="vexpand">True</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-54">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-59">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">both-horiz</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-55">
+                                  <object class="GtkToolButton" id="WPS-scalc-60">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:ClearArrowPrecedents</property>
                                   </object>
@@ -7420,13 +7448,13 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-56">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-61">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">both-horiz</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-57">
+                                  <object class="GtkToolButton" id="WPS-scalc-62">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:ClearArrowDependents</property>
                                   </object>
@@ -7460,13 +7488,13 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="VclOptionalBox" id="WPS-scalc-58">
-                        <property name="visible">True</property>
+                      <object class="VclOptionalBox" id="WPS-scalc-63">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <child>
-                          <object class="GtkSeparator" id="WPS-scalc-59">
+                          <object class="GtkSeparator" id="WPS-scalc-64">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_top">5</property>
@@ -7481,7 +7509,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-60">
+                          <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-65">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="valign">center</property>
@@ -7490,7 +7518,7 @@
                             <property name="show_arrow">False</property>
                             <property name="icon_size">3</property>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-61">
+                              <object class="GtkToolButton" id="WPS-scalc-66">
                                 <property name="visible">False</property>
                                 <property name="action_name">.uno:GoalSeekDialog</property>
                               </object>
@@ -7514,13 +7542,13 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="VclOptionalBox" id="WPS-scalc-62">
-                        <property name="visible">True</property>
+                      <object class="VclOptionalBox" id="WPS-scalc-67">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-63">
+                          <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-68">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="valign">center</property>
@@ -7529,7 +7557,7 @@
                             <property name="show_arrow">False</property>
                             <property name="icon_size">3</property>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-64">
+                              <object class="GtkToolButton" id="WPS-scalc-69">
                                 <property name="visible">False</property>
                                 <property name="action_name">.uno:SolverDialog</property>
                               </object>
@@ -7556,26 +7584,26 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="VclOptionalBox" id="WPS-scalc-65">
-                        <property name="visible">True</property>
+                      <object class="VclOptionalBox" id="WPS-scalc-70">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <child>
-                          <object class="GtkBox" id="WPS-scalc-66">
+                          <object class="GtkBox" id="WPS-scalc-71">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="valign">center</property>
                             <property name="vexpand">True</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-67">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-72">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">both-horiz</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-68">
+                                  <object class="GtkToolButton" id="WPS-scalc-73">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:ShowErrors</property>
                                   </object>
@@ -7592,13 +7620,13 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-69">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-74">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">both-horiz</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-70">
+                                  <object class="GtkToolButton" id="WPS-scalc-75">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:ShowInvalid</property>
                                   </object>
@@ -7632,13 +7660,13 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="VclOptionalBox" id="WPS-scalc-71">
-                        <property name="visible">True</property>
+                      <object class="VclOptionalBox" id="WPS-scalc-76">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <child>
-                          <object class="GtkSeparator" id="WPS-scalc-72">
+                          <object class="GtkSeparator" id="WPS-scalc-77">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_top">5</property>
@@ -7653,7 +7681,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-73">
+                          <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-78">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="valign">center</property>
@@ -7662,7 +7690,7 @@
                             <property name="show_arrow">False</property>
                             <property name="icon_size">3</property>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-74">
+                              <object class="GtkToolButton" id="WPS-scalc-79">
                                 <property name="visible">False</property>
                                 <property name="action_name">.uno:SwitchControlDesignMode</property>
                               </object>
@@ -7686,20 +7714,20 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="VclOptionalBox" id="WPS-scalc-75">
-                        <property name="visible">True</property>
+                      <object class="VclOptionalBox" id="WPS-scalc-80">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <child>
-                          <object class="GtkBox" id="WPS-scalc-76">
+                          <object class="GtkBox" id="WPS-scalc-81">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="valign">center</property>
                             <property name="vexpand">True</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-77">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-82">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="valign">center</property>
@@ -7707,7 +7735,7 @@
                                 <property name="toolbar_style">both-horiz</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-78">
+                                  <object class="GtkToolButton" id="WPS-scalc-83">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:UseWizards</property>
                                   </object>
@@ -7724,7 +7752,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-79">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-84">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="valign">center</property>
@@ -7732,7 +7760,7 @@
                                 <property name="toolbar_style">both-horiz</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-80">
+                                  <object class="GtkToolButton" id="WPS-scalc-85">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:GroupBox</property>
                                   </object>
@@ -7766,13 +7794,13 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="VclOptionalBox" id="WPS-scalc-81">
-                        <property name="visible">True</property>
+                      <object class="VclOptionalBox" id="WPS-scalc-86">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <child>
-                          <object class="GtkSeparator" id="WPS-scalc-82">
+                          <object class="GtkSeparator" id="WPS-scalc-87">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_top">5</property>
@@ -7787,20 +7815,20 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox" id="WPS-scalc-83">
+                          <object class="GtkBox" id="WPS-scalc-88">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="valign">center</property>
                             <property name="vexpand">True</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-84">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-89">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">icons</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-85">
+                                  <object class="GtkToolButton" id="WPS-scalc-90">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:Label</property>
                                   </object>
@@ -7810,7 +7838,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-86">
+                                  <object class="GtkToolButton" id="WPS-scalc-91">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:Edit</property>
                                   </object>
@@ -7820,7 +7848,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-87">
+                                  <object class="GtkToolButton" id="WPS-scalc-92">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:CheckBox</property>
                                   </object>
@@ -7837,13 +7865,13 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-88">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-93">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">icons</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-89">
+                                  <object class="GtkToolButton" id="WPS-scalc-94">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:RadioButton</property>
                                   </object>
@@ -7853,7 +7881,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-90">
+                                  <object class="GtkToolButton" id="WPS-scalc-95">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:ListBox</property>
                                   </object>
@@ -7863,7 +7891,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-91">
+                                  <object class="GtkToolButton" id="WPS-scalc-96">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:ComboBox</property>
                                   </object>
@@ -7897,13 +7925,13 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="VclOptionalBox" id="WPS-scalc-92">
-                        <property name="visible">True</property>
+                      <object class="VclOptionalBox" id="WPS-scalc-97">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <child>
-                          <object class="GtkSeparator" id="WPS-scalc-93">
+                          <object class="GtkSeparator" id="WPS-scalc-98">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_top">5</property>
@@ -7918,20 +7946,20 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox" id="WPS-scalc-94">
+                          <object class="GtkBox" id="WPS-scalc-99">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="valign">center</property>
                             <property name="vexpand">True</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-95">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-100">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">icons</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-96">
+                                  <object class="GtkToolButton" id="WPS-scalc-101">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:NumericField</property>
                                   </object>
@@ -7941,7 +7969,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-97">
+                                  <object class="GtkToolButton" id="WPS-scalc-102">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:CurrencyField</property>
                                   </object>
@@ -7951,7 +7979,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-98">
+                                  <object class="GtkToolButton" id="WPS-scalc-103">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:PatternField</property>
                                   </object>
@@ -7968,13 +7996,13 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-99">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-104">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">icons</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-100">
+                                  <object class="GtkToolButton" id="WPS-scalc-105">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:FormattedField</property>
                                   </object>
@@ -7984,7 +8012,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-101">
+                                  <object class="GtkToolButton" id="WPS-scalc-106">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:DateField</property>
                                   </object>
@@ -7994,7 +8022,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-102">
+                                  <object class="GtkToolButton" id="WPS-scalc-107">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:TimeField</property>
                                   </object>
@@ -8028,13 +8056,13 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="VclOptionalBox" id="WPS-scalc-103">
-                        <property name="visible">True</property>
+                      <object class="VclOptionalBox" id="WPS-scalc-108">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <child>
-                          <object class="GtkSeparator" id="WPS-scalc-104">
+                          <object class="GtkSeparator" id="WPS-scalc-109">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_top">5</property>
@@ -8049,20 +8077,20 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox" id="WPS-scalc-105">
+                          <object class="GtkBox" id="WPS-scalc-110">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="valign">center</property>
                             <property name="vexpand">True</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-106">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-111">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">icons</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-107">
+                                  <object class="GtkToolButton" id="WPS-scalc-112">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:Pushbutton</property>
                                   </object>
@@ -8072,7 +8100,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-108">
+                                  <object class="GtkToolButton" id="WPS-scalc-113">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:Imagebutton</property>
                                   </object>
@@ -8082,7 +8110,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-109">
+                                  <object class="GtkToolButton" id="WPS-scalc-114">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:ImageControl</property>
                                   </object>
@@ -8099,13 +8127,13 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-110">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-115">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">icons</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-111">
+                                  <object class="GtkToolButton" id="WPS-scalc-116">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:FileControl</property>
                                   </object>
@@ -8115,7 +8143,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-112">
+                                  <object class="GtkToolButton" id="WPS-scalc-117">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:NavigationBar</property>
                                   </object>
@@ -8125,7 +8153,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-113">
+                                  <object class="GtkToolButton" id="WPS-scalc-118">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:Grid</property>
                                   </object>
@@ -8159,13 +8187,13 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="VclOptionalBox" id="WPS-scalc-114">
-                        <property name="visible">True</property>
+                      <object class="VclOptionalBox" id="WPS-scalc-119">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <child>
-                          <object class="GtkSeparator" id="WPS-scalc-115">
+                          <object class="GtkSeparator" id="WPS-scalc-120">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_top">5</property>
@@ -8180,20 +8208,20 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox" id="WPS-scalc-116">
+                          <object class="GtkBox" id="WPS-scalc-121">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="valign">center</property>
                             <property name="vexpand">True</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-117">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-122">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">icons</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-118">
+                                  <object class="GtkToolButton" id="WPS-scalc-123">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:FormProperties</property>
                                   </object>
@@ -8203,7 +8231,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-119">
+                                  <object class="GtkToolButton" id="WPS-scalc-124">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:TabDialog</property>
                                   </object>
@@ -8213,7 +8241,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-120">
+                                  <object class="GtkToolButton" id="WPS-scalc-125">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:ControlProperties</property>
                                   </object>
@@ -8230,13 +8258,13 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-121">
+                              <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-126">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="toolbar_style">icons</property>
                                 <property name="show_arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-122">
+                                  <object class="GtkToolButton" id="WPS-scalc-127">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:ShowFmExplorer</property>
                                   </object>
@@ -8246,7 +8274,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-123">
+                                  <object class="GtkToolButton" id="WPS-scalc-128">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:OpenReadOnly</property>
                                   </object>
@@ -8256,7 +8284,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-124">
+                                  <object class="GtkToolButton" id="WPS-scalc-129">
                                     <property name="visible">False</property>
                                     <property name="action_name">.uno:AutoControlFocus</property>
                                   </object>
@@ -8297,21 +8325,21 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="sfxlo-DropdownBox" id="WPS-scalc-125">
+                  <object class="sfxlo-DropdownBox" id="WPS-scalc-130">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
                     <property name="vexpand">True</property>
                     <child>
-                      <object class="GtkBox" id="WPS-scalc-126">
+                      <object class="GtkBox" id="WPS-scalc-131">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <property name="orientation">vertical</property>
                         <child>
-                          <object class="svtlo-ManagedMenuButton" id="WPS-scalc-127:Menu Tools">
+                          <object class="svtlo-ManagedMenuButton" id="WPS-scalc-132:Menu Tools">
                             <property name="label">公式工具</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -8330,7 +8358,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-128">
+                          <object class="sfxlo-NotebookbarToolBox" id="WPS-scalc-133">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="halign">end</property>
@@ -8339,7 +8367,7 @@
                             <property name="show_arrow">False</property>
                             <property name="icon_size">1</property>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-129">
+                              <object class="GtkToolButton" id="WPS-scalc-134">
                                 <property name="visible">True</property>
                                 <property name="action_name">.uno:OptionsTreeDialog</property>
                               </object>
@@ -8371,7 +8399,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="WPS-scalc-130">
+                  <object class="GtkSeparator" id="WPS-scalc-135">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="halign">end</property>
@@ -8484,7 +8512,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-155">
+                              <object class="GtkToolButton" id="WPS-scalc-160">
                                 <property name="tooltip-text">全部显示</property>
                                 <property name="label">全部显示</property>
                                 <property name="action-name">.uno:DataFilterRemoveFilter</property>
@@ -8492,7 +8520,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-156">
+                              <object class="GtkToolButton" id="WPS-scalc-161">
                                 <property name="tooltip-text">排序</property>
                                 <property name="label">排序</property>
                                 <property name="action-name">.uno:DataSort</property>
@@ -8542,7 +8570,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-157">
+                              <object class="GtkToolButton" id="WPS-scalc-162">
                                 <property name="tooltip-text">分列</property>
                                 <property name="label">分列</property>
                                 <property name="action-name">.uno:TextToColumns</property>
@@ -8550,7 +8578,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-158">
+                              <object class="GtkToolButton" id="WPS-scalc-163">
                                 <property name="tooltip-text">有效性</property>
                                 <property name="label">有效性</property>
                                 <property name="action-name">.uno:Validation</property>
@@ -8723,7 +8751,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-159">
+                                  <object class="GtkToolButton" id="WPS-scalc-164">
                                     <property name="tooltip-text">取消组合</property>
                                     <property name="label">取消组合</property>
                                     <property name="action-name">.uno:Ungroup</property>
@@ -8731,7 +8759,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-160">
+                                  <object class="GtkToolButton" id="WPS-scalc-165">
                                     <property name="tooltip-text">展开</property>
                                     <property name="label">展开</property>
                                     <property name="action-name">.uno:ShowDetail</property>
@@ -8739,7 +8767,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-161">
+                                  <object class="GtkToolButton" id="WPS-scalc-166">
                                     <property name="tooltip-text">折叠</property>
                                     <property name="label">折叠</property>
                                     <property name="action-name">.uno:HideDetail</property>
@@ -8871,7 +8899,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-162">
+                                  <object class="GtkToolButton" id="WPS-scalc-167">
                                     <property name="tooltip-text">选择数据区域</property>
                                     <property name="label">选择数据区域</property>
                                     <property name="action-name">.uno:SelectData</property>
@@ -8901,7 +8929,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Data-Section-Sort">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -8955,7 +8983,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Data-Section-Sort1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -9035,7 +9063,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Data-Section-Filter">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -9127,7 +9155,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Data-Section-Filter1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -9207,7 +9235,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Data-Section-Group">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -9261,7 +9289,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Data-Section-Group1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -9341,7 +9369,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Data-Section-Group2">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -9421,7 +9449,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Data-Section-Define">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -9475,7 +9503,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Data-Section-Define1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -9555,7 +9583,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Data-Section-NamedRanges">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -9635,7 +9663,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Data-Section-TextToColumn">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -9689,7 +9717,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Data-Section-TextToColumn1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -10071,7 +10099,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-163">
+                                  <object class="GtkToolButton" id="WPS-scalc-168">
                                     <property name="tooltip-text">上一条批注</property>
                                     <property name="label">上一条批注</property>
                                     <property name="action-name">.uno:PreviousAnnotation</property>
@@ -10079,7 +10107,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-164">
+                                  <object class="GtkToolButton" id="WPS-scalc-169">
                                     <property name="tooltip-text">下一条批注</property>
                                     <property name="label">下一条批注</property>
                                     <property name="action-name">.uno:NextAnnotation</property>
@@ -10087,7 +10115,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-165">
+                                  <object class="GtkToolButton" id="WPS-scalc-170">
                                     <property name="tooltip-text">显示批注</property>
                                     <property name="label">显示批注</property>
                                     <property name="action-name">.uno:ShowNote</property>
@@ -10173,7 +10201,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-166">
+                              <object class="GtkToolButton" id="WPS-scalc-171">
                                 <property name="tooltip-text">保护工作簿</property>
                                 <property name="label">保护工作簿</property>
                                 <property name="action-name">.uno:ToolProtectionDocument</property>
@@ -10278,7 +10306,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Review-Section-Annotation2">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -10358,7 +10386,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Review-Section-TrackChanges">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -10412,7 +10440,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Review-Section-TrackChanges1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -10451,7 +10479,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Review-Section-Document">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -10505,7 +10533,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Review-Section-Document1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -10581,7 +10609,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Review-Section-Document2">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -10657,7 +10685,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Review-Section-RedactDoc">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -10714,7 +10742,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Review-Section-EditDoc">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -10923,7 +10951,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-167">
+                              <object class="GtkToolButton" id="WPS-scalc-172">
                                 <property name="tooltip-text">分页预览</property>
                                 <property name="label">分页预览</property>
                                 <property name="action-name">.uno:PagebreakMode</property>
@@ -10931,7 +10959,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-168">
+                              <object class="GtkToolButton" id="WPS-scalc-173">
                                 <property name="tooltip-text">全屏显示</property>
                                 <property name="label">全屏显示</property>
                                 <property name="action-name">.uno:FullScreen</property>
@@ -10980,7 +11008,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-169">
+                              <object class="GtkToolButton" id="WPS-scalc-174">
                                 <property name="tooltip-text">行号列标</property>
                                 <property name="label">行号列标</property>
                                 <property name="action-name">.uno:ViewRowColumnHeaders</property>
@@ -10988,7 +11016,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-170">
+                              <object class="GtkToolButton" id="WPS-scalc-175">
                                 <property name="tooltip-text">网格线</property>
                                 <property name="label">网格线</property>
                                 <property name="action-name">.uno:ToggleSheetGrid</property>
@@ -10996,7 +11024,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-171">
+                              <object class="GtkToolButton" id="WPS-scalc-176">
                                 <property name="tooltip-text">样式窗格</property>
                                 <property name="label">样式窗格</property>
                                 <property name="action-name">.uno:DesignerDialog</property>
@@ -11045,7 +11073,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-172">
+                              <object class="GtkToolButton" id="WPS-scalc-177">
                                 <property name="tooltip-text">100%</property>
                                 <property name="label">100%</property>
                                 <property name="action-name">.uno:Zoom100Percent</property>
@@ -11126,7 +11154,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-173">
+                                  <object class="GtkToolButton" id="WPS-scalc-178">
                                     <property name="tooltip-text">冻结首列</property>
                                     <property name="label">冻结首列</property>
                                     <property name="action-name">.uno:FreezePanesColumn</property>
@@ -11134,7 +11162,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-174">
+                                  <object class="GtkToolButton" id="WPS-scalc-179">
                                     <property name="tooltip-text">拆分窗口</property>
                                     <property name="label">拆分窗口</property>
                                     <property name="action-name">.uno:SplitWindow</property>
@@ -11142,7 +11170,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-175">
+                                  <object class="GtkToolButton" id="WPS-scalc-180">
                                     <property name="tooltip-text">新建窗口</property>
                                     <property name="label">新建窗口</property>
                                     <property name="action-name">.uno:NewWindow</property>
@@ -11175,7 +11203,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="View-Section-DarkMode">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -11229,7 +11257,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="View-Section-Zoom">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -11283,7 +11311,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="View-Section-Zoom1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -11359,7 +11387,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="View-Section-Zoom2">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -11435,7 +11463,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="View-Section-Split">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -11489,7 +11517,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="View-Section-Split1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -11531,7 +11559,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="View-Section-Visible">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -11585,7 +11613,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="View-Section-Visible1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -11665,7 +11693,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="View-Section-Visible2">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -11745,7 +11773,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="View-Section-New">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -11954,7 +11982,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-176">
+                              <object class="GtkToolButton" id="WPS-scalc-181">
                                 <property name="tooltip-text">宏编辑器</property>
                                 <property name="label">宏编辑器</property>
                                 <property name="action-name">.uno:BasicIDEAppear</property>
@@ -11962,7 +11990,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-177">
+                              <object class="GtkToolButton" id="WPS-scalc-182">
                                 <property name="tooltip-text">加载项</property>
                                 <property name="label">加载项</property>
                                 <property name="action-name">.uno:ExtensionManager</property>
@@ -11970,7 +11998,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-178">
+                              <object class="GtkToolButton" id="WPS-scalc-183">
                                 <property name="tooltip-text">开发工具</property>
                                 <property name="label">开发工具</property>
                                 <property name="action-name">.uno:AvailableToolbars</property>
@@ -12048,7 +12076,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-scalc-179">
+                                  <object class="GtkToolButton" id="WPS-scalc-184">
                                     <property name="tooltip-text">合并计算</property>
                                     <property name="label">合并计算</property>
                                     <property name="action-name">.uno:DataConsolidate</property>
@@ -12122,7 +12150,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-scalc-180">
+                              <object class="GtkToolButton" id="WPS-scalc-185">
                                 <property name="tooltip-text">自定义</property>
                                 <property name="label">自定义</property>
                                 <property name="action-name">.uno:ConfigureDialog</property>
@@ -12145,7 +12173,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Tools-Section-Trace1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -12218,7 +12246,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Tools-Section-Trace2">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -12294,7 +12322,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Tools-Section-Formular1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -12348,7 +12376,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Tools-Section-Formular2">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -12390,7 +12418,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Tools-Section-Formular3">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -12466,7 +12494,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Tools-Section-Form">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -12520,7 +12548,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Tools-Section-Form1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -12600,7 +12628,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Tools-Section-Form2">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -12731,7 +12759,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Tools-Section-Form3">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -12862,7 +12890,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Tools-Section-Form4">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
@@ -12993,7 +13021,7 @@
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="Tools-Section-Form5">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>

@@ -92,8 +92,9 @@
             "command": ".uno:InsertBookmark"
           },
           {
-            "label": "附件",
-            "command": ".uno:InsertObject"
+            "label": "嵌入对象…",
+            "command": ".uno:InsertObject",
+            "tooltip": "将文件作为 OLE 对象嵌入或链接到当前文档。"
           }
         ]
       ],
@@ -430,8 +431,9 @@
             "command": ".uno:InsertGraphic"
           },
           {
-            "label": "文档",
-            "command": ".uno:InsertSheetFromFile"
+            "label": "从文件导入工作表…",
+            "command": ".uno:InsertSheetFromFile",
+            "tooltip": "从其他表格文件复制工作表到当前文件。"
           },
           {
             "label": "形状",
@@ -470,8 +472,9 @@
             "command": ".uno:InsertSymbol"
           },
           {
-            "label": "附件",
-            "command": ".uno:InsertObject"
+            "label": "嵌入对象…",
+            "command": ".uno:InsertObject",
+            "tooltip": "将文件作为 OLE 对象嵌入或链接到当前文档。"
           }
         ]
       ],

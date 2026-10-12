@@ -132,6 +132,29 @@ class PackageTests(unittest.TestCase):
         self.assertEqual(len(keys), len(set(keys)))
         self.assertTrue(any(x['Value'] == '格式刷' and x['Name'] == 'Label' for x in labels))
 
+    def test_release_scope(self):
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        from check_release import verify
+        name = 'LibreOfficePlus-WPS界面配置包.zip'
+        data = (ROOT / 'dist' / name).read_bytes()
+        digest = hashlib.sha256(data).hexdigest()
+        version = json.loads((ROOT / 'package/version.json').read_text('utf8'))['Version']
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            (folder / name).write_bytes(data)
+            (folder / 'release.json').write_text(json.dumps({'commit':'a' * 40, 'sha256':digest, 'file':name, 'version':version}), 'utf8')
+            (folder / 'SHA256SUMS.txt').write_text(f'{digest}  {name}\n', 'utf8')
+            verify(folder, 'a' * 40)
+            with self.assertRaises(AssertionError):
+                verify(folder, 'b' * 40)
+            (folder / 'unexpected.txt').write_text('private', 'utf8')
+            with self.assertRaises(AssertionError):
+                verify(folder, 'a' * 40)
+            (folder / 'unexpected.txt').unlink()
+            (folder / name).write_bytes(data + b'changed')
+            with self.assertRaises(AssertionError):
+                verify(folder, 'a' * 40)
+
     def test_popup_commands_and_groups(self):
         ns = '{http://openoffice.org/2001/menu}'
         specs = json.loads((ROOT / 'config/popups.json').read_text('utf8'))
