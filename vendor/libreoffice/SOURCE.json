@@ -12,6 +12,11 @@
       "path": "scalc/notebookbar.ui",
       "sha256": "95663027bb4325d46522b19259fe47fc85b837b6f92558f6568942b58d535804",
       "upstream_reference": "https://github.com/LibreOffice/core/blob/cd7284b4cbbfeb507e630c1aac019f4157393acb/sc/uiconfig/scalc/ui/notebookbar.ui"
+    },
+    "sdraw": {
+      "path": "sdraw/notebookbar.ui",
+      "sha256": "8952c4df2b5755c94991a5854c4adc05626cf5833a7e258db20797a0bb1690a3",
+      "upstream_reference": "https://github.com/LibreOffice/core/blob/cd7284b4cbbfeb507e630c1aac019f4157393acb/sd/uiconfig/sdraw/ui/notebookbar.ui"
     }
   }
 }

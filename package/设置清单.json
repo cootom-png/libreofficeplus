@@ -478,5 +478,146 @@
     "Name": "TooltipLabel",
     "Value": "格式刷",
     "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Commands/.uno:InsertPagebreak",
+    "Name": "Label",
+    "Value": "分页符",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Commands/.uno:InsertPagebreak",
+    "Name": "ContextLabel",
+    "Value": "分页符",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Commands/.uno:InsertPagebreak",
+    "Name": "PopupLabel",
+    "Value": "分页符",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Commands/.uno:InsertPagebreak",
+    "Name": "TooltipLabel",
+    "Value": "分页符",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:SetDefault",
+    "Name": "Label",
+    "Value": "清除格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:SetDefault",
+    "Name": "ContextLabel",
+    "Value": "清除格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:SetDefault",
+    "Name": "PopupLabel",
+    "Value": "清除格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:SetDefault",
+    "Name": "TooltipLabel",
+    "Value": "清除格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:Text",
+    "Name": "Label",
+    "Value": "文本框",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:Text",
+    "Name": "ContextLabel",
+    "Value": "文本框",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:Text",
+    "Name": "PopupLabel",
+    "Value": "文本框",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:Text",
+    "Name": "TooltipLabel",
+    "Value": "文本框",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:FormatArea",
+    "Name": "Label",
+    "Value": "形状填充",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:FormatArea",
+    "Name": "ContextLabel",
+    "Value": "形状填充",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:FormatArea",
+    "Name": "PopupLabel",
+    "Value": "形状填充",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:FormatArea",
+    "Name": "TooltipLabel",
+    "Value": "形状填充",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:FormatLine",
+    "Name": "Label",
+    "Value": "形状轮廓",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:FormatLine",
+    "Name": "ContextLabel",
+    "Value": "形状轮廓",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:FormatLine",
+    "Name": "PopupLabel",
+    "Value": "形状轮廓",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:FormatLine",
+    "Name": "TooltipLabel",
+    "Value": "形状轮廓",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/D_MOD1",
+    "Name": "Command",
+    "Value": ".uno:FontDialog",
+    "Localized": true,
+    "Language": "en-US"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/F12",
+    "Name": "Command",
+    "Value": ".uno:SaveAs",
+    "Localized": true,
+    "Language": "en-US"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/F4",
+    "Name": "Command",
+    "Value": ".uno:Repeat",
+    "Localized": true,
+    "Language": "en-US"
   }
 ]

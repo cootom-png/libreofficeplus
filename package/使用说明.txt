@@ -1,100 +1,112 @@
 # LibreOfficePlus
 
-面向习惯 WPS 的用户，为 **LibreOffice Writer（文字）和 Calc（表格）**提供中文界面配置与可恢复的一键安装包。
+为习惯 WPS 的用户提供 **LibreOffice Writer（文字）、Calc（表格）、Draw（绘图）**的中文功能区、常用操作和可恢复的一键配置包。
 
-当前版本 **v4，部分位置适配版**。以 WPS 截图中的选项卡顺序和常用操作为参考，使用 LibreOffice 原生命令。按钮分组、换行、尺寸、部分名称和弹窗仍有差异，**尚未完成逐项、逐像素复刻**。
+当前版本 **v5，WPS 习惯适配版**。以用户提供的 WPS 文字、表格截图为参考，重点调整按钮顺序、分组、常用菜单和键位；Draw 沿用相同的字体、形状、排列与属性栏习惯。它仍使用 LibreOffice 原生界面和文档引擎，**不是 WPS 的逐像素复刻**。
 
-## 下载和安装
+## 下载与安装
 
-**[下载一键配置包](https://github.com/cootom-png/libreofficeplus/raw/refs/heads/main/dist/LibreOfficePlus-WPS%E7%95%8C%E9%9D%A2%E9%85%8D%E7%BD%AE%E5%8C%85.zip)**
+**[下载 main 已合入版本](https://github.com/cootom-png/libreofficeplus/raw/refs/heads/main/dist/LibreOfficePlus-WPS%E7%95%8C%E9%9D%A2%E9%85%8D%E7%BD%AE%E5%8C%85.zip)**。PR 未合入时，此链接仍提供上一版本；查看本 PR 的 `dist/` 文件可获取待合入配置包。
 
-1. 确认已安装 Windows 版 **LibreOffice 26.2.5.2**。本包校验构建 ID `cd7284b4cbbfeb507e630c1aac019f4157393acb`，其他构建会拒绝安装。
-2. 首次使用 LibreOffice 时，先启动并关闭一次，让软件生成用户配置。
-3. 保存文档，完全退出所有 LibreOffice 窗口；后台还有进程时，安装程序会提示退出。
+1. 安装 Windows 版 **LibreOffice 26.2.5.2**，构建 ID 必须为 `cd7284b4cbbfeb507e630c1aac019f4157393acb`。
+2. 首次使用时，先启动并关闭一次 LibreOffice，让软件生成用户配置。
+3. 保存文档，完全退出 LibreOffice。后台仍有进程时安装程序会拒绝修改，不会强制关闭文档。
 4. 解压整个 ZIP，进入 `LibreOfficePlus` 文件夹，双击 **`安装.cmd`**。
-5. 重新打开 Writer 或 Calc，在“开始”页检查布局。
+5. 重新打开所需组件，建议最大化窗口查看“开始”页。
 
-安装仅写入当前用户配置，通常不需要管理员权限。请保留解压目录，恢复时使用其中的入口。
+默认安装三个模块，写入当前用户配置，通常不需要管理员权限。请保留解压目录和首次备份。
 
-默认程序路径为 `C:\Program Files\LibreOffice`。如果安装在其他位置，可在 PowerShell 中指定路径：
+可在解压目录的 PowerShell 中选择模块，重复安装或追加模块会保留首次备份：
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\设置界面.ps1 -LibreOfficePath "D:\Apps\LibreOffice"
+.\安装.cmd -Modules Draw
+.\安装.cmd -Modules Writer,Calc
 ```
 
-## v4 优化内容
+默认程序路径是 `C:\Program Files\LibreOffice`。自定义安装路径示例：
 
-| 位置 | 本版变化 |
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\设置界面.ps1 -Modules Writer,Calc,Draw -LibreOfficePath "D:\Apps\LibreOffice"
+```
+
+## v5 改进
+
+| 区域 | 本版处理 |
 | --- | --- |
-| 文字和表格的开始页 | 格式刷成为最左侧独立大按钮；粘贴、剪切和复制紧随其后；清除格式移到字体区 |
-| 文字开始页 | 保留字体、段落和样式预览；增加样式窗格、查找替换、批注和选择全部入口 |
-| 表格开始页 | 换行和合并移到对齐区后；数字格式随后；新增填充、求和、排序、筛选、冻结窗格和查找入口 |
-| 常用名称 | 将“克隆”等名称调整为“格式刷”等熟悉叫法；同时保存菜单、提示文字的原值，支持恢复 |
-| 文字选项卡 | 文件 → 开始 → 插入 → 页面 → 引用 → 审阅 → 视图 → 工具 |
-| 表格选项卡 | 文件 → 开始 → 插入 → 页面 → 公式 → 数据 → 审阅 → 视图 → 工具 |
-| 上下文功能 | 保留原生图片、绘图、表格等上下文页；扩展管理从“工具”进入 |
-| 安装与恢复 | 兼容 v3 备份升级；重复安装保留首次配置；检查运行中进程和软件构建版本 |
+| 三个开始页 | 格式刷置左；剪贴板随后；字体、字号和清除格式集中；常用操作按上下两行排列 |
+| Writer | 缩进、段落标记并入段落区；上标在下标前；保留样式预览和右侧样式窗格入口 |
+| Calc | 换行、合并紧跟对齐区；填充菜单包含上下左右与序列；冻结菜单包含当前位置、首行、首列 |
+| Draw | 增加字体字号区；集中形状填充、轮廓、组合、取消组合、旋转、置顶置底和 PDF 导出 |
+| 其他选项卡 | 每个配置分组分配独立原生容器，保留上下文页及原生控件；不再将不同分组混排到一串位置 |
+| Writer 快捷键 | Ctrl+D 字体、F12 另存为、F4 重复操作；首次键位随备份保存并可恢复 |
+| 可选模板 | 文字宋体五号、表格宋体 11 磅、绘图 A4 模板；不自动改为默认模板 |
+| 安装与恢复 | 支持按模块安装、追加、恢复；兼容 v3/v4 备份升级及软件保存后的 XML；失败撤回已写入的界面文件 |
 
-其他选项卡沿用已验证可显示的原生按钮容器，按参考顺序安排入口。它们仍受原生分组和换行规则影响。窗口较窄时，部分分组进入 `»` 溢出区，建议最大化窗口使用。
+选项卡顺序：
 
-已清理开始页中被替代的重复入口；其他选项卡保留原生分组和部分分隔线，以维持正常显示。
+- Writer：文件 → 开始 → 插入 → 页面 → 引用 → 审阅 → 视图 → 工具。
+- Calc：文件 → 开始 → 插入 → 页面 → 公式 → 数据 → 审阅 → 视图 → 工具。
+- Draw：文件 → 开始 → 插入 → 页面 → 审阅 → 视图 → 工具。
 
-常用名称设置包含 80 项名称属性，涉及 18 个命令及其不同模块定义；不是新增 80 个功能。通用命令的名称调整也可能出现在 LibreOffice 的其他组件或菜单中。
+图片、绘图、表格等上下文页和原生扩展页继续保留。窄窗口会将分组收进 `»` 溢出区；所有选项卡的控件尺寸、分隔线和换行尚未与 WPS 完全一致。
 
 ### 实际窗口预览
 
-文字开始页与样式窗格（空白测试文档）：
+以下为独立测试配置中的窗口，未使用个人文档。
 
-![文字开始页与样式窗格](docs/writer-home.png)
+![Writer 开始页与样式窗格](docs/writer-home.png)
 
-表格开始页（空白测试工作表）：
+![Calc 开始页](docs/calc-home.png)
 
-![表格开始页](docs/calc-home.png)
+![Draw 开始页、形状与属性栏](docs/draw-home.png)
+
+## 从熟悉的模板开始
+
+双击 `templates/` 中的模板会新建文档：
+
+| 模板 | 内容 |
+| --- | --- |
+| `WPS习惯文字.ott` | 宋体五号（10.5 磅）、A4、上下边距 2.54 cm、左右边距 3.18 cm |
+| `WPS习惯表格.ots` | 宋体 11 磅、Sheet1 空白工作表 |
+| `WPS习惯绘图.otg` | A4 纵向空白页面、默认文字宋体 11 磅 |
+
+这些参数来自截图或项目统一设置，不保证复杂文档与 WPS 完全相同。字体须在电脑上存在，否则 LibreOffice 会替代字体。需要长期使用时，可自行在 LibreOffice 模板管理器中将模板设为默认。与 WPS 交换文件时使用“另存为”选择 DOCX/XLSX；先检查版式、公式和图形。Draw 的可编辑原生格式是 ODG。
 
 ## 恢复原界面
 
-保存文档并完全退出 LibreOffice，双击 **`恢复原界面.cmd`**。
+保存文档并完全退出 LibreOffice，双击 **`恢复原界面.cmd`**。也可仅恢复某个模块：
 
-恢复范围包括本包修改的设置、中文按钮名称及 Writer/Calc 的 `notebookbar.ui` 文件。原先存在的文件会恢复，新建的文件会移除；同一配置节点下其他属性会保留。
+```powershell
+.\恢复原界面.cmd -Modules Draw
+```
 
-首次备份位于：
+所选模块的 UI、专属设置及 Writer 键位恢复到首次安装前。原有 UI 文件会还原，新建文件会移除；同一节点下其他属性保留。
+
+**图标主题、功能区图标尺寸及通用命令中文名称属于共享设置**，也可能影响其他 LibreOffice 组件。部分恢复时保留共享设置，直到最后一个本包模块恢复后才一并恢复。按模块安装不表示所有通用名称均能独立隔离。
+
+首次备份位置：
 
 ```text
 %APPDATA%\LibreOffice\wps-ui-backup.xml
 %APPDATA%\LibreOffice\wps-ui-files-backup\
 ```
 
-升级或重复安装前不要删除这些备份。安装后若自行修改过定制 UI，请先另存文件再恢复。配置备份丢失时，本包无法重建安装前的个人设置。
+升级或重复安装前不要删除备份。安装后自行改过定制 UI 的，请先另存再恢复。备份丢失时无法重建安装前的个人设置。
 
-## 功能边界
+## 对应关系与验证范围
 
-- 本包定制界面，不改变 LibreOffice 的文档排版、公式计算或格式兼容引擎。
-- 默认字体、字号、缩放、保存格式、现有文档和宏安全设置均不修改。
-- 页边距、打印网格线、打印缩放等部分入口会打开原生设置窗口，不能等同于 WPS 的直接开关。
-- “数据区域”是 Calc 的数据库区域；“单元格格式（保护）”打开格式窗口，不能当作锁定切换开关。
-- WPS AI、会员、云服务、素材中心、SmartArt、COM/WPS 加载项及跨文档顶端标签等未实现。
-- WPS 式函数分类菜单、所有选项卡的精确两行排布仍待后续开发。
-- 未逐个执行全部命令。具体通过的检查及未验证范围见 [验收记录](docs/验收记录.md)。
+- [按钮对应表](package/按钮对应表.csv)：命令、逻辑分组、组内顺序和状态；不是像素坐标或全部功能通过记录。
+- [按钮差异](docs/按钮差异.md)、[操作习惯](docs/操作习惯.md)：名称、菜单、右键和键位的实际差异。
+- [适配计划与进度](docs/适配计划.md)：本版交付、技术限制和下一步验收要求。
+- [验收记录](docs/验收记录.md)、[原生操作结果](docs/原生命令验收.json)：每个组件 15 项文档操作、三种模板和三个 Writer 键位，共 51 项。
 
-详细对应关系见 [按钮对应表](package/按钮对应表.csv) 和 [按钮差异说明](docs/按钮差异.md)。
+51 项验证包含 UNO 命令、文档属性和导出结果，**不等于逐个点击 51 个按钮，也不证明全部菜单都正确**。实际窗口检查单独记录。宏、保护、复杂 DOCX/XLSX、所有公式、真实打印及所有显示缩放尚未完整验收。
 
-## 项目结构
+本包不修改现有文档、默认保存格式或宏安全设置。WPS AI、会员、云服务、素材中心、SmartArt、COM/WPS 加载项、跨文档顶部标签、WPS 专属右键菜单及完整函数分类菜单未实现。部分页面按钮会打开同一个原生页面格式窗口；这不能等同于 WPS 的直接开关。
 
-```text
-config/       选项卡、命令和中文名称映射
-vendor/       固定构建版本的原生 UI 基线及来源、校验值
-scripts/      Python 构建脚本（仅标准库）
-package/      可直接解压安装的文件、生成后的 UI 与对应表
-dist/         一键配置 ZIP
-tests/        UI 结构、可重复构建和隔离安装/恢复检查
-docs/         差异和验收记录
-```
+## 构建与维护
 
-仓库不包含个人 LibreOffice 配置、业务文档或本机调试日志。
-
-## 构建与验证
-
-要求 Python 3.10+。构建不需要在机器上安装 LibreOffice：原生基线已固定保存在仓库内。
+Python 3.10+，仅使用标准库。原生基线已固定在仓库，普通构建不需要安装 LibreOffice。
 
 ```powershell
 python scripts/build.py
@@ -102,16 +114,18 @@ python -m unittest discover -s tests
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/test_installer.ps1
 ```
 
-最后一项需在 Windows 上执行。测试使用独立目录和合成配置，模拟软件版本与进程状态，不修改真实用户配置、不结束用户进程。
+PowerShell 测试使用独立目录、合成设置和固定 v4 备份生成器，不访问真实用户配置或结束用户进程。CI 检查结构、可重复构建、生成文件同步及 Windows PowerShell 5.1 安装/恢复；图形与原生行为测试需本地 LibreOffice，方法见验收记录。
 
-修改 `config/layout.json` 调整非开始页的命令顺序；修改 `config/labels.json` 调整常用中文名称；开始页的原生控件移动在 `scripts/build.py` 中。重新构建后提交 `package/` 与 `dist/` 的对应结果。
+| 目录 | 用途 |
+| --- | --- |
+| `config/` | 非开始页分组、开始页两行入口、已确认命令、名称和键位 |
+| `vendor/` | 固定版本原生 UI、来源和 SHA-256 |
+| `scripts/` | 构建、模板生成和可选原生操作检查 |
+| `package/`、`dist/` | 解压安装文件和 ZIP |
+| `tests/`、`docs/` | 自动检查、实际预览、差异与验收记录 |
 
-CI 执行结构检查、可重复构建和 Windows PowerShell 5.1 的隔离安装/恢复测试。**CI 不证明图形窗口正常，也不证明所有按钮功能正确**；更改布局后还需要使用独立 LibreOffice 用户配置进行实际窗口检查。
-
-适配其他 LibreOffice 版本时，必须更新原生基线、构建校验和验收记录，不能只移除安装版本限制。
+修改后重新构建并提交 `package/` 和 `dist/`。适配其他构建版本须更新基线、构建限制和实际验收，不能只去掉版本检查。
 
 ## 许可与来源
 
-项目使用 [Mozilla Public License 2.0](LICENSE)。原生 UI 基于 The Document Foundation / LibreOffice contributors 的 LibreOffice 26.2.5.2 Windows 安装文件；对应上游构建为 [`cd7284b4`](https://github.com/LibreOffice/core/tree/cd7284b4cbbfeb507e630c1aac019f4157393acb)。
-
-基线来源和校验值见 [SOURCE.json](vendor/libreoffice/SOURCE.json)。配置包内提供修改后的 XML 源文件、许可证及来源说明。WPS 截图仅用于布局参考，项目未分发 WPS 图标或程序文件。
+[Mozilla Public License 2.0](LICENSE)。原生 UI 来自 The Document Foundation / LibreOffice contributors 的 LibreOffice 26.2.5.2 Windows 安装文件，上游构建 [`cd7284b4`](https://github.com/LibreOffice/core/tree/cd7284b4cbbfeb507e630c1aac019f4157393acb)，校验值见 [SOURCE.json](vendor/libreoffice/SOURCE.json)。配置包包含修改后的 XML 源文件、许可证和来源说明。WPS 截图仅作习惯参考，未分发 WPS 图标或程序文件。

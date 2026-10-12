@@ -6,10 +6,12 @@ import json
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
+from templates import build_templates
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE = ROOT / "package"
 LAYOUT = json.loads((ROOT / "config/layout.json").read_text(encoding="utf-8"))
+HOME = json.loads((ROOT / "config/home.json").read_text(encoding="utf-8"))
 KNOWN = set(json.loads((ROOT / "config/commands.json").read_text(encoding="utf-8")))
 BUTTONS = {"GtkToolButton", "GtkMenuToolButton", "GtkToggleToolButton"}
 
@@ -91,17 +93,35 @@ class Builder:
             ET.SubElement(bar, "child").append(self.button(item))
         return bar
 
-    def section(self, items, separator=True):
+    def menu_button(self, item):
+        menu = self.make("GtkMenu")
+        self.root.insert(0, menu)
+        for entry in item["menu"]:
+            command = self.make("GtkMenuItem")
+            prop(command, "label", entry["label"])
+            prop(command, "action-name", entry["command"])
+            ET.SubElement(menu, "child").append(command)
+        button = self.make("svtlo-ManagedMenuButton")
+        button.set("id", button.get("id") + ":" + menu.get("id"))
+        for name, value in {"label": item["label"], "relief": "none", "valign": "center",
+                            "can-focus": "True", "focus-on-click": "False"}.items():
+            prop(button, name, value)
+        return button
+
+    def quick_section(self, rows):
         section = self.make("VclOptionalBox")
         prop(section, "valign", "center")
-        prop(section, "vexpand", "True")
-        if separator:
-            sep = self.make("GtkSeparator")
-            prop(sep, "orientation", "vertical")
-            prop(sep, "margin-start", "5")
-            prop(sep, "margin-end", "5")
-            ET.SubElement(section, "child").append(sep)
-        ET.SubElement(section, "child").append(self.toolbar(items))
+        prop(section, "margin-start", "5")
+        prop(section, "margin-end", "5")
+        stack = self.make("GtkBox")
+        prop(stack, "orientation", "vertical")
+        ET.SubElement(section, "child").append(stack)
+        for items in rows:
+            row = self.make("GtkBox")
+            ET.SubElement(stack, "child").append(row)
+            for item in items:
+                widget = self.menu_button(item) if "menu" in item else self.toolbar([item], large=False)
+                ET.SubElement(row, "child").append(widget)
         ET.SubElement(ET.SubElement(section, "style"), "class", {"name": "priority-8"})
         return section
 
@@ -114,10 +134,17 @@ class Builder:
 
     def home(self):
         home = self.obj("Home")
+        if self.module == "sdraw":
+            source = ET.parse(ROOT / "vendor/libreoffice/swriter/notebookbar.ui")
+            font = copy.deepcopy(source.find('.//object[@id="Home-Section-Format"]'))
+            for obj in font.iter("object"):
+                if obj is not font:
+                    obj.set("id", "DrawFont-" + obj.get("id"))
+            ET.SubElement(home, "child").append(font)
         sections = {c.find("object").get("id"): c for c in home.findall("child")}
         # 格式刷独立大按钮，剪切/复制保留原生命令，清除格式放在字号旁。
         brush = self.obj("Home-Section-Style")
-        reset = self.obj("Home-ResetAttributes")
+        reset = self.obj("Home-SetDefault" if self.module == "sdraw" else "Home-ResetAttributes")
         fontbar = next(n for n in self.obj("Home-Section-Format").iter("object")
                        if any(action(o) == ".uno:Shrink" for o in n.findall("child/object")))
         self.move_button(reset.get("id"), fontbar)
@@ -129,10 +156,8 @@ class Builder:
             obj = self.obj(ident)
             bar = next(n for n in self.root.iter("object") if obj in n.findall("child/object"))
             prop(bar, "toolbar-style", "icons")
-        order = ["Style", "Clipboard", "Format"]
         removed = []
         if self.module == "scalc":
-            order += ["Align", "Cell", "Number", "Cell1", "Condition", "Style2"]
             # WPS 的换行与合并紧跟在对齐按钮后面。
             cellbar = self.obj("Home-Section-Cell").find('.//object[@class="sfxlo-NotebookbarToolBox"]')
             self.move_button("Home-WrapText", cellbar)
@@ -149,30 +174,43 @@ class Builder:
                     prop(obj, "visible", "False")
             bars = [n for n in styles.iter("object") if n.get("class") == "sfxlo-NotebookbarToolBox"]
             ET.SubElement(bars[-1], "child").append(self.button({"label": "单元格格式", "command": ".uno:FormatCellDialog"}))
-            tools = [{"label": label, "command": ".uno:" + cmd} for label, cmd in
-                     [("填充", "FillDown"), ("求和", "AutoSum"), ("排序", "DataSort"),
-                      ("筛选", "DataFilterAutoFilter"), ("冻结窗格", "FreezePanes"), ("查找", "SearchDialog")]]
-            extra = ET.SubElement(home, "child")
-            extra.append(self.section(tools))
-            order.append("Quick")
-            sections["Home-Section-Quick"] = extra
             removed += ["Find", "Find1"]
-        else:
-            order += ["Paragraph", "Paragraph1", "Style3"]
+        elif self.module == "swriter":
             prop(self.obj("Home-Shadowed"), "visible", "False")
             removed += ["Insert", "View"]
-            extra = ET.SubElement(home, "child")
-            extra.append(self.section([{"label": label, "command": ".uno:" + cmd} for label, cmd in
-                                      [("样式窗格", "SidebarDeck.StyleListDeck"), ("查找替换", "SearchDialog"),
-                                       ("批注", "InsertAnnotation"), ("选择全部", "SelectAll")]]))
-            sections["Home-Section-Quick"] = extra
-            order.append("Quick")
+            # 将缩进、行距与段落标记放回段落区的上下两行。
+            top = self.obj("SectionBottom91")
+            bottom = self.obj("SectionBottom13")
+            for ident in ["Home-DecrementIndent1", "Home-IncrementIndent1", "Home-ControlCodes1"]:
+                self.move_button(ident, top)
+            self.move_button("Home-LineSpacing1", bottom)
+            removed.append("Paragraph1")
+        else:
+            removed += ["DrawColor", "Arrange1", "Arrange2"]
+        spec = HOME[self.module]
+        for bar_id, buttons in spec.get("toolbar_rows", {}).items():
+            bar = self.obj(bar_id)
+            children = bar.findall("child")
+            selected = [next(c for c in children if c.find("object").get("id") == ident) for ident in buttons]
+            reorder(bar, selected + [c for c in children if c not in selected])
+        extra = ET.SubElement(home, "child")
+        extra.append(self.quick_section(spec["quick_rows"]))
+        sections["Home-Section-Quick"] = extra
+        order = spec["sections"]
         first = [sections["Home-Section-" + name] for name in order]
         for name in removed:
             home.remove(sections["Home-Section-" + name])
         reorder(home, first + [c for c in home.findall("child") if c not in first])
-        self.records.extend([[self.module, "开始", action(o), o.get("id"), "保留原生控件或增加常用入口"]
-                             for o in home.iter("object") if action(o)])
+        for child in home.findall('child'):
+            section = child.find('object')
+            for index, obj in enumerate(o for o in section.iter('object') if action(o)):
+                self.records.append([self.module, '开始', action(obj), obj.get('id'),
+                                     section.get('id'), index + 1, '保留原生控件或增加常用入口'])
+        for row, items in enumerate(spec['quick_rows'], 1):
+            for item in items:
+                for entry in item.get('menu', []):
+                    self.records.append([self.module, '开始', entry['command'], entry['label'],
+                                         '常用操作/' + item['label'], row, '菜单入口；行号指上级按钮所在行'])
 
     def tabs(self):
         if self.module == "scalc":
@@ -181,42 +219,58 @@ class Builder:
             formula = copy.deepcopy(self.obj("Tools Tab"))
             for obj in formula.iter("object"):
                 self.counter += 1
-                obj.set("id", f"WPS-{self.module}-{self.counter}")
+                suffix = ':' + obj.get('id').split(':', 1)[1] if ':' in obj.get('id') else ''
+                obj.set("id", f"WPS-{self.module}-{self.counter}" + suffix)
             formula.set("id", "Formula Tab")
             extension.insert(0, formula)
             self.obj("ExtensionLabel").set("id", "FormulaLabel")
         for tab, groups in LAYOUT["modules"][self.module].items():
             page = self.obj(tab + " Tab")
-            items = [item for group in groups for item in group]
-            available = [i for i in items if i["command"] in KNOWN or i["command"] in self.templates]
-            slots = [n for n in page.iter("object") if n.get("class") in BUTTONS]
-            assert len(slots) >= len(available)
-            for index, obj in enumerate(slots):
-                if index < len(available):
-                    item = available[index]
-                    template = self.templates.get(item["command"])
-                    obj.set("class", template.get("class") if template is not None else "GtkToolButton")
-                    for p in list(obj.findall("property")):
-                        if p.get("name").replace("_", "-") in {"icon-name", "width-request"}:
-                            obj.remove(p)
-                    prop(obj, "visible", "True")
-                    prop(obj, "action-name", item["command"])
-                    prop(obj, "label", item["label"])
-                    prop(obj, "tooltip-text", item["label"])
-                else:
-                    prop(obj, "visible", "False")
-            for item in items:
-                status = "已安排；待具体文档验证" if item in available else "无已确认对应命令，省略"
-                self.records.append([self.module, LAYOUT["tabs"][tab], item["command"], item["label"], status])
+            body = next(n for n in page.iter("object") if n.get("class") == "sfxlo-PriorityMergedHBox")
+            containers = [o for o in body.findall('child/object') if any(n.get('class') in BUTTONS for n in o.iter('object'))]
+            if len(containers) < len(groups):
+                raise ValueError(f'{self.module}/{tab} 原生分组数量不足')
+            for index, container in enumerate(containers):
+                group = groups[index] if index < len(groups) else []
+                available = [i for i in group if i["command"] in KNOWN or i["command"] in self.templates]
+                slots=[o for o in container.iter('object') if o.get('class') in BUTTONS]
+                bars=[o for o in container.iter('object') if o.get('class')=='sfxlo-NotebookbarToolBox']
+                while len(slots) < len(available):
+                    button=self.button(available[len(slots)])
+                    ET.SubElement(bars[-1], 'child').append(button)
+                    slots.append(button)
+                for slot_index,obj in enumerate(slots):
+                    if slot_index < len(available):
+                        item=available[slot_index]
+                        template=self.templates.get(item['command'])
+                        obj.set('class',template.get('class') if template is not None else 'GtkToolButton')
+                        for p in list(obj.findall('property')):
+                            if p.get('name').replace('_','-') in {'icon-name','width-request'}:
+                                obj.remove(p)
+                        prop(obj,'visible','True')
+                        prop(obj,'action-name',item['command'])
+                        prop(obj,'label',item['label'])
+                        prop(obj,'tooltip-text',item['label'])
+                    else:
+                        prop(obj,'visible','False')
+                for item_index, item in enumerate(group, 1):
+                    status = "已安排；待具体文档验证" if item in available else "无已确认对应命令，省略"
+                    self.records.append([self.module, LAYOUT["tabs"][tab], item["command"], item["label"],
+                                         f'第 {index + 1} 组/{container.get("id")}', item_index, status])
         children = self.notebook.findall("child")
         pairs = list(zip(children[::2], children[1::2]))
-        order = ["File", "Home", "Insert", "Layout"] + (["References"] if self.module == "swriter" else ["Formula", "Data"]) + ["Review", "View", "Tools"]
+        order = ["File", "Home", "Insert", "Page" if self.module == "sdraw" else "Layout"] + (
+            ["References"] if self.module == "swriter" else ["Formula", "Data"] if self.module == "scalc" else []) + ["Review", "View", "Tools"]
         pairs.sort(key=lambda pair: order.index(pair[0].find("object").get("id").removesuffix(" Tab"))
                    if pair[0].find("object").get("id").removesuffix(" Tab") in order else 99)
         for page, label in pairs:
             name = page.find("object").get("id").removesuffix(" Tab")
             if name in LAYOUT["tabs"]:
                 prop(label.find("object"), "label", LAYOUT["tabs"][name])
+        if self.module == "scalc":
+            for obj in self.obj("Formula Tab").iter("object"):
+                if obj.get("class") == "svtlo-ManagedMenuButton":
+                    prop(obj, "label", "公式工具")
         for child in children:
             self.notebook.remove(child)
         for index, pair in enumerate(pairs):
@@ -242,6 +296,7 @@ class Builder:
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
+    build_templates(PACKAGE)
     records = []
     for module in LAYOUT["modules"]:
         builder = Builder(module)
@@ -251,11 +306,16 @@ def main():
         records.extend(builder.records)
     with (PACKAGE / "按钮对应表.csv").open("w", encoding="utf-8-sig", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow(["模块", "选项卡", "LibreOffice命令", "按钮文字或控件ID", "状态"])
+        writer.writerow(["模块", "选项卡", "LibreOffice命令", "配置文字或控件ID", "逻辑分组", "组内顺序或菜单所在行", "状态"])
         writer.writerows(records)
-    (PACKAGE / "设置清单.json").write_text((ROOT / "config/labels.json").read_text(encoding="utf-8"), encoding="utf-8")
+    settings = []
+    for name in ['labels', 'shortcuts']:
+        settings.extend(json.loads((ROOT / f'config/{name}.json').read_text(encoding='utf-8')))
+    (PACKAGE / "设置清单.json").write_text(json.dumps(settings, ensure_ascii=False, indent=2) + '\n', encoding="utf-8")
     for source, dest in [("README.md", "使用说明.txt"), ("LICENSE", "LICENSE.txt"),
-                         ("NOTICE", "来源说明.txt"), ("docs/验收记录.md", "验证记录.txt")]:
+                         ("NOTICE", "来源说明.txt"), ("docs/验收记录.md", "验证记录.txt"),
+                         ("docs/操作习惯.md", "操作习惯.txt"), ("docs/按钮差异.md", "按钮差异.txt"),
+                         ("docs/适配计划.md", "适配计划.txt")]:
         if (ROOT / source).exists():
             (PACKAGE / dest).write_bytes((ROOT / source).read_bytes())
     out = ROOT / "dist"
