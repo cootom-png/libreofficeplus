@@ -14,6 +14,31 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class PackageTests(unittest.TestCase):
+    @unittest.skipUnless(os.name == 'nt', '图形入口检查需要 Windows Script Host')
+    def test_graphical_launchers(self):
+        with tempfile.TemporaryDirectory(prefix='LOPlus 图形入口 ') as temp:
+            with ZipFile(ROOT / 'dist/LibreOfficePlus-WPS界面配置包.zip') as archive:
+                archive.extractall(temp)
+            folder = Path(temp) / 'LibreOfficePlus'
+            marker = folder / 'gui-probe.json'
+            (folder / 'installer-ui.ps1').write_text(
+                'param([switch]$Restore)\n'
+                '@{Restore=[bool]$Restore;Apartment=[Threading.Thread]::CurrentThread.ApartmentState.ToString()} | '
+                'ConvertTo-Json | Set-Content -LiteralPath (Join-Path $PSScriptRoot "gui-probe.json") -Encoding UTF8\n',
+                encoding='utf-8-sig')
+            for name, restore in [('安装.vbs', False), ('恢复原界面.vbs', True)]:
+                marker.unlink(missing_ok=True)
+                data = (folder / name).read_bytes()
+                data.decode('ascii')
+                self.assertNotIn(b'\n', data.replace(b'\r\n', b''))
+                # 将异步启动改为等待，仅用于捕获探针结果；隐藏方式保持不变。
+                (folder / name).write_bytes(data.replace(b'shell.Run command, 0, False', b'shell.Run command, 0, True'))
+                result = subprocess.run([str(Path(os.environ['SystemRoot']) / 'System32/cscript.exe'),
+                                         '//nologo', str(folder / name)], capture_output=True, timeout=30)
+                self.assertEqual(result.returncode, 0, repr(result.stdout + result.stderr))
+                self.assertTrue(marker.exists(), repr(result.stdout + result.stderr))
+                self.assertEqual(json.loads(marker.read_text('utf-8-sig')), {'Restore': restore, 'Apartment': 'STA'})
+
     @unittest.skipUnless(os.name == 'nt', '实际入口检查需要 Windows cmd.exe')
     def test_windows_launchers(self):
         # 解压最终交付文件，探针不修改个人 LibreOffice 配置。

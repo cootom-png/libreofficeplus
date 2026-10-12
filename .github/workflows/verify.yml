@@ -19,6 +19,9 @@ jobs:
       - name: 安装、升级和恢复检查
         shell: powershell
         run: .\tests\test_installer.ps1
+      - name: 图形安装界面检查
+        shell: powershell
+        run: .\tests\test_gui.ps1
       - name: 检查生成文件同步
         shell: powershell
         run: git diff --exit-code -- package dist

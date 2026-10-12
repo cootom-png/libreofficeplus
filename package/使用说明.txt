@@ -4,7 +4,7 @@
 
 当前版本 **v5，WPS 习惯适配版**。以用户提供的 WPS 文字、表格截图为参考，重点调整按钮顺序、分组、常用菜单和键位；Draw 沿用相同的字体、形状、排列与属性栏习惯。它仍使用 LibreOffice 原生界面和文档引擎，**不是 WPS 的逐像素复刻**。
 
-2026-10-12 安装入口修复：解决双击后出现 `'d'`、`'rshell.exe' 不是内部或外部命令` 的问题。遇到此错误，请重新下载并解压完整配置包，再运行新的 `安装.cmd`；原来的首次备份会继续保留。
+2026-10-12 安装入口更新：修复 `'d'`、`'rshell.exe' 命令截断，并新增图形进度窗口。请重新下载并解压完整配置包，双击新的 `安装.vbs`；原来的首次备份会继续保留。
 
 ## 下载与安装
 
@@ -13,10 +13,20 @@
 1. 安装 Windows 版 **LibreOffice 26.2.5.2**，构建 ID 必须为 `cd7284b4cbbfeb507e630c1aac019f4157393acb`。
 2. 首次使用时，先启动并关闭一次 LibreOffice，让软件生成用户配置。
 3. 保存文档，完全退出 LibreOffice。后台仍有进程时安装程序会拒绝修改，不会强制关闭文档。
-4. 解压整个 ZIP，进入 `LibreOfficePlus` 文件夹，双击 **`安装.cmd`**。
+4. 解压整个 ZIP，进入 `LibreOfficePlus` 文件夹，双击 **`安装.vbs`**，显示图形进度窗口。
 5. 重新打开所需组件，建议最大化窗口查看“开始”页。
 
 默认安装三个模块，写入当前用户配置，通常不需要管理员权限。请保留解压目录和首次备份。
+
+图形安装和恢复使用蓝白窗口，显示实际操作阶段、进度和完成结果；出现问题时在窗口中说明原因。操作期间请等待完成后再关闭窗口或打开 LibreOffice。`安装.vbs`、`恢复原界面.vbs` 使用 Windows Script Host 启动，不弹出黑色控制台；`.cmd` 保留为命令行入口。若电脑禁用了 Windows Script Host，可继续使用 `.cmd`，无需修改安全策略。
+
+![图形安装窗口完成状态的 WPF 渲染预览](docs/installer-preview.png)
+
+图形入口也可指定模块或安装路径：
+
+```powershell
+powershell.exe -NoProfile -STA -ExecutionPolicy Bypass -WindowStyle Hidden -File .\installer-ui.ps1 -Modules Writer,Calc -LibreOfficePath "D:\Apps\LibreOffice"
+```
 
 可在解压目录的 PowerShell 中选择模块，重复安装或追加模块会保留首次备份：
 
@@ -43,6 +53,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\configure.ps1 -Modules
 | Writer 快捷键 | Ctrl+D 字体、F12 另存为、F4 重复操作；首次键位随备份保存并可恢复 |
 | 可选模板 | 文字宋体五号、表格宋体 11 磅、绘图 A4 模板；不自动改为默认模板 |
 | 安装与恢复 | 支持按模块安装、追加、恢复；兼容 v3/v4 备份升级及软件保存后的 XML；失败撤回已写入的界面文件 |
+| 图形安装 | 无控制台双击入口、真实阶段进度、成功/错误提示；后台执行保持窗口响应，操作中防止误关闭与图形入口并发 |
 
 选项卡顺序：
 
@@ -76,7 +87,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\configure.ps1 -Modules
 
 ## 恢复原界面
 
-保存文档并完全退出 LibreOffice，双击 **`恢复原界面.cmd`**。也可仅恢复某个模块：
+保存文档并完全退出 LibreOffice，双击 **`恢复原界面.vbs`**。也可仅恢复某个模块：
 
 ```powershell
 .\恢复原界面.cmd -Modules Draw

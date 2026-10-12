@@ -67,7 +67,12 @@ try {
     $env:APPDATA = $fixture
     # 仅对隔离配置目录进行文件测试，不访问真实用户配置或结束任何进程。
     function Get-Process { param($Name,$ErrorAction) }
-    & $installer -LibreOfficePath $fakeInstall
+    $progress = [Collections.Generic.List[int]]::new()
+    & $installer -LibreOfficePath $fakeInstall -OnProgress { param($Percent,$Message) $progress.Add($Percent) }
+    if ($progress[0] -ne 5 -or $progress[$progress.Count-1] -ne 100) { throw '安装进度缺少起点或完成状态' }
+    for ($index=1; $index -lt $progress.Count; $index++) {
+        if ($progress[$index] -lt $progress[$index-1] -or $progress[$index] -gt 100) { throw '安装进度倒退或越界' }
+    }
     [xml]$installed = Get-Content -LiteralPath $config -Raw -Encoding UTF8
     if (!@($installed.SelectNodes('//value') | Where-Object { $_.GetAttribute('lang','http://www.w3.org/XML/1998/namespace') -eq 'zh-CN' -and $_.InnerText -eq '格式刷' }).Count) { throw '中文名称未写入' }
     if (!@($installed.SelectNodes('//value') | Where-Object { $_.GetAttribute('lang','http://www.w3.org/XML/1998/namespace') -eq 'en-US' -and $_.InnerText -eq '.uno:FontDialog' }).Count) { throw 'WPS 快捷键未写入' }
@@ -131,9 +136,11 @@ try {
         Microsoft.PowerShell.Management\Copy-Item @PSBoundParameters
     }
     $failed = $false
-    try { & $installer -LibreOfficePath $fakeInstall } catch { $failed = $true }
+    $progress.Clear()
+    try { & $installer -LibreOfficePath $fakeInstall -OnProgress { param($Percent,$Message) $progress.Add($Percent) } } catch { $failed = $true }
     finally { Remove-Item Function:\Copy-Item }
     if (!$failed -or (Get-FileHash -LiteralPath $config).Hash -ne $before) { throw '失败后配置未保持原值' }
+    if ($progress.Contains(100)) { throw '写入失败不应报告完成' }
     Check-Restore
     & $installer -Restore
     Check-Restore
