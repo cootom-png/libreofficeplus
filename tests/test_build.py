@@ -42,8 +42,9 @@ class PackageTests(unittest.TestCase):
                         self.assertEqual(result.returncode, 23, repr(result.stdout + result.stderr))
                         self.assertTrue(probe.exists(), repr(result.stdout + result.stderr))
                         actual = json.loads(probe.read_text('utf-8-sig'))
+                        self.assertTrue(folder.samefile(actual.pop('Directory')))
                         self.assertEqual(actual, {'Restore': restore, 'Modules': 'Writer,Calc',
-                                                  'Path': r'C:\Apps with spaces\LibreOffice', 'Directory': str(folder)})
+                                                  'Path': r'C:\Apps with spaces\LibreOffice'})
 
     def test_baseline_hashes(self):
         source = json.loads((ROOT / 'vendor/libreoffice/SOURCE.json').read_text(encoding='utf-8'))
