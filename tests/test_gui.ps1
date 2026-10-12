@@ -90,7 +90,8 @@ function Run-UI($name,$arguments,$badTitle) {
     $process=Start-Process -FilePath "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -ArgumentList $command -WindowStyle Hidden -PassThru
     if (!$process.WaitForExit(30000)) { throw "图形检查超时：$name" }
     $result=Get-Content -LiteralPath (Join-Path $bundle 'ui-result.json') -Raw -Encoding UTF8 | ConvertFrom-Json
-    if ($result.Version -ne 'v6.4.0') { throw '安装窗口版本号不正确' }
+    $expectedVersion='v' + (Get-Content -LiteralPath (Join-Path $bundle 'version.json') -Raw -Encoding UTF8 | ConvertFrom-Json).Version
+    if ($result.Version -ne $expectedVersion) { throw '安装窗口版本号不正确' }
     if ($badTitle) {
         if ($process.ExitCode -ne 1 -or !$result.Failure -or $result.Progress -eq 100 -or $result.Percent -ne '需要处理') { throw "图形失败状态不正确：$name" }
         $row=$result.Checks | Where-Object { $_.Title -eq $badTitle }

@@ -53,8 +53,8 @@ jobs:
           RELEASE_SHA: ${{ inputs.release_sha }}
         run: |
           New-Item -ItemType Directory -Path release | Out-Null
-          $name = 'LibreOfficePlus-WPS界面配置包.zip'
-          Copy-Item -LiteralPath "dist/$name" -Destination release
+          $name = 'LibreOfficePlus.zip'
+          Copy-Item -LiteralPath 'dist/LibreOfficePlus-WPS界面配置包.zip' -Destination "release/$name"
           $hash = (Get-FileHash -LiteralPath "release/$name" -Algorithm SHA256).Hash.ToLowerInvariant()
           "$hash  $name" | Set-Content release/SHA256SUMS.txt -Encoding utf8
           @{version=(Get-Content package/version.json -Raw | ConvertFrom-Json).Version;commit=$env:RELEASE_SHA;sha256=$hash;file=$name;libreoffice='26.2.5.2';build='cd7284b4cbbfeb507e630c1aac019f4157393acb'} | ConvertTo-Json | Set-Content release/release.json -Encoding utf8
@@ -94,3 +94,5 @@ jobs:
           gh release create "$RELEASE_TAG" release/* --target "$RELEASE_SHA" --title "LibreOfficePlus $RELEASE_TAG · 常用操作与安装体验改进" --notes-file docs/发布说明-v6.4.md --latest
           published=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq .object.sha)
           test "$published" = "$RELEASE_SHA"
+          gh release download "$RELEASE_TAG" --dir published
+          python scripts/check_release.py published "$RELEASE_SHA"

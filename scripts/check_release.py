@@ -7,7 +7,7 @@ from zipfile import ZipFile
 
 
 def verify(folder, commit):
-    name = 'LibreOfficePlus-WPS界面配置包.zip'
+    name = 'LibreOfficePlus.zip'
     assert {p.name for p in folder.iterdir()} == {name, 'SHA256SUMS.txt', 'release.json'}, '发布文件超出白名单'
     info = json.loads((folder / 'release.json').read_text('utf-8-sig'))
     assert info['commit'] == commit and info['file'] == name, '版本信息不匹配'
