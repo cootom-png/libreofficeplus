@@ -2,7 +2,7 @@
 
 为习惯 WPS 的用户提供 **LibreOffice Writer（文字）、Calc（表格）、Draw（绘图）**的中文功能区、常用操作和可恢复的一键配置包。
 
-当前版本 **v5，WPS 习惯适配版**。以用户提供的 WPS 文字、表格截图为参考，重点调整按钮顺序、分组、常用菜单和键位；Draw 沿用相同的字体、形状、排列与属性栏习惯。它仍使用 LibreOffice 原生界面和文档引擎，**不是 WPS 的逐像素复刻**。
+当前版本 **v6，菜单习惯适配版**。以用户提供的 WPS 文字、表格截图为参考，重点调整按钮顺序、分组、常用菜单和键位；Draw 沿用相同的字体、形状、排列与属性栏习惯。它仍使用 LibreOffice 原生界面和文档引擎，**不是 WPS 的逐像素复刻**。
 
 2026-10-12 安装入口更新：修复 `'d'`、`'rshell.exe' 命令截断，并新增图形进度窗口。请重新下载并解压完整配置包，双击新的 `安装.vbs`；原来的首次备份会继续保留。
 
@@ -40,6 +40,17 @@ powershell.exe -NoProfile -STA -ExecutionPolicy Bypass -WindowStyle Hidden -File
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\configure.ps1 -Modules Writer,Calc,Draw -LibreOfficePath "D:\Apps\LibreOffice"
 ```
+
+## v6 弹出菜单与弹窗入口
+
+- 重排 Writer、Calc、Draw 的 16 类常用右键菜单，按剪贴板、格式、对象操作、批注等分组；保留全部原生命令和动态子菜单。
+- Writer 字体、段落直接出现在文字/表格右键中；开始页增加“格式设置”。Calc 集中单元格格式、行高列宽与清除内容。Draw 增加“形状设置”，集中填充、轮廓及大小位置。
+- 常用下拉增加分隔线；菜单显示图标与可用快捷键。打开与另存为使用 Windows 系统文件窗口。
+- 菜单也支持首次备份、重复安装、旧版升级、按模块恢复和写入失败撤回。
+
+**字体、段落、单元格格式等原生弹窗内部布局仍未重排，圆角、配色和尺寸也未完全复刻 WPS。** 当前配置包可调整入口和菜单，内部布局需要另做源码构建或扩展窗口。具体设计、执行顺序和实现边界见 [弹窗菜单设计](docs/弹窗菜单设计.md)。现有 WPS 参考图不含弹窗/右键菜单，因此本版是操作习惯适配。
+
+实测截图：[文字右键菜单](docs/writer-popup.jpg) · [表格右键菜单](docs/calc-popup.jpg) · [绘图右键菜单](docs/draw-popup.jpg)。
 
 ## v5 改进
 

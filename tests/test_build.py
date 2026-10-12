@@ -1,5 +1,6 @@
 """检查配置包中的 UI 结构、引用完整性和可重复构建。"""
 import hashlib
+from collections import Counter
 import json
 import os
 import subprocess
@@ -129,6 +130,40 @@ class PackageTests(unittest.TestCase):
         keys = [(x['Path'], x['Name']) for x in labels]
         self.assertEqual(len(keys), len(set(keys)))
         self.assertTrue(any(x['Value'] == '格式刷' and x['Name'] == 'Label' for x in labels))
+
+    def test_popup_commands_and_groups(self):
+        ns = '{http://openoffice.org/2001/menu}'
+        specs = json.loads((ROOT / 'config/popups.json').read_text('utf8'))
+        labels = json.loads((ROOT / 'config/popup-labels.json').read_text('utf8'))
+        manifest = json.loads((ROOT / 'package/profile-files.json').read_text('utf8'))
+        self.assertEqual(len(manifest), len(specs))
+        for entry in manifest:
+            path = entry['Path']
+            self.assertRegex(path, r'^config/soffice.cfg/modules/(swriter|scalc|sdraw)/popupmenu/[a-z0-9_]+\.xml$')
+            module, name = entry['Module'], Path(path).stem
+            source = ET.parse(ROOT / 'vendor/libreoffice' / module / 'popupmenu' / (name + '.xml')).getroot()
+            output = ET.parse(ROOT / 'package/profile' / path).getroot()
+            commands = lambda menu: Counter(n.get(ns + 'id') for n in menu.iter() if n.get(ns + 'id'))
+            self.assertEqual(commands(source), commands(output), path)
+            for node in output.iter():
+                command = node.get(ns + 'id', '').removeprefix('.uno:')
+                if command in labels:
+                    self.assertEqual(node.get(ns + 'label'), labels[command])
+            for menu in output.iter(ns + 'menupopup'):
+                tags = [c.tag for c in menu]
+                if tags:
+                    self.assertNotEqual(tags[0], ns + 'menuseparator')
+                    self.assertNotEqual(tags[-1], ns + 'menuseparator')
+                self.assertFalse(any(a == b == ns + 'menuseparator' for a,b in zip(tags,tags[1:])))
+            expected = ['.uno:' + c for g in specs[module + '/' + name]['groups'] for c in g]
+            actual = [c.get(ns + 'id') for c in output if c.get(ns + 'id') in expected]
+            self.assertEqual(actual, [c for c in expected if c in actual])
+            # 动态菜单必须仍为空，由原生控制器按选区生成。
+            for node in source.iter(ns + 'menu'):
+                if not list(node):
+                    dynamic = output.find('.//*[@' + ns + 'id="' + node.get(ns + 'id') + '"]')
+                    self.assertIsNotNone(dynamic)
+                    self.assertEqual(list(dynamic), [])
 
     def test_templates(self):
         templates=list((ROOT/'package/templates').glob('*'))

@@ -1,5 +1,34 @@
 <?xml version='1.0' encoding='utf-8'?>
 <interface domain="sd">
+  <object class="GtkMenu" id="WPS-sdraw-12">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkMenuItem" id="WPS-sdraw-13">
+        <property name="action-name">.uno:FormatArea</property>
+        <property name="label">填充…</property>
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="WPS-sdraw-14">
+        <property name="action-name">.uno:FormatLine</property>
+        <property name="label">轮廓…</property>
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="WPS-sdraw-15">
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="WPS-sdraw-16">
+        <property name="action-name">.uno:TransformDialog</property>
+        <property name="label">大小和位置…</property>
+        <property name="visible">True</property>
+      </object>
+    </child>
+  </object>
   <requires lib="gtk+" version="3.24" />
   <requires lib="LibreOffice" version="1.0" />
   <object class="GtkMenu" id="Menu 3d">
@@ -4140,13 +4169,23 @@
                                     </child>
                                   </object>
                                 </child>
+                                <child>
+                                  <object class="svtlo-ManagedMenuButton" id="WPS-sdraw-17:WPS-sdraw-12">
+                                    <property name="focus-on-click">False</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="valign">center</property>
+                                    <property name="relief">none</property>
+                                    <property name="label">形状设置</property>
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkBox" id="WPS-sdraw-12">
+                              <object class="GtkBox" id="WPS-sdraw-18">
                                 <property name="visible">True</property>
                                 <child>
-                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-sdraw-13">
+                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-sdraw-19">
                                     <property name="icon-size">1</property>
                                     <property name="show-arrow">False</property>
                                     <property name="toolbar-style">both-horiz</property>
@@ -4155,7 +4194,7 @@
                                     <property name="can-focus">True</property>
                                     <property name="visible">True</property>
                                     <child>
-                                      <object class="GtkToolButton" id="WPS-sdraw-14">
+                                      <object class="GtkToolButton" id="WPS-sdraw-20">
                                         <property name="tooltip-text">置于顶层</property>
                                         <property name="label">置于顶层</property>
                                         <property name="action-name">.uno:BringToFront</property>
@@ -4165,7 +4204,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-sdraw-15">
+                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-sdraw-21">
                                     <property name="icon-size">1</property>
                                     <property name="show-arrow">False</property>
                                     <property name="toolbar-style">both-horiz</property>
@@ -4174,7 +4213,7 @@
                                     <property name="can-focus">True</property>
                                     <property name="visible">True</property>
                                     <child>
-                                      <object class="GtkToolButton" id="WPS-sdraw-16">
+                                      <object class="GtkToolButton" id="WPS-sdraw-22">
                                         <property name="tooltip-text">置于底层</property>
                                         <property name="label">置于底层</property>
                                         <property name="action-name">.uno:SendToBack</property>
@@ -4184,7 +4223,7 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-sdraw-17">
+                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-sdraw-23">
                                     <property name="icon-size">1</property>
                                     <property name="show-arrow">False</property>
                                     <property name="toolbar-style">both-horiz</property>
@@ -4193,7 +4232,7 @@
                                     <property name="can-focus">True</property>
                                     <property name="visible">True</property>
                                     <child>
-                                      <object class="GtkToolButton" id="WPS-sdraw-18">
+                                      <object class="GtkToolButton" id="WPS-sdraw-24">
                                         <property name="tooltip-text">导出 PDF</property>
                                         <property name="label">导出 PDF</property>
                                         <property name="action-name">.uno:ExportToPDF</property>
@@ -4757,7 +4796,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-19">
+                              <object class="GtkToolButton" id="WPS-sdraw-25">
                                 <property name="tooltip-text">文本框</property>
                                 <property name="label">文本框</property>
                                 <property name="action-name">.uno:Text</property>
@@ -4765,7 +4804,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkMenuToolButton" id="WPS-sdraw-20">
+                              <object class="GtkMenuToolButton" id="WPS-sdraw-26">
                                 <property name="tooltip-text">表格</property>
                                 <property name="label">表格</property>
                                 <property name="action-name">.uno:InsertTable</property>
@@ -4842,7 +4881,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-sdraw-21">
+                                  <object class="GtkToolButton" id="WPS-sdraw-27">
                                     <property name="tooltip-text">艺术字</property>
                                     <property name="label">艺术字</property>
                                     <property name="action-name">.uno:FontworkGalleryFloater</property>
@@ -4916,7 +4955,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-22">
+                              <object class="GtkToolButton" id="WPS-sdraw-28">
                                 <property name="tooltip-text">符号</property>
                                 <property name="label">符号</property>
                                 <property name="action-name">.uno:CharmapControl</property>
@@ -4924,7 +4963,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-23">
+                              <object class="GtkToolButton" id="WPS-sdraw-29">
                                 <property name="tooltip-text">超链接</property>
                                 <property name="label">超链接</property>
                                 <property name="action-name">.uno:HyperlinkDialog</property>
@@ -5788,7 +5827,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-24">
+                              <object class="GtkToolButton" id="WPS-sdraw-30">
                                 <property name="tooltip-text">复制页面</property>
                                 <property name="label">复制页面</property>
                                 <property name="action-name">.uno:DuplicatePage</property>
@@ -5796,7 +5835,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-25">
+                              <object class="GtkToolButton" id="WPS-sdraw-31">
                                 <property name="tooltip-text">删除页面</property>
                                 <property name="label">删除页面</property>
                                 <property name="action-name">.uno:DeletePage</property>
@@ -6597,7 +6636,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-26">
+                              <object class="GtkToolButton" id="WPS-sdraw-32">
                                 <property name="tooltip-text">删除批注</property>
                                 <property name="label">删除批注</property>
                                 <property name="action-name">.uno:DeleteAnnotation</property>
@@ -7218,7 +7257,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-27">
+                              <object class="GtkToolButton" id="WPS-sdraw-33">
                                 <property name="tooltip-text">全屏</property>
                                 <property name="label">全屏</property>
                                 <property name="action-name">.uno:FullScreen</property>
@@ -7226,7 +7265,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-28">
+                              <object class="GtkToolButton" id="WPS-sdraw-34">
                                 <property name="tooltip-text">显示比例</property>
                                 <property name="label">显示比例</property>
                                 <property name="action-name">.uno:Zoom</property>
@@ -7276,7 +7315,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-29">
+                              <object class="GtkToolButton" id="WPS-sdraw-35">
                                 <property name="tooltip-text">侧边栏</property>
                                 <property name="label">侧边栏</property>
                                 <property name="action-name">.uno:Sidebar</property>
@@ -7284,7 +7323,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-30">
+                              <object class="GtkToolButton" id="WPS-sdraw-36">
                                 <property name="tooltip-text">标尺</property>
                                 <property name="label">标尺</property>
                                 <property name="action-name">.uno:Ruler</property>
@@ -7348,7 +7387,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-31">
+                              <object class="GtkToolButton" id="WPS-sdraw-37">
                                 <property name="tooltip-text">参考线</property>
                                 <property name="label">参考线</property>
                                 <property name="action-name">.uno:HelplinesVisible</property>
@@ -7356,7 +7395,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-32">
+                              <object class="GtkToolButton" id="WPS-sdraw-38">
                                 <property name="tooltip-text">吸附到网格</property>
                                 <property name="label">吸附到网格</property>
                                 <property name="action-name">.uno:GridUse</property>
@@ -8441,7 +8480,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-33">
+                              <object class="GtkToolButton" id="WPS-sdraw-39">
                                 <property name="tooltip-text">分布</property>
                                 <property name="label">分布</property>
                                 <property name="action-name">.uno:DistributeSelection</property>
@@ -8449,7 +8488,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-34">
+                              <object class="GtkToolButton" id="WPS-sdraw-40">
                                 <property name="tooltip-text">位置和大小</property>
                                 <property name="label">位置和大小</property>
                                 <property name="action-name">.uno:TransformDialog</property>
@@ -8527,7 +8566,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolButton" id="WPS-sdraw-35">
+                                  <object class="GtkToolButton" id="WPS-sdraw-41">
                                     <property name="tooltip-text">旋转</property>
                                     <property name="label">旋转</property>
                                     <property name="action-name">.uno:ToggleObjectRotateMode</property>
@@ -8601,7 +8640,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-36">
+                              <object class="GtkToolButton" id="WPS-sdraw-42">
                                 <property name="tooltip-text">置于底层</property>
                                 <property name="label">置于底层</property>
                                 <property name="action-name">.uno:SendToBack</property>
@@ -8609,7 +8648,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-37">
+                              <object class="GtkToolButton" id="WPS-sdraw-43">
                                 <property name="tooltip-text">水平翻转</property>
                                 <property name="label">水平翻转</property>
                                 <property name="action-name">.uno:FlipHorizontal</property>
@@ -8617,7 +8656,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-38">
+                              <object class="GtkToolButton" id="WPS-sdraw-44">
                                 <property name="tooltip-text">垂直翻转</property>
                                 <property name="label">垂直翻转</property>
                                 <property name="action-name">.uno:FlipVertical</property>
@@ -8666,7 +8705,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-39">
+                              <object class="GtkToolButton" id="WPS-sdraw-45">
                                 <property name="tooltip-text">选项</property>
                                 <property name="label">选项</property>
                                 <property name="action-name">.uno:OptionsTreeDialog</property>
@@ -8674,7 +8713,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-sdraw-40">
+                              <object class="GtkToolButton" id="WPS-sdraw-46">
                                 <property name="tooltip-text">自定义</property>
                                 <property name="label">自定义</property>
                                 <property name="action-name">.uno:ConfigureDialog</property>

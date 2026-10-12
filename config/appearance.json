@@ -1,0 +1,22 @@
+[
+  {
+    "Path": "/org.openoffice.Office.Common/View/Menu",
+    "Name": "IsSystemIconsInMenus",
+    "Value": "false"
+  },
+  {
+    "Path": "/org.openoffice.Office.Common/View/Menu",
+    "Name": "ShowIconsInMenues",
+    "Value": "true"
+  },
+  {
+    "Path": "/org.openoffice.Office.Common/View/Menu",
+    "Name": "ShortcutsInContextMenus",
+    "Value": "1"
+  },
+  {
+    "Path": "/org.openoffice.Office.Common/Misc",
+    "Name": "UseSystemFileDialog",
+    "Value": "true"
+  }
+]

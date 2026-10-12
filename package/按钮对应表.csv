@@ -31,9 +31,12 @@ swriter,开始,.uno:JustifyPara,Home-JustifyPara,Home-Section-Paragraph,10,保�
 swriter,开始,.uno:LineSpacing,Home-LineSpacing1,Home-Section-Paragraph,11,保留原生控件或增加常用入口
 swriter,开始,.uno:StylesPreview,Home-StylesPreview,Home-Section-Style3,1,保留原生控件或增加常用入口
 swriter,开始,.uno:SearchDialog,WPS-swriter-7,WPS-swriter-3,1,保留原生控件或增加常用入口
-swriter,开始,.uno:SidebarDeck.StyleListDeck,WPS-swriter-13,WPS-swriter-3,2,保留原生控件或增加常用入口
-swriter,开始,.uno:InsertAnnotation,WPS-swriter-15,WPS-swriter-3,3,保留原生控件或增加常用入口
+swriter,开始,.uno:SidebarDeck.StyleListDeck,WPS-swriter-19,WPS-swriter-3,2,保留原生控件或增加常用入口
+swriter,开始,.uno:InsertAnnotation,WPS-swriter-21,WPS-swriter-3,3,保留原生控件或增加常用入口
 swriter,开始,.uno:SelectAll,全选,常用操作/选择,1,菜单入口；行号指上级按钮所在行
+swriter,开始,.uno:FontDialog,字体…,常用操作/格式设置,2,菜单入口；行号指上级按钮所在行
+swriter,开始,.uno:ParagraphDialog,段落…,常用操作/格式设置,2,菜单入口；行号指上级按钮所在行
+swriter,开始,.uno:PageDialog,页面设置…,常用操作/格式设置,2,菜单入口；行号指上级按钮所在行
 swriter,插入,.uno:InsertPagebreak,分页符,第 1 组/Insert-Section-Pagebreak,1,已安排；待具体文档验证
 swriter,插入,.uno:InsertBreak,分隔符,第 1 组/Insert-Section-Pagebreak,2,已安排；待具体文档验证
 swriter,插入,.uno:InsertPageNumberField,页码,第 1 组/Insert-Section-Pagebreak,3,已安排；待具体文档验证
@@ -167,10 +170,11 @@ scalc,开始,.uno:StyleApply?Style:string=Good&FamilyName:string=CellStyles,Home
 scalc,开始,.uno:StyleApply?Style:string=Neutral&FamilyName:string=CellStyles,Home-NeutralStyle,Home-Section-Style2,6,保留原生控件或增加常用入口
 scalc,开始,.uno:StyleApply?Style:string=Bad&FamilyName:string=CellStyles,Home-BadStyle,Home-Section-Style2,7,保留原生控件或增加常用入口
 scalc,开始,.uno:FormatCellDialog,WPS-scalc-3,Home-Section-Style2,8,保留原生控件或增加常用入口
-scalc,开始,.uno:AutoSum,WPS-scalc-15,WPS-scalc-4,1,保留原生控件或增加常用入口
-scalc,开始,.uno:DataSort,WPS-scalc-17,WPS-scalc-4,2,保留原生控件或增加常用入口
-scalc,开始,.uno:DataFilterAutoFilter,WPS-scalc-20,WPS-scalc-4,3,保留原生控件或增加常用入口
-scalc,开始,.uno:SearchDialog,WPS-scalc-27,WPS-scalc-4,4,保留原生控件或增加常用入口
+scalc,开始,.uno:AutoSum,WPS-scalc-16,WPS-scalc-4,1,保留原生控件或增加常用入口
+scalc,开始,.uno:DataSort,WPS-scalc-18,WPS-scalc-4,2,保留原生控件或增加常用入口
+scalc,开始,.uno:DataFilterAutoFilter,WPS-scalc-21,WPS-scalc-4,3,保留原生控件或增加常用入口
+scalc,开始,.uno:SearchDialog,WPS-scalc-28,WPS-scalc-4,4,保留原生控件或增加常用入口
+scalc,开始,.uno:FormatCellDialog,WPS-scalc-30,WPS-scalc-4,5,保留原生控件或增加常用入口
 scalc,开始,.uno:FillDown,向下填充,常用操作/填充,1,菜单入口；行号指上级按钮所在行
 scalc,开始,.uno:FillRight,向右填充,常用操作/填充,1,菜单入口；行号指上级按钮所在行
 scalc,开始,.uno:FillUp,向上填充,常用操作/填充,1,菜单入口；行号指上级按钮所在行
@@ -205,20 +209,20 @@ scalc,页面,.uno:PageFormatDialog,打印行号列标,第 2 组/Layout-Section-F
 scalc,页面,.uno:PagebreakMode,分页预览,第 3 组/Layout-Section-File2,1,已安排；待具体文档验证
 scalc,页面,.uno:InsertRowBreak,插入分页符,第 3 组/Layout-Section-File2,2,已安排；待具体文档验证
 scalc,页面,.uno:PageFormatDialog,背景,第 3 组/Layout-Section-File2,3,已安排；待具体文档验证
-scalc,公式,.uno:FunctionDialog,插入函数,第 1 组/WPS-scalc-30,1,已安排；待具体文档验证
-scalc,公式,.uno:AutoSum,求和,第 1 组/WPS-scalc-30,2,已安排；待具体文档验证
-scalc,公式,.uno:FunctionBox,常用函数,第 1 组/WPS-scalc-30,3,已安排；待具体文档验证
-scalc,公式,.uno:DefineName,名称管理器,第 2 组/WPS-scalc-33,1,已安排；待具体文档验证
-scalc,公式,.uno:DefineName,指定名称,第 2 组/WPS-scalc-33,2,已安排；待具体文档验证
-scalc,公式,.uno:InsertName,粘贴名称,第 2 组/WPS-scalc-33,3,已安排；待具体文档验证
-scalc,公式,.uno:ShowPrecedents,追踪引用,第 3 组/WPS-scalc-39,1,已安排；待具体文档验证
-scalc,公式,.uno:ShowDependents,追踪从属,第 3 组/WPS-scalc-39,2,已安排；待具体文档验证
-scalc,公式,.uno:ClearArrows,移去箭头,第 3 组/WPS-scalc-39,3,已安排；待具体文档验证
-scalc,公式,.uno:ShowErrors,错误检查,第 3 组/WPS-scalc-39,4,已安排；待具体文档验证
-scalc,公式,.uno:ToggleFormula,显示公式,第 4 组/WPS-scalc-43,1,已安排；待具体文档验证
-scalc,公式,.uno:AutomaticCalculation,自动重算,第 4 组/WPS-scalc-43,2,已安排；待具体文档验证
-scalc,公式,.uno:CalculateHard,重算工作簿,第 4 组/WPS-scalc-43,3,已安排；待具体文档验证
-scalc,公式,.uno:Calculate,计算工作表,第 4 组/WPS-scalc-43,4,已安排；待具体文档验证
+scalc,公式,.uno:FunctionDialog,插入函数,第 1 组/WPS-scalc-33,1,已安排；待具体文档验证
+scalc,公式,.uno:AutoSum,求和,第 1 组/WPS-scalc-33,2,已安排；待具体文档验证
+scalc,公式,.uno:FunctionBox,常用函数,第 1 组/WPS-scalc-33,3,已安排；待具体文档验证
+scalc,公式,.uno:DefineName,名称管理器,第 2 组/WPS-scalc-36,1,已安排；待具体文档验证
+scalc,公式,.uno:DefineName,指定名称,第 2 组/WPS-scalc-36,2,已安排；待具体文档验证
+scalc,公式,.uno:InsertName,粘贴名称,第 2 组/WPS-scalc-36,3,已安排；待具体文档验证
+scalc,公式,.uno:ShowPrecedents,追踪引用,第 3 组/WPS-scalc-42,1,已安排；待具体文档验证
+scalc,公式,.uno:ShowDependents,追踪从属,第 3 组/WPS-scalc-42,2,已安排；待具体文档验证
+scalc,公式,.uno:ClearArrows,移去箭头,第 3 组/WPS-scalc-42,3,已安排；待具体文档验证
+scalc,公式,.uno:ShowErrors,错误检查,第 3 组/WPS-scalc-42,4,已安排；待具体文档验证
+scalc,公式,.uno:ToggleFormula,显示公式,第 4 组/WPS-scalc-46,1,已安排；待具体文档验证
+scalc,公式,.uno:AutomaticCalculation,自动重算,第 4 组/WPS-scalc-46,2,已安排；待具体文档验证
+scalc,公式,.uno:CalculateHard,重算工作簿,第 4 组/WPS-scalc-46,3,已安排；待具体文档验证
+scalc,公式,.uno:Calculate,计算工作表,第 4 组/WPS-scalc-46,4,已安排；待具体文档验证
 scalc,数据,.uno:DataDataPilotRun,数据透视表,第 1 组/Data-Section-Source,1,已安排；待具体文档验证
 scalc,数据,.uno:DataFilterAutoFilter,筛选,第 2 组/Data-Section-Source1,1,已安排；待具体文档验证
 scalc,数据,.uno:DataFilterRemoveFilter,全部显示,第 2 组/Data-Section-Source1,2,已安排；待具体文档验证
@@ -313,9 +317,9 @@ sdraw,开始,.uno:DistributeSelection,Home-DistributeSelection,Home-Section-Tran
 sdraw,开始,.uno:FormatGroup,WPS-sdraw-7,WPS-sdraw-3,1,保留原生控件或增加常用入口
 sdraw,开始,.uno:FormatUngroup,WPS-sdraw-9,WPS-sdraw-3,2,保留原生控件或增加常用入口
 sdraw,开始,.uno:ToggleObjectRotateMode,WPS-sdraw-11,WPS-sdraw-3,3,保留原生控件或增加常用入口
-sdraw,开始,.uno:BringToFront,WPS-sdraw-14,WPS-sdraw-3,4,保留原生控件或增加常用入口
-sdraw,开始,.uno:SendToBack,WPS-sdraw-16,WPS-sdraw-3,5,保留原生控件或增加常用入口
-sdraw,开始,.uno:ExportToPDF,WPS-sdraw-18,WPS-sdraw-3,6,保留原生控件或增加常用入口
+sdraw,开始,.uno:BringToFront,WPS-sdraw-20,WPS-sdraw-3,4,保留原生控件或增加常用入口
+sdraw,开始,.uno:SendToBack,WPS-sdraw-22,WPS-sdraw-3,5,保留原生控件或增加常用入口
+sdraw,开始,.uno:ExportToPDF,WPS-sdraw-24,WPS-sdraw-3,6,保留原生控件或增加常用入口
 sdraw,开始,.uno:ArrowShapes,Home-ArrowShapes,Home-Section-Draw2,1,保留原生控件或增加常用入口
 sdraw,开始,.uno:ConnectorToolbox,Home-ConnectorToolbox,Home-Section-Draw2,2,保留原生控件或增加常用入口
 sdraw,开始,.uno:FlowChartShapes,Home-FlowChartShapes,Home-Section-Draw2,3,保留原生控件或增加常用入口
@@ -329,6 +333,9 @@ sdraw,开始,.uno:InsertGraphic,Home-InsertGraphic,Home-Section-Insert,1,保留�
 sdraw,开始,.uno:InsertPage,Home-InsertPage,Home-Section-Insert,2,保留原生控件或增加常用入口
 sdraw,开始,.uno:InsertObjectChart,Home-InsertObjectChart,Home-Section-Insert,3,保留原生控件或增加常用入口
 sdraw,开始,.uno:InsertTable,InsertTable,Home-Section-Insert,4,保留原生控件或增加常用入口
+sdraw,开始,.uno:FormatArea,填充…,常用操作/形状设置,1,菜单入口；行号指上级按钮所在行
+sdraw,开始,.uno:FormatLine,轮廓…,常用操作/形状设置,1,菜单入口；行号指上级按钮所在行
+sdraw,开始,.uno:TransformDialog,大小和位置…,常用操作/形状设置,1,菜单入口；行号指上级按钮所在行
 sdraw,插入,.uno:InsertGraphic,图片,第 1 组/Insert-Section-Slide,1,已安排；待具体文档验证
 sdraw,插入,.uno:Text,文本框,第 1 组/Insert-Section-Slide,2,已安排；待具体文档验证
 sdraw,插入,.uno:InsertTable,表格,第 1 组/Insert-Section-Slide,3,已安排；待具体文档验证

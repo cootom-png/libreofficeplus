@@ -1,0 +1,149 @@
+{
+  "swriter/text": {
+    "lift": ["FontDialog", "ParagraphDialog"],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["FontDialog", "ParagraphDialog", "CharacterMenu", "ParagraphMenu", "NumberingMenu", "OutlineBullet", "FormatPaintbrush", "ResetAttributes", "SetDefault"],
+      ["InsertHyperlink", "OpenHyperlinkOnCursor", "EditHyperlink", "CopyHyperlinkLocation", "RemoveHyperlink"],
+      ["InsertAnnotation", "EditAnnotation", "DeleteNote", "ShowNote", "HideNote", "AcceptTrackedChange", "RejectTrackedChange", "ReinstateTrackedChange", "NextTrackedChange", "PreviousTrackedChange"],
+      ["PageDialog"]
+    ]
+  },
+  "swriter/table": {
+    "lift": ["FontDialog", "ParagraphDialog"],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["TableInsertMenu", "TableDeleteMenu", "MergeCells", "SplitCell", "TableAutoFitMenu", "TableDialog"],
+      ["FontDialog", "ParagraphDialog", "CharacterMenu", "ParagraphMenu", "NumberingMenu", "OutlineBullet", "FormatPaintbrush", "ResetAttributes", "SetDefault"],
+      ["InsertHyperlink", "OpenHyperlinkOnCursor", "EditHyperlink", "CopyHyperlinkLocation", "RemoveHyperlink"],
+      ["InsertAnnotation", "EditAnnotation", "DeleteNote", "ShowNote", "HideNote", "AcceptTrackedChange", "RejectTrackedChange", "ReinstateTrackedChange", "NextTrackedChange", "PreviousTrackedChange"]
+    ]
+  },
+  "swriter/graphic": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["Crop", "ChangePicture", "CompressGraphic", "SaveGraphic", "ExternalEdit", "OriginalSize", "FitCellSize", "ProtectGraphicMenu"],
+      ["GraphicDialog"],
+      ["ArrangeMenu", "ArrangeFrameMenu", "ObjectAlign", "DistributeSelection", "FormatGroup", "FormatUngroup", "EnterGroup", "LeaveGroup", "RotateFlipMenu", "MirrorMenu", "FlipMenu", "ToggleObjectRotateMode"],
+      ["AnchorMenu", "WrapMenu", "InsertCaptionDialog"]
+    ]
+  },
+  "scalc/cell": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["InsertCell", "DeleteCell", "Delete", "MergeCells", "SplitCell"],
+      ["FormatCellDialog", "FormatPaintbrush", "ResetAttributes", "FormatStylesMenu"],
+      ["DataSelect", "CurrentValidation", "ClearAutoFilter", "DefineCurrentName"],
+      ["InsertAnnotation", "EditAnnotation", "DeleteNote", "ShowNote", "HideNote", "AcceptTrackedChange", "RejectTrackedChange", "ReinstateTrackedChange", "NextTrackedChange", "PreviousTrackedChange"]
+    ]
+  },
+  "scalc/rowheader": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["InsertRowsBefore", "InsertRowsAfter", "DeleteRows", "Delete"],
+      ["RowHeight", "SetOptimalRowHeight", "HideRow", "ShowRow"],
+      ["FormatCellDialog"],
+      ["FreezePanes", "SplitWindow"]
+    ]
+  },
+  "scalc/colheader": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["InsertColumnsBefore", "InsertColumnsAfter", "DeleteColumns", "Delete"],
+      ["ColumnWidth", "SetOptimalColumnWidth", "HideColumn", "ShowColumn"],
+      ["FormatCellDialog"],
+      ["FreezePanes", "SplitWindow"]
+    ]
+  },
+  "scalc/sheettab": {
+    "lift": [],
+    "groups": [
+      ["Insert", "Remove", "RenameTable", "DuplicateSheet", "Move"],
+      ["TableSelectAll", "TableDeselectAll"],
+      ["SetTabBgColor", "Hide", "Show", "Protect"],
+      ["ToggleSheetGrid", "SheetRightToLeft", "TableEvents"]
+    ]
+  },
+  "scalc/draw": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["FormatArea", "FormatLine", "TransformDialog", "TextAttributes"],
+      ["ArrangeMenu", "ArrangeFrameMenu", "ObjectAlign", "DistributeSelection", "FormatGroup", "FormatUngroup", "EnterGroup", "LeaveGroup", "RotateFlipMenu", "MirrorMenu", "FlipMenu", "ToggleObjectRotateMode"],
+      ["AnchorMenu"],
+      ["InsertHyperlink", "OpenHyperlinkOnCursor", "EditHyperlink", "CopyHyperlinkLocation", "RemoveHyperlink"]
+    ]
+  },
+  "scalc/graphic": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["Crop", "ChangePicture", "CompressGraphic", "SaveGraphic", "ExternalEdit", "OriginalSize", "FitCellSize", "ProtectGraphicMenu"],
+      ["TransformDialog"],
+      ["ArrangeMenu", "ArrangeFrameMenu", "ObjectAlign", "DistributeSelection", "FormatGroup", "FormatUngroup", "EnterGroup", "LeaveGroup", "RotateFlipMenu", "MirrorMenu", "FlipMenu", "ToggleObjectRotateMode"],
+      ["AnchorMenu"],
+      ["InsertHyperlink", "OpenHyperlinkOnCursor", "EditHyperlink", "CopyHyperlinkLocation", "RemoveHyperlink"]
+    ]
+  },
+  "sdraw/draw": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["FormatArea", "FormatLine", "TransformDialog", "TextAttributes"],
+      ["ArrangeMenu", "ArrangeFrameMenu", "ObjectAlign", "DistributeSelection", "FormatGroup", "FormatUngroup", "EnterGroup", "LeaveGroup", "RotateFlipMenu", "MirrorMenu", "FlipMenu", "ToggleObjectRotateMode"]
+    ]
+  },
+  "sdraw/group": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["FormatArea", "FormatLine", "TransformDialog", "TextAttributes"],
+      ["ArrangeMenu", "ArrangeFrameMenu", "ObjectAlign", "DistributeSelection", "FormatGroup", "FormatUngroup", "EnterGroup", "LeaveGroup", "RotateFlipMenu", "MirrorMenu", "FlipMenu", "ToggleObjectRotateMode"]
+    ]
+  },
+  "sdraw/multiselect": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["FormatArea", "FormatLine", "TransformDialog", "TextAttributes"],
+      ["ArrangeMenu", "ArrangeFrameMenu", "ObjectAlign", "DistributeSelection", "FormatGroup", "FormatUngroup", "EnterGroup", "LeaveGroup", "RotateFlipMenu", "MirrorMenu", "FlipMenu", "ToggleObjectRotateMode"]
+    ]
+  },
+  "sdraw/drawtext": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["FontDialog", "ParagraphDialog", "CharacterMenu", "ParagraphMenu", "NumberingMenu", "OutlineBullet", "FormatPaintbrush", "ResetAttributes", "SetDefault"],
+      ["TextAttributes"],
+      ["InsertHyperlink", "OpenHyperlinkOnCursor", "EditHyperlink", "CopyHyperlinkLocation", "RemoveHyperlink"]
+    ]
+  },
+  "sdraw/graphic": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["Crop", "ChangePicture", "CompressGraphic", "SaveGraphic", "ExternalEdit", "OriginalSize", "FitCellSize", "ProtectGraphicMenu"],
+      ["TransformDialog", "FormatLine"],
+      ["ArrangeMenu", "ArrangeFrameMenu", "ObjectAlign", "DistributeSelection", "FormatGroup", "FormatUngroup", "EnterGroup", "LeaveGroup", "RotateFlipMenu", "MirrorMenu", "FlipMenu", "ToggleObjectRotateMode"]
+    ]
+  },
+  "sdraw/page": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["PageSetup", "PageMenu", "DrawingLayout", "SaveBackground"],
+      ["ShowRuler", "GridMenu", "SnapLinesMenu", "CapturePoint"]
+    ]
+  },
+  "sdraw/pagepane": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["InsertPage", "DuplicatePage", "DeletePage", "RenamePage"]
+    ]
+  }
+}

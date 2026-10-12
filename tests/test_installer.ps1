@@ -23,6 +23,12 @@ $calcUi = Join-Path $profile 'config\soffice.cfg\modules\scalc\ui\notebookbar.ui
 $drawUi = Join-Path $profile 'config\soffice.cfg\modules\sdraw\ui\notebookbar.ui'
 New-Item -ItemType Directory -Path (Split-Path $writerUi) -Force | Out-Null
 [IO.File]::WriteAllText($writerUi,$oldUi)
+$writerMenu = Join-Path $profile 'config\soffice.cfg\modules\swriter\popupmenu\text.xml'
+$calcMenu = Join-Path $profile 'config\soffice.cfg\modules\scalc\popupmenu\cell.xml'
+$drawMenu = Join-Path $profile 'config\soffice.cfg\modules\sdraw\popupmenu\draw.xml'
+$oldMenu = '<menu:menupopup xmlns:menu="http://openoffice.org/2001/menu"><menu:menuitem menu:id=".uno:Copy"/></menu:menupopup>'
+New-Item -ItemType Directory -Path (Split-Path $writerMenu) -Force | Out-Null
+[IO.File]::WriteAllText($writerMenu,$oldMenu)
 function Semantic($text) {
     [xml]$xml = $text
     @($xml.DocumentElement.SelectNodes('item') | ForEach-Object {
@@ -60,6 +66,8 @@ function Check-Restore {
     if ((Get-Content -LiteralPath $writerUi -Raw) -ne $oldUi) { throw '原界面未恢复' }
     if (Test-Path -LiteralPath $calcUi) { throw '新增界面未删除' }
     if (Test-Path -LiteralPath $drawUi) { throw '新增 Draw 界面未删除' }
+    if ((Get-Content -LiteralPath $writerMenu -Raw) -ne $oldMenu) { throw '首次自定义菜单未恢复' }
+    if ((Test-Path -LiteralPath $calcMenu) -or (Test-Path -LiteralPath $drawMenu)) { throw '新增菜单未删除' }
     if (Compare-Object (Semantic $initial) (Semantic (Get-Content -LiteralPath $config -Raw -Encoding UTF8))) { throw '恢复结果与原设置不同' }
 }
 $originalAppData = $env:APPDATA
@@ -77,8 +85,11 @@ try {
     if (!@($installed.SelectNodes('//value') | Where-Object { $_.GetAttribute('lang','http://www.w3.org/XML/1998/namespace') -eq 'zh-CN' -and $_.InnerText -eq '格式刷' }).Count) { throw '中文名称未写入' }
     if (!@($installed.SelectNodes('//value') | Where-Object { $_.GetAttribute('lang','http://www.w3.org/XML/1998/namespace') -eq 'en-US' -and $_.InnerText -eq '.uno:FontDialog' }).Count) { throw 'WPS 快捷键未写入' }
     $hash = (Get-FileHash -LiteralPath $backup).Hash
+    $menuHash = (Get-FileHash -LiteralPath (Join-Path $fixture 'LibreOffice\wps-ui-files-backup\swriter-text.xml')).Hash
+    if (!(Test-Path -LiteralPath $calcMenu) -or !(Test-Path -LiteralPath $drawMenu)) { throw '所选模块的菜单未安装' }
     & $installer -LibreOfficePath $fakeInstall
     if ((Get-FileHash -LiteralPath $backup).Hash -ne $hash) { throw '重复安装覆盖了首次备份' }
+    if ((Get-FileHash -LiteralPath (Join-Path $fixture 'LibreOffice\wps-ui-files-backup\swriter-text.xml')).Hash -ne $menuHash) { throw '重复安装覆盖了首次菜单备份' }
     Simulate-NativeSave
     & $installer -Restore
     Check-Restore
@@ -95,7 +106,7 @@ try {
     & $installer -LibreOfficePath $fakeInstall
     & $installer -Restore
     Check-Restore
-    Write-Host '通过：v3 升级到 v5 后恢复首次配置。'
+    Write-Host '通过：v3 升级到 v6 后恢复首次配置。'
 
     # 先单独安装 Draw，再追加两个模块；部分恢复不得覆盖其他模块。
     & $installer -Modules Draw -LibreOfficePath $fakeInstall
@@ -108,6 +119,7 @@ try {
     $writerHash=(Get-FileHash -LiteralPath $writerUi).Hash
     $calcHash=(Get-FileHash -LiteralPath $calcUi).Hash
     & $installer -Modules Draw -Restore
+    if ((Test-Path -LiteralPath $drawMenu) -or !(Test-Path -LiteralPath $calcMenu)) { throw '菜单部分恢复范围不正确' }
     if ((Test-Path -LiteralPath $drawUi) -or (Get-FileHash -LiteralPath $writerUi).Hash -ne $writerHash -or (Get-FileHash -LiteralPath $calcUi).Hash -ne $calcHash) { throw '部分恢复修改了其他模块' }
     & $installer -Modules Writer -Restore
     if ((Get-FileHash -LiteralPath $calcUi).Hash -ne $calcHash) { throw '恢复 Writer 修改了 Calc' }
@@ -127,7 +139,20 @@ try {
     & $installer -Modules Draw -Restore
     & $installer -Modules 'Writer,Calc' -Restore
     Check-Restore
-    Write-Host '通过：真实 v4 备份升级到 v5 并分模块恢复。'
+    Write-Host '通过：真实 v4 备份升级到 v6 并分模块恢复。'
+
+    # v5 无 Path 的旧清单仍使用原 notebookbar 备份名，菜单另建首次记录。
+    & $installer -Modules Writer -LibreOfficePath $fakeInstall
+    & $installer -Modules Writer -Restore
+    $statePath=Join-Path $fixture 'LibreOffice\wps-ui-files-backup\state.json'
+    [IO.File]::WriteAllText($writerUi,'<interface id="v5"/>')
+    [IO.File]::WriteAllText((Join-Path (Split-Path $statePath) 'swriter.ui'),$oldUi)
+    '[{"Module":"swriter","Existed":true}]' | Set-Content -LiteralPath $statePath -Encoding UTF8
+    '<backup version="5"><tracked/></backup>' | Set-Content -LiteralPath $backup -Encoding UTF8
+    & $installer -Modules Writer -LibreOfficePath $fakeInstall
+    & $installer -Modules Writer -Restore
+    Check-Restore
+    Write-Host '通过：v5 旧文件清单升级及原菜单恢复。'
 
     $before = (Get-FileHash -LiteralPath $config).Hash
     function Copy-Item {
@@ -145,6 +170,21 @@ try {
     & $installer -Restore
     Check-Restore
     Write-Host '通过：第二个 UI 写入失败时撤回第一个 UI，保留配置和恢复能力。'
+
+    # 前面的 notebookbar 与文字菜单已经写入后，第二类菜单失败也须完整撤回。
+    function Copy-Item {
+        param([string]$LiteralPath,[string]$Destination,[switch]$Force)
+        if ($Destination -eq $calcMenu) { throw '模拟菜单写入失败' }
+        Microsoft.PowerShell.Management\Copy-Item @PSBoundParameters
+    }
+    $failed=$false
+    try { & $installer -LibreOfficePath $fakeInstall } catch { $failed=$true }
+    finally { Remove-Item Function:\Copy-Item }
+    if (!$failed -or (Get-FileHash -LiteralPath $config).Hash -ne $before) { throw '菜单失败后配置未保持原值' }
+    Check-Restore
+    & $installer -Restore
+    Check-Restore
+    Write-Host '通过：菜单写入失败完整撤回并保留恢复能力。'
 
     [IO.File]::WriteAllText("$fakeInstall\program\version.ini",'buildid=unsupported')
     $before = (Get-FileHash -LiteralPath $config).Hash

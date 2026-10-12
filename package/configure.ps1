@@ -53,7 +53,23 @@ function Remove-Setting($xml, $path, $name) {
         if (!$item.HasChildNodes) { $xml.DocumentElement.RemoveChild($item) | Out-Null }
     }
 }
-function UiPath($module) { Join-Path $base "4\user\config\soffice.cfg\modules\$module\ui\notebookbar.ui" }
+function UiPath($module, $path = 'ui/notebookbar.ui') { Join-Path $base "4\user\config\soffice.cfg\modules\$module\$path" }
+function FileKey($entry) {
+    if ($entry.Path -eq 'ui/notebookbar.ui') { return "$($entry.Module).ui" }
+    return "$($entry.Module)-$([IO.Path]::GetFileName($entry.Path))"
+}
+function Valid-File($entry) {
+    $entry.Module -in $moduleIds.Values -and ($entry.Path -eq 'ui/notebookbar.ui' -or $entry.Path -cmatch '^popupmenu/[a-z0-9_]+\.xml$')
+}
+$packageFiles = @($selectedIds | ForEach-Object { [pscustomobject]@{Module=$_;Path='ui/notebookbar.ui'} })
+$menuFiles = ConvertFrom-Json -InputObject (Get-Content -LiteralPath (Join-Path $PSScriptRoot 'profile-files.json') -Raw -Encoding UTF8)
+foreach ($file in $menuFiles) {
+    $prefix = "config/soffice.cfg/modules/$($file.Module)/"
+    if (!$file.Path.StartsWith($prefix)) { throw '菜单文件路径不正确，未修改设置。' }
+    $entry = [pscustomobject]@{Module=$file.Module;Path=$file.Path.Substring($prefix.Length)}
+    if (!(Valid-File $entry)) { throw '菜单文件路径不正确，未修改设置。' }
+    if ($entry.Module -in $selectedIds) { $packageFiles += $entry }
+}
 # 前十二项固定，供 v1-v3 备份迁移。
 $defaults = @(
     @('/org.openoffice.Office.UI.ToolbarMode','ActiveWriter','notebookbar.ui'),
@@ -80,6 +96,10 @@ foreach ($setting in $labels) {
 if (!$Restore) {
     $versionFile = Join-Path $LibreOfficePath 'program\version.ini'
     if (!(Test-Path -LiteralPath $versionFile) -or !(Select-String -LiteralPath $versionFile -Pattern '^buildid=cd7284b4cbbfeb507e630c1aac019f4157393acb$' -Quiet)) { throw '本定制功能区只验证用于 LibreOffice 26.2.5.2，未修改设置。' }
+    foreach ($file in $packageFiles | Where-Object { $_.Path -like 'popupmenu/*' }) {
+        [xml]$menuCheck = Get-Content -LiteralPath (Join-Path $PSScriptRoot "profile/config/soffice.cfg/modules/$($file.Module)/$($file.Path)") -Raw -Encoding UTF8
+        if ($menuCheck.DocumentElement.LocalName -ne 'menupopup' -or $menuCheck.DocumentElement.NamespaceURI -ne 'http://openoffice.org/2001/menu') { throw '菜单文件不完整，未修改设置。' }
+    }
     foreach ($module in $selectedIds) {
         [xml]$uiCheck = Get-Content -LiteralPath (Join-Path $PSScriptRoot "ui\$module\notebookbar.ui") -Raw -Encoding UTF8
         if (!$uiCheck.SelectSingleNode('//object[@id="ContextContainer"]')) { throw '功能区文件不完整，未修改设置。' }
@@ -90,18 +110,23 @@ $uiFiles = @()
 if (Test-Path -LiteralPath $uiState) {
     $uiFiles = ConvertFrom-Json -InputObject (Get-Content -LiteralPath $uiState -Raw -Encoding UTF8)
     if ($uiFiles -isnot [array]) { $uiFiles = @($uiFiles) }
-    if ($uiFiles.Count -lt 1 -or $uiFiles.Count -gt 3 -or @($uiFiles.Module | Sort-Object -Unique).Count -ne $uiFiles.Count -or
-        @($uiFiles | Where-Object { $_.Module -notin $moduleIds.Values -or $_.Existed -isnot [bool] }).Count) { throw '界面备份清单格式不正确，未修改设置。' }
     foreach ($entry in $uiFiles) {
-        if ($entry.Existed -and !(Test-Path -LiteralPath (Join-Path $uiBackup "$($entry.Module).ui"))) { throw '原界面备份文件缺失，未修改设置。' }
+        # v4/v5 的清单只记录 Module，首次 notebookbar 备份文件名保持不变。
+        if (!$entry.PSObject.Properties['Path']) { $entry | Add-Member -NotePropertyName Path -NotePropertyValue 'ui/notebookbar.ui' }
+    }
+    $keys = @($uiFiles | ForEach-Object { "$($_.Module)/$($_.Path)" })
+    if ($uiFiles.Count -lt 1 -or $uiFiles.Count -gt 128 -or @($keys | Sort-Object -Unique).Count -ne $uiFiles.Count -or
+        @($uiFiles | Where-Object { !(Valid-File $_) -or $_.Existed -isnot [bool] }).Count) { throw '界面备份清单格式不正确，未修改设置。' }
+    foreach ($entry in $uiFiles) {
+        if ($entry.Existed -and !(Test-Path -LiteralPath (Join-Path $uiBackup (FileKey $entry)))) { throw '原界面备份文件缺失，未修改设置。' }
     }
 }
 $saved = New-Object System.Xml.XmlDocument
 if (Test-Path -LiteralPath $backup) {
     $saved.Load($backup); $version = $saved.DocumentElement.GetAttribute('version')
-    if ($saved.DocumentElement.Name -ne 'backup' -or $version -notin @('1','2','3','4','5')) { throw '无法识别配置备份版本，未修改设置。' }
+    if ($saved.DocumentElement.Name -ne 'backup' -or $version -notin @('1','2','3','4','5','6')) { throw '无法识别配置备份版本，未修改设置。' }
 } elseif ($Restore) { throw '没有找到此配置包的备份。' }
-else { $saved.LoadXml('<backup version="5"><tracked/></backup>'); $version='5' }
+else { $saved.LoadXml('<backup version="6"><tracked/></backup>'); $version='6' }
 $tracked = $saved.SelectSingleNode('/backup/tracked')
 if (!$tracked) {
     $tracked = $saved.CreateElement('tracked'); $saved.DocumentElement.AppendChild($tracked) | Out-Null
@@ -110,7 +135,7 @@ if (!$tracked) {
     }
 }
 foreach ($node in $tracked.SelectNodes('setting')) { $node.SetAttribute('scope',(Scope $node.path $node.name)) }
-$saved.DocumentElement.SetAttribute('version','5')
+$saved.DocumentElement.SetAttribute('version','6')
 if ($Restore) {
     $remaining = @($uiFiles | Where-Object { $_.Module -notin $selectedIds })
     $scopes = $selected + $(if (!$remaining.Count) { 'Shared' })
@@ -129,11 +154,11 @@ if ($Restore) {
         }
     }
     New-Item -ItemType Directory -Path $uiBackup -Force | Out-Null
-    foreach ($module in $selectedIds) {
-        if ($module -notin $uiFiles.Module) {
-            $target = UiPath $module; $existed = Test-Path -LiteralPath $target
-            if ($existed) { Copy-Item -LiteralPath $target -Destination (Join-Path $uiBackup "$module.ui") -Force }
-            $uiFiles += [pscustomobject]@{ Module=$module; Existed=$existed }
+    foreach ($entry in $packageFiles) {
+        if (!@($uiFiles | Where-Object { $_.Module -eq $entry.Module -and $_.Path -eq $entry.Path }).Count) {
+            $target = UiPath $entry.Module $entry.Path; $existed = Test-Path -LiteralPath $target
+            if ($existed) { Copy-Item -LiteralPath $target -Destination (Join-Path $uiBackup (FileKey $entry)) -Force }
+            $uiFiles += [pscustomobject]@{ Module=$entry.Module; Path=$entry.Path; Existed=$existed }
         }
     }
     $saved.Save($backup)
@@ -167,16 +192,18 @@ $stage = Join-Path $base ('wps-ui-stage-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $stage | Out-Null
 $current = @{}
 foreach ($entry in $applyUi) {
-    $module=$entry.Module; $target=UiPath $module; $current[$module]=Test-Path -LiteralPath $target
-    if ($current[$module]) { Copy-Item -LiteralPath $target -Destination (Join-Path $stage "$module.ui") }
+    $key=FileKey $entry; $target=UiPath $entry.Module $entry.Path; $current[$key]=Test-Path -LiteralPath $target
+    if ($current[$key]) { Copy-Item -LiteralPath $target -Destination (Join-Path $stage $key) }
 }
 try {
     $completedUi = 0
     foreach ($entry in $applyUi) {
         & $OnProgress (60 + [int](25 * $completedUi / [Math]::Max(1,$applyUi.Count))) "正在处理$($moduleNames[$entry.Module])界面…"
-        $target=UiPath $entry.Module
+        $target=UiPath $entry.Module $entry.Path
         if (!$Restore -or $entry.Existed) {
-            $source = if ($Restore) { Join-Path $uiBackup "$($entry.Module).ui" } else { Join-Path $PSScriptRoot "ui\$($entry.Module)\notebookbar.ui" }
+            $source = if ($Restore) { Join-Path $uiBackup (FileKey $entry) }
+                elseif ($entry.Path -eq 'ui/notebookbar.ui') { Join-Path $PSScriptRoot "ui\$($entry.Module)\notebookbar.ui" }
+                else { Join-Path $PSScriptRoot "profile/config/soffice.cfg/modules/$($entry.Module)/$($entry.Path)" }
             New-Item -ItemType Directory -Path (Split-Path $target) -Force | Out-Null
             Copy-Item -LiteralPath $source -Destination $target -Force
         } elseif (Test-Path -LiteralPath $target) { Remove-Item -LiteralPath $target }
@@ -186,15 +213,15 @@ try {
     Move-Item -LiteralPath $temp -Destination $config -Force
 } catch {
     foreach ($entry in $applyUi) {
-        $module=$entry.Module; $target=UiPath $module
-        if ($current[$module]) { Copy-Item -LiteralPath (Join-Path $stage "$module.ui") -Destination $target -Force }
+        $key=FileKey $entry; $target=UiPath $entry.Module $entry.Path
+        if ($current[$key]) { Copy-Item -LiteralPath (Join-Path $stage $key) -Destination $target -Force }
         elseif (Test-Path -LiteralPath $target) { Remove-Item -LiteralPath $target }
     }
     throw
 } finally {
     if (Test-Path -LiteralPath $temp) { Remove-Item -LiteralPath $temp }
     foreach ($entry in $applyUi) {
-        $file=Join-Path $stage "$($entry.Module).ui"
+        $file=Join-Path $stage (FileKey $entry)
         if (Test-Path -LiteralPath $file) { Remove-Item -LiteralPath $file }
     }
     Remove-Item -LiteralPath $stage
@@ -206,7 +233,7 @@ if ($Restore) {
         foreach ($node in @($tracked.SelectNodes('setting') | Where-Object { $_.path -eq $change[0] -and $_.name -eq $change[1] })) { $tracked.RemoveChild($node) | Out-Null }
     }
     foreach ($entry in $applyUi) {
-        $file=Join-Path $uiBackup "$($entry.Module).ui"
+        $file=Join-Path $uiBackup (FileKey $entry)
         if (Test-Path -LiteralPath $file) { Remove-Item -LiteralPath $file }
     }
     if ($remaining.Count -or $tracked.HasChildNodes) {
@@ -216,5 +243,5 @@ if ($Restore) {
         if (Test-Path -LiteralPath $uiState) { Remove-Item -LiteralPath $uiState }
     }
     Write-Host "已恢复模块：$($selected -join '、')。"
-} else { Write-Host "已安装 LibreOfficePlus v5：$($selected -join '、')。请重新打开所选模块。" }
+} else { Write-Host "已安装 LibreOfficePlus v6：$($selected -join '、')。请重新打开所选模块。" }
 & $OnProgress 100 '所有步骤已完成。'
