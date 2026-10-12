@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<menu:menupopup xmlns:menu="http://openoffice.org/2001/menu">
+  <menu:menuitem menu:id=".uno:Cut" />
+  <menu:menuitem menu:id=".uno:Copy" />
+  <menu:menuitem menu:id=".uno:Paste" />
+  <menu:menu menu:id=".uno:PasteSpecialMenu">
+    <menu:menupopup>
+      <menu:menuitem menu:id=".uno:PasteUnformatted" />
+      <menu:menuitem menu:id=".uno:PasteSpecial" />
+    </menu:menupopup>
+  </menu:menu>
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:FontDialog" menu:label="字体…" />
+  <menu:menuitem menu:id=".uno:ParagraphDialog" menu:label="段落…" />
+  <menu:menuitem menu:id=".uno:OutlineBullet" />
+  <menu:menuitem menu:id=".uno:SetDefault" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:TextAttributes" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:InsertHyperlink" />
+  <menu:menuitem menu:id=".uno:OpenHyperlinkOnCursor" />
+  <menu:menuitem menu:id=".uno:EditHyperlink" />
+  <menu:menuitem menu:id=".uno:CopyHyperlinkLocation" />
+  <menu:menuitem menu:id=".uno:RemoveHyperlink" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:ThesaurusFromContext" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:EditStyle" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:InsertAnnotation" />
+</menu:menupopup>

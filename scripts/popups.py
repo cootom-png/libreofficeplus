@@ -21,13 +21,14 @@ def clean(menu):
         menu.remove(menu[-1])
 
 
-def build_popups(root, package):
+def build_popups(root, package, source=None):
+    source_root = source or root / 'vendor/libreoffice'
     specs = json.loads((root / "config/popups.json").read_text("utf8"))
     labels = json.loads((root / "config/popup-labels.json").read_text("utf8"))
     files = []
     for key, spec in specs.items():
         module, name = key.split("/")
-        source = root / "vendor/libreoffice" / module / "popupmenu" / (name + ".xml")
+        source = source_root / module / "popupmenu" / (name + ".xml")
         tree = ET.parse(source)
         menu = tree.getroot()
         for command in spec["lift"]:

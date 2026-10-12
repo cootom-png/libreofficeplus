@@ -114,6 +114,15 @@ try {
     $result=Get-Content -LiteralPath (Join-Path $bundle 'ui-result.json') -Raw -Encoding UTF8 | ConvertFrom-Json
     if ($result.Modules -ne 'Impress' -or !(Test-Path -LiteralPath (Join-Path $profile 'config\soffice.cfg\modules\simpress\ui\notebookbar.ui')) -or (Test-Path -LiteralPath (Join-Path $profile 'config\soffice.cfg\modules\swriter\ui\notebookbar.ui'))) { throw '演示图形模块选择未隔离' }
     Run-UI '仅演示恢复' '-Restore -Modules Impress' ''
+    [IO.File]::WriteAllText("$fakeApp\program\version.ini",'buildid=bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1')
+    Run-UI '新版安装检查' '' ''
+    $result=Get-Content -LiteralPath (Join-Path $bundle 'ui-result.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+    if (($result.Checks | Where-Object { $_.Title -eq '版本兼容' }).Message -notmatch '26.8.1.1') { throw '图形窗口未显示新版兼容结果' }
+    $source=Join-Path $bundle 'variants\26.8.1\ui\swriter\notebookbar.ui'
+    $target=Join-Path $profile 'config\soffice.cfg\modules\swriter\ui\notebookbar.ui'
+    if ((Get-FileHash -LiteralPath $source).Hash -ne (Get-FileHash -LiteralPath $target).Hash) { throw '图形安装未选择新版文件' }
+    Run-UI '新版恢复检查' '-Restore' ''
+    [IO.File]::WriteAllText("$fakeApp\program\version.ini",'buildid=cd7284b4cbbfeb507e630c1aac019f4157393acb')
     $before=(Get-FileHash -LiteralPath $config).Hash
     [IO.File]::WriteAllText((Join-Path $bundle 'empty-selection'),'')
     $process=Start-Process -FilePath "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -ArgumentList ('-NoProfile -STA -ExecutionPolicy Bypass -File "' + $controller + '"') -WindowStyle Hidden -PassThru

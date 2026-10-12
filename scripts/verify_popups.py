@@ -11,7 +11,7 @@ MODULES = {'swriter': 'text.TextDocument', 'scalc': 'sheet.SpreadsheetDocument',
 NS = '{http://openoffice.org/2001/menu}'
 
 
-def verify(context):
+def verify(context, package=ROOT / 'package'):
     manager = context.ServiceManager
     supplier = manager.createInstanceWithContext('com.sun.star.ui.ModuleUIConfigurationManagerSupplier', context)
     records = []
@@ -28,11 +28,11 @@ def verify(context):
         return [[child.get(NS + 'id', ''), child.get(NS + 'label', ''), expected(child.find(NS + 'menupopup'))
                  if child.find(NS + 'menupopup') is not None else []] for child in element]
 
-    for file in json.loads((ROOT / 'package/profile-files.json').read_text('utf8')):
+    for file in json.loads((package / 'profile-files.json').read_text('utf8')):
         module, name = file['Module'], Path(file['Path']).stem
         config = supplier.getUIConfigurationManager('com.sun.star.' + MODULES[module])
         actual = native(config.getSettings('private:resource/popupmenu/' + name, False))
-        wanted = expected(ET.parse(ROOT / 'package/profile' / file['Path']).getroot())
+        wanted = expected(ET.parse(package / 'profile' / file['Path']).getroot())
         if actual != wanted:
             raise AssertionError(f'{module}/{name} 有效菜单与配置不一致')
         records.append({'模块': module, '菜单': name, '通过': True, '有效结构': actual})
@@ -51,10 +51,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--pipe', required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--package', type=Path, default=ROOT / 'package')
     args = parser.parse_args()
     local = uno.getComponentContext()
     resolver = local.ServiceManager.createInstanceWithContext('com.sun.star.bridge.UnoUrlResolver', local)
     context = resolver.resolve('uno:pipe,name=' + args.pipe + ';urp;StarOffice.ComponentContext')
-    records = verify(context)
+    records = verify(context, args.package)
     args.output.write_text(json.dumps(records, ensure_ascii=False, indent=2) + '\n', 'utf8')
     print(f'{len(records)} 项有效菜单及外观设置通过。')

@@ -199,6 +199,64 @@ try {
     Check-Restore
     Write-Host '通过：v5 旧文件清单升级及原菜单恢复。'
 
+    # 同一份备份经历升级、拒绝混用、降级后仍可恢复；旧清单也需受版本保护。
+    $statePath=Join-Path $fixture 'LibreOffice\wps-ui-files-backup\state.json'
+    & $installer -LibreOfficePath $fakeInstall
+    $firstBackup=(Get-FileHash -LiteralPath $backup).Hash
+    $firstUi=(Get-FileHash -LiteralPath (Join-Path (Split-Path $statePath) 'swriter.ui')).Hash
+    $legacyState=Get-Content -LiteralPath $statePath -Raw -Encoding UTF8 | ConvertFrom-Json
+    ConvertTo-Json -InputObject @($legacyState | Select-Object Module,Path,Existed) | Set-Content -LiteralPath $statePath -Encoding UTF8
+    [IO.File]::WriteAllText("$fakeInstall\program\version.ini",'buildid=bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1')
+    $before=(Get-FileHash -LiteralPath $config).Hash
+    $stateBefore=(Get-FileHash -LiteralPath $statePath).Hash
+    $uiBefore=(Get-FileHash -LiteralPath $writerUi).Hash
+    $refused=$false
+    try { & $installer -Modules Writer -LibreOfficePath $fakeInstall } catch {
+        $refused=$true
+        if ($_.Exception.Message -notmatch '软件版本发生变化') { throw }
+    }
+    if (!$refused -or (Get-FileHash -LiteralPath $config).Hash -ne $before -or (Get-FileHash -LiteralPath $statePath).Hash -ne $stateBefore -or (Get-FileHash -LiteralPath $writerUi).Hash -ne $uiBefore) { throw '混合版本未在写入前停止' }
+    function Move-Item {
+        param([string]$LiteralPath,[string]$Destination,[switch]$Force)
+        if ($Destination -eq $statePath) { throw '模拟版本记录提交失败' }
+        Microsoft.PowerShell.Management\Move-Item @PSBoundParameters
+    }
+    $failed=$false
+    try { & $installer -LibreOfficePath $fakeInstall } catch { $failed=$true }
+    finally { Remove-Item Function:\Move-Item }
+    if (!$failed -or (Get-FileHash -LiteralPath $config).Hash -ne $before -or (Get-FileHash -LiteralPath $writerUi).Hash -ne $uiBefore -or (Get-FileHash -LiteralPath $statePath).Hash -ne $stateBefore) { throw '版本记录失败后未撤回设置、界面和构建记录' }
+    foreach ($buildId in 'bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1','cd7284b4cbbfeb507e630c1aac019f4157393acb') {
+        [IO.File]::WriteAllText("$fakeInstall\program\version.ini","buildid=$buildId")
+        $checks.Clear()
+        & $installer -LibreOfficePath $fakeInstall -OnCheck { param($Result) $checks.Add($Result) }
+        $variant=if ($buildId -like 'bf6*') { 'package\variants\26.8.1' } else { 'package' }
+        $files=Get-Content -LiteralPath $statePath -Raw -Encoding UTF8 | ConvertFrom-Json
+        foreach ($file in $files) {
+            $source=if ($file.Path -eq 'ui/notebookbar.ui') { Join-Path $repo "$variant\ui\$($file.Module)\notebookbar.ui" }
+                else { Join-Path $repo "$variant\profile\config\soffice.cfg\modules\$($file.Module)\$($file.Path)" }
+            $target=Join-Path $profile "config\soffice.cfg\modules\$($file.Module)\$($file.Path)"
+            if ($file.BuildId -cne $buildId -or (Get-FileHash -LiteralPath $source).Hash -ne (Get-FileHash -LiteralPath $target).Hash) { throw '版本专属文件或构建记录不匹配' }
+        }
+        if ((Get-FileHash -LiteralPath $backup).Hash -ne $firstBackup -or (Get-FileHash -LiteralPath (Join-Path (Split-Path $statePath) 'swriter.ui')).Hash -ne $firstUi) { throw '切换版本覆盖首次备份' }
+        if ($buildId -like 'bf6*' -and ($checks | Where-Object { $_.Title -eq '版本兼容' }).Message -notmatch '26.8.1.1') { throw '未显示新版兼容状态' }
+    }
+    & $installer -Restore
+    Check-Restore
+    [IO.File]::WriteAllText("$fakeInstall\program\version.ini",'buildid=bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1')
+    & $installer -Modules Impress -LibreOfficePath $fakeInstall
+    & $installer -Restore -Modules Impress
+    Check-Restore
+    # 新版专属文件缺失时，不得回退到旧版或创建备份。
+    $before=(Get-FileHash -LiteralPath $config).Hash
+    $source=Join-Path $repo 'package\variants\26.8.1\ui\swriter\notebookbar.ui'
+    [IO.File]::Move($source,"$source.test-saved")
+    $refused=$false
+    try { & $installer -Modules Writer -LibreOfficePath $fakeInstall } catch { $refused=$true }
+    finally { [IO.File]::Move("$source.test-saved",$source) }
+    if (!$refused -or (Test-Path -LiteralPath $backup) -or (Get-FileHash -LiteralPath $config).Hash -ne $before) { throw '新版文件缺失时没有安全停止' }
+    [IO.File]::WriteAllText("$fakeInstall\program\version.ini",'buildid=cd7284b4cbbfeb507e630c1aac019f4157393acb')
+    Write-Host '通过：新版专属文件、升级与降级、旧清单防混用、新版单模块与首次恢复。'
+
     $before = (Get-FileHash -LiteralPath $config).Hash
     function Copy-Item {
         param([string]$LiteralPath,[string]$Destination,[switch]$Force)
