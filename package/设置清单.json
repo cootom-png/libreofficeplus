@@ -604,21 +604,198 @@
     "Name": "Command",
     "Value": ".uno:FontDialog",
     "Localized": true,
-    "Language": "en-US"
+    "Language": "en-US",
+    "Shortcut": "Ctrl+D",
+    "Label": "字体"
   },
   {
     "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/F12",
     "Name": "Command",
     "Value": ".uno:SaveAs",
     "Localized": true,
-    "Language": "en-US"
+    "Language": "en-US",
+    "Shortcut": "F12",
+    "Label": "另存为"
   },
   {
     "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/F4",
     "Name": "Command",
     "Value": ".uno:Repeat",
     "Localized": true,
-    "Language": "en-US"
+    "Language": "en-US",
+    "Shortcut": "F4",
+    "Label": "重复"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/G_SHIFT_MOD1",
+    "Name": "Command",
+    "Value": ".uno:WordCountDialog",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+Shift+G",
+    "Label": "字数统计"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/EQUAL_MOD1",
+    "Name": "Command",
+    "Value": ".uno:SubScript",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+=",
+    "Label": "下标"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/EQUAL_SHIFT_MOD1",
+    "Name": "Command",
+    "Value": ".uno:SuperScript",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+Shift+=",
+    "Label": "上标"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/1_MOD1",
+    "Name": "Command",
+    "Value": ".uno:SpacePara1",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+1",
+    "Label": "单倍行距"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/2_MOD1",
+    "Name": "Command",
+    "Value": ".uno:SpacePara2",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+2",
+    "Label": "双倍行距"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/E_SHIFT_MOD1",
+    "Name": "Command",
+    "Value": ".uno:TrackChanges",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+Shift+E",
+    "Label": "修订开关"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/V_MOD1_MOD2",
+    "Name": "Command",
+    "Value": ".uno:PasteSpecial",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+Alt+V",
+    "Label": "选择性粘贴"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.sheet.SpreadsheetDocument/F12",
+    "Name": "Command",
+    "Value": ".uno:SaveAs",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "F12",
+    "Label": "另存为"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.sheet.SpreadsheetDocument/R_MOD1",
+    "Name": "Command",
+    "Value": ".uno:FillRight",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+R",
+    "Label": "向右填充"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.sheet.SpreadsheetDocument/G_MOD1",
+    "Name": "Command",
+    "Value": ".uno:FocusCellAddress",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+G",
+    "Label": "定位到名称框"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.sheet.SpreadsheetDocument/F5",
+    "Name": "Command",
+    "Value": ".uno:FocusCellAddress",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "F5",
+    "Label": "定位到名称框"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.sheet.SpreadsheetDocument/F11",
+    "Name": "Command",
+    "Value": ".uno:InsertObjectChart",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "F11",
+    "Label": "插入图表向导"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.sheet.SpreadsheetDocument/V_MOD1_MOD2",
+    "Name": "Command",
+    "Value": ".uno:PasteSpecial",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+Alt+V",
+    "Label": "选择性粘贴"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.sheet.SpreadsheetDocument/EQUAL_MOD2",
+    "Name": "Command",
+    "Value": ".uno:AutoSum",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Alt+=",
+    "Label": "自动求和"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.sheet.SpreadsheetDocument/EQUAL_SHIFT_MOD1",
+    "Name": "Command",
+    "Value": ".uno:InsertCell",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+Shift+=",
+    "Label": "插入单元格"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.drawing.DrawingDocument/G_MOD1",
+    "Name": "Command",
+    "Value": ".uno:FormatGroup",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+G",
+    "Label": "组合"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.drawing.DrawingDocument/G_SHIFT_MOD1",
+    "Name": "Command",
+    "Value": ".uno:FormatUngroup",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+Shift+G",
+    "Label": "取消组合"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.drawing.DrawingDocument/F12",
+    "Name": "Command",
+    "Value": ".uno:SaveAs",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "F12",
+    "Label": "另存为"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.drawing.DrawingDocument/V_MOD1_MOD2",
+    "Name": "Command",
+    "Value": ".uno:PasteSpecial",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+Alt+V",
+    "Label": "选择性粘贴"
   },
   {
     "Path": "/org.openoffice.Office.Common/View/Menu",

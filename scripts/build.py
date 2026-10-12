@@ -338,6 +338,13 @@ def main():
     for name in ['labels', 'shortcuts', 'appearance']:
         settings.extend(json.loads((ROOT / f'config/{name}.json').read_text(encoding='utf-8')))
     (PACKAGE / "设置清单.json").write_text(json.dumps(settings, ensure_ascii=False, indent=2) + '\n', encoding="utf-8")
+    modules = {'com.sun.star.text.TextDocument': 'Writer 文字', 'com.sun.star.sheet.SpreadsheetDocument': 'Calc 表格',
+               'com.sun.star.drawing.DrawingDocument': 'Draw 绘图'}
+    with (PACKAGE / '快捷键对照表.csv').open('w', encoding='utf-8-sig', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['模块', '快捷键', '动作', 'LibreOffice命令'])
+        for entry in json.loads((ROOT / 'config/shortcuts.json').read_text('utf8')):
+            writer.writerow([modules[entry['Path'].split('/')[-2]], entry['Shortcut'], entry['Label'], entry['Value']])
     for source, dest in [("README.md", "使用说明.txt"), ("LICENSE", "LICENSE.txt"),
                          ("NOTICE", "来源说明.txt"), ("docs/验收记录.md", "验证记录.txt"),
                          ("docs/操作习惯.md", "操作习惯.txt"), ("docs/按钮差异.md", "按钮差异.txt"),

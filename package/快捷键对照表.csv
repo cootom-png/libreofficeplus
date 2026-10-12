@@ -1,0 +1,23 @@
+﻿模块,快捷键,动作,LibreOffice命令
+Writer 文字,Ctrl+D,字体,.uno:FontDialog
+Writer 文字,F12,另存为,.uno:SaveAs
+Writer 文字,F4,重复,.uno:Repeat
+Writer 文字,Ctrl+Shift+G,字数统计,.uno:WordCountDialog
+Writer 文字,Ctrl+=,下标,.uno:SubScript
+Writer 文字,Ctrl+Shift+=,上标,.uno:SuperScript
+Writer 文字,Ctrl+1,单倍行距,.uno:SpacePara1
+Writer 文字,Ctrl+2,双倍行距,.uno:SpacePara2
+Writer 文字,Ctrl+Shift+E,修订开关,.uno:TrackChanges
+Writer 文字,Ctrl+Alt+V,选择性粘贴,.uno:PasteSpecial
+Calc 表格,F12,另存为,.uno:SaveAs
+Calc 表格,Ctrl+R,向右填充,.uno:FillRight
+Calc 表格,Ctrl+G,定位到名称框,.uno:FocusCellAddress
+Calc 表格,F5,定位到名称框,.uno:FocusCellAddress
+Calc 表格,F11,插入图表向导,.uno:InsertObjectChart
+Calc 表格,Ctrl+Alt+V,选择性粘贴,.uno:PasteSpecial
+Calc 表格,Alt+=,自动求和,.uno:AutoSum
+Calc 表格,Ctrl+Shift+=,插入单元格,.uno:InsertCell
+Draw 绘图,Ctrl+G,组合,.uno:FormatGroup
+Draw 绘图,Ctrl+Shift+G,取消组合,.uno:FormatUngroup
+Draw 绘图,F12,另存为,.uno:SaveAs
+Draw 绘图,Ctrl+Alt+V,选择性粘贴,.uno:PasteSpecial

@@ -2,7 +2,7 @@
 
 为习惯 WPS 的用户提供 **LibreOffice Writer（文字）、Calc（表格）、Draw（绘图）**的中文功能区、常用操作和可恢复的一键配置包。
 
-当前版本 **v6.1，安装检查增强版**。以用户提供的 WPS 文字、表格截图为参考，重点调整按钮顺序、分组、常用菜单和键位；Draw 沿用相同的字体、形状、排列与属性栏习惯。它仍使用 LibreOffice 原生界面和文档引擎，**不是 WPS 的逐像素复刻**。
+当前版本 **v6.2，快捷键适配版**。以用户提供的 WPS 文字、表格截图为参考，重点调整按钮顺序、分组、常用菜单和键位；Draw 沿用相同的字体、形状、排列与属性栏习惯。它仍使用 LibreOffice 原生界面和文档引擎，**不是 WPS 的逐像素复刻**。
 
 2026-10-12 安装入口更新：修复 `'d'`、`'rshell.exe' 命令截断，并新增图形进度窗口。请重新下载并解压完整配置包，双击新的 `安装.vbs`；原来的首次备份会继续保留。
 
@@ -44,6 +44,12 @@ powershell.exe -NoProfile -STA -ExecutionPolicy Bypass -WindowStyle Hidden -File
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\configure.ps1 -Modules Writer,Calc,Draw -LibreOfficePath "D:\Apps\LibreOffice"
 ```
+
+## v6.2 快捷键适配
+
+配置 22 个键位，并验证 25 个保留的原生键位。Writer 增加字数统计、上下标、单倍/双倍行距和修订；Calc 增加向右填充、名称框定位、插入单元格、自动求和和图表向导；Draw 使用 Ctrl+G 组合、Ctrl+Shift+G 取消组合。三个模块统一 F12 另存为、Ctrl+Alt+V 选择性粘贴。
+
+新增键位也使用 LibreOffice 能读取的 Key 集合格式，支持旧备份升级、重复安装和按模块恢复。包内附“快捷键对照表.csv”，具体替换的动作与边界见 [操作习惯](docs/操作习惯.md)。**Calc 的 Alt+Enter 换行、Ctrl+Enter 批量输入，Writer 的 Ctrl+Shift+C/V 格式复制，以及 WPS 多文档标签切换尚未完整对齐。** Calc 的 F4 保留公式引用切换，图表与定位继续使用原生向导和名称框。
 
 ## v6 弹出菜单与弹窗入口
 

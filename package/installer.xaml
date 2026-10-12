@@ -37,7 +37,7 @@
           <TextBlock x:Name="Heading" Text="让办公，回到熟悉的节奏" Foreground="White" FontSize="25" FontWeight="SemiBold" Margin="0,15,0,8"/>
           <TextBlock x:Name="Subtitle" Text="WPS 习惯适配 · 为文字、表格与绘图配置熟悉的界面" Foreground="#D7E5FF" FontSize="12"/>
         </StackPanel>
-        <Border HorizontalAlignment="Right" VerticalAlignment="Top" Background="#30FFFFFF" CornerRadius="11" Padding="10,4"><TextBlock Text="v6.1" Foreground="White" FontSize="11"/></Border>
+        <Border HorizontalAlignment="Right" VerticalAlignment="Top" Background="#30FFFFFF" CornerRadius="11" Padding="10,4"><TextBlock Text="v6.2" Foreground="White" FontSize="11"/></Border>
       </Grid>
     </Border>
     <Border Grid.Row="1" Margin="24,-12,24,0" Padding="24,22" Background="White" CornerRadius="14" BorderBrush="#E3EAF4" BorderThickness="1">
