@@ -4,3 +4,4 @@
 *.ps1 -text whitespace=cr-at-eol
 *.zip -text
 *.ui -text whitespace=cr-at-eol
+vendor/libreoffice/**/popupmenu/*.xml -text whitespace=cr-at-eol

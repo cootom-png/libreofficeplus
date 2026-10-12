@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<menu:menupopup xmlns:menu="http://openoffice.org/2001/menu">
+  <menu:menuitem menu:id=".uno:Cut" />
+  <menu:menuitem menu:id=".uno:Copy" />
+  <menu:menuitem menu:id=".uno:Paste" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:Crop" />
+  <menu:menuitem menu:id=".uno:ChangePicture" />
+  <menu:menuitem menu:id=".uno:CompressGraphic" />
+  <menu:menuitem menu:id=".uno:SaveGraphic" />
+  <menu:menuitem menu:id=".uno:ExternalEdit" menu:style="text" />
+  <menu:menuitem menu:id=".uno:OriginalSize" />
+  <menu:menu menu:id=".uno:ProtectGraphicMenu">
+    <menu:menupopup>
+      <menu:menuitem menu:id=".uno:ProtectPos" />
+      <menu:menuitem menu:id=".uno:ProtectSize" />
+    </menu:menupopup>
+  </menu:menu>
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:TransformDialog" menu:label="大小和位置…" />
+  <menu:menuitem menu:id=".uno:FormatLine" menu:label="形状轮廓…" />
+  <menu:menuseparator />
+  <menu:menu menu:id=".uno:ArrangeMenu">
+    <menu:menupopup>
+      <menu:menuitem menu:id=".uno:BringToFront" />
+      <menu:menuitem menu:id=".uno:Forward" />
+      <menu:menuitem menu:id=".uno:Backward" />
+      <menu:menuitem menu:id=".uno:SendToBack" />
+      <menu:menuseparator />
+      <menu:menuitem menu:id=".uno:BeforeObject" />
+      <menu:menuitem menu:id=".uno:BehindObject" />
+      <menu:menuseparator />
+      <menu:menuitem menu:id=".uno:ReverseOrder" />
+    </menu:menupopup>
+  </menu:menu>
+  <menu:menu menu:id=".uno:ObjectAlign" />
+  <menu:menuitem menu:id=".uno:FormatGroup" />
+  <menu:menuitem menu:id=".uno:FormatUngroup" />
+  <menu:menuitem menu:id=".uno:EnterGroup" />
+  <menu:menuitem menu:id=".uno:LeaveGroup" />
+  <menu:menu menu:id=".uno:RotateFlipMenu">
+    <menu:menupopup>
+      <menu:menuitem menu:id=".uno:ToggleObjectRotateMode" />
+      <menu:menuseparator />
+      <menu:menuitem menu:id=".uno:MirrorVert" />
+      <menu:menuitem menu:id=".uno:MirrorHorz" />
+    </menu:menupopup>
+  </menu:menu>
+  <menu:menuseparator />
+  <menu:menu menu:id=".uno:ConvertMenu">
+    <menu:menupopup>
+      <menu:menuitem menu:id=".uno:ChangeBezier" />
+      <menu:menuitem menu:id=".uno:ChangePolygon" />
+      <menu:menuitem menu:id=".uno:convert_to_contour" />
+      <menu:menuitem menu:id=".uno:ConvertInto3D" />
+      <menu:menuitem menu:id=".uno:ConvertInto3DLatheFast" />
+      <menu:menuitem menu:id=".uno:ConvertIntoBitmap" />
+      <menu:menuitem menu:id=".uno:ConvertIntoMetaFile" />
+    </menu:menupopup>
+  </menu:menu>
+  <menu:menuitem menu:id=".uno:Break" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:EditQrCode" />
+  <menu:menuitem menu:id=".uno:NameGroup" />
+  <menu:menuitem menu:id=".uno:ObjectTitleDescription" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:EditStyle" />
+</menu:menupopup>

@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<menu:menupopup xmlns:menu="http://openoffice.org/2001/menu">
+  <menu:menuitem menu:id=".uno:Cut" />
+  <menu:menuitem menu:id=".uno:Copy" />
+  <menu:menuitem menu:id=".uno:Paste" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:FormatArea" menu:label="形状填充…" />
+  <menu:menuitem menu:id=".uno:FormatLine" menu:label="形状轮廓…" />
+  <menu:menuitem menu:id=".uno:TransformDialog" menu:label="大小和位置…" />
+  <menu:menuitem menu:id=".uno:TextAttributes" />
+  <menu:menuseparator />
+  <menu:menu menu:id=".uno:ArrangeMenu">
+    <menu:menupopup>
+      <menu:menuitem menu:id=".uno:BringToFront" />
+      <menu:menuitem menu:id=".uno:ObjectForwardOne" />
+      <menu:menuitem menu:id=".uno:ObjectBackOne" />
+      <menu:menuitem menu:id=".uno:SendToBack" />
+      <menu:menuseparator />
+      <menu:menuitem menu:id=".uno:SetObjectToForeground" />
+      <menu:menuitem menu:id=".uno:SetObjectToBackground" />
+    </menu:menupopup>
+  </menu:menu>
+  <menu:menu menu:id=".uno:ObjectAlign">
+    <menu:menupopup>
+      <menu:menuitem menu:id=".uno:ObjectAlignLeft" />
+      <menu:menuitem menu:id=".uno:AlignCenter" />
+      <menu:menuitem menu:id=".uno:ObjectAlignRight" />
+      <menu:menuseparator />
+      <menu:menuitem menu:id=".uno:AlignUp" />
+      <menu:menuitem menu:id=".uno:AlignMiddle" />
+      <menu:menuitem menu:id=".uno:AlignDown" />
+    </menu:menupopup>
+  </menu:menu>
+  <menu:menuitem menu:id=".uno:FormatGroup" />
+  <menu:menuitem menu:id=".uno:FormatUngroup" />
+  <menu:menuitem menu:id=".uno:EnterGroup" />
+  <menu:menuitem menu:id=".uno:LeaveGroup" />
+  <menu:menu menu:id=".uno:FlipMenu">
+    <menu:menupopup>
+      <menu:menuitem menu:id=".uno:ObjectMirrorVertical" />
+      <menu:menuitem menu:id=".uno:ObjectMirrorHorizontal" />
+    </menu:menupopup>
+  </menu:menu>
+  <menu:menuitem menu:id=".uno:ToggleObjectRotateMode" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:AnchorMenu" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:InsertHyperlink" />
+  <menu:menuitem menu:id=".uno:OpenHyperlinkOnCursor" />
+  <menu:menuitem menu:id=".uno:EditHyperlink" />
+  <menu:menuitem menu:id=".uno:CopyHyperlinkLocation" />
+  <menu:menuitem menu:id=".uno:RemoveHyperlink" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:ToggleObjectBezierMode" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:FitCellSize" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:RenameObject" />
+  <menu:menuitem menu:id=".uno:ObjectTitleDescription" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:AssignMacro" />
+</menu:menupopup>

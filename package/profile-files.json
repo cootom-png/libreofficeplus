@@ -1,0 +1,66 @@
+[
+  {
+    "Module": "swriter",
+    "Path": "config/soffice.cfg/modules/swriter/popupmenu/text.xml"
+  },
+  {
+    "Module": "swriter",
+    "Path": "config/soffice.cfg/modules/swriter/popupmenu/table.xml"
+  },
+  {
+    "Module": "swriter",
+    "Path": "config/soffice.cfg/modules/swriter/popupmenu/graphic.xml"
+  },
+  {
+    "Module": "scalc",
+    "Path": "config/soffice.cfg/modules/scalc/popupmenu/cell.xml"
+  },
+  {
+    "Module": "scalc",
+    "Path": "config/soffice.cfg/modules/scalc/popupmenu/rowheader.xml"
+  },
+  {
+    "Module": "scalc",
+    "Path": "config/soffice.cfg/modules/scalc/popupmenu/colheader.xml"
+  },
+  {
+    "Module": "scalc",
+    "Path": "config/soffice.cfg/modules/scalc/popupmenu/sheettab.xml"
+  },
+  {
+    "Module": "scalc",
+    "Path": "config/soffice.cfg/modules/scalc/popupmenu/draw.xml"
+  },
+  {
+    "Module": "scalc",
+    "Path": "config/soffice.cfg/modules/scalc/popupmenu/graphic.xml"
+  },
+  {
+    "Module": "sdraw",
+    "Path": "config/soffice.cfg/modules/sdraw/popupmenu/draw.xml"
+  },
+  {
+    "Module": "sdraw",
+    "Path": "config/soffice.cfg/modules/sdraw/popupmenu/group.xml"
+  },
+  {
+    "Module": "sdraw",
+    "Path": "config/soffice.cfg/modules/sdraw/popupmenu/multiselect.xml"
+  },
+  {
+    "Module": "sdraw",
+    "Path": "config/soffice.cfg/modules/sdraw/popupmenu/drawtext.xml"
+  },
+  {
+    "Module": "sdraw",
+    "Path": "config/soffice.cfg/modules/sdraw/popupmenu/graphic.xml"
+  },
+  {
+    "Module": "sdraw",
+    "Path": "config/soffice.cfg/modules/sdraw/popupmenu/page.xml"
+  },
+  {
+    "Module": "sdraw",
+    "Path": "config/soffice.cfg/modules/sdraw/popupmenu/pagepane.xml"
+  }
+]

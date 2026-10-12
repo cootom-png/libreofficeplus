@@ -1,0 +1,16 @@
+{
+  "FontDialog": "字体…",
+  "ParagraphDialog": "段落…",
+  "CharacterMenu": "字符样式",
+  "ParagraphMenu": "段落样式",
+  "NumberingMenu": "项目符号和编号",
+  "PageDialog": "页面设置…",
+  "TableDialog": "表格属性…",
+  "GraphicDialog": "图片属性…",
+  "FormatCellDialog": "设置单元格格式…",
+  "RowHeight": "行高…",
+  "ColumnWidth": "列宽…",
+  "FormatArea": "形状填充…",
+  "FormatLine": "形状轮廓…",
+  "TransformDialog": "大小和位置…"
+}

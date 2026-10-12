@@ -7,6 +7,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 from templates import build_templates
+from popups import build_popups
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE = ROOT / "package"
@@ -97,9 +98,10 @@ class Builder:
         menu = self.make("GtkMenu")
         self.root.insert(0, menu)
         for entry in item["menu"]:
-            command = self.make("GtkMenuItem")
-            prop(command, "label", entry["label"])
-            prop(command, "action-name", entry["command"])
+            command = self.make("GtkSeparatorMenuItem" if entry.get("separator") else "GtkMenuItem")
+            if not entry.get("separator"):
+                prop(command, "label", entry["label"])
+                prop(command, "action-name", entry["command"])
             ET.SubElement(menu, "child").append(command)
         button = self.make("svtlo-ManagedMenuButton")
         button.set("id", button.get("id") + ":" + menu.get("id"))
@@ -209,6 +211,8 @@ class Builder:
         for row, items in enumerate(spec['quick_rows'], 1):
             for item in items:
                 for entry in item.get('menu', []):
+                    if entry.get('separator'):
+                        continue
                     self.records.append([self.module, '开始', entry['command'], entry['label'],
                                          '常用操作/' + item['label'], row, '菜单入口；行号指上级按钮所在行'])
 
@@ -317,6 +321,8 @@ def main():
                  '  WScript.Quit 1', 'End If']
         (PACKAGE / name).write_bytes(("\r\n".join(lines) + "\r\n").encode("ascii"))
     build_templates(PACKAGE)
+    profile_files = build_popups(ROOT, PACKAGE)
+    (PACKAGE / "profile-files.json").write_text(json.dumps(profile_files, indent=2) + '\n', encoding="utf-8")
     records = []
     for module in LAYOUT["modules"]:
         builder = Builder(module)
@@ -329,13 +335,14 @@ def main():
         writer.writerow(["模块", "选项卡", "LibreOffice命令", "配置文字或控件ID", "逻辑分组", "组内顺序或菜单所在行", "状态"])
         writer.writerows(records)
     settings = []
-    for name in ['labels', 'shortcuts']:
+    for name in ['labels', 'shortcuts', 'appearance']:
         settings.extend(json.loads((ROOT / f'config/{name}.json').read_text(encoding='utf-8')))
     (PACKAGE / "设置清单.json").write_text(json.dumps(settings, ensure_ascii=False, indent=2) + '\n', encoding="utf-8")
     for source, dest in [("README.md", "使用说明.txt"), ("LICENSE", "LICENSE.txt"),
                          ("NOTICE", "来源说明.txt"), ("docs/验收记录.md", "验证记录.txt"),
                          ("docs/操作习惯.md", "操作习惯.txt"), ("docs/按钮差异.md", "按钮差异.txt"),
-                         ("docs/适配计划.md", "适配计划.txt")]:
+                         ("docs/适配计划.md", "适配计划.txt"),
+                         ("docs/弹窗菜单设计.md", "弹窗菜单设计.txt")]:
         if (ROOT / source).exists():
             (PACKAGE / dest).write_bytes((ROOT / source).read_bytes())
     out = ROOT / "dist"

@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<menu:menupopup xmlns:menu="http://openoffice.org/2001/menu">
+  <menu:menuitem menu:id=".uno:Cut" />
+  <menu:menuitem menu:id=".uno:Copy" />
+  <menu:menuitem menu:id=".uno:Paste" />
+  <menu:menuseparator />
+  <menu:menuitem menu:id=".uno:InsertPage" />
+  <menu:menuitem menu:id=".uno:DuplicatePage" />
+  <menu:menuitem menu:id=".uno:DeletePage" />
+  <menu:menuitem menu:id=".uno:RenamePage" />
+</menu:menupopup>
