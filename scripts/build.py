@@ -296,6 +296,13 @@ class Builder:
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
+    # cmd.exe 的启动入口固定使用 ASCII + CRLF，避免换行/代码页截断命令。
+    for name, options in [("安装.cmd", ""), ("恢复原界面.cmd", "-Restore ")]:
+        lines = ["@echo off", "setlocal", 'pushd "%~dp0" || exit /b 1',
+                 '"%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" '
+                 '-NoProfile -ExecutionPolicy Bypass -File ".\\configure.ps1" ' + options + '%*',
+                 'set "result=%errorlevel%"', "popd", "pause", "exit /b %result%"]
+        (PACKAGE / name).write_bytes(("\r\n".join(lines) + "\r\n").encode("ascii"))
     build_templates(PACKAGE)
     records = []
     for module in LAYOUT["modules"]:

@@ -4,6 +4,8 @@
 
 当前版本 **v5，WPS 习惯适配版**。以用户提供的 WPS 文字、表格截图为参考，重点调整按钮顺序、分组、常用菜单和键位；Draw 沿用相同的字体、形状、排列与属性栏习惯。它仍使用 LibreOffice 原生界面和文档引擎，**不是 WPS 的逐像素复刻**。
 
+2026-10-12 安装入口修复：解决双击后出现 `'d'`、`'rshell.exe' 不是内部或外部命令` 的问题。遇到此错误，请重新下载并解压完整配置包，再运行新的 `安装.cmd`；原来的首次备份会继续保留。
+
 ## 下载与安装
 
 **[下载 main 已合入版本](https://github.com/cootom-png/libreofficeplus/raw/refs/heads/main/dist/LibreOfficePlus-WPS%E7%95%8C%E9%9D%A2%E9%85%8D%E7%BD%AE%E5%8C%85.zip)**。PR 未合入时，此链接仍提供上一版本；查看本 PR 的 `dist/` 文件可获取待合入配置包。
@@ -26,7 +28,7 @@
 默认程序路径是 `C:\Program Files\LibreOffice`。自定义安装路径示例：
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\设置界面.ps1 -Modules Writer,Calc,Draw -LibreOfficePath "D:\Apps\LibreOffice"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\configure.ps1 -Modules Writer,Calc,Draw -LibreOfficePath "D:\Apps\LibreOffice"
 ```
 
 ## v5 改进

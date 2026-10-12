@@ -1,8 +1,10 @@
 """检查配置包中的 UI 结构、引用完整性和可重复构建。"""
 import hashlib
 import json
+import os
 import subprocess
 import sys
+import tempfile
 import unittest
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -12,6 +14,37 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class PackageTests(unittest.TestCase):
+    @unittest.skipUnless(os.name == 'nt', '实际入口检查需要 Windows cmd.exe')
+    def test_windows_launchers(self):
+        # 解压最终交付文件，探针不修改个人 LibreOffice 配置。
+        with tempfile.TemporaryDirectory(prefix='LOPlus 中文 路径 ') as temp:
+            with ZipFile(ROOT / 'dist/LibreOfficePlus-WPS界面配置包.zip') as archive:
+                archive.extractall(temp)
+            folder = Path(temp) / 'LibreOfficePlus'
+            probe = folder / 'probe.json'
+            (folder / 'configure.ps1').write_text(
+                'param([switch]$Restore,[string]$Modules,[string]$LibreOfficePath)\n'
+                '@{Restore=[bool]$Restore;Modules=$Modules;Path=$LibreOfficePath;'
+                'Directory=(Get-Location).Path} | ConvertTo-Json | '
+                'Set-Content -LiteralPath (Join-Path $PSScriptRoot "probe.json") -Encoding UTF8\n'
+                'exit 23\n', encoding='utf-8-sig')
+            for name, restore in [('安装.cmd', False), ('恢复原界面.cmd', True)]:
+                data = (folder / name).read_bytes()
+                data.decode('ascii')
+                self.assertNotIn(b'\n', data.replace(b'\r\n', b''))
+                for page in [936, 65001]:
+                    with self.subTest(entry=name, codepage=page):
+                        probe.unlink(missing_ok=True)
+                        # 在其他工作目录启动，验证入口自己切换到解压目录。
+                        command = f'chcp {page} >nul & call "{folder / name}" -Modules Writer,Calc -LibreOfficePath "C:\\Apps with spaces\\LibreOffice"'
+                        result = subprocess.run(f'cmd.exe /d /s /c "{command}"',
+                                                cwd=ROOT, input=b'\r\n', capture_output=True, timeout=30)
+                        self.assertEqual(result.returncode, 23, repr(result.stdout + result.stderr))
+                        self.assertTrue(probe.exists(), repr(result.stdout + result.stderr))
+                        actual = json.loads(probe.read_text('utf-8-sig'))
+                        self.assertEqual(actual, {'Restore': restore, 'Modules': 'Writer,Calc',
+                                                  'Path': r'C:\Apps with spaces\LibreOffice', 'Directory': str(folder)})
+
     def test_baseline_hashes(self):
         source = json.loads((ROOT / 'vendor/libreoffice/SOURCE.json').read_text(encoding='utf-8'))
         for item in source['files'].values():

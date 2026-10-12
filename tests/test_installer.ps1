@@ -5,7 +5,7 @@ $profile = Join-Path $fixture 'LibreOffice\4\user'
 $config = Join-Path $profile 'registrymodifications.xcu'
 $backup = Join-Path $fixture 'LibreOffice\wps-ui-backup.xml'
 $fakeInstall = Join-Path $fixture 'app'
-$installer = Join-Path $repo 'package\设置界面.ps1'
+$installer = Join-Path $repo 'package\configure.ps1'
 $ns = 'http://openoffice.org/2001/registry'
 New-Item -ItemType Directory -Path $profile,"$fakeInstall\program" -Force | Out-Null
 [IO.File]::WriteAllText("$fakeInstall\program\version.ini", 'buildid=cd7284b4cbbfeb507e630c1aac019f4157393acb')
