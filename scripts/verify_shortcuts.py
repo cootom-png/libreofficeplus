@@ -6,7 +6,8 @@ import uno
 ROOT = Path(__file__).resolve().parents[1]
 MODULES = {'com.sun.star.text.TextDocument': 'Writer',
            'com.sun.star.sheet.SpreadsheetDocument': 'Calc',
-           'com.sun.star.drawing.DrawingDocument': 'Draw'}
+           'com.sun.star.drawing.DrawingDocument': 'Draw',
+           'com.sun.star.presentation.PresentationDocument': 'Impress'}
 
 
 def key_event(key):
@@ -52,4 +53,6 @@ def verify(context):
                          ('SEMICOLON_MOD1', 'InsertCurrentDate'), ('SEMICOLON_SHIFT_MOD1', 'InsertCurrentTime')]:
         check('com.sun.star.sheet.SpreadsheetDocument', key, '.uno:' + command, '保留原生')
     check('com.sun.star.drawing.DrawingDocument', 'F4', '.uno:TransformDialog', '保留原生')
+    for key, command in [('F5', 'Presentation'), ('F5_SHIFT', 'PresentationCurrentSlide')]:
+        check('com.sun.star.presentation.PresentationDocument', key, '.uno:' + command, '保留原生')
     return results

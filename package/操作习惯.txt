@@ -36,3 +36,19 @@ Ctrl+C/X/V、Ctrl+S、Ctrl+Z/Y 不重复覆盖。表格的 Ctrl+D 向下填充�
 新建键位使用原生 Key 集合节点写入，兼容软件保存后的节点、单键属性及本地化值形式。独立实例读取 22 个已配置键位和 25 个保留键位；行距、上下标、修订另外按有效映射派发并读取结果。配置读取、命令派发与实际键盘输入分别记录，不互相冒充。
 
 参考：[WPS 文字快捷键](https://help.wps.com/articles/list-of-keyboard-shortcuts-for-writer/)、[WPS 表格快捷键](https://help.wps.com/articles/list-of-keyboard-shortcuts-for-spreadsheets)、[WPS 对象组合快捷键](https://www.wps.com/academy/must-have-shortcut-tricks-in-making-slides/1862879/)、[WPS 行距说明](https://www.wps.com/blog/how-to-double-space-in-wps-office-step-by-step/)、[LibreOffice 通用快捷键](https://help.libreoffice.org/latest/en-US/text/shared/04/01010000.html)。官方列表和不同 WPS 版本可能存在差异，本包明确列出实际处理和未完成项。
+
+
+## Impress 演示（v6.5）
+
+开始页将新建幻灯片与版式放在剪贴板后；设计、切换、动画和放映按工作顺序分开。母版设计打开原生选择窗口，幻灯片大小和背景共用原生设置窗口；不假装为 WPS 的独立直接开关。切换/动画打开 LibreOffice 自己的侧栏，效果列表和计时沿用原生能力。
+
+| 快捷键 | 操作 | 处理 |
+| --- | --- | --- |
+| Ctrl+M | 新建幻灯片 | 配置实际命令 InsertPage，避免把 InsertSlide 别名直接作为 UNO 派发目标 |
+| Ctrl+G / Ctrl+Shift+G | 组合 / 取消组合 | 选中对象时使用；编辑文字时先退出文字编辑 |
+| Shift+F9 | 网格线 | 显示开关 |
+| F12 | 另存为 | 与其他模块保持一致 |
+| Ctrl+Alt+V | 选择性粘贴 | 使用原生格式选择窗口 |
+| F5 / Shift+F5 | 从头 / 当前页放映 | 保留并读取验证原生键位；真实全屏放映待验收 |
+
+Ctrl+D 涉及对象与幻灯片选区，不作全局替换；没有把它统一绑定成“复制幻灯片”。8 类右键保留全部原生命令和动态子菜单，未强制消除原生上下文条件。复杂动画、媒体、字体和 PPTX 母版兼容性不由本配置包修复。

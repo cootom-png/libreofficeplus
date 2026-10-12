@@ -147,7 +147,7 @@ class Builder:
         sections = {c.find("object").get("id"): c for c in home.findall("child")}
         # 格式刷独立大按钮，剪切/复制保留原生命令，清除格式放在字号旁。
         brush = self.obj("Home-Section-Style")
-        reset = self.obj("Home-SetDefault" if self.module == "sdraw" else "Home-ResetAttributes")
+        reset = self.obj("Home-SetDefault" if self.module in {"sdraw", "simpress"} else "Home-ResetAttributes")
         fontbar = next(n for n in self.obj("Home-Section-Format").iter("object")
                        if any(action(o) == ".uno:Shrink" for o in n.findall("child/object")))
         self.move_button(reset.get("id"), fontbar)
@@ -188,6 +188,17 @@ class Builder:
                 self.move_button(ident, top)
             self.move_button("Home-LineSpacing1", bottom)
             removed.append("Paragraph1")
+        elif self.module == "simpress":
+            # 保留演示原生字体、段落与形状控制器；幻灯片操作紧跟剪贴板。
+            slides = self.make("VclOptionalBox")
+            slides.set("id", "Home-Section-Slides")
+            ET.SubElement(slides, "child").append(self.toolbar([
+                {"label": label, "command": ".uno:" + command}
+                for label, command in [("新建幻灯片", "InsertSlide"), ("版式", "AssignLayout"),
+                                       ("复制幻灯片", "DuplicateSlide"), ("删除幻灯片", "DeleteSlide")]]))
+            sections[slides.get("id")] = ET.SubElement(home, "child")
+            sections[slides.get("id")].append(slides)
+            removed.append("Slideshow")
         else:
             removed += ["DrawColor", "Arrange1", "Arrange2"]
         spec = HOME[self.module]
@@ -218,6 +229,26 @@ class Builder:
                                          '常用操作/' + item['label'], row, '菜单入口；行号指上级按钮所在行'])
 
     def tabs(self):
+        if self.module == "simpress":
+            # 新页复用原生页面容器，保留源页；上下文页与扩展页不占用。
+            for name in ["Transition", "Animation"]:
+                page = copy.deepcopy(self.notebook.find('./child/object[@id="Layout Tab"]/..'))
+                label = copy.deepcopy(self.notebook.find('./child/object[@id="LayoutLabel"]/..'))
+                for child in [page, label]:
+                    for obj in child.iter("object"):
+                        self.counter += 1
+                        suffix = ':' + obj.get('id').split(':', 1)[1] if ':' in obj.get('id') else ''
+                        obj.set('id', f'Impress-{name}-{self.counter}' + suffix)
+                page.find('object').set('id', name + ' Tab')
+                label.find('object').set('id', name + 'Label')
+                # 克隆页仅显示本页配置入口，避免保留源页菜单与尺寸控制器。
+                body = next(o for o in page.iter('object') if o.get('class') == 'sfxlo-PriorityMergedHBox')
+                for child in body.findall('child/object'):
+                    prop(child, 'visible', 'False')
+                for obj in page.iter('object'):
+                    if obj.get('class') == 'svtlo-ManagedMenuButton':
+                        prop(obj, 'visible', 'False')
+                self.notebook.extend([page, label])
         if self.module == "scalc":
             extension = self.notebook.find('./child/object[@id="Extension Tab"]/..')
             extension.remove(extension.find("object"))
@@ -238,6 +269,8 @@ class Builder:
             for index, container in enumerate(containers):
                 group = groups[index] if index < len(groups) else []
                 available = [i for i in group if i["command"] in KNOWN or i["command"] in self.templates]
+                if available and self.module == "simpress" and tab in {"Transition", "Animation"}:
+                    prop(container, 'visible', 'True')
                 slots=[o for o in container.iter('object') if o.get('class') in BUTTONS]
                 bars=[o for o in container.iter('object') if o.get('class')=='sfxlo-NotebookbarToolBox']
                 while len(slots) < len(available):
@@ -264,18 +297,20 @@ class Builder:
                     prop(container, 'visible', 'False')
                 for item_index, item in enumerate(group, 1):
                     status = "已安排；待具体文档验证" if item in available else "无已确认对应命令，省略"
-                    self.records.append([self.module, LAYOUT["tabs"][tab], item["command"], item["label"],
+                    self.records.append([self.module, "设计" if self.module == "simpress" and tab == "Layout" else LAYOUT["tabs"][tab], item["command"], item["label"],
                                          f'第 {index + 1} 组/{container.get("id")}', item_index, status])
         children = self.notebook.findall("child")
         pairs = list(zip(children[::2], children[1::2]))
         order = ["File", "Home", "Insert", "Page" if self.module == "sdraw" else "Layout"] + (
             ["References"] if self.module == "swriter" else ["Formula", "Data"] if self.module == "scalc" else []) + ["Review", "View", "Tools"]
+        if self.module == "simpress":
+            order = ["File", "Home", "Insert", "Layout", "Transition", "Animation", "Slide Show", "Review", "View", "Tools"]
         pairs.sort(key=lambda pair: order.index(pair[0].find("object").get("id").removesuffix(" Tab"))
                    if pair[0].find("object").get("id").removesuffix(" Tab") in order else 99)
         for page, label in pairs:
             name = page.find("object").get("id").removesuffix(" Tab")
             if name in LAYOUT["tabs"]:
-                prop(label.find("object"), "label", LAYOUT["tabs"][name])
+                prop(label.find("object"), "label", "设计" if self.module == "simpress" and name == "Layout" else LAYOUT["tabs"][name])
         if self.module == "scalc":
             for obj in self.obj("Formula Tab").iter("object"):
                 if obj.get("class") == "svtlo-ManagedMenuButton":
@@ -344,7 +379,7 @@ def main():
         settings.extend(json.loads((ROOT / f'config/{name}.json').read_text(encoding='utf-8')))
     (PACKAGE / "设置清单.json").write_text(json.dumps(settings, ensure_ascii=False, indent=2) + '\n', encoding="utf-8", newline='\n')
     modules = {'com.sun.star.text.TextDocument': 'Writer 文字', 'com.sun.star.sheet.SpreadsheetDocument': 'Calc 表格',
-               'com.sun.star.drawing.DrawingDocument': 'Draw 绘图'}
+               'com.sun.star.drawing.DrawingDocument': 'Draw 绘图', 'com.sun.star.presentation.PresentationDocument': 'Impress 演示'}
     with (PACKAGE / '快捷键对照表.csv').open('w', encoding='utf-8-sig', newline='') as file:
         writer = csv.writer(file, lineterminator='\n')
         writer.writerow(['模块', '快捷键', '动作', 'LibreOffice命令'])
@@ -355,6 +390,7 @@ def main():
                          ("docs/操作习惯.md", "操作习惯.txt"), ("docs/按钮差异.md", "按钮差异.txt"),
                          ("docs/布局排查.md", "布局排查.txt"),
                          ("docs/适配计划.md", "适配计划.txt"),
+                         ("docs/演示适配.md", "演示适配.txt"),
                          ("docs/弹窗菜单设计.md", "弹窗菜单设计.txt")]:
         if (ROOT / source).exists():
             (PACKAGE / dest).write_bytes((ROOT / source).read_bytes())

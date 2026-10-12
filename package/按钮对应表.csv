@@ -380,3 +380,135 @@ sdraw,工具,.uno:FlipVertical,垂直翻转,第 3 组/Tools-Section-Presentation
 sdraw,工具,.uno:ExportToPDF,导出 PDF,第 4 组/Tools-Section-Presentation1,1,已安排；待具体文档验证
 sdraw,工具,.uno:OptionsTreeDialog,选项,第 4 组/Tools-Section-Presentation1,2,已安排；待具体文档验证
 sdraw,工具,.uno:ConfigureDialog,自定义,第 4 组/Tools-Section-Presentation1,3,已安排；待具体文档验证
+simpress,开始,.uno:FormatPaintbrush,WPS-simpress-2,Home-Section-Style,1,保留原生控件或增加常用入口
+simpress,开始,.uno:Paste,Home-Paste,Home-Section-Clipboard,1,保留原生控件或增加常用入口
+simpress,开始,.uno:Cut,Home-Cut,Home-Section-Clipboard,2,保留原生控件或增加常用入口
+simpress,开始,.uno:Copy,Home-Copy,Home-Section-Clipboard,3,保留原生控件或增加常用入口
+simpress,开始,.uno:InsertSlide,WPS-simpress-5,Home-Section-Slides,1,保留原生控件或增加常用入口
+simpress,开始,.uno:AssignLayout,WPS-simpress-6,Home-Section-Slides,2,保留原生控件或增加常用入口
+simpress,开始,.uno:DuplicateSlide,WPS-simpress-7,Home-Section-Slides,3,保留原生控件或增加常用入口
+simpress,开始,.uno:DeleteSlide,WPS-simpress-8,Home-Section-Slides,4,保留原生控件或增加常用入口
+simpress,开始,.uno:CharFontName,Home-CharFontName,Home-Section-Format,1,保留原生控件或增加常用入口
+simpress,开始,.uno:FontHeight,Home-FontHeight,Home-Section-Format,2,保留原生控件或增加常用入口
+simpress,开始,.uno:Grow,Home-Grow,Home-Section-Format,3,保留原生控件或增加常用入口
+simpress,开始,.uno:Shrink,Home-Shrink,Home-Section-Format,4,保留原生控件或增加常用入口
+simpress,开始,.uno:SetDefault,Home-SetDefault,Home-Section-Format,5,保留原生控件或增加常用入口
+simpress,开始,.uno:Bold,Home-Bold,Home-Section-Format,6,保留原生控件或增加常用入口
+simpress,开始,.uno:Italic,Home-Italic,Home-Section-Format,7,保留原生控件或增加常用入口
+simpress,开始,.uno:Underline,Home-Underline,Home-Section-Format,8,保留原生控件或增加常用入口
+simpress,开始,.uno:Strikeout,Home-Strikeout,Home-Section-Format,9,保留原生控件或增加常用入口
+simpress,开始,.uno:Shadowed,Home-Shadowed,Home-Section-Format,10,保留原生控件或增加常用入口
+simpress,开始,.uno:Spacing,Home-Spacing,Home-Section-Format,11,保留原生控件或增加常用入口
+simpress,开始,.uno:CharBackColor,Home-CharBackColor,Home-Section-Format,12,保留原生控件或增加常用入口
+simpress,开始,.uno:Color,Home-Color,Home-Section-Format,13,保留原生控件或增加常用入口
+simpress,开始,.uno:CellVertTop,Home-CellVertTop,Home-Section-Paragraph,1,保留原生控件或增加常用入口
+simpress,开始,.uno:CellVertCenter,Home-CellVertCenter,Home-Section-Paragraph,2,保留原生控件或增加常用入口
+simpress,开始,.uno:CellVertBottom,Home-CellVertBottom,Home-Section-Paragraph,3,保留原生控件或增加常用入口
+simpress,开始,.uno:LeftPara,Home-LeftPara,Home-Section-Paragraph,4,保留原生控件或增加常用入口
+simpress,开始,.uno:CenterPara,Home-CenterPara,Home-Section-Paragraph,5,保留原生控件或增加常用入口
+simpress,开始,.uno:RightPara,Home-RightPara,Home-Section-Paragraph,6,保留原生控件或增加常用入口
+simpress,开始,.uno:DefaultBullet,Home-DefaultBullet,Home-Section-Paragraph2,1,保留原生控件或增加常用入口
+simpress,开始,.uno:DefaultNumbering,Home-DefaultNumbering,Home-Section-Paragraph2,2,保留原生控件或增加常用入口
+simpress,开始,.uno:SetOutline,Home-SetOutline,Home-Section-Paragraph2,3,保留原生控件或增加常用入口
+simpress,开始,.uno:JustifyPara,Home-JustifyPara1,Home-Section-Paragraph2,4,保留原生控件或增加常用入口
+simpress,开始,.uno:LineSpacing,Home-LineSpacing1,Home-Section-Paragraph2,5,保留原生控件或增加常用入口
+simpress,开始,.uno:OutlineRight,Home-OutlineRight,Home-Section-Paragraph3,1,保留原生控件或增加常用入口
+simpress,开始,.uno:OutlineLeft,Home-OutlineLeft,Home-Section-Paragraph3,2,保留原生控件或增加常用入口
+simpress,开始,.uno:ParaLeftToRight,Home-ParaLeftToRight,Home-Section-Paragraph3,3,保留原生控件或增加常用入口
+simpress,开始,.uno:ParaspaceIncrease,Home-ParaspaceIncrease,Home-Section-Paragraph3,4,保留原生控件或增加常用入口
+simpress,开始,.uno:ParaspaceDecrease,Home-ParaspaceDecrease,Home-Section-Paragraph3,5,保留原生控件或增加常用入口
+simpress,开始,.uno:ParaRightToLeft,Home-ParaRightToLeft,Home-Section-Paragraph3,6,保留原生控件或增加常用入口
+simpress,开始,.uno:Text,Home-Text,Home-Section-DrawSection,1,保留原生控件或增加常用入口
+simpress,开始,.uno:VerticalText,Home-VerticalText,Home-Section-DrawSection,2,保留原生控件或增加常用入口
+simpress,开始,.uno:Line,Home-Line,Home-Section-DrawSection1,1,保留原生控件或增加常用入口
+simpress,开始,.uno:LineToolbox,Home-LineToolbox,Home-Section-DrawSection1,2,保留原生控件或增加常用入口
+simpress,开始,.uno:BasicShapes.rectangle,Home-BasicShapes.rectangle,Home-Section-DrawSection1,3,保留原生控件或增加常用入口
+simpress,开始,.uno:BasicShapes,Home-BasicShapes,Home-Section-DrawSection1,4,保留原生控件或增加常用入口
+simpress,开始,.uno:ConnectorToolbox,Home-ConnectorToolbox,Home-Section-DrawSection2,1,保留原生控件或增加常用入口
+simpress,开始,.uno:XLineColor,Home-XLineColor,Home-Section-DrawSection2,2,保留原生控件或增加常用入口
+simpress,开始,.uno:FlowChartShapes,Home-FlowChartShapes,Home-Section-DrawSection2,3,保留原生控件或增加常用入口
+simpress,开始,.uno:FillColor,Home-FillColor,Home-Section-DrawSection2,4,保留原生控件或增加常用入口
+simpress,开始,.uno:ObjectAlign,WPS-simpress-13,WPS-simpress-9,1,保留原生控件或增加常用入口
+simpress,开始,.uno:FormatGroup,WPS-simpress-15,WPS-simpress-9,2,保留原生控件或增加常用入口
+simpress,开始,.uno:FormatUngroup,WPS-simpress-17,WPS-simpress-9,3,保留原生控件或增加常用入口
+simpress,开始,.uno:SearchDialog,WPS-simpress-19,WPS-simpress-9,4,保留原生控件或增加常用入口
+simpress,开始,.uno:Presentation,WPS-simpress-27,WPS-simpress-9,5,保留原生控件或增加常用入口
+simpress,开始,.uno:PresentationCurrentSlide,WPS-simpress-29,WPS-simpress-9,6,保留原生控件或增加常用入口
+simpress,开始,.uno:FormatArea,填充…,常用操作/形状设置,2,菜单入口；行号指上级按钮所在行
+simpress,开始,.uno:FormatLine,轮廓…,常用操作/形状设置,2,菜单入口；行号指上级按钮所在行
+simpress,开始,.uno:TransformDialog,位置和大小…,常用操作/形状设置,2,菜单入口；行号指上级按钮所在行
+simpress,插入,.uno:InsertSlide,新建幻灯片,第 1 组/Insert-Section-Slide,1,已安排；待具体文档验证
+simpress,插入,.uno:ImportSlideFromFile,从文件导入幻灯片…,第 1 组/Insert-Section-Slide,2,已安排；待具体文档验证
+simpress,插入,.uno:InsertTable,表格,第 2 组/Insert-Section-Slide1,1,已安排；待具体文档验证
+simpress,插入,.uno:InsertGraphic,图片,第 2 组/Insert-Section-Slide1,2,已安排；待具体文档验证
+simpress,插入,.uno:PhotoAlbumDialog,相册…,第 2 组/Insert-Section-Slide1,3,已安排；待具体文档验证
+simpress,插入,.uno:InsertObjectChart,图表,第 2 组/Insert-Section-Slide1,4,已安排；待具体文档验证
+simpress,插入,.uno:Text,文本框,第 3 组/Insert-Section-Table,1,已安排；待具体文档验证
+simpress,插入,.uno:FontworkGalleryFloater,艺术字,第 3 组/Insert-Section-Table,2,已安排；待具体文档验证
+simpress,插入,.uno:BasicShapes,形状,第 3 组/Insert-Section-Table,3,已安排；待具体文档验证
+simpress,插入,.uno:ConnectorToolbox,连接符,第 3 组/Insert-Section-Table,4,已安排；待具体文档验证
+simpress,插入,.uno:InsertAVMedia,音频或视频…,第 4 组/Insert-Section-Table1,1,已安排；待具体文档验证
+simpress,插入,.uno:HyperlinkDialog,超链接…,第 4 组/Insert-Section-Table1,2,已安排；待具体文档验证
+simpress,插入,.uno:CharmapControl,符号…,第 4 组/Insert-Section-Table1,3,已安排；待具体文档验证
+simpress,插入,.uno:InsertMath,公式…,第 4 组/Insert-Section-Table1,4,已安排；待具体文档验证
+simpress,插入,.uno:HeaderAndFooter,页眉页脚…,第 5 组/Insert-Section-Image,1,已安排；待具体文档验证
+simpress,插入,.uno:InsertSlideField,幻灯片编号,第 5 组/Insert-Section-Image,2,已安排；待具体文档验证
+simpress,插入,.uno:InsertAnnotation,批注,第 5 组/Insert-Section-Image,3,已安排；待具体文档验证
+simpress,插入,.uno:InsertObject,嵌入对象…,第 5 组/Insert-Section-Image,4,已安排；待具体文档验证
+simpress,设计,.uno:SlideSetup,幻灯片大小…,第 1 组/Slide-Section-PageFormat,1,已安排；待具体文档验证
+simpress,设计,.uno:SlideSetup,背景设置…,第 1 组/Slide-Section-PageFormat,2,已安排；待具体文档验证
+simpress,设计,.uno:AssignLayout,幻灯片版式,第 2 组/Slide-Section-PageFormat1,1,已安排；待具体文档验证
+simpress,设计,.uno:PresentationLayout,母版设计…,第 2 组/Slide-Section-PageFormat1,2,已安排；待具体文档验证
+simpress,设计,.uno:SlideMasterPage,幻灯片母版,第 3 组/Slide-Section-ShowPage,1,已安排；待具体文档验证
+simpress,设计,.uno:MasterLayouts,母版元素…,第 3 组/Slide-Section-ShowPage,2,已安排；待具体文档验证
+simpress,设计,.uno:CloseMasterView,关闭母版视图,第 3 组/Slide-Section-ShowPage,3,已安排；待具体文档验证
+simpress,设计,.uno:DisplayMasterBackground,显示母版背景,第 4 组/Slide-Section-ShowPage1,1,已安排；待具体文档验证
+simpress,设计,.uno:DisplayMasterObjects,显示母版对象,第 4 组/Slide-Section-ShowPage1,2,已安排；待具体文档验证
+simpress,切换,.uno:SlideChangeWindow,切换效果,第 1 组/Impress-Transition-32,1,已安排；待具体文档验证
+simpress,切换,.uno:PresentationCurrentSlide,从当前页放映,第 2 组/Impress-Transition-36,1,已安排；待具体文档验证
+simpress,切换,.uno:RehearseTimings,排练计时,第 2 组/Impress-Transition-36,2,已安排；待具体文档验证
+simpress,动画,.uno:CustomAnimation,动画窗格,第 1 组/Impress-Animation-88,1,已安排；待具体文档验证
+simpress,动画,.uno:AnimationEffects,对象交互…,第 1 组/Impress-Animation-88,2,已安排；待具体文档验证
+simpress,动画,.uno:PresentationCurrentSlide,从当前页放映,第 2 组/Impress-Animation-92,1,已安排；待具体文档验证
+simpress,放映,.uno:Presentation,从头开始,第 1 组/Slideshow-Section-Slideshow,1,已安排；待具体文档验证
+simpress,放映,.uno:PresentationCurrentSlide,从当前页开始,第 1 组/Slideshow-Section-Slideshow,2,已安排；待具体文档验证
+simpress,放映,.uno:PresentationDialog,设置放映…,第 2 组/Slideshow-Section-Slideshow1,1,已安排；待具体文档验证
+simpress,放映,.uno:CustomShowDialog,自定义放映…,第 2 组/Slideshow-Section-Slideshow1,2,已安排；待具体文档验证
+simpress,放映,.uno:RehearseTimings,排练计时,第 2 组/Slideshow-Section-Slideshow1,3,已安排；待具体文档验证
+simpress,放映,.uno:HideSlide,隐藏幻灯片,第 3 组/Slideshow-Section-Slideshow2,1,已安排；待具体文档验证
+simpress,放映,.uno:ShowSlide,取消隐藏,第 3 组/Slideshow-Section-Slideshow2,2,已安排；待具体文档验证
+simpress,审阅,.uno:SpellDialog,拼写检查…,第 1 组/Review-Section-Language,1,已安排；待具体文档验证
+simpress,审阅,.uno:SpellOnline,自动拼写检查,第 1 组/Review-Section-Language,2,已安排；待具体文档验证
+simpress,审阅,.uno:ChineseConversion,简繁转换…,第 1 组/Review-Section-Language,3,已安排；待具体文档验证
+simpress,审阅,.uno:InsertAnnotation,新建批注,第 2 组/Review-Section-Language1,1,已安排；待具体文档验证
+simpress,审阅,.uno:DeleteAnnotation,删除批注,第 2 组/Review-Section-Language1,2,已安排；待具体文档验证
+simpress,审阅,.uno:PreviousAnnotation,上一条批注,第 2 组/Review-Section-Language1,3,已安排；待具体文档验证
+simpress,审阅,.uno:NextAnnotation,下一条批注,第 2 组/Review-Section-Language1,4,已安排；待具体文档验证
+simpress,审阅,.uno:ShowAnnotations,显示批注,第 2 组/Review-Section-Language1,5,已安排；待具体文档验证
+simpress,视图,.uno:NormalMultiPaneGUI,普通视图,第 1 组/View-Section-View,1,已安排；待具体文档验证
+simpress,视图,.uno:OutlineMode,大纲视图,第 1 组/View-Section-View,2,已安排；待具体文档验证
+simpress,视图,.uno:DiaMode,幻灯片浏览,第 1 组/View-Section-View,3,已安排；待具体文档验证
+simpress,视图,.uno:NotesMode,备注页,第 1 组/View-Section-View,4,已安排；待具体文档验证
+simpress,视图,.uno:HandoutMode,讲义视图,第 1 组/View-Section-View,5,已安排；待具体文档验证
+simpress,视图,.uno:SlideMasterPage,幻灯片母版,第 2 组/View-Section-View1,1,已安排；待具体文档验证
+simpress,视图,.uno:NotesMasterPage,备注母版,第 2 组/View-Section-View1,2,已安排；待具体文档验证
+simpress,视图,.uno:CloseMasterView,关闭母版视图,第 2 组/View-Section-View1,3,已安排；待具体文档验证
+simpress,视图,.uno:LeftPaneImpress,缩略图窗格,第 3 组/View-Section-View2,1,已安排；待具体文档验证
+simpress,视图,.uno:Sidebar,侧边栏,第 3 组/View-Section-View2,2,已安排；待具体文档验证
+simpress,视图,.uno:ShowRuler,标尺,第 3 组/View-Section-View2,3,已安排；待具体文档验证
+simpress,视图,.uno:GridVisible,网格线,第 3 组/View-Section-View2,4,已安排；待具体文档验证
+simpress,视图,.uno:HelplinesVisible,参考线,第 3 组/View-Section-View2,5,已安排；待具体文档验证
+simpress,视图,.uno:Zoom,显示比例…,第 4 组/View-Section-Master,1,已安排；待具体文档验证
+simpress,视图,.uno:ZoomPage,适合窗口,第 4 组/View-Section-Master,2,已安排；待具体文档验证
+simpress,视图,.uno:Zoom100Percent,100%,第 4 组/View-Section-Master,3,已安排；待具体文档验证
+simpress,工具,.uno:ObjectAlign,对齐,第 1 组/Tools-Section-Macro,1,已安排；待具体文档验证
+simpress,工具,.uno:DistributeSelection,分布…,第 1 组/Tools-Section-Macro,2,已安排；待具体文档验证
+simpress,工具,.uno:TransformDialog,位置和大小…,第 1 组/Tools-Section-Macro,3,已安排；待具体文档验证
+simpress,工具,.uno:FormatGroup,组合,第 2 组/Tools-Section-Macro1,1,已安排；待具体文档验证
+simpress,工具,.uno:FormatUngroup,取消组合,第 2 组/Tools-Section-Macro1,2,已安排；待具体文档验证
+simpress,工具,.uno:BringToFront,置于顶层,第 2 组/Tools-Section-Macro1,3,已安排；待具体文档验证
+simpress,工具,.uno:SendToBack,置于底层,第 2 组/Tools-Section-Macro1,4,已安排；待具体文档验证
+simpress,工具,.uno:ExportToPDF,导出 PDF…,第 3 组/Tools-Section-Presentation,1,已安排；待具体文档验证
+simpress,工具,.uno:ExtensionManager,加载项…,第 3 组/Tools-Section-Presentation,2,已安排；待具体文档验证
+simpress,工具,.uno:OptionsTreeDialog,选项…,第 3 组/Tools-Section-Presentation,3,已安排；待具体文档验证
+simpress,工具,.uno:ConfigureDialog,自定义…,第 3 组/Tools-Section-Presentation,4,已安排；待具体文档验证

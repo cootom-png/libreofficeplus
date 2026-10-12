@@ -14,22 +14,24 @@ FONT = '<office:font-face-decls><style:font-face style:name="宋体" svg:font-fa
 def build_templates(package):
     folder=package/'templates'
     folder.mkdir(exist_ok=True)
-    for name,kind,extension,size in [('文字','text','ott','10.5'),('表格','spreadsheet','ots','11'),('绘图','graphics','otg','11')]:
+    for name,kind,extension,size in [('文字','text','ott','10.5'),('表格','spreadsheet','ots','11'),('绘图','graphics','otg','11'),('演示','presentation','otp','24')]:
         mime=f'application/vnd.oasis.opendocument.{kind}-template'
         default=(f'<style:default-style style:family="paragraph"><style:text-properties style:font-name="宋体" '
                  f'style:font-name-asian="宋体" fo:font-size="{size}pt" style:font-size-asian="{size}pt"/></style:default-style>')
         if kind=='spreadsheet':
             default+=f'<style:default-style style:family="table-cell"><style:text-properties style:font-name="宋体" style:font-name-asian="宋体" fo:font-size="{size}pt" style:font-size-asian="{size}pt"/></style:default-style>'
-        if kind=='graphics':
+        if kind in {'graphics','presentation'}:
             # Draw 新建文本框继承 standard 图形样式，不读取文字段落的默认字号。
             default+=f'<style:style style:name="standard" style:family="graphic"><style:text-properties style:font-name="宋体" style:font-name-asian="宋体" fo:font-size="{size}pt" style:font-size-asian="{size}pt"/></style:style>'
         margin='fo:margin-top="2.54cm" fo:margin-bottom="2.54cm" fo:margin-left="3.18cm" fo:margin-right="3.18cm"' if kind=='text' else 'fo:margin="1.9cm"'
+        dimensions='fo:page-width="28cm" fo:page-height="15.75cm" style:print-orientation="landscape" fo:margin="0cm"' if kind=='presentation' else f'fo:page-width="21cm" fo:page-height="29.7cm" style:print-orientation="portrait" {margin}'
         styles=(f'<office:document-styles {NS} office:version="1.3">{FONT}<office:styles>{default}</office:styles>'
-                f'<office:automatic-styles><style:page-layout style:name="pm1"><style:page-layout-properties fo:page-width="21cm" fo:page-height="29.7cm" style:print-orientation="portrait" {margin}/></style:page-layout></office:automatic-styles>'
+                f'<office:automatic-styles><style:page-layout style:name="pm1"><style:page-layout-properties {dimensions}/></style:page-layout></office:automatic-styles>'
                 '<office:master-styles><style:master-page style:name="Standard" style:page-layout-name="pm1"/></office:master-styles></office:document-styles>')
         bodies={'text':'<office:text><text:p/></office:text>',
                 'spreadsheet':'<office:spreadsheet><table:table table:name="Sheet1"><table:table-column/><table:table-row><table:table-cell><text:p/></table:table-cell></table:table-row></table:table></office:spreadsheet>',
-                'graphics':'<office:drawing><draw:page draw:name="页面 1" draw:master-page-name="Standard"/></office:drawing>'}
+                'graphics':'<office:drawing><draw:page draw:name="页面 1" draw:master-page-name="Standard"/></office:drawing>',
+                'presentation':'<office:presentation><draw:page draw:name="幻灯片 1" draw:master-page-name="Standard"/></office:presentation>'}
         content=f'<office:document-content {NS} office:version="1.3">{FONT}<office:body>{bodies[kind]}</office:body></office:document-content>'
         manifest=(f'<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0" manifest:version="1.3">'
                   f'<manifest:file-entry manifest:full-path="/" manifest:media-type="{mime}"/>'

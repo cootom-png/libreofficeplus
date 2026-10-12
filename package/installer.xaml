@@ -36,7 +36,7 @@
         <StackPanel>
           <TextBlock Text="LibreOfficePlus" Foreground="White" FontSize="18" FontWeight="SemiBold"/>
           <TextBlock x:Name="Heading" Text="让办公，回到熟悉的节奏" Foreground="White" FontSize="25" FontWeight="SemiBold" Margin="0,15,0,8"/>
-          <TextBlock x:Name="Subtitle" Text="文字 · 表格 · 绘图，常用操作更容易找到" Foreground="#D7E5FF" FontSize="12"/>
+          <TextBlock x:Name="Subtitle" Text="文字 · 表格 · 绘图 · 演示，常用操作更容易找到" Foreground="#D7E5FF" FontSize="12"/>
         </StackPanel>
         <Border HorizontalAlignment="Right" VerticalAlignment="Top" Background="#30FFFFFF" CornerRadius="11" Padding="10,4"><TextBlock x:Name="VersionLabel" Foreground="White" FontSize="11"/></Border>
       </Grid>
@@ -49,7 +49,8 @@
           <WrapPanel Margin="0,12,0,14">
             <CheckBox x:Name="ModuleWriter" Content="Writer 文字" Margin="0,0,24,8"/>
             <CheckBox x:Name="ModuleCalc" Content="Calc 表格" Margin="0,0,24,8"/>
-            <CheckBox x:Name="ModuleDraw" Content="Draw 绘图" Margin="0,0,0,8"/>
+            <CheckBox x:Name="ModuleDraw" Content="Draw 绘图" Margin="0,0,24,8"/>
+            <CheckBox x:Name="ModuleImpress" Content="Impress 演示" Margin="0,0,0,8"/>
           </WrapPanel>
           <TextBlock Text="LibreOffice 安装目录" Foreground="#52637E" FontSize="12" Margin="0,0,0,6"/>
           <TextBox x:Name="ApplicationPath" Padding="8,6" BorderBrush="#D7E1EE"/>
@@ -94,7 +95,7 @@
           </ItemsControl>
         <Border Background="#F5F8FD" CornerRadius="9" Padding="14,10" MaxHeight="110">
           <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <TextBlock x:Name="Details" Text="适用模块：Writer 文字 / Calc 表格 / Draw 绘图&#xA;首次备份将妥善保留，可随时恢复原界面。" Foreground="#52637E" FontSize="12" TextWrapping="Wrap" LineHeight="23"/>
+            <TextBlock x:Name="Details" Text="适用模块：Writer 文字 / Calc 表格 / Draw 绘图 / Impress 演示&#xA;首次备份将妥善保留，可随时恢复原界面。" Foreground="#52637E" FontSize="12" TextWrapping="Wrap" LineHeight="23"/>
           </ScrollViewer>
         </Border>
         <Button x:Name="TemplatesButton" Content="查看新文档模板" Visibility="Collapsed" HorizontalAlignment="Left" Margin="0,12,0,0" FontSize="12"/>

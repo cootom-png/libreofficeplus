@@ -91,7 +91,7 @@ jobs:
           # 已有标签或版本一律拒绝覆盖，保留可验证的回退包。
           gh api "repos/$GITHUB_REPOSITORY/git/matching-refs/tags/$RELEASE_TAG" > release-tags.json
           python -c 'import json; assert not json.load(open("release-tags.json")), "发布标签已存在"'
-          gh release create "$RELEASE_TAG" release/* --target "$RELEASE_SHA" --title "LibreOfficePlus $RELEASE_TAG · 常用操作与安装体验改进" --notes-file docs/发布说明-v6.4.md --latest
+          gh release create "$RELEASE_TAG" release/* --target "$RELEASE_SHA" --title "LibreOfficePlus $RELEASE_TAG · 演示模块操作习惯适配" --notes-file docs/发布说明-v6.5.md --latest
           published=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq .object.sha)
           test "$published" = "$RELEASE_SHA"
           gh release download "$RELEASE_TAG" --dir published

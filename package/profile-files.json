@@ -62,5 +62,37 @@
   {
     "Module": "sdraw",
     "Path": "config/soffice.cfg/modules/sdraw/popupmenu/pagepane.xml"
+  },
+  {
+    "Module": "simpress",
+    "Path": "config/soffice.cfg/modules/simpress/popupmenu/draw.xml"
+  },
+  {
+    "Module": "simpress",
+    "Path": "config/soffice.cfg/modules/simpress/popupmenu/drawtext.xml"
+  },
+  {
+    "Module": "simpress",
+    "Path": "config/soffice.cfg/modules/simpress/popupmenu/graphic.xml"
+  },
+  {
+    "Module": "simpress",
+    "Path": "config/soffice.cfg/modules/simpress/popupmenu/table.xml"
+  },
+  {
+    "Module": "simpress",
+    "Path": "config/soffice.cfg/modules/simpress/popupmenu/group.xml"
+  },
+  {
+    "Module": "simpress",
+    "Path": "config/soffice.cfg/modules/simpress/popupmenu/multiselect.xml"
+  },
+  {
+    "Module": "simpress",
+    "Path": "config/soffice.cfg/modules/simpress/popupmenu/pagepane.xml"
+  },
+  {
+    "Module": "simpress",
+    "Path": "config/soffice.cfg/modules/simpress/popupmenu/page.xml"
   }
 ]

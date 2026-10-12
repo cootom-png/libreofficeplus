@@ -21,5 +21,67 @@
       [{"label": "组合", "command": ".uno:FormatGroup"}, {"label": "取消组合", "command": ".uno:FormatUngroup"}, {"label": "旋转", "command": ".uno:ToggleObjectRotateMode"}, {"label": "形状设置", "menu": [{"label": "填充…", "command": ".uno:FormatArea"}, {"label": "轮廓…", "command": ".uno:FormatLine"}, {"separator": true}, {"label": "大小和位置…", "command": ".uno:TransformDialog"}]}],
       [{"label": "置于顶层", "command": ".uno:BringToFront"}, {"label": "置于底层", "command": ".uno:SendToBack"}, {"label": "导出 PDF", "command": ".uno:ExportToPDF"}]
     ]
+  },
+  "simpress": {
+    "sections": [
+      "Style",
+      "Clipboard",
+      "Slides",
+      "Format",
+      "Paragraph",
+      "Paragraph2",
+      "Paragraph3",
+      "DrawSection",
+      "DrawSection1",
+      "DrawSection2",
+      "Quick"
+    ],
+    "quick_rows": [
+      [
+        {
+          "label": "排列",
+          "command": ".uno:ObjectAlign"
+        },
+        {
+          "label": "组合",
+          "command": ".uno:FormatGroup"
+        },
+        {
+          "label": "取消组合",
+          "command": ".uno:FormatUngroup"
+        },
+        {
+          "label": "查找替换",
+          "command": ".uno:SearchDialog"
+        }
+      ],
+      [
+        {
+          "label": "形状设置",
+          "menu": [
+            {
+              "label": "填充…",
+              "command": ".uno:FormatArea"
+            },
+            {
+              "label": "轮廓…",
+              "command": ".uno:FormatLine"
+            },
+            {
+              "label": "位置和大小…",
+              "command": ".uno:TransformDialog"
+            }
+          ]
+        },
+        {
+          "label": "从头放映",
+          "command": ".uno:Presentation"
+        },
+        {
+          "label": "当前页放映",
+          "command": ".uno:PresentationCurrentSlide"
+        }
+      ]
+    ]
   }
 }

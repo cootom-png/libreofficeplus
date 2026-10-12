@@ -7,7 +7,7 @@ import uno
 
 ROOT = Path(__file__).resolve().parents[1]
 MODULES = {'swriter': 'text.TextDocument', 'scalc': 'sheet.SpreadsheetDocument',
-           'sdraw': 'drawing.DrawingDocument'}
+           'sdraw': 'drawing.DrawingDocument', 'simpress': 'presentation.PresentationDocument'}
 NS = '{http://openoffice.org/2001/menu}'
 
 

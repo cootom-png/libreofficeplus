@@ -21,3 +21,9 @@ Draw 绘图,Ctrl+G,组合,.uno:FormatGroup
 Draw 绘图,Ctrl+Shift+G,取消组合,.uno:FormatUngroup
 Draw 绘图,F12,另存为,.uno:SaveAs
 Draw 绘图,Ctrl+Alt+V,选择性粘贴,.uno:PasteSpecial
+Impress 演示,Ctrl+M,新建幻灯片,.uno:InsertPage
+Impress 演示,Ctrl+G,组合,.uno:FormatGroup
+Impress 演示,Ctrl+Shift+G,取消组合,.uno:FormatUngroup
+Impress 演示,F12,另存为,.uno:SaveAs
+Impress 演示,Ctrl+Alt+V,选择性粘贴,.uno:PasteSpecial
+Impress 演示,Shift+F9,网格线开关,.uno:GridVisible

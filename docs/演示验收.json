@@ -1,0 +1,553 @@
+[
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:AnimationEffects",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:AssignLayout",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:BasicShapes",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:BringToFront",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:CharmapControl",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:ChineseConversion",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:CloseMasterView",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:ConfigureDialog",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:ConnectorToolbox",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:CustomAnimation",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:CustomShowDialog",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:DeleteAnnotation",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:DiaMode",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:DisplayMasterBackground",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:DisplayMasterObjects",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:DistributeSelection",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:ExportToPDF",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:ExtensionManager",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:FontworkGalleryFloater",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:FormatArea",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:FormatGroup",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:FormatLine",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:FormatUngroup",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:GridVisible",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:HandoutMode",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:HeaderAndFooter",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:HelplinesVisible",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:HideSlide",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:HyperlinkDialog",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:ImportSlideFromFile",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:InsertAVMedia",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:InsertAnnotation",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:InsertGraphic",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:InsertMath",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:InsertObject",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:InsertObjectChart",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:InsertSlide",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:InsertSlideField",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:InsertTable",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:LeftPaneImpress",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:MasterLayouts",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:NextAnnotation",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:NormalMultiPaneGUI",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:NotesMasterPage",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:NotesMode",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:ObjectAlign",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:OptionsTreeDialog",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:OutlineMode",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:PhotoAlbumDialog",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:Presentation",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:PresentationCurrentSlide",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:PresentationDialog",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:PresentationLayout",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:PreviousAnnotation",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:RehearseTimings",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:SearchDialog",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:SendToBack",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:ShowAnnotations",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:ShowRuler",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:ShowSlide",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:Sidebar",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:SlideChangeWindow",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:SlideMasterPage",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:SlideSetup",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:SpellDialog",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:SpellOnline",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:Text",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:TransformDialog",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:Zoom",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:Zoom100Percent",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "入口可派发 .uno:ZoomPage",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "快捷键 M_MOD1",
+    "有效命令": ".uno:InsertPage",
+    "方式": "配置对齐",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "快捷键 G_MOD1",
+    "有效命令": ".uno:FormatGroup",
+    "方式": "配置对齐",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "快捷键 G_SHIFT_MOD1",
+    "有效命令": ".uno:FormatUngroup",
+    "方式": "配置对齐",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "快捷键 F12",
+    "有效命令": ".uno:SaveAs",
+    "方式": "配置对齐",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "快捷键 V_MOD1_MOD2",
+    "有效命令": ".uno:PasteSpecial",
+    "方式": "配置对齐",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "快捷键 F9_SHIFT",
+    "有效命令": ".uno:GridVisible",
+    "方式": "配置对齐",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "快捷键 C_MOD1",
+    "有效命令": ".uno:Copy",
+    "方式": "保留原生",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "快捷键 X_MOD1",
+    "有效命令": ".uno:Cut",
+    "方式": "保留原生",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "快捷键 V_MOD1",
+    "有效命令": ".uno:Paste",
+    "方式": "保留原生",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "快捷键 S_MOD1",
+    "有效命令": ".uno:Save",
+    "方式": "保留原生",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "快捷键 Z_MOD1",
+    "有效命令": ".uno:Undo",
+    "方式": "保留原生",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "快捷键 Y_MOD1",
+    "有效命令": ".uno:Redo",
+    "方式": "保留原生",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "快捷键 F5",
+    "有效命令": ".uno:Presentation",
+    "方式": "保留原生",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "快捷键 F5_SHIFT",
+    "有效命令": ".uno:PresentationCurrentSlide",
+    "方式": "保留原生",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "新建幻灯片",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "复制幻灯片保留内容",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "隐藏幻灯片",
+    "通过": null,
+    "状态": "需可见缩略图选区复核",
+    "无界面观察": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "取消隐藏",
+    "通过": null,
+    "状态": "需可见缩略图选区复核"
+  },
+  {
+    "模块": "Impress",
+    "操作": "删除幻灯片",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "撤销删除",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "重做删除",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "母版视图",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "关闭母版视图",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "对象组合",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "取消组合",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "网格切换保留内容",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "导出 odp",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "odp 往返内容与页数",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "导出 pptx",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "pptx 往返内容与页数",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "导出 pdf",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "16:9 空白模板",
+    "通过": true
+  },
+  {
+    "模块": "Impress",
+    "操作": "模板默认文字",
+    "通过": true
+  }
+]

@@ -196,5 +196,59 @@
     "Language": "en-US",
     "Shortcut": "Ctrl+Alt+V",
     "Label": "选择性粘贴"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.presentation.PresentationDocument/M_MOD1",
+    "Name": "Command",
+    "Value": ".uno:InsertPage",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+M",
+    "Label": "新建幻灯片"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.presentation.PresentationDocument/G_MOD1",
+    "Name": "Command",
+    "Value": ".uno:FormatGroup",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+G",
+    "Label": "组合"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.presentation.PresentationDocument/G_SHIFT_MOD1",
+    "Name": "Command",
+    "Value": ".uno:FormatUngroup",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+Shift+G",
+    "Label": "取消组合"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.presentation.PresentationDocument/F12",
+    "Name": "Command",
+    "Value": ".uno:SaveAs",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "F12",
+    "Label": "另存为"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.presentation.PresentationDocument/V_MOD1_MOD2",
+    "Name": "Command",
+    "Value": ".uno:PasteSpecial",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Ctrl+Alt+V",
+    "Label": "选择性粘贴"
+  },
+  {
+    "Path": "/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.presentation.PresentationDocument/F9_SHIFT",
+    "Name": "Command",
+    "Value": ".uno:GridVisible",
+    "Localized": true,
+    "Language": "en-US",
+    "Shortcut": "Shift+F9",
+    "Label": "网格线开关"
   }
 ]

@@ -14,7 +14,7 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--pipe',required=True)
     parser.add_argument('--output',type=Path,required=True)
-    parser.add_argument('--configured',action='store_true',help='验证已安装本包的独立配置中的三模块快捷键')
+    parser.add_argument('--configured',action='store_true',help='验证已安装本包的独立配置中的四模块快捷键')
     args=parser.parse_args()
     args.output.mkdir(parents=True,exist_ok=True)
     local=uno.getComponentContext()

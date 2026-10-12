@@ -23,5 +23,10 @@
     "Path": "/org.openoffice.Office.UI.ToolbarMode/Applications/Draw/Modes/Tabbed",
     "Name": "HasMenubar",
     "Value": "false"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.ToolbarMode/Applications/Impress/Modes/Tabbed",
+    "Name": "HasMenubar",
+    "Value": "false"
   }
 ]
