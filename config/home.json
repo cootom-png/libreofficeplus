@@ -1,0 +1,28 @@
+{
+  "swriter": {
+    "sections": ["Style", "Clipboard", "Format", "Paragraph", "Style3", "Quick"],
+    "toolbar_rows": {
+      "ExtTop5": ["Home-SuperScript", "Home-SubScript"],
+      "SectionBottom91": ["Home-DefaultBullet", "Home-DefaultNumbering", "Home-SetOutline", "Home-DecrementIndent1", "Home-IncrementIndent1", "Home-ControlCodes1"]
+    },
+    "quick_rows": [
+      [{"label": "查找替换", "command": ".uno:SearchDialog"}, {"label": "选择", "menu": [{"label": "全选", "command": ".uno:SelectAll"}]}],
+      [{"label": "样式窗格", "command": ".uno:SidebarDeck.StyleListDeck"}, {"label": "批注", "command": ".uno:InsertAnnotation"}]
+    ]
+  },
+  "scalc": {
+    "sections": ["Style", "Clipboard", "Format", "Align", "Cell", "Number", "Cell1", "Condition", "Style2", "Quick"],
+    "toolbar_rows": {"first6": ["Home-AlignTop", "Home-AlignVCenter", "Home-AlignBottom", "Home-DecrementIndent", "Home-IncrementIndent"]},
+    "quick_rows": [
+      [{"label": "填充", "menu": [{"label": "向下填充", "command": ".uno:FillDown"}, {"label": "向右填充", "command": ".uno:FillRight"}, {"label": "向上填充", "command": ".uno:FillUp"}, {"label": "向左填充", "command": ".uno:FillLeft"}, {"label": "序列…", "command": ".uno:FillSeries"}]}, {"label": "求和", "command": ".uno:AutoSum"}, {"label": "排序", "command": ".uno:DataSort"}],
+      [{"label": "筛选", "command": ".uno:DataFilterAutoFilter"}, {"label": "冻结", "menu": [{"label": "冻结或取消冻结所选位置", "command": ".uno:FreezePanes"}, {"label": "冻结首行", "command": ".uno:FreezePanesRow"}, {"label": "冻结首列", "command": ".uno:FreezePanesColumn"}]}, {"label": "查找", "command": ".uno:SearchDialog"}]
+    ]
+  },
+  "sdraw": {
+    "sections": ["Style", "Clipboard", "Format", "DrawText", "Draw", "DrawColor1", "DrawColor2", "Transform", "Quick"],
+    "quick_rows": [
+      [{"label": "组合", "command": ".uno:FormatGroup"}, {"label": "取消组合", "command": ".uno:FormatUngroup"}, {"label": "旋转", "command": ".uno:ToggleObjectRotateMode"}],
+      [{"label": "置于顶层", "command": ".uno:BringToFront"}, {"label": "置于底层", "command": ".uno:SendToBack"}, {"label": "导出 PDF", "command": ".uno:ExportToPDF"}]
+    ]
+  }
+}

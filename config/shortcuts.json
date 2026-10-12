@@ -1,0 +1,5 @@
+[
+  {"Path":"/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/D_MOD1","Name":"Command","Value":".uno:FontDialog","Localized":true,"Language":"en-US"},
+  {"Path":"/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/F12","Name":"Command","Value":".uno:SaveAs","Localized":true,"Language":"en-US"},
+  {"Path":"/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/F4","Name":"Command","Value":".uno:Repeat","Localized":true,"Language":"en-US"}
+]

@@ -1,4 +1,4 @@
 @echo off
 cd /d "%~dp0"
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\设置界面.ps1" -Restore
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\设置界面.ps1" -Restore %*
 pause

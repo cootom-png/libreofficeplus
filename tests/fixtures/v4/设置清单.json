@@ -1,0 +1,482 @@
+[
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:ResetAttributes",
+    "Name": "Label",
+    "Value": "清除格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:ResetAttributes",
+    "Name": "ContextLabel",
+    "Value": "清除格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:ResetAttributes",
+    "Name": "PopupLabel",
+    "Value": "清除格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:ResetAttributes",
+    "Name": "TooltipLabel",
+    "Value": "清除格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FreezePanes",
+    "Name": "Label",
+    "Value": "冻结窗格",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FreezePanes",
+    "Name": "ContextLabel",
+    "Value": "冻结窗格",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FreezePanes",
+    "Name": "PopupLabel",
+    "Value": "冻结窗格",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FreezePanes",
+    "Name": "TooltipLabel",
+    "Value": "冻结窗格",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FunctionDialog",
+    "Name": "Label",
+    "Value": "插入函数",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FunctionDialog",
+    "Name": "ContextLabel",
+    "Value": "插入函数",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FunctionDialog",
+    "Name": "PopupLabel",
+    "Value": "插入函数",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FunctionDialog",
+    "Name": "TooltipLabel",
+    "Value": "插入函数",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:WrapText",
+    "Name": "Label",
+    "Value": "自动换行",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:WrapText",
+    "Name": "ContextLabel",
+    "Value": "自动换行",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:WrapText",
+    "Name": "PopupLabel",
+    "Value": "自动换行",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:WrapText",
+    "Name": "TooltipLabel",
+    "Value": "自动换行",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FunctionBox",
+    "Name": "Label",
+    "Value": "常用函数",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FunctionBox",
+    "Name": "ContextLabel",
+    "Value": "常用函数",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FunctionBox",
+    "Name": "PopupLabel",
+    "Value": "常用函数",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FunctionBox",
+    "Name": "TooltipLabel",
+    "Value": "常用函数",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FormatCellDialog",
+    "Name": "Label",
+    "Value": "单元格格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FormatCellDialog",
+    "Name": "ContextLabel",
+    "Value": "单元格格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FormatCellDialog",
+    "Name": "PopupLabel",
+    "Value": "单元格格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:FormatCellDialog",
+    "Name": "TooltipLabel",
+    "Value": "单元格格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:ToggleMergeCells",
+    "Name": "Label",
+    "Value": "合并居中",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:ToggleMergeCells",
+    "Name": "ContextLabel",
+    "Value": "合并居中",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:ToggleMergeCells",
+    "Name": "PopupLabel",
+    "Value": "合并居中",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:ToggleMergeCells",
+    "Name": "TooltipLabel",
+    "Value": "合并居中",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:DataSort",
+    "Name": "Label",
+    "Value": "排序",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:DataSort",
+    "Name": "ContextLabel",
+    "Value": "排序",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:DataSort",
+    "Name": "PopupLabel",
+    "Value": "排序",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:DataSort",
+    "Name": "TooltipLabel",
+    "Value": "排序",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:DataFilterAutoFilter",
+    "Name": "Label",
+    "Value": "筛选",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:DataFilterAutoFilter",
+    "Name": "ContextLabel",
+    "Value": "筛选",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:DataFilterAutoFilter",
+    "Name": "PopupLabel",
+    "Value": "筛选",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.CalcCommands/UserInterface/Commands/.uno:DataFilterAutoFilter",
+    "Name": "TooltipLabel",
+    "Value": "筛选",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:InsertAnnotation",
+    "Name": "Label",
+    "Value": "批注",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:InsertAnnotation",
+    "Name": "ContextLabel",
+    "Value": "批注",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:InsertAnnotation",
+    "Name": "PopupLabel",
+    "Value": "批注",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:InsertAnnotation",
+    "Name": "TooltipLabel",
+    "Value": "批注",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:StylesPreview",
+    "Name": "Label",
+    "Value": "样式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:StylesPreview",
+    "Name": "ContextLabel",
+    "Value": "样式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:StylesPreview",
+    "Name": "PopupLabel",
+    "Value": "样式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:StylesPreview",
+    "Name": "TooltipLabel",
+    "Value": "样式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:ChineseConversion",
+    "Name": "Label",
+    "Value": "繁简转换",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:ChineseConversion",
+    "Name": "ContextLabel",
+    "Value": "繁简转换",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:ChineseConversion",
+    "Name": "PopupLabel",
+    "Value": "繁简转换",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:ChineseConversion",
+    "Name": "TooltipLabel",
+    "Value": "繁简转换",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:InsertGraphic",
+    "Name": "Label",
+    "Value": "图片",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:InsertGraphic",
+    "Name": "ContextLabel",
+    "Value": "图片",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:InsertGraphic",
+    "Name": "PopupLabel",
+    "Value": "图片",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:InsertGraphic",
+    "Name": "TooltipLabel",
+    "Value": "图片",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:FormatPaintbrush",
+    "Name": "Label",
+    "Value": "格式刷",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:FormatPaintbrush",
+    "Name": "ContextLabel",
+    "Value": "格式刷",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:FormatPaintbrush",
+    "Name": "PopupLabel",
+    "Value": "格式刷",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:FormatPaintbrush",
+    "Name": "TooltipLabel",
+    "Value": "格式刷",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:CharmapControl",
+    "Name": "Label",
+    "Value": "符号",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:CharmapControl",
+    "Name": "ContextLabel",
+    "Value": "符号",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:CharmapControl",
+    "Name": "PopupLabel",
+    "Value": "符号",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:CharmapControl",
+    "Name": "TooltipLabel",
+    "Value": "符号",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:SearchDialog",
+    "Name": "Label",
+    "Value": "查找替换",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:SearchDialog",
+    "Name": "ContextLabel",
+    "Value": "查找替换",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:SearchDialog",
+    "Name": "PopupLabel",
+    "Value": "查找替换",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:SearchDialog",
+    "Name": "TooltipLabel",
+    "Value": "查找替换",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:PrintPreview",
+    "Name": "Label",
+    "Value": "打印预览",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:PrintPreview",
+    "Name": "ContextLabel",
+    "Value": "打印预览",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:PrintPreview",
+    "Name": "PopupLabel",
+    "Value": "打印预览",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:PrintPreview",
+    "Name": "TooltipLabel",
+    "Value": "打印预览",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:AutoSum",
+    "Name": "Label",
+    "Value": "求和",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:AutoSum",
+    "Name": "ContextLabel",
+    "Value": "求和",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:AutoSum",
+    "Name": "PopupLabel",
+    "Value": "求和",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.GenericCommands/UserInterface/Commands/.uno:AutoSum",
+    "Name": "TooltipLabel",
+    "Value": "求和",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Commands/.uno:ResetAttributes",
+    "Name": "Label",
+    "Value": "清除格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Commands/.uno:ResetAttributes",
+    "Name": "ContextLabel",
+    "Value": "清除格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Commands/.uno:ResetAttributes",
+    "Name": "PopupLabel",
+    "Value": "清除格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Commands/.uno:ResetAttributes",
+    "Name": "TooltipLabel",
+    "Value": "清除格式",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Commands/.uno:FormatPaintbrush",
+    "Name": "Label",
+    "Value": "格式刷",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Commands/.uno:FormatPaintbrush",
+    "Name": "ContextLabel",
+    "Value": "格式刷",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Commands/.uno:FormatPaintbrush",
+    "Name": "PopupLabel",
+    "Value": "格式刷",
+    "Localized": true
+  },
+  {
+    "Path": "/org.openoffice.Office.UI.WriterCommands/UserInterface/Commands/.uno:FormatPaintbrush",
+    "Name": "TooltipLabel",
+    "Value": "格式刷",
+    "Localized": true
+  }
+]

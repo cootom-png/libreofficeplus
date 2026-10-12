@@ -1,0 +1,33 @@
+# WPS 用户操作习惯（v5）
+
+## 文字快捷键
+
+安装 Writer 模块时应用以下三个键位，恢复 Writer 时还原首次安装前的对应配置：
+
+| 键位 | v5 动作 | 替换的 LibreOffice 原生动作 |
+| --- | --- | --- |
+| Ctrl+D | 字体窗口（`.uno:FontDialog`） | 双下划线 |
+| F12 | 另存为（`.uno:SaveAs`） | 有序列表开关 |
+| F4 | 重复（`.uno:Repeat`） | 图片属性；重复能否执行取决于上一个动作 |
+
+这三个键位的有效映射已通过已安装本包的独立 LibreOffice 配置读取验证。未逐一打开所有对话框或覆盖所有重复动作；F4 不能保证重复所有 WPS 支持的操作。Ctrl+Shift+G 字数统计尚未纳入，使用“审阅”中的字数统计。
+
+常用 Ctrl+C/X/V、Ctrl+B/I/U、Ctrl+Z/Y、Ctrl+H、Ctrl+Enter 继续使用原生命令。保留现有的其他个人快捷键，不批量覆盖整套键盘配置。
+
+参考：[WPS Writer 官方快捷键](https://help.wps.com/articles/list-of-keyboard-shortcuts-for-writer/)、[WPS F4 说明](https://www.wps.cn/learning/article/detail/id/721.html)、[LibreOffice Writer 快捷键](https://help.libreoffice.org/26.2/en-US/text/swriter/04/01020000.html)。在线说明与版本可能不同，实际映射以本机固定构建验证为准。
+
+## 表格输入与选择
+
+Calc 的 F2 编辑单元格、Ctrl+D 向下填充可继续使用。填充先选择包含源单元格的范围，再从“开始 → 填充”选择方向；例如 A1 有值，选择 A1:A3 后向下填充。
+
+WPS 在编辑单元格时使用 Alt+Enter 换行；Calc 使用 Ctrl+Enter。WPS 的 Ctrl+Enter 批量输入习惯与 Calc 的数组/编辑行为不同，不能只改一个加速键就完整复制，因此本版保留原生行为并明确提示。
+
+来源：[WPS 表格官方快捷键](https://help.wps.com/articles/list-of-keyboard-shortcuts-for-spreadsheets)、[LibreOffice Calc 快捷键](https://help.libreoffice.org/26.2/en-US/text/scalc/04/01020000.html)。
+
+## 菜单、右键与对象
+
+- Writer：开始页“选择”提供全选；样式窗格按钮打开右侧样式列表。段落、字体、表格的右键菜单继续由原生上下文决定。
+- Calc：开始页“填充”和“冻结”为本包增加的菜单，其余粘贴、排序、筛选使用原生控件；右键继续保留插入/删除/单元格格式等原生功能。
+- Draw：选择一个对象后操作填充、轮廓、旋转和层级；至少选择两个对象后才能组合。对象选中时保留原生“绘图”上下文页，右侧属性栏可改位置、大小、颜色。
+
+本版不注入宏、不模拟按键替换编辑器行为、不重写原生右键菜单。仅改显示名称不会改变命令实际功能。

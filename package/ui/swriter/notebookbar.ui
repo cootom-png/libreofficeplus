@@ -1,5 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
 <interface domain="sw">
+  <object class="GtkMenu" id="WPS-swriter-8">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkMenuItem" id="WPS-swriter-9">
+        <property name="action-name">.uno:SelectAll</property>
+        <property name="label">全选</property>
+        <property name="visible">True</property>
+      </object>
+    </child>
+  </object>
   <requires lib="gtk+" version="3.24" />
   <requires lib="LibreOffice" version="1.0" />
   <object class="GtkMenu" id="Menu Addons">
@@ -3569,21 +3579,23 @@
                                     <property name="toolbar-style">icons</property>
                                     <property name="show-arrow">False</property>
                                     <child>
-                                      <object class="GtkToolButton" id="Home-SubScript">
-                                        <property name="visible">True</property>
-                                        <property name="action-name">.uno:SubScript</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="homogeneous">True</property>
-                                      </packing>
-                                    </child>
-                                    <child>
                                       <object class="GtkToolButton" id="Home-SuperScript">
                                         <property name="visible">True</property>
                                         <property name="action-name">.uno:SuperScript</property>
                                       </object>
                                       <packing>
+                                        <property name="position">0</property>
+                                        <property name="expand">False</property>
+                                        <property name="homogeneous">True</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkToolButton" id="Home-SubScript">
+                                        <property name="visible">True</property>
+                                        <property name="action-name">.uno:SubScript</property>
+                                      </object>
+                                      <packing>
+                                        <property name="position">1</property>
                                         <property name="expand">False</property>
                                         <property name="homogeneous">True</property>
                                       </packing>
@@ -3720,6 +3732,7 @@
                                         <property name="action-name">.uno:DefaultBullet</property>
                                       </object>
                                       <packing>
+                                        <property name="position">0</property>
                                         <property name="expand">False</property>
                                         <property name="homogeneous">True</property>
                                       </packing>
@@ -3730,6 +3743,7 @@
                                         <property name="action-name">.uno:DefaultNumbering</property>
                                       </object>
                                       <packing>
+                                        <property name="position">1</property>
                                         <property name="expand">False</property>
                                         <property name="homogeneous">True</property>
                                       </packing>
@@ -3740,6 +3754,44 @@
                                         <property name="action-name">.uno:SetOutline</property>
                                       </object>
                                       <packing>
+                                        <property name="position">2</property>
+                                        <property name="expand">False</property>
+                                        <property name="homogeneous">True</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkToolButton" id="Home-DecrementIndent1">
+                                        <property name="visible">True</property>
+                                        <property name="halign">center</property>
+                                        <property name="hexpand">True</property>
+                                        <property name="action-name">.uno:DecrementIndent</property>
+                                      </object>
+                                      <packing>
+                                        <property name="position">3</property>
+                                        <property name="expand">False</property>
+                                        <property name="homogeneous">True</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkToolButton" id="Home-IncrementIndent1">
+                                        <property name="visible">True</property>
+                                        <property name="halign">center</property>
+                                        <property name="hexpand">True</property>
+                                        <property name="action-name">.uno:IncrementIndent</property>
+                                      </object>
+                                      <packing>
+                                        <property name="position">4</property>
+                                        <property name="expand">False</property>
+                                        <property name="homogeneous">True</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkToolButton" id="Home-ControlCodes1">
+                                        <property name="visible">True</property>
+                                        <property name="action-name">.uno:ControlCodes</property>
+                                      </object>
+                                      <packing>
+                                        <property name="position">5</property>
                                         <property name="expand">False</property>
                                         <property name="homogeneous">True</property>
                                       </packing>
@@ -3819,6 +3871,17 @@
                                         <property name="homogeneous">True</property>
                                       </packing>
                                     </child>
+                                    <child>
+                                      <object class="GtkMenuToolButton" id="Home-LineSpacing1">
+                                        <property name="visible">True</property>
+                                        <property name="halign">end</property>
+                                        <property name="action-name">.uno:LineSpacing</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="homogeneous">False</property>
+                                      </packing>
+                                    </child>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -3846,273 +3909,6 @@
                       </object>
                       <packing>
                         <property name="position">3</property>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="VclOptionalBox" id="Home-Section-Paragraph1">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="valign">center</property>
-                        <property name="vexpand">True</property>
-                        <child>
-                          <object class="GtkBox" id="GroupB19">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">center</property>
-                            <property name="orientation">vertical</property>
-                            <child>
-                              <object class="GtkBox" id="GroupB93">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">end</property>
-                                <property name="valign">center</property>
-                                <property name="hexpand">True</property>
-                                <child>
-                                  <object class="GtkSeparator" id="separator68">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">False</property>
-                                    <property name="margin-top">5</property>
-                                    <property name="margin-bottom">5</property>
-                                    <property name="orientation">vertical</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="padding">5</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="sfxlo-NotebookbarToolBox" id="SectionBottom81">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">True</property>
-                                    <property name="toolbar-style">icons</property>
-                                    <property name="show-arrow">False</property>
-                                    <child>
-                                      <object class="GtkToolButton" id="Home-IncrementIndent1">
-                                        <property name="visible">True</property>
-                                        <property name="halign">center</property>
-                                        <property name="hexpand">True</property>
-                                        <property name="action-name">.uno:IncrementIndent</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="homogeneous">True</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkToolButton" id="Home-DecrementIndent1">
-                                        <property name="visible">True</property>
-                                        <property name="halign">center</property>
-                                        <property name="hexpand">True</property>
-                                        <property name="action-name">.uno:DecrementIndent</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="homogeneous">True</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkToolButton" id="Home-HangingIndent">
-                                        <property name="visible">False</property>
-                                        <property name="halign">center</property>
-                                        <property name="hexpand">True</property>
-                                        <property name="action-name">.uno:HangingIndent</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="homogeneous">True</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkToolButton" id="Home-ParaLeftToRight1">
-                                        <property name="visible">True</property>
-                                        <property name="action-name">.uno:ParaLeftToRight</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="homogeneous">True</property>
-                                      </packing>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">3</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="sfxlo-NotebookbarToolBox" id="SectionBottom93">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">True</property>
-                                    <property name="toolbar-style">icons</property>
-                                    <property name="show-arrow">False</property>
-                                    <child>
-                                      <object class="GtkToolButton" id="Home-ParaRightToLeft1">
-                                        <property name="visible">True</property>
-                                        <property name="action-name">.uno:ParaRightToLeft</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="homogeneous">True</property>
-                                      </packing>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">4</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox" id="GroupB94">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">end</property>
-                                <property name="valign">center</property>
-                                <property name="hexpand">True</property>
-                                <child>
-                                  <object class="GtkSeparator" id="separator8">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">False</property>
-                                    <property name="margin-top">5</property>
-                                    <property name="margin-bottom">5</property>
-                                    <property name="orientation">vertical</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="padding">5</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="sfxlo-NotebookbarToolBox" id="SectionBottom125">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">True</property>
-                                    <property name="toolbar-style">icons</property>
-                                    <property name="show-arrow">False</property>
-                                    <child>
-                                      <object class="GtkToolButton" id="Home-ParaspaceIncrease">
-                                        <property name="visible">False</property>
-                                        <property name="halign">center</property>
-                                        <property name="hexpand">True</property>
-                                        <property name="action-name">.uno:ParaspaceIncrease</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="homogeneous">True</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkToolButton" id="Home-ParaspaceDecrease">
-                                        <property name="visible">False</property>
-                                        <property name="halign">center</property>
-                                        <property name="hexpand">True</property>
-                                        <property name="action-name">.uno:ParaspaceDecrease</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="homogeneous">True</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkMenuToolButton" id="Home-LineSpacing1">
-                                        <property name="visible">True</property>
-                                        <property name="halign">end</property>
-                                        <property name="action-name">.uno:LineSpacing</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="homogeneous">False</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkToolButton" id="Home-BackgroundColor1">
-                                        <property name="visible">True</property>
-                                        <property name="halign">center</property>
-                                        <property name="hexpand">True</property>
-                                        <property name="action-name">.uno:BackgroundColor</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="homogeneous">True</property>
-                                      </packing>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="sfxlo-NotebookbarToolBox" id="SectionBottom130">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">True</property>
-                                    <property name="toolbar-style">icons</property>
-                                    <property name="show-arrow">False</property>
-                                    <child>
-                                      <object class="GtkToolButton" id="Home-ControlCodes1">
-                                        <property name="visible">True</property>
-                                        <property name="action-name">.uno:ControlCodes</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="homogeneous">True</property>
-                                      </packing>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">3</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkSeparator" id="separator10">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="margin-top">5</property>
-                            <property name="margin-bottom">5</property>
-                            <property name="orientation">vertical</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="padding">5</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <style>
-                          <class name="priority-5" />
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="position">4</property>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                       </packing>
@@ -4164,63 +3960,96 @@
                         </style>
                       </object>
                       <packing>
-                        <property name="position">5</property>
+                        <property name="position">4</property>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                       </packing>
                     </child>
                     <child>
                       <object class="VclOptionalBox" id="WPS-swriter-3">
-                        <property name="vexpand">True</property>
+                        <property name="margin-end">5</property>
+                        <property name="margin-start">5</property>
                         <property name="valign">center</property>
                         <property name="visible">True</property>
                         <child>
-                          <object class="GtkSeparator" id="WPS-swriter-4">
-                            <property name="margin-end">5</property>
-                            <property name="margin-start">5</property>
+                          <object class="GtkBox" id="WPS-swriter-4">
                             <property name="orientation">vertical</property>
                             <property name="visible">True</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="WPS-swriter-5">
-                            <property name="icon-size">3</property>
-                            <property name="show-arrow">False</property>
-                            <property name="toolbar-style">both</property>
-                            <property name="vexpand">True</property>
-                            <property name="valign">center</property>
-                            <property name="can-focus">True</property>
-                            <property name="visible">True</property>
                             <child>
-                              <object class="GtkToolButton" id="WPS-swriter-6">
-                                <property name="tooltip-text">样式窗格</property>
-                                <property name="label">样式窗格</property>
-                                <property name="action-name">.uno:SidebarDeck.StyleListDeck</property>
+                              <object class="GtkBox" id="WPS-swriter-5">
                                 <property name="visible">True</property>
+                                <child>
+                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-swriter-6">
+                                    <property name="icon-size">1</property>
+                                    <property name="show-arrow">False</property>
+                                    <property name="toolbar-style">both-horiz</property>
+                                    <property name="vexpand">True</property>
+                                    <property name="valign">center</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="visible">True</property>
+                                    <child>
+                                      <object class="GtkToolButton" id="WPS-swriter-7">
+                                        <property name="tooltip-text">查找替换</property>
+                                        <property name="label">查找替换</property>
+                                        <property name="action-name">.uno:SearchDialog</property>
+                                        <property name="visible">True</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="svtlo-ManagedMenuButton" id="WPS-swriter-10:WPS-swriter-8">
+                                    <property name="focus-on-click">False</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="valign">center</property>
+                                    <property name="relief">none</property>
+                                    <property name="label">选择</property>
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="WPS-swriter-7">
-                                <property name="tooltip-text">查找替换</property>
-                                <property name="label">查找替换</property>
-                                <property name="action-name">.uno:SearchDialog</property>
+                              <object class="GtkBox" id="WPS-swriter-11">
                                 <property name="visible">True</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkToolButton" id="WPS-swriter-8">
-                                <property name="tooltip-text">批注</property>
-                                <property name="label">批注</property>
-                                <property name="action-name">.uno:InsertAnnotation</property>
-                                <property name="visible">True</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkToolButton" id="WPS-swriter-9">
-                                <property name="tooltip-text">选择全部</property>
-                                <property name="label">选择全部</property>
-                                <property name="action-name">.uno:SelectAll</property>
-                                <property name="visible">True</property>
+                                <child>
+                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-swriter-12">
+                                    <property name="icon-size">1</property>
+                                    <property name="show-arrow">False</property>
+                                    <property name="toolbar-style">both-horiz</property>
+                                    <property name="vexpand">True</property>
+                                    <property name="valign">center</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="visible">True</property>
+                                    <child>
+                                      <object class="GtkToolButton" id="WPS-swriter-13">
+                                        <property name="tooltip-text">样式窗格</property>
+                                        <property name="label">样式窗格</property>
+                                        <property name="action-name">.uno:SidebarDeck.StyleListDeck</property>
+                                        <property name="visible">True</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="sfxlo-NotebookbarToolBox" id="WPS-swriter-14">
+                                    <property name="icon-size">1</property>
+                                    <property name="show-arrow">False</property>
+                                    <property name="toolbar-style">both-horiz</property>
+                                    <property name="vexpand">True</property>
+                                    <property name="valign">center</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="visible">True</property>
+                                    <child>
+                                      <object class="GtkToolButton" id="WPS-swriter-15">
+                                        <property name="tooltip-text">批注</property>
+                                        <property name="label">批注</property>
+                                        <property name="action-name">.uno:InsertAnnotation</property>
+                                        <property name="visible">True</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                           </object>
@@ -4230,7 +4059,7 @@
                         </style>
                       </object>
                       <packing>
-                        <property name="position">6</property>
+                        <property name="position">5</property>
                         <property name="fill">True</property>
                         <property name="expand">False</property>
                       </packing>
@@ -4386,8 +4215,8 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="Insert-InsertPagebreak">
-                                <property name="tooltip-text">空白页</property>
-                                <property name="label">空白页</property>
+                                <property name="tooltip-text">分页符</property>
+                                <property name="label">分页符</property>
                                 <property name="action-name">.uno:InsertPagebreak</property>
                                 <property name="visible">True</property>
                               </object>
@@ -4395,6 +4224,39 @@
                                 <property name="expand">False</property>
                                 <property name="homogeneous">True</property>
                               </packing>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-16">
+                                <property name="tooltip-text">分隔符</property>
+                                <property name="label">分隔符</property>
+                                <property name="action-name">.uno:InsertBreak</property>
+                                <property name="visible">True</property>
+                                <property name="halign">start</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-17">
+                                <property name="tooltip-text">页码</property>
+                                <property name="label">页码</property>
+                                <property name="action-name">.uno:InsertPageNumberField</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-18">
+                                <property name="tooltip-text">页眉</property>
+                                <property name="label">页眉</property>
+                                <property name="action-name">.uno:InsertPageHeader</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-19">
+                                <property name="tooltip-text">页脚</property>
+                                <property name="label">页脚</property>
+                                <property name="action-name">.uno:InsertPageFooter</property>
+                                <property name="visible">True</property>
+                              </object>
                             </child>
                           </object>
                           <packing>
@@ -4429,10 +4291,10 @@
                                 <property name="toolbar-style">both-horiz</property>
                                 <property name="show-arrow">False</property>
                                 <child>
-                                  <object class="GtkToolButton" id="Insert-TitlePageDialog1">
-                                    <property name="tooltip-text">分隔符</property>
-                                    <property name="label">分隔符</property>
-                                    <property name="action-name">.uno:InsertBreak</property>
+                                  <object class="GtkMenuToolButton" id="Insert-TitlePageDialog1">
+                                    <property name="tooltip-text">表格</property>
+                                    <property name="label">表格</property>
+                                    <property name="action-name">.uno:InsertTable</property>
                                     <property name="visible">True</property>
                                   </object>
                                   <packing>
@@ -4455,15 +4317,55 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Insert-InsertSection1">
-                                    <property name="tooltip-text">页码</property>
-                                    <property name="label">页码</property>
-                                    <property name="action-name">.uno:InsertPageNumberField</property>
+                                    <property name="tooltip-text">图片</property>
+                                    <property name="label">图片</property>
+                                    <property name="action-name">.uno:InsertGraphic</property>
                                     <property name="visible">True</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
                                     <property name="homogeneous">True</property>
                                   </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="WPS-swriter-20">
+                                    <property name="tooltip-text">文档</property>
+                                    <property name="label">文档</property>
+                                    <property name="action-name">.uno:InsertDoc</property>
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="WPS-swriter-21">
+                                    <property name="tooltip-text">形状</property>
+                                    <property name="label">形状</property>
+                                    <property name="action-name">.uno:BasicShapes</property>
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="WPS-swriter-22">
+                                    <property name="tooltip-text">文本框</property>
+                                    <property name="label">文本框</property>
+                                    <property name="action-name">.uno:DrawText</property>
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="WPS-swriter-23">
+                                    <property name="tooltip-text">艺术字</property>
+                                    <property name="label">艺术字</property>
+                                    <property name="action-name">.uno:FontworkGalleryFloater</property>
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="WPS-swriter-24">
+                                    <property name="tooltip-text">图表</property>
+                                    <property name="label">图表</property>
+                                    <property name="action-name">.uno:InsertObjectChart</property>
+                                    <property name="visible">True</property>
+                                  </object>
                                 </child>
                               </object>
                               <packing>
@@ -4521,15 +4423,23 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="Insert-InserTable">
-                                <property name="tooltip-text">页眉</property>
-                                <property name="label">页眉</property>
-                                <property name="action-name">.uno:InsertPageHeader</property>
+                                <property name="tooltip-text">符号</property>
+                                <property name="label">符号</property>
+                                <property name="action-name">.uno:CharmapControl</property>
                                 <property name="visible">True</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="homogeneous">True</property>
                               </packing>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-25">
+                                <property name="tooltip-text">公式</property>
+                                <property name="label">公式</property>
+                                <property name="action-name">.uno:InsertObjectStarMath</property>
+                                <property name="visible">True</property>
+                              </object>
                             </child>
                           </object>
                           <packing>
@@ -4565,9 +4475,9 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Insert-InsertObjectChart1">
-                                    <property name="tooltip-text">页脚</property>
-                                    <property name="label">页脚</property>
-                                    <property name="action-name">.uno:InsertPageFooter</property>
+                                    <property name="tooltip-text">批注</property>
+                                    <property name="label">批注</property>
+                                    <property name="action-name">.uno:InsertAnnotation</property>
                                     <property name="visible">True</property>
                                   </object>
                                   <packing>
@@ -4589,16 +4499,32 @@
                                 <property name="toolbar-style">both-horiz</property>
                                 <property name="show-arrow">False</property>
                                 <child>
-                                  <object class="GtkMenuToolButton" id="Insert-InsertObject1">
-                                    <property name="tooltip-text">表格</property>
-                                    <property name="label">表格</property>
-                                    <property name="action-name">.uno:InsertTable</property>
+                                  <object class="GtkToolButton" id="Insert-InsertObject1">
+                                    <property name="tooltip-text">超链接</property>
+                                    <property name="label">超链接</property>
+                                    <property name="action-name">.uno:HyperlinkDialog</property>
                                     <property name="visible">True</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
                                     <property name="homogeneous">True</property>
                                   </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="WPS-swriter-26">
+                                    <property name="tooltip-text">书签</property>
+                                    <property name="label">书签</property>
+                                    <property name="action-name">.uno:InsertBookmark</property>
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="WPS-swriter-27">
+                                    <property name="tooltip-text">附件</property>
+                                    <property name="label">附件</property>
+                                    <property name="action-name">.uno:InsertObject</property>
+                                    <property name="visible">True</property>
+                                  </object>
                                 </child>
                               </object>
                               <packing>
@@ -4656,10 +4582,8 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="Insert-InsertGraphic">
-                                <property name="tooltip-text">图片</property>
-                                <property name="label">图片</property>
+                                <property name="visible">False</property>
                                 <property name="action-name">.uno:InsertGraphic</property>
-                                <property name="visible">True</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -4700,10 +4624,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Insert-Gallery1">
-                                    <property name="tooltip-text">文档</property>
-                                    <property name="label">文档</property>
-                                    <property name="action-name">.uno:InsertDoc</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:Gallery</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -4725,10 +4647,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Insert-InsertAVMedia1">
-                                    <property name="tooltip-text">形状</property>
-                                    <property name="label">形状</property>
-                                    <property name="action-name">.uno:BasicShapes</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:InsertAVMedia</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -4791,10 +4711,8 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="Insert-HyperlinkDialog">
-                                <property name="tooltip-text">文本框</property>
-                                <property name="label">文本框</property>
-                                <property name="action-name">.uno:DrawText</property>
-                                <property name="visible">True</property>
+                                <property name="visible">False</property>
+                                <property name="action-name">.uno:HyperlinkDialog</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -4835,10 +4753,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Insert-InsertBookmark1">
-                                    <property name="tooltip-text">艺术字</property>
-                                    <property name="label">艺术字</property>
-                                    <property name="action-name">.uno:FontworkGalleryFloater</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:InsertBookmark</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -4860,10 +4776,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Insert-InsertReferenceField1">
-                                    <property name="tooltip-text">图表</property>
-                                    <property name="label">图表</property>
-                                    <property name="action-name">.uno:InsertObjectChart</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:InsertReferenceField</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -4925,11 +4839,9 @@
                             <property name="show-arrow">False</property>
                             <property name="icon_size">3</property>
                             <child>
-                              <object class="GtkToolButton" id="Insert-InsertFieldCtrl">
-                                <property name="tooltip-text">符号</property>
-                                <property name="label">符号</property>
-                                <property name="action-name">.uno:CharmapControl</property>
-                                <property name="visible">True</property>
+                              <object class="GtkMenuToolButton" id="Insert-InsertFieldCtrl">
+                                <property name="visible">False</property>
+                                <property name="action-name">.uno:InsertFieldCtrl</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -4982,10 +4894,8 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="Insert-DrawText1">
-                                <property name="tooltip-text">公式</property>
-                                <property name="label">公式</property>
-                                <property name="action-name">.uno:InsertObjectStarMath</property>
-                                <property name="visible">True</property>
+                                <property name="visible">False</property>
+                                <property name="action-name">.uno:DrawText</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -4994,10 +4904,8 @@
                             </child>
                             <child>
                               <object class="GtkToolButton" id="Insert-VerticalText1">
-                                <property name="tooltip-text">批注</property>
-                                <property name="label">批注</property>
-                                <property name="action-name">.uno:InsertAnnotation</property>
-                                <property name="visible">True</property>
+                                <property name="visible">False</property>
+                                <property name="action-name">.uno:VerticalText</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -5038,10 +4946,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Insert-FontworkGalleryFloater">
-                                    <property name="tooltip-text">超链接</property>
-                                    <property name="label">超链接</property>
-                                    <property name="action-name">.uno:HyperlinkDialog</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:FontworkGalleryFloater</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -5063,10 +4969,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Insert-EditGlossary">
-                                    <property name="tooltip-text">书签</property>
-                                    <property name="label">书签</property>
-                                    <property name="action-name">.uno:InsertBookmark</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:EditGlossary</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -5132,10 +5036,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Insert-Line">
-                                    <property name="tooltip-text">附件</property>
-                                    <property name="label">附件</property>
-                                    <property name="action-name">.uno:InsertObject</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:Line</property>
                                   </object>
                                   <packing>
                                     <property name="expand">True</property>
@@ -5525,7 +5427,7 @@
                             <property name="icon_size">1</property>
                             <child>
                               <object class="GtkToolButton" id="Insert-InsertGraphic1">
-                                <property name="visible">False</property>
+                                <property name="visible">True</property>
                                 <property name="action-name">.uno:InsertGraphic</property>
                               </object>
                               <packing>
@@ -5535,7 +5437,7 @@
                             </child>
                             <child>
                               <object class="GtkToolButton" id="Insert-InsertDraw">
-                                <property name="visible">False</property>
+                                <property name="visible">True</property>
                                 <property name="valign">center</property>
                                 <property name="action-name">.uno:InsertDraw</property>
                               </object>
@@ -5546,7 +5448,7 @@
                             </child>
                             <child>
                               <object class="GtkToolButton" id="Insert-InserTable1">
-                                <property name="visible">False</property>
+                                <property name="visible">True</property>
                                 <property name="action-name">.uno:InsertTable</property>
                               </object>
                               <packing>
@@ -5649,6 +5551,38 @@
                                 <property name="homogeneous">False</property>
                               </packing>
                             </child>
+                            <child>
+                              <object class="GtkMenuToolButton" id="WPS-swriter-28">
+                                <property name="tooltip-text">纸张方向</property>
+                                <property name="label">纸张方向</property>
+                                <property name="action-name">.uno:Orientation</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-29">
+                                <property name="tooltip-text">纸张大小</property>
+                                <property name="label">纸张大小</property>
+                                <property name="action-name">.uno:Size</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-30">
+                                <property name="tooltip-text">分栏</property>
+                                <property name="label">分栏</property>
+                                <property name="action-name">.uno:FormatColumns</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-31">
+                                <property name="tooltip-text">文字方向</property>
+                                <property name="label">文字方向</property>
+                                <property name="action-name">.uno:TextdirectionLeftToRight</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -5679,16 +5613,42 @@
                             <property name="show-arrow">False</property>
                             <property name="icon_size">3</property>
                             <child>
-                              <object class="GtkMenuToolButton" id="Layout-Orientation">
-                                <property name="tooltip-text">纸张方向</property>
-                                <property name="label">纸张方向</property>
-                                <property name="action-name">.uno:Orientation</property>
+                              <object class="GtkToolButton" id="Layout-Orientation">
+                                <property name="tooltip-text">页面边框</property>
+                                <property name="label">页面边框</property>
+                                <property name="action-name">.uno:BorderDialog</property>
                                 <property name="visible">True</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="homogeneous">False</property>
                               </packing>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-32">
+                                <property name="tooltip-text">背景（页面设置）</property>
+                                <property name="label">背景（页面设置）</property>
+                                <property name="action-name">.uno:PageDialog</property>
+                                <property name="visible">True</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-33">
+                                <property name="tooltip-text">水印</property>
+                                <property name="label">水印</property>
+                                <property name="action-name">.uno:Watermark</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-34">
+                                <property name="tooltip-text">行号</property>
+                                <property name="label">行号</property>
+                                <property name="action-name">.uno:LineNumberingDialog</property>
+                                <property name="visible">True</property>
+                                <property name="halign">start</property>
+                              </object>
                             </child>
                           </object>
                           <packing>
@@ -5721,15 +5681,33 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="Layout-Size">
-                                <property name="tooltip-text">纸张大小</property>
-                                <property name="label">纸张大小</property>
-                                <property name="action-name">.uno:Size</property>
+                                <property name="tooltip-text">分页符</property>
+                                <property name="label">分页符</property>
+                                <property name="action-name">.uno:InsertPagebreak</property>
                                 <property name="visible">True</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="homogeneous">False</property>
                               </packing>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-35">
+                                <property name="tooltip-text">分隔符</property>
+                                <property name="label">分隔符</property>
+                                <property name="action-name">.uno:InsertBreak</property>
+                                <property name="visible">True</property>
+                                <property name="halign">start</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-36">
+                                <property name="tooltip-text">章节导航</property>
+                                <property name="label">章节导航</property>
+                                <property name="action-name">.uno:Navigator</property>
+                                <property name="visible">True</property>
+                                <property name="valign">center</property>
+                              </object>
                             </child>
                           </object>
                           <packing>
@@ -5762,15 +5740,31 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="Layout-Columns">
-                                <property name="tooltip-text">分栏</property>
-                                <property name="label">分栏</property>
-                                <property name="action-name">.uno:FormatColumns</property>
+                                <property name="tooltip-text">页眉</property>
+                                <property name="label">页眉</property>
+                                <property name="action-name">.uno:InsertPageHeader</property>
                                 <property name="visible">True</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="homogeneous">False</property>
                               </packing>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-37">
+                                <property name="tooltip-text">页脚</property>
+                                <property name="label">页脚</property>
+                                <property name="action-name">.uno:InsertPageFooter</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-38">
+                                <property name="tooltip-text">页码</property>
+                                <property name="label">页码</property>
+                                <property name="action-name">.uno:InsertPageNumberField</property>
+                                <property name="visible">True</property>
+                              </object>
                             </child>
                           </object>
                           <packing>
@@ -5809,10 +5803,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Layout-InsertPagebreak1">
-                                    <property name="tooltip-text">文字方向</property>
-                                    <property name="label">文字方向</property>
-                                    <property name="action-name">.uno:TextdirectionLeftToRight</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:InsertPagebreak</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -5834,11 +5826,9 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Layout-InsertBreak1">
-                                    <property name="tooltip-text">页面边框</property>
-                                    <property name="label">页面边框</property>
-                                    <property name="action-name">.uno:BorderDialog</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
                                     <property name="halign">start</property>
+                                    <property name="action-name">.uno:InsertBreak</property>
                                   </object>
                                   <packing>
                                     <property name="expand">True</property>
@@ -5902,12 +5892,10 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Layout-LeftParaMargin">
-                                    <property name="tooltip-text">背景（页面设置）</property>
-                                    <property name="label">背景（页面设置）</property>
-                                    <property name="action-name">.uno:PageDialog</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
                                     <property name="valign">center</property>
                                     <property name="vexpand">True</property>
+                                    <property name="action-name">.uno:LeftParaMargin</property>
                                   </object>
                                   <packing>
                                     <property name="expand">True</property>
@@ -5928,10 +5916,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Layout-RightParaMargin">
-                                    <property name="tooltip-text">水印</property>
-                                    <property name="label">水印</property>
-                                    <property name="action-name">.uno:Watermark</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:RightParaMargin</property>
                                   </object>
                                   <packing>
                                     <property name="expand">True</property>
@@ -5980,10 +5966,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Layout-AboveSpacing1">
-                                    <property name="tooltip-text">行号</property>
-                                    <property name="label">行号</property>
-                                    <property name="action-name">.uno:LineNumberingDialog</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:AboveSpacing</property>
                                   </object>
                                   <packing>
                                     <property name="expand">True</property>
@@ -6003,10 +5987,8 @@
                                 <property name="can-focus">True</property>
                                 <child>
                                   <object class="GtkToolButton" id="Layout-BelowSpacing1">
-                                    <property name="tooltip-text">空白页</property>
-                                    <property name="label">空白页</property>
-                                    <property name="action-name">.uno:InsertPagebreak</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:BelowSpacing</property>
                                   </object>
                                   <packing>
                                     <property name="expand">True</property>
@@ -6069,10 +6051,8 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="Layout-Wizard">
-                                <property name="tooltip-text">分隔符</property>
-                                <property name="label">分隔符</property>
-                                <property name="action-name">.uno:InsertBreak</property>
-                                <property name="visible">True</property>
+                                <property name="visible">False</property>
+                                <property name="action-name">.uno:PageNumberWizard</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -6113,10 +6093,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Layout-TitlePageDialog">
-                                    <property name="tooltip-text">章节导航</property>
-                                    <property name="label">章节导航</property>
-                                    <property name="action-name">.uno:Navigator</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:TitlePageDialog</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -6138,10 +6116,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Layout-Watermark">
-                                    <property name="tooltip-text">页眉</property>
-                                    <property name="label">页眉</property>
-                                    <property name="action-name">.uno:InsertPageHeader</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:Watermark</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -6194,10 +6170,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Layout-Hyphenate1">
-                                    <property name="tooltip-text">页脚</property>
-                                    <property name="label">页脚</property>
-                                    <property name="action-name">.uno:InsertPageFooter</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:Hyphenate</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -6221,11 +6195,9 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Layout-LineNumberingDialog1">
-                                    <property name="tooltip-text">页码</property>
-                                    <property name="label">页码</property>
-                                    <property name="action-name">.uno:InsertPageNumberField</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
                                     <property name="halign">start</property>
+                                    <property name="action-name">.uno:LineNumberingDialog</property>
                                   </object>
                                   <packing>
                                     <property name="expand">True</property>
@@ -6765,7 +6737,7 @@
                             <property name="icon_size">1</property>
                             <child>
                               <object class="GtkToolButton" id="Layout-PageDialog">
-                                <property name="visible">False</property>
+                                <property name="visible">True</property>
                                 <property name="valign">center</property>
                                 <property name="action-name">.uno:PageDialog</property>
                               </object>
@@ -6867,6 +6839,22 @@
                                 <property name="homogeneous">True</property>
                               </packing>
                             </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-39">
+                                <property name="tooltip-text">更新目录</property>
+                                <property name="label">更新目录</property>
+                                <property name="action-name">.uno:UpdateAllIndexes</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-40">
+                                <property name="tooltip-text">目录级别</property>
+                                <property name="label">目录级别</property>
+                                <property name="action-name">.uno:OutlineBullet</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -6902,9 +6890,9 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="References-InsertIndexesEntry1">
-                                    <property name="tooltip-text">更新目录</property>
-                                    <property name="label">更新目录</property>
-                                    <property name="action-name">.uno:UpdateAllIndexes</property>
+                                    <property name="tooltip-text">插入脚注</property>
+                                    <property name="label">插入脚注</property>
+                                    <property name="action-name">.uno:InsertFootnote</property>
                                     <property name="visible">True</property>
                                   </object>
                                   <packing>
@@ -6927,15 +6915,31 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="References-UpdateAllIndexes1">
-                                    <property name="tooltip-text">目录级别</property>
-                                    <property name="label">目录级别</property>
-                                    <property name="action-name">.uno:OutlineBullet</property>
+                                    <property name="tooltip-text">上一条脚注</property>
+                                    <property name="label">上一条脚注</property>
+                                    <property name="action-name">.uno:JumpToPrevFootnote</property>
                                     <property name="visible">True</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
                                     <property name="homogeneous">True</property>
                                   </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="WPS-swriter-41">
+                                    <property name="tooltip-text">下一条脚注</property>
+                                    <property name="label">下一条脚注</property>
+                                    <property name="action-name">.uno:JumpToNextFootnote</property>
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="WPS-swriter-42">
+                                    <property name="tooltip-text">插入尾注</property>
+                                    <property name="label">插入尾注</property>
+                                    <property name="action-name">.uno:InsertEndnote</property>
+                                    <property name="visible">True</property>
+                                  </object>
                                 </child>
                               </object>
                               <packing>
@@ -6993,15 +6997,23 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="References-InsertFootnote">
-                                <property name="tooltip-text">插入脚注</property>
-                                <property name="label">插入脚注</property>
-                                <property name="action-name">.uno:InsertFootnote</property>
+                                <property name="tooltip-text">题注</property>
+                                <property name="label">题注</property>
+                                <property name="action-name">.uno:InsertCaptionDialog</property>
                                 <property name="visible">True</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="homogeneous">True</property>
                               </packing>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-43">
+                                <property name="tooltip-text">交叉引用</property>
+                                <property name="label">交叉引用</property>
+                                <property name="action-name">.uno:InsertReferenceField</property>
+                                <property name="visible">True</property>
+                              </object>
                             </child>
                           </object>
                           <packing>
@@ -7040,9 +7052,9 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="References-InsertEndnote1">
-                                    <property name="tooltip-text">上一条脚注</property>
-                                    <property name="label">上一条脚注</property>
-                                    <property name="action-name">.uno:JumpToPrevFootnote</property>
+                                    <property name="tooltip-text">标记索引项</property>
+                                    <property name="label">标记索引项</property>
+                                    <property name="action-name">.uno:InsertIndexesEntry</property>
                                     <property name="visible">True</property>
                                   </object>
                                   <packing>
@@ -7067,15 +7079,23 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="References-FootnoteDialog1">
-                                    <property name="tooltip-text">下一条脚注</property>
-                                    <property name="label">下一条脚注</property>
-                                    <property name="action-name">.uno:JumpToNextFootnote</property>
+                                    <property name="tooltip-text">插入索引</property>
+                                    <property name="label">插入索引</property>
+                                    <property name="action-name">.uno:InsertMultiIndex</property>
                                     <property name="visible">True</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
                                     <property name="homogeneous">True</property>
                                   </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="WPS-swriter-44">
+                                    <property name="tooltip-text">更新索引</property>
+                                    <property name="label">更新索引</property>
+                                    <property name="action-name">.uno:UpdateAllIndexes</property>
+                                    <property name="visible">True</property>
+                                  </object>
                                 </child>
                               </object>
                               <packing>
@@ -7133,9 +7153,9 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="References-InsertReferenceField">
-                                <property name="tooltip-text">插入尾注</property>
-                                <property name="label">插入尾注</property>
-                                <property name="action-name">.uno:InsertEndnote</property>
+                                <property name="tooltip-text">邮件合并</property>
+                                <property name="label">邮件合并</property>
+                                <property name="action-name">.uno:MailMergeWizard</property>
                                 <property name="visible">True</property>
                               </object>
                               <packing>
@@ -7178,10 +7198,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="References-InsertBookmark1">
-                                    <property name="tooltip-text">题注</property>
-                                    <property name="label">题注</property>
-                                    <property name="action-name">.uno:InsertCaptionDialog</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:InsertBookmark</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -7203,10 +7221,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="References-InsertCaptionDialog1">
-                                    <property name="tooltip-text">交叉引用</property>
-                                    <property name="label">交叉引用</property>
-                                    <property name="action-name">.uno:InsertReferenceField</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:InsertCaptionDialog</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -7268,11 +7284,9 @@
                             <property name="show-arrow">False</property>
                             <property name="icon_size">3</property>
                             <child>
-                              <object class="GtkToolButton" id="References-InsertFieldCtrl">
-                                <property name="tooltip-text">标记索引项</property>
-                                <property name="label">标记索引项</property>
-                                <property name="action-name">.uno:InsertIndexesEntry</property>
-                                <property name="visible">True</property>
+                              <object class="GtkMenuToolButton" id="References-InsertFieldCtrl">
+                                <property name="visible">False</property>
+                                <property name="action-name">.uno:InsertFieldCtrl</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -7314,10 +7328,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="References-InsertPageNumberField1">
-                                    <property name="tooltip-text">插入索引</property>
-                                    <property name="label">插入索引</property>
-                                    <property name="action-name">.uno:InsertMultiIndex</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:InsertPageNumberField</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -7326,10 +7338,8 @@
                                 </child>
                                 <child>
                                   <object class="GtkToolButton" id="References-InsertPageCountField1">
-                                    <property name="tooltip-text">更新索引</property>
-                                    <property name="label">更新索引</property>
-                                    <property name="action-name">.uno:UpdateAllIndexes</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:InsertPageCountField</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -7351,10 +7361,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="References-InsertDateField1">
-                                    <property name="tooltip-text">邮件合并</property>
-                                    <property name="label">邮件合并</property>
-                                    <property name="action-name">.uno:MailMergeWizard</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:InsertDateField</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -7578,7 +7586,7 @@
                             <property name="icon_size">1</property>
                             <child>
                               <object class="GtkToolButton" id="References-UpdateAll">
-                                <property name="visible">False</property>
+                                <property name="visible">True</property>
                                 <property name="valign">center</property>
                                 <property name="action-name">.uno:UpdateAll</property>
                               </object>
@@ -7692,6 +7700,14 @@
                                 <property name="homogeneous">True</property>
                               </packing>
                             </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-45">
+                                <property name="tooltip-text">字数统计</property>
+                                <property name="label">字数统计</property>
+                                <property name="action-name">.uno:WordCountDialog</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -7727,9 +7743,9 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Review-SpellOnline1">
-                                    <property name="tooltip-text">字数统计</property>
-                                    <property name="label">字数统计</property>
-                                    <property name="action-name">.uno:WordCountDialog</property>
+                                    <property name="tooltip-text">插入批注</property>
+                                    <property name="label">插入批注</property>
+                                    <property name="action-name">.uno:InsertAnnotation</property>
                                     <property name="visible">True</property>
                                   </object>
                                   <packing>
@@ -7752,15 +7768,31 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Review-WordCountDialog1">
-                                    <property name="tooltip-text">插入批注</property>
-                                    <property name="label">插入批注</property>
-                                    <property name="action-name">.uno:InsertAnnotation</property>
+                                    <property name="tooltip-text">删除批注</property>
+                                    <property name="label">删除批注</property>
+                                    <property name="action-name">.uno:DeleteComment</property>
                                     <property name="visible">True</property>
                                   </object>
                                   <packing>
                                     <property name="expand">True</property>
                                     <property name="homogeneous">True</property>
                                   </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="WPS-swriter-46">
+                                    <property name="tooltip-text">上一条批注</property>
+                                    <property name="label">上一条批注</property>
+                                    <property name="action-name">.uno:PreviousAnnotation</property>
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="WPS-swriter-47">
+                                    <property name="tooltip-text">下一条批注</property>
+                                    <property name="label">下一条批注</property>
+                                    <property name="action-name">.uno:NextAnnotation</property>
+                                    <property name="visible">True</property>
+                                  </object>
                                 </child>
                               </object>
                               <packing>
@@ -7818,15 +7850,48 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="Review-InsertAnnotation">
-                                <property name="tooltip-text">删除批注</property>
-                                <property name="label">删除批注</property>
-                                <property name="action-name">.uno:DeleteComment</property>
+                                <property name="tooltip-text">修订</property>
+                                <property name="label">修订</property>
+                                <property name="action-name">.uno:TrackChanges</property>
                                 <property name="visible">True</property>
                               </object>
                               <packing>
                                 <property name="expand">True</property>
                                 <property name="homogeneous">True</property>
                               </packing>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-48">
+                                <property name="tooltip-text">显示标记</property>
+                                <property name="label">显示标记</property>
+                                <property name="action-name">.uno:ShowTrackedChanges</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-49">
+                                <property name="tooltip-text">管理修订</property>
+                                <property name="label">管理修订</property>
+                                <property name="action-name">.uno:AcceptTrackedChanges</property>
+                                <property name="visible">True</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-50">
+                                <property name="tooltip-text">接受</property>
+                                <property name="label">接受</property>
+                                <property name="action-name">.uno:AcceptTrackedChange</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-51">
+                                <property name="tooltip-text">拒绝</property>
+                                <property name="label">拒绝</property>
+                                <property name="action-name">.uno:RejectTrackedChange</property>
+                                <property name="visible">True</property>
+                              </object>
                             </child>
                           </object>
                           <packing>
@@ -7865,9 +7930,9 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Review-ReplyComment1">
-                                    <property name="tooltip-text">上一条批注</property>
-                                    <property name="label">上一条批注</property>
-                                    <property name="action-name">.uno:PreviousAnnotation</property>
+                                    <property name="tooltip-text">翻译</property>
+                                    <property name="label">翻译</property>
+                                    <property name="action-name">.uno:Translate</property>
                                     <property name="visible">True</property>
                                   </object>
                                   <packing>
@@ -7892,9 +7957,9 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Review-DeleteComment1">
-                                    <property name="tooltip-text">下一条批注</property>
-                                    <property name="label">下一条批注</property>
-                                    <property name="action-name">.uno:NextAnnotation</property>
+                                    <property name="tooltip-text">繁转简</property>
+                                    <property name="label">繁转简</property>
+                                    <property name="action-name">.uno:ChineseConversion</property>
                                     <property name="visible">True</property>
                                   </object>
                                   <packing>
@@ -7958,10 +8023,8 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="Review-TrackChanges">
-                                <property name="tooltip-text">修订</property>
-                                <property name="label">修订</property>
+                                <property name="visible">False</property>
                                 <property name="action-name">.uno:TrackChanges</property>
-                                <property name="visible">True</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -7970,10 +8033,8 @@
                             </child>
                             <child>
                               <object class="GtkToolButton" id="Review-ShowTrackedChanges">
-                                <property name="tooltip-text">显示标记</property>
-                                <property name="label">显示标记</property>
+                                <property name="visible">False</property>
                                 <property name="action-name">.uno:ShowTrackedChanges</property>
-                                <property name="visible">True</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -8015,10 +8076,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Review-NextTrackedChange1">
-                                    <property name="tooltip-text">管理修订</property>
-                                    <property name="label">管理修订</property>
-                                    <property name="action-name">.uno:AcceptTrackedChanges</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:NextTrackedChange</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -8040,10 +8099,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Review-PreviousTrackedChange1">
-                                    <property name="tooltip-text">接受</property>
-                                    <property name="label">接受</property>
-                                    <property name="action-name">.uno:AcceptTrackedChange</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:PreviousTrackedChange</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -8095,10 +8152,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Review-AcceptTrackedChange2">
-                                    <property name="tooltip-text">拒绝</property>
-                                    <property name="label">拒绝</property>
-                                    <property name="action-name">.uno:RejectTrackedChange</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:AcceptTrackedChange</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -8120,10 +8175,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Review-RejectTrackedChange2">
-                                    <property name="tooltip-text">翻译</property>
-                                    <property name="label">翻译</property>
-                                    <property name="action-name">.uno:Translate</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:RejectTrackedChange</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -8175,10 +8228,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Review-AcceptTrackedChangeToNext">
-                                    <property name="tooltip-text">繁转简</property>
-                                    <property name="label">繁转简</property>
-                                    <property name="action-name">.uno:ChineseConversion</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:AcceptTrackedChangeToNext</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -8606,7 +8657,7 @@
                             <property name="icon_size">1</property>
                             <child>
                               <object class="GtkToolButton" id="Review-AcceptTrackedChanges">
-                                <property name="visible">False</property>
+                                <property name="visible">True</property>
                                 <property name="valign">center</property>
                                 <property name="action-name">.uno:AcceptTrackedChanges</property>
                               </object>
@@ -8708,6 +8759,30 @@
                                 <property name="homogeneous">True</property>
                               </packing>
                             </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-52">
+                                <property name="tooltip-text">只读模式</property>
+                                <property name="label">只读模式</property>
+                                <property name="action-name">.uno:ReadOnlyDoc</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-53">
+                                <property name="tooltip-text">页面</property>
+                                <property name="label">页面</property>
+                                <property name="action-name">.uno:PrintLayout</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-54">
+                                <property name="tooltip-text">Web版式</property>
+                                <property name="label">Web版式</property>
+                                <property name="action-name">.uno:BrowseView</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -8739,15 +8814,47 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="View-BrowseView1">
-                                <property name="tooltip-text">阅读模式</property>
-                                <property name="label">阅读模式</property>
-                                <property name="action-name">.uno:ReadOnlyDoc</property>
+                                <property name="tooltip-text">导航窗格</property>
+                                <property name="label">导航窗格</property>
+                                <property name="action-name">.uno:Navigator</property>
                                 <property name="visible">True</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="homogeneous">True</property>
                               </packing>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-55">
+                                <property name="tooltip-text">标尺</property>
+                                <property name="label">标尺</property>
+                                <property name="action-name">.uno:Ruler</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-56">
+                                <property name="tooltip-text">格式标记</property>
+                                <property name="label">格式标记</property>
+                                <property name="action-name">.uno:ControlCodes</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-57">
+                                <property name="tooltip-text">网格线</property>
+                                <property name="label">网格线</property>
+                                <property name="action-name">.uno:GridVisible</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-58">
+                                <property name="tooltip-text">样式窗格</property>
+                                <property name="label">样式窗格</property>
+                                <property name="action-name">.uno:DesignerDialog</property>
+                                <property name="visible">True</property>
+                              </object>
                             </child>
                           </object>
                           <packing>
@@ -8780,15 +8887,39 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="View-PrintPreview2">
-                                <property name="tooltip-text">页面</property>
-                                <property name="label">页面</property>
-                                <property name="action-name">.uno:PrintLayout</property>
+                                <property name="tooltip-text">显示比例</property>
+                                <property name="label">显示比例</property>
+                                <property name="action-name">.uno:Zoom</property>
                                 <property name="visible">True</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="homogeneous">True</property>
                               </packing>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-59">
+                                <property name="tooltip-text">100%</property>
+                                <property name="label">100%</property>
+                                <property name="action-name">.uno:Zoom100Percent</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-60">
+                                <property name="tooltip-text">页宽</property>
+                                <property name="label">页宽</property>
+                                <property name="action-name">.uno:ZoomPageWidth</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-61">
+                                <property name="tooltip-text">整页</property>
+                                <property name="label">整页</property>
+                                <property name="action-name">.uno:ZoomPage</property>
+                                <property name="visible">True</property>
+                              </object>
                             </child>
                           </object>
                           <packing>
@@ -8828,9 +8959,9 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="View-ControlCodes3">
-                                    <property name="tooltip-text">Web版式</property>
-                                    <property name="label">Web版式</property>
-                                    <property name="action-name">.uno:BrowseView</property>
+                                    <property name="tooltip-text">新建窗口</property>
+                                    <property name="label">新建窗口</property>
+                                    <property name="action-name">.uno:NewWindow</property>
                                     <property name="visible">True</property>
                                   </object>
                                   <packing>
@@ -8853,10 +8984,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="View-ShowWhitespace3">
-                                    <property name="tooltip-text">导航窗格</property>
-                                    <property name="label">导航窗格</property>
-                                    <property name="action-name">.uno:Navigator</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:ShowWhitespace</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -8919,10 +9048,8 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="View-DarkMode">
-                                <property name="tooltip-text">标尺</property>
-                                <property name="label">标尺</property>
-                                <property name="action-name">.uno:Ruler</property>
-                                <property name="visible">True</property>
+                                <property name="visible">False</property>
+                                <property name="action-name">.uno:ChangeTheme</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -8975,10 +9102,8 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="View-ZoomOptimal">
-                                <property name="tooltip-text">格式标记</property>
-                                <property name="label">格式标记</property>
-                                <property name="action-name">.uno:ControlCodes</property>
-                                <property name="visible">True</property>
+                                <property name="visible">False</property>
+                                <property name="action-name">.uno:ZoomOptimal</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -9020,10 +9145,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="View-Zoom100Percent1">
-                                    <property name="tooltip-text">网格线</property>
-                                    <property name="label">网格线</property>
-                                    <property name="action-name">.uno:GridVisible</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:Zoom100Percent</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -9045,10 +9168,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="View-ZoomPage1">
-                                    <property name="tooltip-text">样式窗格</property>
-                                    <property name="label">样式窗格</property>
-                                    <property name="action-name">.uno:DesignerDialog</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:ZoomPage</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -9100,10 +9221,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="View-FullScreen2">
-                                    <property name="tooltip-text">显示比例</property>
-                                    <property name="label">显示比例</property>
-                                    <property name="action-name">.uno:Zoom</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:FullScreen</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -9125,10 +9244,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="View-ZoomPageWidth2">
-                                    <property name="tooltip-text">100%</property>
-                                    <property name="label">100%</property>
-                                    <property name="action-name">.uno:Zoom100Percent</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:ZoomPageWidth</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -9191,10 +9308,8 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="View-Sidebar">
-                                <property name="tooltip-text">页宽</property>
-                                <property name="label">页宽</property>
-                                <property name="action-name">.uno:ZoomPageWidth</property>
-                                <property name="visible">True</property>
+                                <property name="visible">False</property>
+                                <property name="action-name">.uno:Sidebar</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -9238,10 +9353,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="View-Ruler1">
-                                    <property name="tooltip-text">整页</property>
-                                    <property name="label">整页</property>
-                                    <property name="action-name">.uno:ZoomPage</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:Ruler</property>
                                   </object>
                                   <packing>
                                     <property name="expand">True</property>
@@ -9265,10 +9378,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="View-GridVisible1">
-                                    <property name="tooltip-text">新建窗口</property>
-                                    <property name="label">新建窗口</property>
-                                    <property name="action-name">.uno:NewWindow</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:GridVisible</property>
                                   </object>
                                   <packing>
                                     <property name="expand">True</property>
@@ -9624,7 +9735,7 @@
                             <property name="icon_size">1</property>
                             <child>
                               <object class="GtkToolButton" id="View-Zoom">
-                                <property name="visible">False</property>
+                                <property name="visible">True</property>
                                 <property name="valign">center</property>
                                 <property name="action-name">.uno:Zoom</property>
                               </object>
@@ -9726,6 +9837,30 @@
                                 <property name="homogeneous">True</property>
                               </packing>
                             </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-62">
+                                <property name="tooltip-text">宏管理</property>
+                                <property name="label">宏管理</property>
+                                <property name="action-name">.uno:MacroDialog</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-63">
+                                <property name="tooltip-text">加载项</property>
+                                <property name="label">加载项</property>
+                                <property name="action-name">.uno:ExtensionManager</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="WPS-swriter-64">
+                                <property name="tooltip-text">开发工具</property>
+                                <property name="label">开发工具</property>
+                                <property name="action-name">.uno:AvailableToolbars</property>
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -9761,9 +9896,9 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Tools-BasicIDEAppear1">
-                                    <property name="tooltip-text">宏管理</property>
-                                    <property name="label">宏管理</property>
-                                    <property name="action-name">.uno:MacroDialog</property>
+                                    <property name="tooltip-text">自动更正</property>
+                                    <property name="label">自动更正</property>
+                                    <property name="action-name">.uno:AutoCorrectDlg</property>
                                     <property name="visible">True</property>
                                   </object>
                                   <packing>
@@ -9785,15 +9920,23 @@
                                 <property name="toolbar-style">both-horiz</property>
                                 <child>
                                   <object class="GtkToolButton" id="Tools-MacroDialog1">
-                                    <property name="tooltip-text">加载项</property>
-                                    <property name="label">加载项</property>
-                                    <property name="action-name">.uno:ExtensionManager</property>
+                                    <property name="tooltip-text">选项</property>
+                                    <property name="label">选项</property>
+                                    <property name="action-name">.uno:OptionsTreeDialog</property>
                                     <property name="visible">True</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
                                     <property name="homogeneous">True</property>
                                   </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="WPS-swriter-65">
+                                    <property name="tooltip-text">自定义</property>
+                                    <property name="label">自定义</property>
+                                    <property name="action-name">.uno:ConfigureDialog</property>
+                                    <property name="visible">True</property>
+                                  </object>
                                 </child>
                               </object>
                               <packing>
@@ -9851,10 +9994,8 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="Tools-MailMergeWizard">
-                                <property name="tooltip-text">开发工具</property>
-                                <property name="label">开发工具</property>
-                                <property name="action-name">.uno:AvailableToolbars</property>
-                                <property name="visible">True</property>
+                                <property name="visible">False</property>
+                                <property name="action-name">.uno:MailMergeWizard</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -9898,10 +10039,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Tools-InsertEnvelope1">
-                                    <property name="tooltip-text">自动更正</property>
-                                    <property name="label">自动更正</property>
-                                    <property name="action-name">.uno:AutoCorrectDlg</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:InsertEnvelope</property>
                                   </object>
                                   <packing>
                                     <property name="expand">True</property>
@@ -9925,10 +10064,8 @@
                                 <property name="show-arrow">False</property>
                                 <child>
                                   <object class="GtkToolButton" id="Tools-SendMail1">
-                                    <property name="tooltip-text">选项</property>
-                                    <property name="label">选项</property>
-                                    <property name="action-name">.uno:OptionsTreeDialog</property>
-                                    <property name="visible">True</property>
+                                    <property name="visible">False</property>
+                                    <property name="action-name">.uno:SendMail</property>
                                   </object>
                                   <packing>
                                     <property name="expand">True</property>
@@ -9991,10 +10128,8 @@
                             <property name="icon_size">3</property>
                             <child>
                               <object class="GtkToolButton" id="Tools-SwitchControlDesignMode">
-                                <property name="tooltip-text">自定义</property>
-                                <property name="label">自定义</property>
-                                <property name="action-name">.uno:ConfigureDialog</property>
-                                <property name="visible">True</property>
+                                <property name="visible">False</property>
+                                <property name="action-name">.uno:SwitchControlDesignMode</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -10670,7 +10805,7 @@
                             <property name="icon_size">1</property>
                             <child>
                               <object class="GtkToolButton" id="Tools-OptionsTreeDialog">
-                                <property name="visible">False</property>
+                                <property name="visible">True</property>
                                 <property name="action-name">.uno:OptionsTreeDialog</property>
                               </object>
                               <packing>

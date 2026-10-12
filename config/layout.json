@@ -10,14 +10,15 @@
     "View": "视图",
     "Tools": "工具",
     "Dev": "工具",
-    "File": "文件"
+    "File": "文件",
+    "Page": "页面"
   },
   "modules": {
     "swriter": {
       "Insert": [
         [
           {
-            "label": "空白页",
+            "label": "分页符",
             "command": ".uno:InsertPagebreak"
           },
           {
@@ -139,7 +140,7 @@
         ],
         [
           {
-            "label": "空白页",
+            "label": "分页符",
             "command": ".uno:InsertPagebreak"
           },
           {
@@ -313,7 +314,7 @@
             "command": ".uno:FullScreen"
           },
           {
-            "label": "阅读模式",
+            "label": "只读模式",
             "command": ".uno:ReadOnlyDoc"
           },
           {
@@ -637,7 +638,7 @@
         ],
         [
           {
-            "label": "填充",
+            "label": "向下填充",
             "command": ".uno:FillDown"
           },
           {
@@ -840,6 +841,204 @@
           }
         ],
         [
+          {
+            "label": "选项",
+            "command": ".uno:OptionsTreeDialog"
+          },
+          {
+            "label": "自定义",
+            "command": ".uno:ConfigureDialog"
+          }
+        ]
+      ]
+    },
+    "sdraw": {
+      "Insert": [
+        [
+          {
+            "label": "图片",
+            "command": ".uno:InsertGraphic"
+          },
+          {
+            "label": "文本框",
+            "command": ".uno:Text"
+          },
+          {
+            "label": "表格",
+            "command": ".uno:InsertTable"
+          }
+        ],
+        [
+          {
+            "label": "形状",
+            "command": ".uno:BasicShapes"
+          },
+          {
+            "label": "连接线",
+            "command": ".uno:ConnectorToolbox"
+          },
+          {
+            "label": "艺术字",
+            "command": ".uno:FontworkGalleryFloater"
+          }
+        ],
+        [
+          {
+            "label": "新建页面",
+            "command": ".uno:InsertPage"
+          },
+          {
+            "label": "符号",
+            "command": ".uno:CharmapControl"
+          },
+          {
+            "label": "超链接",
+            "command": ".uno:HyperlinkDialog"
+          }
+        ]
+      ],
+      "Page": [
+        [
+          {
+            "label": "页面设置",
+            "command": ".uno:PageSetup"
+          },
+          {
+            "label": "新建页面",
+            "command": ".uno:InsertPage"
+          },
+          {
+            "label": "复制页面",
+            "command": ".uno:DuplicatePage"
+          },
+          {
+            "label": "删除页面",
+            "command": ".uno:DeletePage"
+          }
+        ],
+        [
+          {
+            "label": "母版页面",
+            "command": ".uno:MasterPage"
+          },
+          {
+            "label": "插入图层",
+            "command": ".uno:InsertLayer"
+          }
+        ]
+      ],
+      "Review": [
+        [
+          {
+            "label": "拼写检查",
+            "command": ".uno:SpellingAndGrammarDialog"
+          },
+          {
+            "label": "批注",
+            "command": ".uno:InsertAnnotation"
+          },
+          {
+            "label": "删除批注",
+            "command": ".uno:DeleteAnnotation"
+          }
+        ]
+      ],
+      "View": [
+        [
+          {
+            "label": "普通视图",
+            "command": ".uno:NormalMultiPaneGUI"
+          },
+          {
+            "label": "全屏",
+            "command": ".uno:FullScreen"
+          },
+          {
+            "label": "显示比例",
+            "command": ".uno:Zoom"
+          }
+        ],
+        [
+          {
+            "label": "页面缩略图",
+            "command": ".uno:LeftPaneDraw"
+          },
+          {
+            "label": "侧边栏",
+            "command": ".uno:Sidebar"
+          },
+          {
+            "label": "标尺",
+            "command": ".uno:Ruler"
+          }
+        ],
+        [
+          {
+            "label": "网格",
+            "command": ".uno:GridVisible"
+          },
+          {
+            "label": "参考线",
+            "command": ".uno:HelplinesVisible"
+          },
+          {
+            "label": "吸附到网格",
+            "command": ".uno:GridUse"
+          }
+        ]
+      ],
+      "Tools": [
+        [
+          {
+            "label": "对齐",
+            "command": ".uno:ObjectAlign"
+          },
+          {
+            "label": "分布",
+            "command": ".uno:DistributeSelection"
+          },
+          {
+            "label": "位置和大小",
+            "command": ".uno:TransformDialog"
+          }
+        ],
+        [
+          {
+            "label": "组合",
+            "command": ".uno:FormatGroup"
+          },
+          {
+            "label": "取消组合",
+            "command": ".uno:FormatUngroup"
+          },
+          {
+            "label": "旋转",
+            "command": ".uno:ToggleObjectRotateMode"
+          }
+        ],
+        [
+          {
+            "label": "置于顶层",
+            "command": ".uno:BringToFront"
+          },
+          {
+            "label": "置于底层",
+            "command": ".uno:SendToBack"
+          },
+          {
+            "label": "水平翻转",
+            "command": ".uno:FlipHorizontal"
+          },
+          {
+            "label": "垂直翻转",
+            "command": ".uno:FlipVertical"
+          }
+        ],
+        [
+          {
+            "label": "导出 PDF",
+            "command": ".uno:ExportToPDF"
+          },
           {
             "label": "选项",
             "command": ".uno:OptionsTreeDialog"

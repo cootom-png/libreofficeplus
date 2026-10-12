@@ -13,24 +13,53 @@ $initial = @'
 <oor:items xmlns:oor="http://openoffice.org/2001/registry">
 <item oor:path="/org.openoffice.Office.UI.ToolbarMode"><prop oor:name="ActiveWriter" oor:op="fuse"><value>original.ui</value></prop><prop oor:name="Unrelated" oor:op="fuse"><value>keep</value></prop></item>
 <item oor:path="/org.openoffice.Office.UI.WriterCommands/UserInterface/Commands/.uno:FormatPaintbrush"><prop oor:name="Label" oor:op="fuse"><value xml:lang="zh-CN">原始名称</value><value xml:lang="en-US">Custom name</value></prop></item>
+<item oor:path="/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/org.openoffice.Office.Accelerators:Module['com.sun.star.text.TextDocument']/org.openoffice.Office.Accelerators:Key['D_MOD1']/Command"><value xml:lang="en-US">.uno:UnderlineDouble</value><value xml:lang="zh-CN">.uno:CustomFont</value></item>
 </oor:items>
 '@
 [IO.File]::WriteAllText($config,$initial,[Text.UTF8Encoding]::new($false))
 $oldUi = '<interface><object class="GtkBox" id="original"/></interface>'
 $writerUi = Join-Path $profile 'config\soffice.cfg\modules\swriter\ui\notebookbar.ui'
 $calcUi = Join-Path $profile 'config\soffice.cfg\modules\scalc\ui\notebookbar.ui'
+$drawUi = Join-Path $profile 'config\soffice.cfg\modules\sdraw\ui\notebookbar.ui'
 New-Item -ItemType Directory -Path (Split-Path $writerUi) -Force | Out-Null
 [IO.File]::WriteAllText($writerUi,$oldUi)
 function Semantic($text) {
     [xml]$xml = $text
     @($xml.DocumentElement.SelectNodes('item') | ForEach-Object {
-        $path = $_.GetAttribute('path',$ns)
-        foreach ($prop in $_.ChildNodes) { "$path|$($prop.GetAttribute('name',$ns))|$($prop.InnerXml)" }
+        $path = [regex]::Replace($_.GetAttribute('path',$ns), "[^/:\[\]]+:[^/:\[\]]+\['([^']*)'\]", '$1')
+        $props=@($_.SelectNodes('prop'))
+        if (!$props.Count) {
+            $name=$path.Substring($path.LastIndexOf('/')+1); $path=$path.Substring(0,$path.LastIndexOf('/'))
+            $props=@($_)
+        }
+        foreach ($prop in $props) {
+            if ($prop.LocalName -eq 'prop') { $name=$prop.GetAttribute('name',$ns) }
+            $values=@($prop.SelectNodes('value') | ForEach-Object { "$($_.GetAttribute('lang','http://www.w3.org/XML/1998/namespace'))=$($_.InnerText)" }) -join ';'
+            "$path|$name|$values"
+        }
     } | Sort-Object)
+}
+function Simulate-NativeSave {
+    [xml]$xml=Get-Content -LiteralPath $config -Raw -Encoding UTF8
+    foreach ($item in @($xml.DocumentElement.SelectNodes('item'))) {
+        foreach ($prop in @($item.SelectNodes('prop'))) {
+            if (!@($prop.SelectNodes('value') | Where-Object { $_.HasAttribute('lang','http://www.w3.org/XML/1998/namespace') }).Count) { continue }
+            $path=$item.GetAttribute('path',$ns)
+            if ($path -match '/Modules/com.sun.star.text.TextDocument/([^/]+)$') {
+                $path="/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/org.openoffice.Office.Accelerators:Module['com.sun.star.text.TextDocument']/org.openoffice.Office.Accelerators:Key['$($Matches[1])']"
+            }
+            $direct=$xml.CreateElement('item'); $direct.SetAttribute('path',$ns,"$path/$($prop.GetAttribute('name',$ns))") | Out-Null
+            foreach ($value in $prop.SelectNodes('value')) { $direct.AppendChild($value.CloneNode($true)) | Out-Null }
+            $xml.DocumentElement.AppendChild($direct) | Out-Null; $item.RemoveChild($prop) | Out-Null
+        }
+        if (!$item.HasChildNodes) { $xml.DocumentElement.RemoveChild($item) | Out-Null }
+    }
+    $xml.Save($config)
 }
 function Check-Restore {
     if ((Get-Content -LiteralPath $writerUi -Raw) -ne $oldUi) { throw '原界面未恢复' }
     if (Test-Path -LiteralPath $calcUi) { throw '新增界面未删除' }
+    if (Test-Path -LiteralPath $drawUi) { throw '新增 Draw 界面未删除' }
     if (Compare-Object (Semantic $initial) (Semantic (Get-Content -LiteralPath $config -Raw -Encoding UTF8))) { throw '恢复结果与原设置不同' }
 }
 $originalAppData = $env:APPDATA
@@ -41,9 +70,11 @@ try {
     & $installer -LibreOfficePath $fakeInstall
     [xml]$installed = Get-Content -LiteralPath $config -Raw -Encoding UTF8
     if (!@($installed.SelectNodes('//value') | Where-Object { $_.GetAttribute('lang','http://www.w3.org/XML/1998/namespace') -eq 'zh-CN' -and $_.InnerText -eq '格式刷' }).Count) { throw '中文名称未写入' }
+    if (!@($installed.SelectNodes('//value') | Where-Object { $_.GetAttribute('lang','http://www.w3.org/XML/1998/namespace') -eq 'en-US' -and $_.InnerText -eq '.uno:FontDialog' }).Count) { throw 'WPS 快捷键未写入' }
     $hash = (Get-FileHash -LiteralPath $backup).Hash
     & $installer -LibreOfficePath $fakeInstall
     if ((Get-FileHash -LiteralPath $backup).Hash -ne $hash) { throw '重复安装覆盖了首次备份' }
+    Simulate-NativeSave
     & $installer -Restore
     Check-Restore
     Write-Host '通过：安装、重复安装、首次备份、中文名称、多语言恢复、UI 文件还原。'
@@ -59,7 +90,39 @@ try {
     & $installer -LibreOfficePath $fakeInstall
     & $installer -Restore
     Check-Restore
-    Write-Host '通过：v3 升级到 v4 后恢复首次配置。'
+    Write-Host '通过：v3 升级到 v5 后恢复首次配置。'
+
+    # 先单独安装 Draw，再追加两个模块；部分恢复不得覆盖其他模块。
+    & $installer -Modules Draw -LibreOfficePath $fakeInstall
+    if (!(Test-Path -LiteralPath $drawUi) -or (Test-Path -LiteralPath $calcUi) -or (Get-Content -LiteralPath $writerUi -Raw) -ne $oldUi) { throw '按模块安装修改了其他界面' }
+    [xml]$drawOnly=Get-Content -LiteralPath $config -Raw -Encoding UTF8
+    if (@($drawOnly.SelectNodes('/*/item/prop') | Where-Object { $_.GetAttribute('name',$ns) -eq 'ActiveCalc' }).Count) { throw 'Draw 安装写入 Calc 设置' }
+    if (@($drawOnly.SelectNodes('//value') | Where-Object { $_.InnerText -eq '.uno:FontDialog' }).Count) { throw 'Draw 安装修改 Writer 快捷键' }
+    & $installer -Modules 'Writer,Calc' -LibreOfficePath $fakeInstall
+    Simulate-NativeSave
+    $writerHash=(Get-FileHash -LiteralPath $writerUi).Hash
+    $calcHash=(Get-FileHash -LiteralPath $calcUi).Hash
+    & $installer -Modules Draw -Restore
+    if ((Test-Path -LiteralPath $drawUi) -or (Get-FileHash -LiteralPath $writerUi).Hash -ne $writerHash -or (Get-FileHash -LiteralPath $calcUi).Hash -ne $calcHash) { throw '部分恢复修改了其他模块' }
+    & $installer -Modules Writer -Restore
+    if ((Get-FileHash -LiteralPath $calcUi).Hash -ne $calcHash) { throw '恢复 Writer 修改了 Calc' }
+    & $installer -Modules Calc -Restore
+    Check-Restore
+    Write-Host '通过：独立安装、追加安装、逐模块恢复与共享设置最后恢复。'
+
+    # 使用仓库 main 的真实 v4 安装程序创建旧备份，验证升级和部分恢复。
+    $v4dir=Join-Path $fixture 'v4'; New-Item -ItemType Directory -Path $v4dir | Out-Null
+    foreach ($file in @('设置界面.ps1','设置清单.json')) {
+        Copy-Item -LiteralPath (Join-Path $PSScriptRoot "fixtures\v4\$file") -Destination (Join-Path $v4dir $file)
+    }
+    New-Item -ItemType Directory -Path (Join-Path $v4dir 'ui') | Out-Null
+    Copy-Item -LiteralPath (Join-Path $repo 'package\ui\swriter'),(Join-Path $repo 'package\ui\scalc') -Destination (Join-Path $v4dir 'ui') -Recurse
+    & (Join-Path $v4dir '设置界面.ps1') -LibreOfficePath $fakeInstall
+    & $installer -LibreOfficePath $fakeInstall
+    & $installer -Modules Draw -Restore
+    & $installer -Modules 'Writer,Calc' -Restore
+    Check-Restore
+    Write-Host '通过：真实 v4 备份升级到 v5 并分模块恢复。'
 
     $before = (Get-FileHash -LiteralPath $config).Hash
     function Copy-Item {
