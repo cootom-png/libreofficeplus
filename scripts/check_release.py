@@ -16,6 +16,7 @@ def verify(folder, commit):
     assert (folder / 'SHA256SUMS.txt').read_text('utf-8-sig').strip() == f'{digest}  {name}'
     with ZipFile(folder / name) as archive:
         assert json.loads(archive.read('LibreOfficePlus/version.json'))['Version'] == info['version']
+        assert json.loads(archive.read('LibreOfficePlus/compatibility.json')) == info['compatibility'], '发布兼容版本清单不匹配'
         # ZIP 必须逐字匹配该提交的 package/，排除本机资料与额外路径。
         root = Path(__file__).resolve().parents[1] / 'package'
         expected = {'LibreOfficePlus/' + p.relative_to(root).as_posix(): p for p in root.rglob('*') if p.is_file()}

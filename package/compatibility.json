@@ -1,0 +1,14 @@
+[
+  {
+    "Version": "26.2.5.2",
+    "DisplayVersion": "26.2.5.2",
+    "BuildId": "cd7284b4cbbfeb507e630c1aac019f4157393acb",
+    "Bundle": "."
+  },
+  {
+    "Version": "26.8.1.1",
+    "DisplayVersion": "26.8.1",
+    "BuildId": "bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1",
+    "Bundle": "variants/26.8.1"
+  }
+]

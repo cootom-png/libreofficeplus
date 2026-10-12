@@ -57,7 +57,7 @@ jobs:
           Copy-Item -LiteralPath 'dist/LibreOfficePlus-WPS界面配置包.zip' -Destination "release/$name"
           $hash = (Get-FileHash -LiteralPath "release/$name" -Algorithm SHA256).Hash.ToLowerInvariant()
           "$hash  $name" | Set-Content release/SHA256SUMS.txt -Encoding utf8
-          @{version=(Get-Content package/version.json -Raw | ConvertFrom-Json).Version;commit=$env:RELEASE_SHA;sha256=$hash;file=$name;libreoffice='26.2.5.2';build='cd7284b4cbbfeb507e630c1aac019f4157393acb'} | ConvertTo-Json | Set-Content release/release.json -Encoding utf8
+          @{version=(Get-Content package/version.json -Raw | ConvertFrom-Json).Version;commit=$env:RELEASE_SHA;sha256=$hash;file=$name;compatibility=(Get-Content package/compatibility.json -Raw | ConvertFrom-Json)} | ConvertTo-Json -Depth 5 | Set-Content release/release.json -Encoding utf8
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: verified-release
@@ -91,7 +91,7 @@ jobs:
           # 已有标签或版本一律拒绝覆盖，保留可验证的回退包。
           gh api "repos/$GITHUB_REPOSITORY/git/matching-refs/tags/$RELEASE_TAG" > release-tags.json
           python -c 'import json; assert not json.load(open("release-tags.json")), "发布标签已存在"'
-          gh release create "$RELEASE_TAG" release/* --target "$RELEASE_SHA" --title "LibreOfficePlus $RELEASE_TAG · 演示模块操作习惯适配" --notes-file docs/发布说明-v6.5.md --latest
+          gh release create "$RELEASE_TAG" release/* --target "$RELEASE_SHA" --title "LibreOfficePlus $RELEASE_TAG · 新旧版本兼容" --notes-file docs/发布说明-v6.6.md --latest
           published=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq .object.sha)
           test "$published" = "$RELEASE_SHA"
           gh release download "$RELEASE_TAG" --dir published

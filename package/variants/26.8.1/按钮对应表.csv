@@ -1,0 +1,469 @@
+﻿模块,选项卡,LibreOffice命令,配置文字或控件ID,逻辑分组,组内顺序或菜单所在行,状态
+swriter,开始,.uno:FormatPaintbrush,WPS-swriter-24,Home-Section-Style,1,保留新版原生控件或增加常用入口
+swriter,开始,.uno:Paste,btnHomePaste,gdHomeClipboard,1,保留新版原生控件或增加常用入口
+swriter,开始,.uno:Cut,btnHomeCut,gdHomeClipboard,2,保留新版原生控件或增加常用入口
+swriter,开始,.uno:Copy,btnHomeCopy,gdHomeClipboard,3,保留新版原生控件或增加常用入口
+swriter,开始,.uno:FormatPaintbrush,btnHomeFormatPaintbrush,gdHomeFont,1,保留新版原生控件或增加常用入口
+swriter,开始,.uno:ResetAttributes,btnHomeResetAttributes,gdHomeFont,2,保留新版原生控件或增加常用入口
+swriter,开始,.uno:CharFontName,btnHomeCharFontName,gdHomeFont,3,保留新版原生控件或增加常用入口
+swriter,开始,.uno:FontHeight,btnHomeFontHeight,gdHomeFont,4,保留新版原生控件或增加常用入口
+swriter,开始,.uno:Bold,btnHomeBold,gdHomeFont,5,保留新版原生控件或增加常用入口
+swriter,开始,.uno:Italic,btnHomeItalic,gdHomeFont,6,保留新版原生控件或增加常用入口
+swriter,开始,.uno:Underline,btnHomeUnderline,gdHomeFont,7,保留新版原生控件或增加常用入口
+swriter,开始,.uno:Strikeout,btnHomeStrikeout,gdHomeFont,8,保留新版原生控件或增加常用入口
+swriter,开始,.uno:Shadowed,btnHomeShadowed,gdHomeFont,9,保留新版原生控件或增加常用入口
+swriter,开始,.uno:SubScript,btnHomeSubScript,gdHomeFont,10,保留新版原生控件或增加常用入口
+swriter,开始,.uno:SuperScript,btnHomeSuperScript,gdHomeFont,11,保留新版原生控件或增加常用入口
+swriter,开始,.uno:Spacing,btnHomeSpacing,gdHomeFont,12,保留新版原生控件或增加常用入口
+swriter,开始,.uno:CharBackColor,btnHomeBackColor,gdHomeFont,13,保留新版原生控件或增加常用入口
+swriter,开始,.uno:Color,btnHomeColor,gdHomeFont,14,保留新版原生控件或增加常用入口
+swriter,开始,.uno:Grow,btnHomeGrow,gdHomeFont,15,保留新版原生控件或增加常用入口
+swriter,开始,.uno:Shrink,btnHomeShrink,gdHomeFont,16,保留新版原生控件或增加常用入口
+swriter,开始,.uno:DefaultBullet,btnHomeDefaultBullet,gdHomeParagraph,1,保留新版原生控件或增加常用入口
+swriter,开始,.uno:DefaultNumbering,btnHomeDefaultNumbering,gdHomeParagraph,2,保留新版原生控件或增加常用入口
+swriter,开始,.uno:SetOutline,btnHomeSetOutline,gdHomeParagraph,3,保留新版原生控件或增加常用入口
+swriter,开始,.uno:StartPara,btnHomeStartPara,gdHomeParagraph,4,保留新版原生控件或增加常用入口
+swriter,开始,.uno:CenterPara,btnHomeCenterPara,gdHomeParagraph,5,保留新版原生控件或增加常用入口
+swriter,开始,.uno:EndPara,btnHomeRightPara,gdHomeParagraph,6,保留新版原生控件或增加常用入口
+swriter,开始,.uno:JustifyPara,btnHomeJustifyPara,gdHomeParagraph,7,保留新版原生控件或增加常用入口
+swriter,开始,.uno:IncrementIndent,btnHomeIncrementIndent,gdHomeParagraph,8,保留新版原生控件或增加常用入口
+swriter,开始,.uno:DecrementIndent,btnHomeDecrementIndent,gdHomeParagraph,9,保留新版原生控件或增加常用入口
+swriter,开始,.uno:HangingIndent,btnHomeHangingIndent,gdHomeParagraph,10,保留新版原生控件或增加常用入口
+swriter,开始,.uno:ParaLeftToRight,btnHomeParaLeftToRight,gdHomeParagraph,11,保留新版原生控件或增加常用入口
+swriter,开始,.uno:ParaRightToLeft,btnHomeParaRightToLeft,gdHomeParagraph,12,保留新版原生控件或增加常用入口
+swriter,开始,.uno:ParaspaceIncrease,btnHomeParaspaceIncrease,gdHomeParagraph,13,保留新版原生控件或增加常用入口
+swriter,开始,.uno:ParaspaceDecrease,btnHomeParaspaceDecrease,gdHomeParagraph,14,保留新版原生控件或增加常用入口
+swriter,开始,.uno:LineSpacing,btnHomeLineSpacing,gdHomeParagraph,15,保留新版原生控件或增加常用入口
+swriter,开始,.uno:BackgroundColor,btnHomeBackgroundColor,gdHomeParagraph,16,保留新版原生控件或增加常用入口
+swriter,开始,.uno:ControlCodes,btnHomeControlCodes,gdHomeParagraph,17,保留新版原生控件或增加常用入口
+swriter,开始,.uno:StylesPreview,btnHomeStylesPreview,gdHomeStyle,1,保留新版原生控件或增加常用入口
+swriter,开始,.uno:SearchDialog,WPS-swriter-29,WPS-swriter-25,1,保留新版原生控件或增加常用入口
+swriter,开始,.uno:SidebarDeck.StyleListDeck,WPS-swriter-42,WPS-swriter-25,2,保留新版原生控件或增加常用入口
+swriter,开始,.uno:InsertAnnotation,WPS-swriter-44,WPS-swriter-25,3,保留新版原生控件或增加常用入口
+swriter,插入,.uno:InsertPagebreak,分页符,第 1 组,1,已安排；待具体文档验证
+swriter,插入,.uno:InsertBreak,分隔符,第 1 组,2,已安排；待具体文档验证
+swriter,插入,.uno:InsertPageNumberField,页码,第 1 组,3,已安排；待具体文档验证
+swriter,插入,.uno:InsertPageHeader,页眉,第 1 组,4,已安排；待具体文档验证
+swriter,插入,.uno:InsertPageFooter,页脚,第 1 组,5,已安排；待具体文档验证
+swriter,插入,.uno:InsertTable,表格,第 2 组,1,已安排；待具体文档验证
+swriter,插入,.uno:InsertGraphic,图片,第 2 组,2,已安排；待具体文档验证
+swriter,插入,.uno:InsertDoc,文档,第 2 组,3,已安排；待具体文档验证
+swriter,插入,.uno:BasicShapes,形状,第 2 组,4,已安排；待具体文档验证
+swriter,插入,.uno:DrawText,文本框,第 2 组,5,已安排；待具体文档验证
+swriter,插入,.uno:FontworkGalleryFloater,艺术字,第 2 组,6,已安排；待具体文档验证
+swriter,插入,.uno:InsertObjectChart,图表,第 2 组,7,已安排；待具体文档验证
+swriter,插入,.uno:CharmapControl,符号,第 3 组,1,已安排；待具体文档验证
+swriter,插入,.uno:InsertObjectStarMath,公式,第 3 组,2,已安排；待具体文档验证
+swriter,插入,.uno:InsertAnnotation,批注,第 4 组,1,已安排；待具体文档验证
+swriter,插入,.uno:HyperlinkDialog,超链接,第 4 组,2,已安排；待具体文档验证
+swriter,插入,.uno:InsertBookmark,书签,第 4 组,3,已安排；待具体文档验证
+swriter,插入,.uno:InsertObject,嵌入对象…,第 4 组,4,已安排；待具体文档验证
+swriter,页面,.uno:PageDialog,页边距,第 1 组,1,已安排；待具体文档验证
+swriter,页面,.uno:Orientation,纸张方向,第 1 组,2,已安排；待具体文档验证
+swriter,页面,.uno:Size,纸张大小,第 1 组,3,已安排；待具体文档验证
+swriter,页面,.uno:FormatColumns,分栏,第 1 组,4,已安排；待具体文档验证
+swriter,页面,.uno:TextdirectionLeftToRight,横排文字（从左向右）,第 1 组,5,已安排；待具体文档验证
+swriter,页面,.uno:BorderDialog,页面边框,第 2 组,1,已安排；待具体文档验证
+swriter,页面,.uno:PageDialog,背景（页面设置）,第 2 组,2,已安排；待具体文档验证
+swriter,页面,.uno:Watermark,水印,第 2 组,3,已安排；待具体文档验证
+swriter,页面,.uno:LineNumberingDialog,行号,第 2 组,4,已安排；待具体文档验证
+swriter,页面,.uno:InsertPagebreak,分页符,第 3 组,1,已安排；待具体文档验证
+swriter,页面,.uno:InsertBreak,分隔符,第 3 组,2,已安排；待具体文档验证
+swriter,页面,.uno:Navigator,章节导航,第 3 组,3,已安排；待具体文档验证
+swriter,页面,.uno:InsertPageHeader,页眉,第 4 组,1,已安排；待具体文档验证
+swriter,页面,.uno:InsertPageFooter,页脚,第 4 组,2,已安排；待具体文档验证
+swriter,页面,.uno:InsertPageNumberField,页码,第 4 组,3,已安排；待具体文档验证
+swriter,引用,.uno:InsertMultiIndex,目录,第 1 组,1,已安排；待具体文档验证
+swriter,引用,.uno:UpdateAllIndexes,更新目录,第 1 组,2,已安排；待具体文档验证
+swriter,引用,.uno:OutlineBullet,项目符号和编号…,第 1 组,3,已安排；待具体文档验证
+swriter,引用,.uno:InsertFootnote,插入脚注,第 2 组,1,已安排；待具体文档验证
+swriter,引用,.uno:JumpToPrevFootnote,上一条脚注,第 2 组,2,已安排；待具体文档验证
+swriter,引用,.uno:JumpToNextFootnote,下一条脚注,第 2 组,3,已安排；待具体文档验证
+swriter,引用,.uno:InsertEndnote,插入尾注,第 2 组,4,已安排；待具体文档验证
+swriter,引用,.uno:InsertCaptionDialog,题注,第 3 组,1,已安排；待具体文档验证
+swriter,引用,.uno:InsertReferenceField,交叉引用,第 3 组,2,已安排；待具体文档验证
+swriter,引用,.uno:InsertIndexesEntry,标记索引项,第 4 组,1,已安排；待具体文档验证
+swriter,引用,.uno:InsertMultiIndex,插入索引,第 4 组,2,已安排；待具体文档验证
+swriter,引用,.uno:UpdateAllIndexes,更新索引,第 4 组,3,已安排；待具体文档验证
+swriter,引用,.uno:MailMergeWizard,邮件合并,第 5 组,1,已安排；待具体文档验证
+swriter,审阅,.uno:SpellingAndGrammarDialog,拼写检查,第 1 组,1,已安排；待具体文档验证
+swriter,审阅,.uno:CompareDocuments,比较,第 1 组,2,已安排；待具体文档验证
+swriter,审阅,.uno:ReadAloud,朗读,第 1 组,3,已安排；待具体文档验证
+swriter,审阅,.uno:WordCountDialog,字数统计,第 1 组,4,已安排；待具体文档验证
+swriter,审阅,.uno:InsertAnnotation,插入批注,第 2 组,1,已安排；待具体文档验证
+swriter,审阅,.uno:DeleteComment,删除批注,第 2 组,2,已安排；待具体文档验证
+swriter,审阅,.uno:PreviousAnnotation,上一条批注,第 2 组,3,已安排；待具体文档验证
+swriter,审阅,.uno:NextAnnotation,下一条批注,第 2 组,4,已安排；待具体文档验证
+swriter,审阅,.uno:TrackChanges,修订,第 3 组,1,已安排；待具体文档验证
+swriter,审阅,.uno:ShowTrackedChanges,显示标记,第 3 组,2,已安排；待具体文档验证
+swriter,审阅,.uno:AcceptTrackedChanges,管理修订,第 3 组,3,已安排；待具体文档验证
+swriter,审阅,.uno:AcceptTrackedChange,接受,第 3 组,4,已安排；待具体文档验证
+swriter,审阅,.uno:RejectTrackedChange,拒绝,第 3 组,5,已安排；待具体文档验证
+swriter,审阅,.uno:Translate,翻译,第 4 组,1,已安排；待具体文档验证
+swriter,审阅,.uno:ChineseConversion,简繁转换…,第 4 组,2,已安排；待具体文档验证
+swriter,审阅,.uno:NoWpsRestrictEditing,限制编辑,第 5 组,1,已安排；待具体文档验证
+swriter,视图,.uno:FullScreen,全屏显示,第 1 组,1,已安排；待具体文档验证
+swriter,视图,.uno:ReadOnlyDoc,只读模式,第 1 组,2,已安排；待具体文档验证
+swriter,视图,.uno:PrintLayout,页面,第 1 组,3,已安排；待具体文档验证
+swriter,视图,.uno:BrowseView,Web版式,第 1 组,4,已安排；待具体文档验证
+swriter,视图,.uno:Navigator,导航窗格,第 2 组,1,已安排；待具体文档验证
+swriter,视图,.uno:Ruler,标尺,第 2 组,2,已安排；待具体文档验证
+swriter,视图,.uno:ControlCodes,格式标记,第 2 组,3,已安排；待具体文档验证
+swriter,视图,.uno:GridVisible,网格线,第 2 组,4,已安排；待具体文档验证
+swriter,视图,.uno:DesignerDialog,样式窗格,第 2 组,5,已安排；待具体文档验证
+swriter,视图,.uno:Zoom,显示比例,第 3 组,1,已安排；待具体文档验证
+swriter,视图,.uno:Zoom100Percent,100%,第 3 组,2,已安排；待具体文档验证
+swriter,视图,.uno:ZoomPageWidth,页宽,第 3 组,3,已安排；待具体文档验证
+swriter,视图,.uno:ZoomPage,整页,第 3 组,4,已安排；待具体文档验证
+swriter,视图,.uno:NewWindow,新建窗口,第 4 组,1,已安排；待具体文档验证
+swriter,视图,.uno:ArrangeWindows,重排窗口,第 4 组,2,已安排；待具体文档验证
+swriter,工具,.uno:RunMacro,运行宏,第 1 组,1,已安排；待具体文档验证
+swriter,工具,.uno:MacroDialog,宏管理,第 1 组,2,已安排；待具体文档验证
+swriter,工具,.uno:ExtensionManager,加载项,第 1 组,3,已安排；待具体文档验证
+swriter,工具,.uno:AvailableToolbars,开发工具,第 1 组,4,已安排；待具体文档验证
+swriter,工具,.uno:AutoCorrectDlg,自动更正,第 2 组,1,已安排；待具体文档验证
+swriter,工具,.uno:OptionsTreeDialog,选项,第 2 组,2,已安排；待具体文档验证
+swriter,工具,.uno:ConfigureDialog,自定义,第 2 组,3,已安排；待具体文档验证
+scalc,开始,.uno:FormatPaintbrush,WPS-scalc-55,Home-Section-Style,1,保留新版原生控件或增加常用入口
+scalc,开始,.uno:Paste,btnHomePaste,gdHomeClipboard,1,保留新版原生控件或增加常用入口
+scalc,开始,.uno:Cut,btnHomeCut,gdHomeClipboard,2,保留新版原生控件或增加常用入口
+scalc,开始,.uno:Copy,btnHomeCopy,gdHomeClipboard,3,保留新版原生控件或增加常用入口
+scalc,开始,.uno:FormatPaintbrush,btnHomeFormatPaintbrush,gdHomeFont,1,保留新版原生控件或增加常用入口
+scalc,开始,.uno:ResetAttributes,btnHomeResetAttributes,gdHomeFont,2,保留新版原生控件或增加常用入口
+scalc,开始,.uno:CharFontName,btnHomeCharFontName,gdHomeFont,3,保留新版原生控件或增加常用入口
+scalc,开始,.uno:Bold,btnHomeBold,gdHomeFont,4,保留新版原生控件或增加常用入口
+scalc,开始,.uno:Italic,btnHomeItalic,gdHomeFont,5,保留新版原生控件或增加常用入口
+scalc,开始,.uno:Underline,btnHomeUnderline,gdHomeFont,6,保留新版原生控件或增加常用入口
+scalc,开始,.uno:Strikeout,btnHomeStrikeout,gdHomeFont,7,保留新版原生控件或增加常用入口
+scalc,开始,.uno:FontHeight,btnHomeFontHeight,gdHomeFont,8,保留新版原生控件或增加常用入口
+scalc,开始,.uno:SetBorderStyle,btnHomeSetBorderStyle,gdHomeFont,9,保留新版原生控件或增加常用入口
+scalc,开始,.uno:BackgroundColor,btnHomeBackgroundColor,gdHomeFont,10,保留新版原生控件或增加常用入口
+scalc,开始,.uno:Color,btnHomeFontColor,gdHomeFont,11,保留新版原生控件或增加常用入口
+scalc,开始,.uno:SubScript,btnHomeSubScript,gdHomeFont,12,保留新版原生控件或增加常用入口
+scalc,开始,.uno:SuperScript,btnHomeSuperScript,gdHomeFont,13,保留新版原生控件或增加常用入口
+scalc,开始,.uno:Grow,btnHomeGrow,gdHomeFont,14,保留新版原生控件或增加常用入口
+scalc,开始,.uno:Shrink,btnHomeShrink,gdHomeFont,15,保留新版原生控件或增加常用入口
+scalc,开始,.uno:AlignTop,btnHomeAlignTop,gdHomeAlignment,1,保留新版原生控件或增加常用入口
+scalc,开始,.uno:AlignVCenter,btnHomeAlignVCenter,gdHomeAlignment,2,保留新版原生控件或增加常用入口
+scalc,开始,.uno:AlignBottom,btnHomeAlignBottom,gdHomeAlignment,3,保留新版原生控件或增加常用入口
+scalc,开始,.uno:AlignLeft,btnHomeAlignLeft,gdHomeAlignment,4,保留新版原生控件或增加常用入口
+scalc,开始,.uno:AlignHorizontalCenter,btnHomeAlignHorizontalCenter,gdHomeAlignment,5,保留新版原生控件或增加常用入口
+scalc,开始,.uno:AlignRight,btnHomeAlignRight,gdHomeAlignment,6,保留新版原生控件或增加常用入口
+scalc,开始,.uno:Spacing,btnHomeSpacing,gdHomeAlignment,7,保留新版原生控件或增加常用入口
+scalc,开始,.uno:IncrementIndent,btnHomeIncrementIndent,gdHomeAlignment,8,保留新版原生控件或增加常用入口
+scalc,开始,.uno:DecrementIndent,btnHomeDecrementIndent,gdHomeAlignment,9,保留新版原生控件或增加常用入口
+scalc,开始,.uno:ParaLeftToRight,btnHomeParaLeftToRight,gdHomeAlignment,10,保留新版原生控件或增加常用入口
+scalc,开始,.uno:AlignBlock,btnHomeAlignBlock,gdHomeAlignment,11,保留新版原生控件或增加常用入口
+scalc,开始,.uno:WrapText,btnHomeWrapText,gdHomeAlignment,12,保留新版原生控件或增加常用入口
+scalc,开始,.uno:ParaRightToLeft,btnHomeParaRightToLeft,gdHomeAlignment,13,保留新版原生控件或增加常用入口
+scalc,开始,.uno:NumberFormatType,btnHomeNumberFormatType,gdHomeNumber,1,保留新版原生控件或增加常用入口
+scalc,开始,.uno:NumberFormatCurrency,btnHomeNumberFormatCurrency,gdHomeNumber,2,保留新版原生控件或增加常用入口
+scalc,开始,.uno:NumberFormatPercent,btnHomeNumberFormatPercent,gdHomeNumber,3,保留新版原生控件或增加常用入口
+scalc,开始,.uno:NumberFormatDecimal,btnHomeNumberFormatDecimal,gdHomeNumber,4,保留新版原生控件或增加常用入口
+scalc,开始,.uno:NumberFormatIncDecimals,btnHomeNumberFormatIncDecimals,gdHomeNumber,5,保留新版原生控件或增加常用入口
+scalc,开始,.uno:NumberFormatDecDecimals,btnHomeNumberFormatDecDecimals,gdHomeNumber,6,保留新版原生控件或增加常用入口
+scalc,开始,.uno:ConditionalFormatMenu,btnHomeConditionalFormatMenu,gdHomeNumber,7,保留新版原生控件或增加常用入口
+scalc,开始,.uno:ToggleMergeCells,btnHomeMergeCells,gdHomeCells,1,保留新版原生控件或增加常用入口
+scalc,开始,.uno:InsertRowsBefore,btnHomeInsertRowsBefore,gdHomeCells,2,保留新版原生控件或增加常用入口
+scalc,开始,.uno:DeleteRows,btnHomeDeleteRows,gdHomeCells,3,保留新版原生控件或增加常用入口
+scalc,开始,.uno:RowOperations,btnHomeRowOperations,gdHomeCells,4,保留新版原生控件或增加常用入口
+scalc,开始,.uno:InsertColumnsBefore,btnInsertColumnsBefore,gdHomeCells,5,保留新版原生控件或增加常用入口
+scalc,开始,.uno:DeleteColumns,btnHomeDeleteColumns,gdHomeCells,6,保留新版原生控件或增加常用入口
+scalc,开始,.uno:ColumnOperations,btnHomeColumnOperations,gdHomeCells,7,保留新版原生控件或增加常用入口
+scalc,开始,.uno:AutoSum,WPS-scalc-75,WPS-scalc-56,1,保留新版原生控件或增加常用入口
+scalc,开始,.uno:DataSort,WPS-scalc-78,WPS-scalc-56,2,保留新版原生控件或增加常用入口
+scalc,开始,.uno:DataFilterAutoFilter,WPS-scalc-80,WPS-scalc-56,3,保留新版原生控件或增加常用入口
+scalc,开始,.uno:SearchDialog,WPS-scalc-87,WPS-scalc-56,4,保留新版原生控件或增加常用入口
+scalc,插入,.uno:DataDataPilotRun,数据透视表,第 1 组,1,已安排；待具体文档验证
+scalc,插入,.uno:DefineDBName,数据区域,第 1 组,2,已安排；待具体文档验证
+scalc,插入,.uno:InsertGraphic,图片,第 2 组,1,已安排；待具体文档验证
+scalc,插入,.uno:InsertSheetFromFile,从文件导入工作表…,第 2 组,2,已安排；待具体文档验证
+scalc,插入,.uno:BasicShapes,形状,第 2 组,3,已安排；待具体文档验证
+scalc,插入,.uno:FontworkGalleryFloater,艺术字,第 2 组,4,已安排；待具体文档验证
+scalc,插入,.uno:DrawText,文本框,第 2 组,5,已安排；待具体文档验证
+scalc,插入,.uno:InsertObjectChart,图表,第 3 组,1,已安排；待具体文档验证
+scalc,插入,.uno:InsertSparkline,迷你图,第 3 组,2,已安排；待具体文档验证
+scalc,插入,.uno:HyperlinkDialog,超链接,第 4 组,1,已安排；待具体文档验证
+scalc,插入,.uno:InsertObjectStarMath,公式,第 4 组,2,已安排；待具体文档验证
+scalc,插入,.uno:InsertSymbol,符号,第 4 组,3,已安排；待具体文档验证
+scalc,插入,.uno:InsertObject,嵌入对象…,第 4 组,4,已安排；待具体文档验证
+scalc,页面,.uno:PrintPreview,打印预览,第 1 组,1,已安排；待具体文档验证
+scalc,页面,.uno:PageFormatDialog,页边距,第 1 组,2,已安排；待具体文档验证
+scalc,页面,.uno:Orientation,纸张方向,第 1 组,3,已安排；待具体文档验证
+scalc,页面,.uno:Size,纸张大小,第 1 组,4,已安排；待具体文档验证
+scalc,页面,.uno:DefinePrintArea,打印区域,第 1 组,5,已安排；待具体文档验证
+scalc,页面,.uno:PageFormatDialog,打印缩放,第 1 组,6,已安排；待具体文档验证
+scalc,页面,.uno:EditPrintArea,打印标题,第 2 组,1,已安排；待具体文档验证
+scalc,页面,.uno:EditHeaderAndFooter,页眉页脚,第 2 组,2,已安排；待具体文档验证
+scalc,页面,.uno:PageFormatDialog,打印网格线,第 2 组,3,已安排；待具体文档验证
+scalc,页面,.uno:PageFormatDialog,打印行号列标,第 2 组,4,已安排；待具体文档验证
+scalc,页面,.uno:PagebreakMode,分页预览,第 3 组,1,已安排；待具体文档验证
+scalc,页面,.uno:InsertRowBreak,插入分页符,第 3 组,2,已安排；待具体文档验证
+scalc,页面,.uno:PageFormatDialog,背景,第 3 组,3,已安排；待具体文档验证
+scalc,公式,.uno:FunctionDialog,插入函数,第 1 组,1,已安排；待具体文档验证
+scalc,公式,.uno:AutoSum,求和,第 1 组,2,已安排；待具体文档验证
+scalc,公式,.uno:FunctionBox,常用函数,第 1 组,3,已安排；待具体文档验证
+scalc,公式,.uno:DefineName,名称管理器,第 2 组,1,已安排；待具体文档验证
+scalc,公式,.uno:DefineName,指定名称,第 2 组,2,已安排；待具体文档验证
+scalc,公式,.uno:InsertName,粘贴名称,第 2 组,3,已安排；待具体文档验证
+scalc,公式,.uno:ShowPrecedents,追踪引用,第 3 组,1,已安排；待具体文档验证
+scalc,公式,.uno:ShowDependents,追踪从属,第 3 组,2,已安排；待具体文档验证
+scalc,公式,.uno:ClearArrows,移去箭头,第 3 组,3,已安排；待具体文档验证
+scalc,公式,.uno:ShowErrors,错误检查,第 3 组,4,已安排；待具体文档验证
+scalc,公式,.uno:ToggleFormula,显示公式,第 4 组,1,已安排；待具体文档验证
+scalc,公式,.uno:AutomaticCalculation,自动重算,第 4 组,2,已安排；待具体文档验证
+scalc,公式,.uno:CalculateHard,重算工作簿,第 4 组,3,已安排；待具体文档验证
+scalc,公式,.uno:Calculate,计算工作表,第 4 组,4,已安排；待具体文档验证
+scalc,数据,.uno:DataDataPilotRun,数据透视表,第 1 组,1,已安排；待具体文档验证
+scalc,数据,.uno:DataFilterAutoFilter,筛选,第 2 组,1,已安排；待具体文档验证
+scalc,数据,.uno:DataFilterRemoveFilter,全部显示,第 2 组,2,已安排；待具体文档验证
+scalc,数据,.uno:DataSort,排序,第 2 组,3,已安排；待具体文档验证
+scalc,数据,.uno:HandleDuplicateRecords,重复项,第 3 组,1,已安排；待具体文档验证
+scalc,数据,.uno:TextToColumns,分列,第 3 组,2,已安排；待具体文档验证
+scalc,数据,.uno:Validation,有效性,第 3 组,3,已安排；待具体文档验证
+scalc,数据,.uno:FillDown,向下填充,第 4 组,1,已安排；待具体文档验证
+scalc,数据,.uno:DataConsolidate,合并计算,第 4 组,2,已安排；待具体文档验证
+scalc,数据,.uno:DataSubTotals,分类汇总,第 5 组,1,已安排；待具体文档验证
+scalc,数据,.uno:Group,创建组,第 5 组,2,已安排；待具体文档验证
+scalc,数据,.uno:Ungroup,取消组合,第 5 组,3,已安排；待具体文档验证
+scalc,数据,.uno:ShowDetail,展开,第 5 组,4,已安排；待具体文档验证
+scalc,数据,.uno:HideDetail,折叠,第 5 组,5,已安排；待具体文档验证
+scalc,数据,.uno:InsertExternalDataSource,获取外部数据,第 6 组,1,已安排；待具体文档验证
+scalc,数据,.uno:DataAreaRefresh,刷新数据区域,第 6 组,2,已安排；待具体文档验证
+scalc,数据,.uno:ScenarioManager,模拟分析（方案）,第 6 组,3,已安排；待具体文档验证
+scalc,数据,.uno:SelectData,选择数据区域,第 6 组,4,已安排；待具体文档验证
+scalc,审阅,.uno:SpellingAndGrammarDialog,拼写检查,第 1 组,1,已安排；待具体文档验证
+scalc,审阅,.uno:InsertAnnotation,新建批注,第 2 组,1,已安排；待具体文档验证
+scalc,审阅,.uno:DeleteNote,删除批注,第 2 组,2,已安排；待具体文档验证
+scalc,审阅,.uno:PreviousAnnotation,上一条批注,第 2 组,3,已安排；待具体文档验证
+scalc,审阅,.uno:NextAnnotation,下一条批注,第 2 组,4,已安排；待具体文档验证
+scalc,审阅,.uno:ShowNote,显示批注,第 2 组,5,已安排；待具体文档验证
+scalc,审阅,.uno:FormatCellDialog,单元格格式（保护）,第 3 组,1,已安排；待具体文档验证
+scalc,审阅,.uno:AllowEditRanges,允许编辑区域,第 3 组,2,已安排；待具体文档验证
+scalc,审阅,.uno:Protect,保护工作表,第 3 组,3,已安排；待具体文档验证
+scalc,审阅,.uno:ToolProtectionDocument,保护工作簿,第 3 组,4,已安排；待具体文档验证
+scalc,审阅,.uno:ChineseConversion,简繁转换…,第 4 组,1,已安排；待具体文档验证
+scalc,视图,.uno:NormalViewMode,普通,第 1 组,1,已安排；待具体文档验证
+scalc,视图,.uno:PagebreakMode,分页预览,第 1 组,2,已安排；待具体文档验证
+scalc,视图,.uno:FullScreen,全屏显示,第 1 组,3,已安排；待具体文档验证
+scalc,视图,.uno:InputLineVisible,编辑栏,第 2 组,1,已安排；待具体文档验证
+scalc,视图,.uno:ViewRowColumnHeaders,行号列标,第 2 组,2,已安排；待具体文档验证
+scalc,视图,.uno:ToggleSheetGrid,网格线,第 2 组,3,已安排；待具体文档验证
+scalc,视图,.uno:DesignerDialog,样式窗格,第 2 组,4,已安排；待具体文档验证
+scalc,视图,.uno:Zoom,显示比例,第 3 组,1,已安排；待具体文档验证
+scalc,视图,.uno:Zoom100Percent,100%,第 3 组,2,已安排；待具体文档验证
+scalc,视图,.uno:FreezePanes,冻结窗格,第 4 组,1,已安排；待具体文档验证
+scalc,视图,.uno:FreezePanesRow,冻结首行,第 4 组,2,已安排；待具体文档验证
+scalc,视图,.uno:FreezePanesColumn,冻结首列,第 4 组,3,已安排；待具体文档验证
+scalc,视图,.uno:SplitWindow,拆分窗口,第 4 组,4,已安排；待具体文档验证
+scalc,视图,.uno:NewWindow,新建窗口,第 4 组,5,已安排；待具体文档验证
+scalc,工具,.uno:RunMacro,运行宏,第 1 组,1,已安排；待具体文档验证
+scalc,工具,.uno:BasicIDEAppear,宏编辑器,第 1 组,2,已安排；待具体文档验证
+scalc,工具,.uno:ExtensionManager,加载项,第 1 组,3,已安排；待具体文档验证
+scalc,工具,.uno:AvailableToolbars,开发工具,第 1 组,4,已安排；待具体文档验证
+scalc,工具,.uno:DataForm,记录单,第 2 组,1,已安排；待具体文档验证
+scalc,工具,.uno:SelectData,选择数据区域,第 2 组,2,已安排；待具体文档验证
+scalc,工具,.uno:DataConsolidate,合并计算,第 2 组,3,已安排；待具体文档验证
+scalc,工具,.uno:OptionsTreeDialog,选项,第 3 组,1,已安排；待具体文档验证
+scalc,工具,.uno:ConfigureDialog,自定义,第 3 组,2,已安排；待具体文档验证
+sdraw,开始,.uno:FormatPaintbrush,WPS-sdraw-57,Home-Section-Style,1,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:Paste,btnHomePaste,gdHomeClipboard,1,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:Cut,btnHomeCut,gdHomeClipboard,2,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:Copy,btnHomeCopy,gdHomeClipboard,3,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:InsertPage,btnHomeInsertPage,gdHomePage,1,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:DuplicatePage,btnHomeDuplicatePage,gdHomePage,2,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:DrawingLayout,btnHomeDrawingLayout,gdHomePage,3,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:FormatPaintbrush,btnHomeFormatPaintbrush,gdHomeFont,1,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:SetDefault,btnHomeSetDefault,gdHomeFont,2,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:CharFontName,btnHomeCharFontName,gdHomeFont,3,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:FontHeight,btnHomeFontHeight,gdHomeFont,4,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:Bold,btnHomeBold,gdHomeFont,5,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:Italic,btnHomeItalic,gdHomeFont,6,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:Underline,btnHomeUnderline,gdHomeFont,7,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:Strikeout,btnHomeStrikeout,gdHomeFont,8,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:Shadowed,btnHomeShadowed,gdHomeFont,9,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:SubScript,btnHomeSubScript,gdHomeFont,10,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:SuperScript,btnHomeSuperScript,gdHomeFont,11,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:Spacing,btnHomeSpacing,gdHomeFont,12,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:CharBackColor,btnHomeBackColor,gdHomeFont,13,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:Color,btnHomeColor,gdHomeFont,14,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:Grow,btnHomeGrow,gdHomeFont,15,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:Shrink,btnHomeShrink,gdHomeFont,16,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:DefaultBullet,btnHomeDefaultBullet,gdHomeParagraph,1,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:DefaultNumbering,btnHomeDefaultNumbering,gdHomeParagraph,2,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:StartPara,btnHomeStartPara,gdHomeParagraph,3,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:CenterPara,btnHomeCenterPara,gdHomeParagraph,4,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:EndPara,btnHomeRightPara,gdHomeParagraph,5,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:JustifyPara,btnHomeJustifyPara,gdHomeParagraph,6,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:IncrementIndent,btnHomeIncrementIndent,gdHomeParagraph,7,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:DecrementIndent,btnHomeDecrementIndent,gdHomeParagraph,8,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:HangingIndent,btnHomeHangingIndent,gdHomeParagraph,9,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:ParaLeftToRight,btnHomeParaLeftToRight,gdHomeParagraph,10,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:ParaRightToLeft,btnHomeParaRightToLeft,gdHomeParagraph,11,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:LineSpacing,btnHomeLineSpacing,gdHomeParagraph,12,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:ParaspaceIncrease,btnHomeParaspaceIncrease,gdHomeParagraph,13,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:ParaspaceDecrease,btnHomeParaspaceDecrease,gdHomeParagraph,14,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:FormatGroup,WPS-sdraw-62,WPS-sdraw-58,1,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:FormatUngroup,WPS-sdraw-64,WPS-sdraw-58,2,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:ToggleObjectRotateMode,WPS-sdraw-66,WPS-sdraw-58,3,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:BringToFront,WPS-sdraw-75,WPS-sdraw-58,4,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:SendToBack,WPS-sdraw-77,WPS-sdraw-58,5,保留新版原生控件或增加常用入口
+sdraw,开始,.uno:ExportToPDF,WPS-sdraw-79,WPS-sdraw-58,6,保留新版原生控件或增加常用入口
+sdraw,插入,.uno:InsertGraphic,图片,第 1 组,1,已安排；待具体文档验证
+sdraw,插入,.uno:Text,文本框,第 1 组,2,已安排；待具体文档验证
+sdraw,插入,.uno:InsertTable,表格,第 1 组,3,已安排；待具体文档验证
+sdraw,插入,.uno:BasicShapes,形状,第 2 组,1,已安排；待具体文档验证
+sdraw,插入,.uno:ConnectorToolbox,连接线,第 2 组,2,已安排；待具体文档验证
+sdraw,插入,.uno:FontworkGalleryFloater,艺术字,第 2 组,3,已安排；待具体文档验证
+sdraw,插入,.uno:InsertPage,新建页面,第 3 组,1,已安排；待具体文档验证
+sdraw,插入,.uno:CharmapControl,符号,第 3 组,2,已安排；待具体文档验证
+sdraw,插入,.uno:HyperlinkDialog,超链接,第 3 组,3,已安排；待具体文档验证
+sdraw,页面,.uno:PageSetup,页面设置,第 1 组,1,已安排；待具体文档验证
+sdraw,页面,.uno:InsertPage,新建页面,第 1 组,2,已安排；待具体文档验证
+sdraw,页面,.uno:DuplicatePage,复制页面,第 1 组,3,已安排；待具体文档验证
+sdraw,页面,.uno:DeletePage,删除页面,第 1 组,4,已安排；待具体文档验证
+sdraw,页面,.uno:MasterPage,母版页面,第 2 组,1,已安排；待具体文档验证
+sdraw,页面,.uno:InsertLayer,插入图层,第 2 组,2,已安排；待具体文档验证
+sdraw,审阅,.uno:SpellingAndGrammarDialog,拼写检查,第 1 组,1,已安排；待具体文档验证
+sdraw,审阅,.uno:InsertAnnotation,批注,第 1 组,2,已安排；待具体文档验证
+sdraw,审阅,.uno:DeleteAnnotation,删除批注,第 1 组,3,已安排；待具体文档验证
+sdraw,视图,.uno:NormalMultiPaneGUI,普通视图,第 1 组,1,已安排；待具体文档验证
+sdraw,视图,.uno:FullScreen,全屏,第 1 组,2,已安排；待具体文档验证
+sdraw,视图,.uno:Zoom,显示比例,第 1 组,3,已安排；待具体文档验证
+sdraw,视图,.uno:LeftPaneDraw,页面缩略图,第 2 组,1,已安排；待具体文档验证
+sdraw,视图,.uno:Sidebar,侧边栏,第 2 组,2,已安排；待具体文档验证
+sdraw,视图,.uno:Ruler,标尺,第 2 组,3,已安排；待具体文档验证
+sdraw,视图,.uno:GridVisible,网格,第 3 组,1,已安排；待具体文档验证
+sdraw,视图,.uno:HelplinesVisible,参考线,第 3 组,2,已安排；待具体文档验证
+sdraw,视图,.uno:GridUse,吸附到网格,第 3 组,3,已安排；待具体文档验证
+sdraw,工具,.uno:ObjectAlign,对齐,第 1 组,1,已安排；待具体文档验证
+sdraw,工具,.uno:DistributeSelection,分布,第 1 组,2,已安排；待具体文档验证
+sdraw,工具,.uno:TransformDialog,位置和大小,第 1 组,3,已安排；待具体文档验证
+sdraw,工具,.uno:FormatGroup,组合,第 2 组,1,已安排；待具体文档验证
+sdraw,工具,.uno:FormatUngroup,取消组合,第 2 组,2,已安排；待具体文档验证
+sdraw,工具,.uno:ToggleObjectRotateMode,旋转,第 2 组,3,已安排；待具体文档验证
+sdraw,工具,.uno:BringToFront,置于顶层,第 3 组,1,已安排；待具体文档验证
+sdraw,工具,.uno:SendToBack,置于底层,第 3 组,2,已安排；待具体文档验证
+sdraw,工具,.uno:FlipHorizontal,水平翻转,第 3 组,3,已安排；待具体文档验证
+sdraw,工具,.uno:FlipVertical,垂直翻转,第 3 组,4,已安排；待具体文档验证
+sdraw,工具,.uno:ExportToPDF,导出 PDF,第 4 组,1,已安排；待具体文档验证
+sdraw,工具,.uno:OptionsTreeDialog,选项,第 4 组,2,已安排；待具体文档验证
+sdraw,工具,.uno:ConfigureDialog,自定义,第 4 组,3,已安排；待具体文档验证
+simpress,开始,.uno:FormatPaintbrush,WPS-simpress-63,Home-Section-Style,1,保留新版原生控件或增加常用入口
+simpress,开始,.uno:Paste,btnHomePaste,gdHomeClipboard,1,保留新版原生控件或增加常用入口
+simpress,开始,.uno:Cut,btnHomeCut,gdHomeClipboard,2,保留新版原生控件或增加常用入口
+simpress,开始,.uno:Copy,btnHomeCopy,gdHomeClipboard,3,保留新版原生控件或增加常用入口
+simpress,开始,.uno:InsertSlide,btnHomeInsertSlide,gdHomeSlide,1,保留新版原生控件或增加常用入口
+simpress,开始,.uno:DuplicateSlide,btnHomeDuplicatePage,gdHomeSlide,2,保留新版原生控件或增加常用入口
+simpress,开始,.uno:PresentationLayout,btnHomePresentationLayout,gdHomeSlide,3,保留新版原生控件或增加常用入口
+simpress,开始,.uno:FormatPaintbrush,btnHomeFormatPaintbrush,gdHomeFont,1,保留新版原生控件或增加常用入口
+simpress,开始,.uno:SetDefault,btnHomeSetDefault,gdHomeFont,2,保留新版原生控件或增加常用入口
+simpress,开始,.uno:CharFontName,btnHomeCharFontName,gdHomeFont,3,保留新版原生控件或增加常用入口
+simpress,开始,.uno:FontHeight,btnHomeFontHeight,gdHomeFont,4,保留新版原生控件或增加常用入口
+simpress,开始,.uno:Bold,btnHomeBold,gdHomeFont,5,保留新版原生控件或增加常用入口
+simpress,开始,.uno:Italic,btnHomeItalic,gdHomeFont,6,保留新版原生控件或增加常用入口
+simpress,开始,.uno:Underline,btnHomeUnderline,gdHomeFont,7,保留新版原生控件或增加常用入口
+simpress,开始,.uno:Strikeout,btnHomeStrikeout,gdHomeFont,8,保留新版原生控件或增加常用入口
+simpress,开始,.uno:Shadowed,btnHomeShadowed,gdHomeFont,9,保留新版原生控件或增加常用入口
+simpress,开始,.uno:SubScript,btnHomeSubScript,gdHomeFont,10,保留新版原生控件或增加常用入口
+simpress,开始,.uno:SuperScript,btnHomeSuperScript,gdHomeFont,11,保留新版原生控件或增加常用入口
+simpress,开始,.uno:Spacing,btnHomeSpacing,gdHomeFont,12,保留新版原生控件或增加常用入口
+simpress,开始,.uno:CharBackColor,btnHomeBackColor,gdHomeFont,13,保留新版原生控件或增加常用入口
+simpress,开始,.uno:Color,btnHomeColor,gdHomeFont,14,保留新版原生控件或增加常用入口
+simpress,开始,.uno:Grow,btnHomeGrow,gdHomeFont,15,保留新版原生控件或增加常用入口
+simpress,开始,.uno:Shrink,btnHomeShrink,gdHomeFont,16,保留新版原生控件或增加常用入口
+simpress,开始,.uno:DefaultBullet,btnHomeDefaultBullet,gdHomeParagraph,1,保留新版原生控件或增加常用入口
+simpress,开始,.uno:DefaultNumbering,btnHomeDefaultNumbering,gdHomeParagraph,2,保留新版原生控件或增加常用入口
+simpress,开始,.uno:StartPara,btnHomeStartPara,gdHomeParagraph,3,保留新版原生控件或增加常用入口
+simpress,开始,.uno:CenterPara,btnHomeCenterPara,gdHomeParagraph,4,保留新版原生控件或增加常用入口
+simpress,开始,.uno:EndPara,btnHomeRightPara,gdHomeParagraph,5,保留新版原生控件或增加常用入口
+simpress,开始,.uno:JustifyPara,btnHomeJustifyPara,gdHomeParagraph,6,保留新版原生控件或增加常用入口
+simpress,开始,.uno:IncrementIndent,btnHomeIncrementIndent,gdHomeParagraph,7,保留新版原生控件或增加常用入口
+simpress,开始,.uno:DecrementIndent,btnHomeDecrementIndent,gdHomeParagraph,8,保留新版原生控件或增加常用入口
+simpress,开始,.uno:HangingIndent,btnHomeHangingIndent,gdHomeParagraph,9,保留新版原生控件或增加常用入口
+simpress,开始,.uno:ParaLeftToRight,btnHomeParaLeftToRight,gdHomeParagraph,10,保留新版原生控件或增加常用入口
+simpress,开始,.uno:ParaRightToLeft,btnHomeParaRightToLeft,gdHomeParagraph,11,保留新版原生控件或增加常用入口
+simpress,开始,.uno:LineSpacing,btnHomeLineSpacing,gdHomeParagraph,12,保留新版原生控件或增加常用入口
+simpress,开始,.uno:ParaspaceIncrease,btnHomeParaspaceIncrease,gdHomeParagraph,13,保留新版原生控件或增加常用入口
+simpress,开始,.uno:ParaspaceDecrease,btnHomeParaspaceDecrease,gdHomeParagraph,14,保留新版原生控件或增加常用入口
+simpress,开始,.uno:ObjectAlign,WPS-simpress-68,WPS-simpress-64,1,保留新版原生控件或增加常用入口
+simpress,开始,.uno:FormatGroup,WPS-simpress-70,WPS-simpress-64,2,保留新版原生控件或增加常用入口
+simpress,开始,.uno:FormatUngroup,WPS-simpress-72,WPS-simpress-64,3,保留新版原生控件或增加常用入口
+simpress,开始,.uno:SearchDialog,WPS-simpress-74,WPS-simpress-64,4,保留新版原生控件或增加常用入口
+simpress,开始,.uno:Presentation,WPS-simpress-82,WPS-simpress-64,5,保留新版原生控件或增加常用入口
+simpress,开始,.uno:PresentationCurrentSlide,WPS-simpress-84,WPS-simpress-64,6,保留新版原生控件或增加常用入口
+simpress,插入,.uno:InsertSlide,新建幻灯片,第 1 组,1,已安排；待具体文档验证
+simpress,插入,.uno:ImportSlideFromFile,从文件导入幻灯片…,第 1 组,2,已安排；待具体文档验证
+simpress,插入,.uno:InsertTable,表格,第 2 组,1,已安排；待具体文档验证
+simpress,插入,.uno:InsertGraphic,图片,第 2 组,2,已安排；待具体文档验证
+simpress,插入,.uno:PhotoAlbumDialog,相册…,第 2 组,3,已安排；待具体文档验证
+simpress,插入,.uno:InsertObjectChart,图表,第 2 组,4,已安排；待具体文档验证
+simpress,插入,.uno:Text,文本框,第 3 组,1,已安排；待具体文档验证
+simpress,插入,.uno:FontworkGalleryFloater,艺术字,第 3 组,2,已安排；待具体文档验证
+simpress,插入,.uno:BasicShapes,形状,第 3 组,3,已安排；待具体文档验证
+simpress,插入,.uno:ConnectorToolbox,连接符,第 3 组,4,已安排；待具体文档验证
+simpress,插入,.uno:InsertAVMedia,音频或视频…,第 4 组,1,已安排；待具体文档验证
+simpress,插入,.uno:HyperlinkDialog,超链接…,第 4 组,2,已安排；待具体文档验证
+simpress,插入,.uno:CharmapControl,符号…,第 4 组,3,已安排；待具体文档验证
+simpress,插入,.uno:InsertMath,公式…,第 4 组,4,已安排；待具体文档验证
+simpress,插入,.uno:HeaderAndFooter,页眉页脚…,第 5 组,1,已安排；待具体文档验证
+simpress,插入,.uno:InsertSlideField,幻灯片编号,第 5 组,2,已安排；待具体文档验证
+simpress,插入,.uno:InsertAnnotation,批注,第 5 组,3,已安排；待具体文档验证
+simpress,插入,.uno:InsertObject,嵌入对象…,第 5 组,4,已安排；待具体文档验证
+simpress,页面,.uno:SlideSetup,幻灯片大小…,第 1 组,1,已安排；待具体文档验证
+simpress,页面,.uno:SlideSetup,背景设置…,第 1 组,2,已安排；待具体文档验证
+simpress,页面,.uno:AssignLayout,幻灯片版式,第 2 组,1,已安排；待具体文档验证
+simpress,页面,.uno:PresentationLayout,母版设计…,第 2 组,2,已安排；待具体文档验证
+simpress,页面,.uno:SlideMasterPage,幻灯片母版,第 3 组,1,已安排；待具体文档验证
+simpress,页面,.uno:MasterLayouts,母版元素…,第 3 组,2,已安排；待具体文档验证
+simpress,页面,.uno:CloseMasterView,关闭母版视图,第 3 组,3,已安排；待具体文档验证
+simpress,页面,.uno:DisplayMasterBackground,显示母版背景,第 4 组,1,已安排；待具体文档验证
+simpress,页面,.uno:DisplayMasterObjects,显示母版对象,第 4 组,2,已安排；待具体文档验证
+simpress,切换,.uno:SlideChangeWindow,切换效果,第 1 组,1,已安排；待具体文档验证
+simpress,切换,.uno:PresentationCurrentSlide,从当前页放映,第 2 组,1,已安排；待具体文档验证
+simpress,切换,.uno:RehearseTimings,排练计时,第 2 组,2,已安排；待具体文档验证
+simpress,动画,.uno:CustomAnimation,动画窗格,第 1 组,1,已安排；待具体文档验证
+simpress,动画,.uno:AnimationEffects,对象交互…,第 1 组,2,已安排；待具体文档验证
+simpress,动画,.uno:PresentationCurrentSlide,从当前页放映,第 2 组,1,已安排；待具体文档验证
+simpress,放映,.uno:Presentation,从头开始,第 1 组,1,已安排；待具体文档验证
+simpress,放映,.uno:PresentationCurrentSlide,从当前页开始,第 1 组,2,已安排；待具体文档验证
+simpress,放映,.uno:PresentationDialog,设置放映…,第 2 组,1,已安排；待具体文档验证
+simpress,放映,.uno:CustomShowDialog,自定义放映…,第 2 组,2,已安排；待具体文档验证
+simpress,放映,.uno:RehearseTimings,排练计时,第 2 组,3,已安排；待具体文档验证
+simpress,放映,.uno:HideSlide,隐藏幻灯片,第 3 组,1,已安排；待具体文档验证
+simpress,放映,.uno:ShowSlide,取消隐藏,第 3 组,2,已安排；待具体文档验证
+simpress,审阅,.uno:SpellDialog,拼写检查…,第 1 组,1,已安排；待具体文档验证
+simpress,审阅,.uno:SpellOnline,自动拼写检查,第 1 组,2,已安排；待具体文档验证
+simpress,审阅,.uno:ChineseConversion,简繁转换…,第 1 组,3,已安排；待具体文档验证
+simpress,审阅,.uno:InsertAnnotation,新建批注,第 2 组,1,已安排；待具体文档验证
+simpress,审阅,.uno:DeleteAnnotation,删除批注,第 2 组,2,已安排；待具体文档验证
+simpress,审阅,.uno:PreviousAnnotation,上一条批注,第 2 组,3,已安排；待具体文档验证
+simpress,审阅,.uno:NextAnnotation,下一条批注,第 2 组,4,已安排；待具体文档验证
+simpress,审阅,.uno:ShowAnnotations,显示批注,第 2 组,5,已安排；待具体文档验证
+simpress,视图,.uno:NormalMultiPaneGUI,普通视图,第 1 组,1,已安排；待具体文档验证
+simpress,视图,.uno:OutlineMode,大纲视图,第 1 组,2,已安排；待具体文档验证
+simpress,视图,.uno:DiaMode,幻灯片浏览,第 1 组,3,已安排；待具体文档验证
+simpress,视图,.uno:NotesMode,备注页,第 1 组,4,已安排；待具体文档验证
+simpress,视图,.uno:HandoutMode,讲义视图,第 1 组,5,已安排；待具体文档验证
+simpress,视图,.uno:SlideMasterPage,幻灯片母版,第 2 组,1,已安排；待具体文档验证
+simpress,视图,.uno:NotesMasterPage,备注母版,第 2 组,2,已安排；待具体文档验证
+simpress,视图,.uno:CloseMasterView,关闭母版视图,第 2 组,3,已安排；待具体文档验证
+simpress,视图,.uno:LeftPaneImpress,缩略图窗格,第 3 组,1,已安排；待具体文档验证
+simpress,视图,.uno:Sidebar,侧边栏,第 3 组,2,已安排；待具体文档验证
+simpress,视图,.uno:ShowRuler,标尺,第 3 组,3,已安排；待具体文档验证
+simpress,视图,.uno:GridVisible,网格线,第 3 组,4,已安排；待具体文档验证
+simpress,视图,.uno:HelplinesVisible,参考线,第 3 组,5,已安排；待具体文档验证
+simpress,视图,.uno:Zoom,显示比例…,第 4 组,1,已安排；待具体文档验证
+simpress,视图,.uno:ZoomPage,适合窗口,第 4 组,2,已安排；待具体文档验证
+simpress,视图,.uno:Zoom100Percent,100%,第 4 组,3,已安排；待具体文档验证
+simpress,工具,.uno:ObjectAlign,对齐,第 1 组,1,已安排；待具体文档验证
+simpress,工具,.uno:DistributeSelection,分布…,第 1 组,2,已安排；待具体文档验证
+simpress,工具,.uno:TransformDialog,位置和大小…,第 1 组,3,已安排；待具体文档验证
+simpress,工具,.uno:FormatGroup,组合,第 2 组,1,已安排；待具体文档验证
+simpress,工具,.uno:FormatUngroup,取消组合,第 2 组,2,已安排；待具体文档验证
+simpress,工具,.uno:BringToFront,置于顶层,第 2 组,3,已安排；待具体文档验证
+simpress,工具,.uno:SendToBack,置于底层,第 2 组,4,已安排；待具体文档验证
+simpress,工具,.uno:ExportToPDF,导出 PDF…,第 3 组,1,已安排；待具体文档验证
+simpress,工具,.uno:ExtensionManager,加载项…,第 3 组,2,已安排；待具体文档验证
+simpress,工具,.uno:OptionsTreeDialog,选项…,第 3 组,3,已安排；待具体文档验证
+simpress,工具,.uno:ConfigureDialog,自定义…,第 3 组,4,已安排；待具体文档验证

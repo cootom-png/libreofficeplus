@@ -45,9 +45,11 @@ def reorder(obj, children):
 
 
 class Builder:
-    def __init__(self, module):
+    def __init__(self, module, source=None, package=PACKAGE):
         self.module = module
-        self.tree = ET.parse(ROOT / "vendor/libreoffice" / module / "notebookbar.ui")
+        self.source = source or ROOT / "vendor/libreoffice"
+        self.package = package
+        self.tree = ET.parse(self.source / module / "notebookbar.ui")
         self.root = self.tree.getroot()
         self.notebook = self.root.find('.//object[@id="ContextContainer"]')
         self.templates = {}
@@ -56,6 +58,30 @@ class Builder:
                 self.templates.setdefault(action(obj), copy.deepcopy(obj))
         self.counter = 0
         self.records = []
+        self.modern = self.root.find('.//object[@id="gdHomeFont"]') is not None
+        if self.modern:
+            for obj in self.root.iter('object'):
+                if not obj.get('id'):
+                    self.counter += 1
+                    obj.set('id', f'Native-{self.module}-{self.counter}')
+            # 26.8 的网格功能区有独立公式页；统一页名，保留全部实际上下文页。
+            children = self.notebook.findall('child')
+            for page, label in zip(children[::2], children[1::2]):
+                if page.find('object') is None:
+                    self.notebook.remove(page)
+                    self.notebook.remove(label)
+                    continue
+                name = label.find('object').get('id').removesuffix('Label')
+                name = {'FunctionsLabel1': 'Formula', 'Dev': 'Tools', 'SlideShow': 'Slide Show',
+                        'Design': 'Theme', '3DObject': '3D'}.get(name, name)
+                if self.module == 'sdraw' and name == 'Layout':
+                    name = 'Page'
+                page.find('object').set('id', name + ' Tab')
+                label.find('object').set('id', name + 'Label')
+                if name == 'Theme':
+                    prop(label.find('object'), 'label', '主题')
+            body = next(o for o in self.obj('Home Tab').iter('object') if o.get('class') == 'sfxlo-PriorityMergedHBox')
+            body.set('id', 'Home')
 
     def obj(self, ident):
         found = self.root.find(f'.//object[@id="{ident}"]')
@@ -136,9 +162,12 @@ class Builder:
         target.append(parent)
 
     def home(self):
+        if self.modern:
+            self.modern_home()
+            return
         home = self.obj("Home")
         if self.module == "sdraw":
-            source = ET.parse(ROOT / "vendor/libreoffice/swriter/notebookbar.ui")
+            source = ET.parse(self.source / "swriter/notebookbar.ui")
             font = copy.deepcopy(source.find('.//object[@id="Home-Section-Format"]'))
             for obj in font.iter("object"):
                 if obj is not font:
@@ -228,6 +257,30 @@ class Builder:
                     self.records.append([self.module, '开始', entry['command'], entry['label'],
                                          '常用操作/' + item['label'], row, '菜单入口；行号指上级按钮所在行'])
 
+    def modern_home(self):
+        home = self.obj('Home')
+        # 保留新版原生字体、段落、数字、版式和样式控制器及网格定位。
+        for obj in home.iter('object'):
+            if action(obj) == '.uno:FormatPaintbrush':
+                prop(obj, 'visible', 'False')
+        brush = self.make('VclOptionalBox')
+        brush.set('id', 'Home-Section-Style')
+        ET.SubElement(brush, 'child').append(self.toolbar([{'label': '格式刷', 'command': '.uno:FormatPaintbrush'}]))
+        first = ET.SubElement(home, 'child')
+        first.append(brush)
+        quick = ET.SubElement(home, 'child')
+        quick.append(self.quick_section(HOME[self.module]['quick_rows']))
+        reorder(home, [first] + [c for c in home.findall('child') if c not in [first, quick]] + [quick])
+        for key, text in {'Clipboard':'剪贴板', 'Font':'字体', 'Paragraph':'段落', 'Style':'样式',
+                          'Alignment':'对齐', 'Number':'数字', 'Cells':'单元格', 'Slide':'幻灯片', 'Page':'页面'}.items():
+            label = home.find('.//object[@id="lbHome' + key + '"]')
+            if label is not None:
+                prop(label, 'label', text)
+        for child in home.findall('child'):
+            section = child.find('object')
+            for index, obj in enumerate(o for o in section.iter('object') if action(o)):
+                self.records.append([self.module, '开始', action(obj), obj.get('id'), section.get('id'), index + 1, '保留新版原生控件或增加常用入口'])
+
     def tabs(self):
         if self.module == "simpress":
             # 新页复用原生页面容器，保留源页；上下文页与扩展页不占用。
@@ -249,7 +302,7 @@ class Builder:
                     if obj.get('class') == 'svtlo-ManagedMenuButton':
                         prop(obj, 'visible', 'False')
                 self.notebook.extend([page, label])
-        if self.module == "scalc":
+        if self.module == "scalc" and not self.modern:
             extension = self.notebook.find('./child/object[@id="Extension Tab"]/..')
             extension.remove(extension.find("object"))
             formula = copy.deepcopy(self.obj("Tools Tab"))
@@ -263,6 +316,17 @@ class Builder:
         for tab, groups in LAYOUT["modules"][self.module].items():
             page = self.obj(tab + " Tab")
             body = next(n for n in page.iter("object") if n.get("class") == "sfxlo-PriorityMergedHBox")
+            if self.modern:
+                # 配置页使用本版本原生命令控件，原生菜单和上下文页仍保留。
+                for child in body.findall('child'):
+                    body.remove(child)
+                for index, group in enumerate(groups, 1):
+                    container = self.make('VclOptionalBox')
+                    ET.SubElement(container, 'child').append(self.toolbar(group))
+                    ET.SubElement(body, 'child').append(container)
+                    for position, item in enumerate(group, 1):
+                        self.records.append([self.module, LAYOUT['tabs'][tab], item['command'], item['label'], f'第 {index} 组', position, '已安排；待具体文档验证'])
+                continue
             containers = [o for o in body.findall('child/object') if any(n.get('class') in BUTTONS for n in o.iter('object'))]
             if len(containers) < len(groups):
                 raise ValueError(f'{self.module}/{tab} 原生分组数量不足')
@@ -332,7 +396,7 @@ class Builder:
             for widget in list(widgets):
                 if widget.get("name") not in ids:
                     widgets.remove(widget)
-        target = PACKAGE / "ui" / self.module / "notebookbar.ui"
+        target = self.package / "ui" / self.module / "notebookbar.ui"
         target.parent.mkdir(parents=True, exist_ok=True)
         ET.indent(self.tree, space="  ")
         self.tree.write(target, encoding="utf-8", xml_declaration=True)
@@ -361,15 +425,30 @@ def main():
                  '  WScript.Quit 1', 'End If']
         (PACKAGE / name).write_bytes(("\r\n".join(lines) + "\r\n").encode("ascii"))
     build_templates(PACKAGE)
-    profile_files = build_popups(ROOT, PACKAGE)
-    (PACKAGE / "profile-files.json").write_text(json.dumps(profile_files, indent=2) + '\n', encoding="utf-8", newline='\n')
-    records = []
-    for module in LAYOUT["modules"]:
-        builder = Builder(module)
-        builder.home()
-        builder.tabs()
-        builder.write()
-        records.extend(builder.records)
+    compatibility, records = [], []
+    for entry in json.loads((ROOT / 'config/versions.json').read_text('utf8')):
+        source, package = ROOT / entry['Source'], PACKAGE / entry['Bundle']
+        metadata = json.loads((source / 'SOURCE.json').read_text('utf8'))
+        compatibility.append({'Version': metadata['version'], 'DisplayVersion': metadata.get('display_version', metadata['version']),
+                              'BuildId': metadata['buildid'], 'Bundle': entry['Bundle']})
+        package.mkdir(parents=True, exist_ok=True)
+        profile_files = build_popups(ROOT, package, source)
+        (package / "profile-files.json").write_text(json.dumps(profile_files, indent=2) + '\n', encoding="utf-8", newline='\n')
+        profile_records = []
+        for module in LAYOUT["modules"]:
+            builder = Builder(module, source, package)
+            builder.home()
+            builder.tabs()
+            builder.write()
+            profile_records.extend(builder.records)
+            if entry['Bundle'] == '.':
+                records.extend(builder.records)
+        if entry['Bundle'] != '.':
+            with (package / '按钮对应表.csv').open('w', encoding='utf-8-sig', newline='') as file:
+                writer = csv.writer(file, lineterminator='\n')
+                writer.writerow(['模块', '选项卡', 'LibreOffice命令', '配置文字或控件ID', '逻辑分组', '组内顺序或菜单所在行', '状态'])
+                writer.writerows(profile_records)
+    (PACKAGE / 'compatibility.json').write_text(json.dumps(compatibility, ensure_ascii=False, indent=2) + '\n', 'utf8', newline='\n')
     with (PACKAGE / "按钮对应表.csv").open("w", encoding="utf-8-sig", newline="") as f:
         writer = csv.writer(f, lineterminator='\n')
         writer.writerow(["模块", "选项卡", "LibreOffice命令", "配置文字或控件ID", "逻辑分组", "组内顺序或菜单所在行", "状态"])
@@ -391,6 +470,7 @@ def main():
                          ("docs/布局排查.md", "布局排查.txt"),
                          ("docs/适配计划.md", "适配计划.txt"),
                          ("docs/演示适配.md", "演示适配.txt"),
+                         ("docs/版本兼容.md", "版本兼容.txt"),
                          ("docs/弹窗菜单设计.md", "弹窗菜单设计.txt")]:
         if (ROOT / source).exists():
             (PACKAGE / dest).write_bytes((ROOT / source).read_bytes())

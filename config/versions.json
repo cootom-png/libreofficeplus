@@ -1,0 +1,4 @@
+[
+  {"Source": "vendor/libreoffice", "Bundle": "."},
+  {"Source": "vendor/libreoffice/26.8.1", "Bundle": "variants/26.8.1"}
+]

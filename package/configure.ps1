@@ -29,6 +29,7 @@ if ($env:OS -eq 'Windows_NT' -and $PSVersionTable.PSVersion -ge [version]'5.1') 
 $executable = Join-Path $LibreOfficePath 'program\soffice.exe'
 $versionFile = Join-Path $LibreOfficePath 'program\version.ini'
 $applicationFound = (Test-Path -LiteralPath $executable -PathType Leaf) -and (Test-Path -LiteralPath $versionFile -PathType Leaf)
+$payloadRoot = $PSScriptRoot
 if ($Restore) {
     Check '安装目录' '不适用' '恢复仅还原用户配置，不要求软件仍安装在原目录。'
     Check '版本兼容' '不适用' '恢复原界面无需匹配适配版本。'
@@ -36,15 +37,22 @@ if ($Restore) {
     if ($applicationFound) { Check '安装目录' '通过' $LibreOfficePath }
     else { Check '安装目录' '需处理' "未找到完整的 LibreOffice 安装：$LibreOfficePath。请先安装软件；自定义路径请使用 LibreOfficePath 参数。" }
     try {
-        $build = if (Test-Path -LiteralPath $versionFile -PathType Leaf) {
-            (Get-Content -LiteralPath $versionFile -Encoding UTF8 | Where-Object { $_ -match '^buildid=' }) -replace '^buildid=',''
-        }
+        $supported = ConvertFrom-Json -InputObject (Get-Content -LiteralPath (Join-Path $PSScriptRoot 'compatibility.json') -Raw -Encoding UTF8)
+        if (!$supported.Count -or @($supported | Where-Object { $_.Version -cnotmatch '^\d+\.\d+\.\d+\.\d+$' -or $_.BuildId -cnotmatch '^[0-9a-f]{40}$' -or ($_.Bundle -cne '.' -and $_.Bundle -cnotmatch '^variants/\d+\.\d+\.\d+$') }).Count) { throw '版本适配清单格式不正确。' }
+        $buildLines = @(if (Test-Path -LiteralPath $versionFile -PathType Leaf) { Get-Content -LiteralPath $versionFile -Encoding UTF8 | Where-Object { $_ -match '^buildid=' } })
+        $build = if ($buildLines.Count -eq 1) { $buildLines[0] -replace '^buildid=','' } else { '' }
         $detectedVersion = if (Test-Path -LiteralPath $executable -PathType Leaf) { (Get-Item -LiteralPath $executable).VersionInfo.ProductVersion }
-        $buildMatches = $applicationFound -and $build -ceq 'cd7284b4cbbfeb507e630c1aac019f4157393acb'
-        $compatible = $buildMatches -and (!$detectedVersion -or $detectedVersion -eq '26.2.5.2')
-        if (!$detectedVersion) { $detectedVersion = if ($buildMatches) { '26.2.5.2' } else { '无法识别' } }
-        if ($compatible) { Check '版本兼容' '通过' "当前 $detectedVersion · 适配 26.2.5.2，构建匹配。" }
-        else { Check '版本兼容' '需处理' "当前版本：$detectedVersion；本包适配 LibreOffice 26.2.5.2，且须匹配验证过的构建。请使用适配版本或等待对应版本配置包。" }
+        $matchedProfiles = @($supported | Where-Object { $_.BuildId -ceq $build -and (!$detectedVersion -or $_.Version -ceq $detectedVersion) })
+        $compatible = $applicationFound -and $matchedProfiles.Count -eq 1
+        if ($compatible) {
+            $matchedProfile = $matchedProfiles[0]
+            $payloadRoot = Join-Path $PSScriptRoot $matchedProfile.Bundle
+            if (!$detectedVersion) { $detectedVersion = $matchedProfile.Version }
+            Check '版本兼容' '通过' "当前 $detectedVersion · 使用 $($matchedProfile.DisplayVersion) 专属界面，构建匹配。"
+        } else {
+            if (!$detectedVersion) { $detectedVersion = '无法识别' }
+            Check '版本兼容' '需处理' "当前版本：$detectedVersion；本包支持 $($supported.DisplayVersion -join ' / ') 的已验证构建。未知版本不会写入，请使用对应配置包。"
+        }
     } catch { Check '版本兼容' '需处理' "无法读取版本信息：$($_.Exception.Message)。请检查安装文件和读取权限。" }
 }
 if (Get-Process -Name 'soffice','soffice.bin' -ErrorAction SilentlyContinue) {
@@ -135,7 +143,7 @@ function Valid-File($entry) {
 }
 $packageFiles = @($selectedIds | ForEach-Object { [pscustomobject]@{Module=$_;Path='ui/notebookbar.ui'} })
 try {
-$menuFiles = ConvertFrom-Json -InputObject (Get-Content -LiteralPath (Join-Path $PSScriptRoot 'profile-files.json') -Raw -Encoding UTF8)
+$menuFiles = ConvertFrom-Json -InputObject (Get-Content -LiteralPath (Join-Path $payloadRoot 'profile-files.json') -Raw -Encoding UTF8)
 foreach ($file in $menuFiles) {
     $prefix = "config/soffice.cfg/modules/$($file.Module)/"
     if (!$file.Path.StartsWith($prefix)) { throw '菜单文件路径不正确，未修改设置。' }
@@ -172,11 +180,11 @@ foreach ($setting in $labels) {
 }
 if (!$Restore) {
     foreach ($file in $packageFiles | Where-Object { $_.Path -like 'popupmenu/*' }) {
-        [xml]$menuCheck = Get-Content -LiteralPath (Join-Path $PSScriptRoot "profile/config/soffice.cfg/modules/$($file.Module)/$($file.Path)") -Raw -Encoding UTF8
+        [xml]$menuCheck = Get-Content -LiteralPath (Join-Path $payloadRoot "profile/config/soffice.cfg/modules/$($file.Module)/$($file.Path)") -Raw -Encoding UTF8
         if ($menuCheck.DocumentElement.LocalName -ne 'menupopup' -or $menuCheck.DocumentElement.NamespaceURI -ne 'http://openoffice.org/2001/menu') { throw '菜单文件不完整，未修改设置。' }
     }
     foreach ($module in $selectedIds) {
-        [xml]$uiCheck = Get-Content -LiteralPath (Join-Path $PSScriptRoot "ui\$module\notebookbar.ui") -Raw -Encoding UTF8
+        [xml]$uiCheck = Get-Content -LiteralPath (Join-Path $payloadRoot "ui\$module\notebookbar.ui") -Raw -Encoding UTF8
         if (!$uiCheck.SelectSingleNode('//object[@id="ContextContainer"]')) { throw '功能区文件不完整，未修改设置。' }
     }
 }
@@ -194,7 +202,7 @@ if (Test-Path -LiteralPath $uiState) {
     }
     $keys = @($uiFiles | ForEach-Object { "$($_.Module)/$($_.Path)" })
     if ($uiFiles.Count -lt 1 -or $uiFiles.Count -gt 128 -or @($keys | Sort-Object -Unique).Count -ne $uiFiles.Count -or
-        @($uiFiles | Where-Object { !(Valid-File $_) -or $_.Existed -isnot [bool] }).Count) { throw '界面备份清单格式不正确，未修改设置。' }
+        @($uiFiles | Where-Object { !(Valid-File $_) -or $_.Existed -isnot [bool] -or ($_.PSObject.Properties['BuildId'] -and $_.BuildId -cnotmatch '^[0-9a-f]{40}$') }).Count) { throw '界面备份清单格式不正确，未修改设置。' }
     foreach ($entry in $uiFiles) {
         if ($entry.Existed -and !(Test-Path -LiteralPath (Join-Path $uiBackup (FileKey $entry)))) { throw '原界面备份文件缺失，未修改设置。' }
     }
@@ -207,6 +215,19 @@ if (Test-Path -LiteralPath $backup) {
 else { $saved.LoadXml('<backup version="6"><tracked/></backup>'); $version='6' }
 Check '首次备份' '通过' $(if (Test-Path -LiteralPath $backup) { '已找到并校验原备份，将继续保留首次记录。' } else { '未发现旧备份，本次安装将创建首次备份。' })
 } catch { Check '首次备份' '需处理' $_.Exception.Message; throw }
+if (!$Restore) {
+    # 旧清单没有构建字段；此前仅支持根目录中的旧版基线。
+    $legacyBuild = ($supported | Where-Object { $_.Bundle -ceq '.' }).BuildId
+    $staleModules = @($uiFiles | Where-Object {
+        $installedBuild = if ($_.PSObject.Properties['BuildId']) { $_.BuildId } else { $legacyBuild }
+        $_.Module -notin $selectedIds -and $installedBuild -cne $matchedProfile.BuildId
+    } | Select-Object -ExpandProperty Module -Unique)
+    if ($staleModules.Count) {
+        $message = "软件版本发生变化，请同时选择已配置的模块：$(($staleModules | ForEach-Object { $moduleNames[$_] }) -join '、')，以换用匹配界面；或先恢复这些模块。"
+        Check '版本兼容' '需处理' $message
+        throw $message
+    }
+}
 $tracked = $saved.SelectSingleNode('/backup/tracked')
 if (!$tracked) {
     $tracked = $saved.CreateElement('tracked'); $saved.DocumentElement.AppendChild($tracked) | Out-Null
@@ -275,15 +296,23 @@ foreach ($entry in $applyUi) {
     $key=FileKey $entry; $target=UiPath $entry.Module $entry.Path; $current[$key]=Test-Path -LiteralPath $target
     if ($current[$key]) { Copy-Item -LiteralPath $target -Destination (Join-Path $stage $key) }
 }
+$configApplied = $false
 try {
+    Copy-Item -LiteralPath $config -Destination (Join-Path $stage 'registry-original.xcu')
+    if (!$Restore) {
+        foreach ($entry in $uiFiles | Where-Object { $_.Module -in $selectedIds }) {
+            $entry | Add-Member -NotePropertyName BuildId -NotePropertyValue $matchedProfile.BuildId -Force
+        }
+        ConvertTo-Json -InputObject @($uiFiles) | Set-Content -LiteralPath (Join-Path $stage 'state.json') -Encoding UTF8
+    }
     $completedUi = 0
     foreach ($entry in $applyUi) {
         & $OnProgress (60 + [int](25 * $completedUi / [Math]::Max(1,$applyUi.Count))) "正在处理$($moduleNames[$entry.Module])界面…"
         $target=UiPath $entry.Module $entry.Path
         if (!$Restore -or $entry.Existed) {
             $source = if ($Restore) { Join-Path $uiBackup (FileKey $entry) }
-                elseif ($entry.Path -eq 'ui/notebookbar.ui') { Join-Path $PSScriptRoot "ui\$($entry.Module)\notebookbar.ui" }
-                else { Join-Path $PSScriptRoot "profile/config/soffice.cfg/modules/$($entry.Module)/$($entry.Path)" }
+                elseif ($entry.Path -eq 'ui/notebookbar.ui') { Join-Path $payloadRoot "ui\$($entry.Module)\notebookbar.ui" }
+                else { Join-Path $payloadRoot "profile/config/soffice.cfg/modules/$($entry.Module)/$($entry.Path)" }
             New-Item -ItemType Directory -Path (Split-Path $target) -Force | Out-Null
             Copy-Item -LiteralPath $source -Destination $target -Force
         } elseif (Test-Path -LiteralPath $target) { Remove-Item -LiteralPath $target }
@@ -291,17 +320,24 @@ try {
     }
     & $OnProgress 90 '正在保存设置…'
     Move-Item -LiteralPath $temp -Destination $config -Force
+    $configApplied = $true
+    if (!$Restore) { Move-Item -LiteralPath (Join-Path $stage 'state.json') -Destination $uiState -Force }
 } catch {
     foreach ($entry in $applyUi) {
         $key=FileKey $entry; $target=UiPath $entry.Module $entry.Path
         if ($current[$key]) { Copy-Item -LiteralPath (Join-Path $stage $key) -Destination $target -Force }
         elseif (Test-Path -LiteralPath $target) { Remove-Item -LiteralPath $target }
     }
+    if ($configApplied) { Copy-Item -LiteralPath (Join-Path $stage 'registry-original.xcu') -Destination $config -Force }
     throw
 } finally {
     if (Test-Path -LiteralPath $temp) { Remove-Item -LiteralPath $temp }
     foreach ($entry in $applyUi) {
         $file=Join-Path $stage (FileKey $entry)
+        if (Test-Path -LiteralPath $file) { Remove-Item -LiteralPath $file }
+    }
+    foreach ($name in 'registry-original.xcu','state.json') {
+        $file=Join-Path $stage $name
         if (Test-Path -LiteralPath $file) { Remove-Item -LiteralPath $file }
     }
     Remove-Item -LiteralPath $stage
@@ -323,5 +359,7 @@ if ($Restore) {
         if (Test-Path -LiteralPath $uiState) { Remove-Item -LiteralPath $uiState }
     }
     Write-Host "已恢复模块：$($selected -join '、')。"
-} else { Write-Host "已安装 LibreOfficePlus：$($selected -join '、')。请重新打开所选模块。" }
+} else {
+    Write-Host "已安装 LibreOfficePlus：$($selected -join '、')。请重新打开所选模块。"
+}
 & $OnProgress 100 '所有步骤已完成。'

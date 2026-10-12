@@ -13,6 +13,8 @@ from pathlib import Path
 from zipfile import ZipFile
 
 ROOT = Path(__file__).resolve().parents[1]
+PROFILES = [(ROOT / e['Source'], ROOT / 'package' / e['Bundle'])
+            for e in json.loads((ROOT / 'config/versions.json').read_text('utf8'))]
 
 
 class PackageTests(unittest.TestCase):
@@ -74,74 +76,102 @@ class PackageTests(unittest.TestCase):
                                                   'Path': r'C:\Apps with spaces\LibreOffice'})
 
     def test_baseline_hashes(self):
-        source = json.loads((ROOT / 'vendor/libreoffice/SOURCE.json').read_text(encoding='utf-8'))
-        for item in source['files'].values():
-            self.assertEqual(hashlib.sha256((ROOT / 'vendor/libreoffice' / item['path']).read_bytes()).hexdigest(), item['sha256'])
+        for baseline, package in PROFILES:
+            source = json.loads((baseline / 'SOURCE.json').read_text(encoding='utf-8'))
+            for item in source['files'].values():
+                self.assertEqual(hashlib.sha256((baseline / item['path']).read_bytes()).hexdigest(), item['sha256'])
 
     def test_ui_structure(self):
-        for module in ["swriter", "scalc", "sdraw", "simpress"]:
-            root = ET.parse(ROOT / "package/ui" / module / "notebookbar.ui").getroot()
-            ids = [n.get("id") for n in root.iter("object")]
-            self.assertEqual(len(ids), len(set(ids)), module)
-            for widget in root.findall(".//widgets/widget"):
-                self.assertIn(widget.get("name"), ids)
-            notebook = root.find('.//object[@id="ContextContainer"]')
-            self.assertIsNotNone(notebook)
-            children = notebook.findall("child")
-            for i in range(0, len(children), 2):
-                page, label = children[i:i + 2]
-                self.assertEqual(label.get("type"), "tab")
-                self.assertEqual(page.find('packing/property[@name="position"]').text, str(i // 2))
-                self.assertEqual(label.find('packing/property[@name="position"]').text, str(i // 2))
-            home = root.find('.//object[@id="Home"]')
-            self.assertEqual(home.find('child/object').get('id'), 'Home-Section-Style')
-            self.assertIsNotNone(home.find('.//property[.=".uno:CharFontName"]'))
-            self.assertIsNotNone(home.find('.//property[.=".uno:FontHeight"]'))
-            # 图片、表格等上下文功能区继续存在。
-            self.assertGreater(len(children), 20)
+        for baseline, package in PROFILES:
+            for module in ["swriter", "scalc", "sdraw", "simpress"]:
+                root = ET.parse(package / "ui" / module / "notebookbar.ui").getroot()
+                ids = [n.get("id") for n in root.iter("object")]
+                self.assertEqual(len(ids), len(set(ids)), module)
+                for widget in root.findall(".//widgets/widget"):
+                    self.assertIn(widget.get("name"), ids)
+                notebook = root.find('.//object[@id="ContextContainer"]')
+                self.assertIsNotNone(notebook)
+                children = notebook.findall("child")
+                for i in range(0, len(children), 2):
+                    page, label = children[i:i + 2]
+                    self.assertEqual(label.get("type"), "tab")
+                    self.assertEqual(page.find('packing/property[@name="position"]').text, str(i // 2))
+                    self.assertEqual(label.find('packing/property[@name="position"]').text, str(i // 2))
+                home = root.find('.//object[@id="Home"]')
+                self.assertEqual(home.find('child/object').get('id'), 'Home-Section-Style')
+                self.assertIsNotNone(home.find('.//property[.=".uno:CharFontName"]'))
+                self.assertIsNotNone(home.find('.//property[.=".uno:FontHeight"]'))
+                # 图片、表格等上下文功能区继续存在。
+                self.assertGreater(len(children), 20)
+                source = ET.parse(baseline / module / 'notebookbar.ui').getroot()
+                contexts = lambda tree: Counter(p.text for p in tree.findall('.//object[@id="ContextContainer"]/child/object/property[@name="context"]'))
+                self.assertFalse(contexts(source) - contexts(root), module)
+                if baseline.name == '26.8.1':
+                    self.assertIsNotNone(root.find('.//object[@id="gdHomeFont"]'))
+                    if module == 'scalc':
+                        self.assertIsNotNone(root.find('.//object[@id="Formula Tab"]'))
+                        self.assertIsNotNone(root.find('.//object[@id="Extension Tab"]'))
+                    if module == 'simpress':
+                        self.assertIsNotNone(root.find('.//object[@id="Theme Tab"]'))
 
     def test_grouped_layout_and_menus(self):
-        layout=json.loads((ROOT/'config/layout.json').read_text('utf8'))
-        known=set(json.loads((ROOT/'config/commands.json').read_text('utf8')))
-        for module,tabs in layout['modules'].items():
-            root=ET.parse(ROOT/'package/ui'/module/'notebookbar.ui').getroot()
-            for tab,groups in tabs.items():
-                page=root.find(f'.//object[@id="{tab} Tab"]')
-                body=next(n for n in page.iter('object') if n.get('class')=='sfxlo-PriorityMergedHBox')
-                # 分组保留独立容器，不再把全部按钮塞入一串原生位置。
-                self.assertGreater(len(body.findall('child')),0)
-                containers=[o for o in body.findall('child/object') if any(n.get('class') in {'GtkToolButton','GtkMenuToolButton','GtkToggleToolButton'} for n in o.iter('object'))]
-                self.assertGreaterEqual(len(containers),len(groups))
-                for container,group in zip(containers,groups):
-                    actual=[p.text for o in container.iter('object') for p in o.findall('property') if p.get('name').replace('_','-')=='action-name']
-                    for item in group:
-                        if item['command'] in known:
-                            self.assertIn(item['command'],actual)
-            for obj in root.iter('object'):
-                if obj.get('class')=='svtlo-ManagedMenuButton' and ':' in obj.get('id'):
-                    menu=obj.get('id').split(':',1)[1]
-                    if menu.startswith('WPS-'):
-                        self.assertIsNotNone(root.find(f'./object[@id="{menu}"]'),menu)
-        root=ET.parse(ROOT/'package/ui/scalc/notebookbar.ui').getroot()
-        for command in ['FillDown','FillRight','FillUp','FillLeft','FillSeries','FreezePanesRow','FreezePanesColumn']:
-            self.assertTrue(any(p.text=='.uno:'+command for p in root.iter('property')))
+        for baseline, package in PROFILES:
+            layout=json.loads((ROOT/'config/layout.json').read_text('utf8'))
+            known=set(json.loads((ROOT/'config/commands.json').read_text('utf8')))
+            for module,tabs in layout['modules'].items():
+                root=ET.parse(package/'ui'/module/'notebookbar.ui').getroot()
+                for tab,groups in tabs.items():
+                    page=root.find(f'.//object[@id="{tab} Tab"]')
+                    body=next(n for n in page.iter('object') if n.get('class')=='sfxlo-PriorityMergedHBox')
+                    # 分组保留独立容器，不再把全部按钮塞入一串原生位置。
+                    self.assertGreater(len(body.findall('child')),0)
+                    containers=[o for o in body.findall('child/object') if any(n.get('class') in {'GtkToolButton','GtkMenuToolButton','GtkToggleToolButton'} for n in o.iter('object'))]
+                    self.assertGreaterEqual(len(containers),len(groups))
+                    for container,group in zip(containers,groups):
+                        actual=[p.text for o in container.iter('object') for p in o.findall('property') if p.get('name').replace('_','-')=='action-name']
+                        for item in group:
+                            if item['command'] in known:
+                                self.assertIn(item['command'],actual)
+                for obj in root.iter('object'):
+                    if obj.get('class')=='svtlo-ManagedMenuButton' and ':' in obj.get('id'):
+                        menu=obj.get('id').split(':',1)[1]
+                        if menu.startswith('WPS-'):
+                            self.assertIsNotNone(root.find(f'./object[@id="{menu}"]'),menu)
+            root=ET.parse(ROOT/'package/ui/scalc/notebookbar.ui').getroot()
+            for command in ['FillDown','FillRight','FillUp','FillLeft','FillSeries','FreezePanesRow','FreezePanesColumn']:
+                self.assertTrue(any(p.text=='.uno:'+command for p in root.iter('property')))
 
     def test_impress_navigation(self):
-        root = ET.parse(ROOT / 'package/ui/simpress/notebookbar.ui').getroot()
-        notebook = root.find('.//object[@id="ContextContainer"]')
-        self.assertEqual([c.find('object').get('id') for c in notebook.findall('child')[::2]][:10],
-                         [name + ' Tab' for name in ['File','Home','Insert','Layout','Transition','Animation','Slide Show','Review','View','Tools']])
-        self.assertEqual(root.find('.//object[@id="LayoutLabel"]/property[@name="label"]').text, '设计')
-        for name, command in [('Transition','SlideChangeWindow'),('Animation','CustomAnimation')]:
-            tab = root.find(f'.//object[@id="{name} Tab"]')
-            buttons = [o for o in tab.iter('object') if o.find('property[@name="action-name"]') is not None]
-            self.assertTrue(any(o.find('property[@name="action-name"]').text == '.uno:' + command and
-                                o.find('property[@name="visible"]').text == 'True' for o in buttons))
-        home = root.find('.//object[@id="Home"]')
-        self.assertIn('.uno:InsertSlide', [p.text for p in home.iter('property')])
-        # 图片、表格、母版、媒体等上下文页必须保留，扩展页不能被新页占用。
-        for name in ['Image','Table','Draw','Master','Media','Extension']:
-            self.assertIsNotNone(root.find(f'.//object[@id="{name} Tab"]'))
+        for baseline, package in PROFILES:
+            root = ET.parse(package / 'ui/simpress/notebookbar.ui').getroot()
+            notebook = root.find('.//object[@id="ContextContainer"]')
+            self.assertEqual([c.find('object').get('id') for c in notebook.findall('child')[::2]][:10],
+                             [name + ' Tab' for name in ['File','Home','Insert','Layout','Transition','Animation','Slide Show','Review','View','Tools']])
+            self.assertEqual(root.find('.//object[@id="LayoutLabel"]/property[@name="label"]').text, '设计')
+            for name, command in [('Transition','SlideChangeWindow'),('Animation','CustomAnimation')]:
+                tab = root.find(f'.//object[@id="{name} Tab"]')
+                buttons = [o for o in tab.iter('object') if o.find('property[@name="action-name"]') is not None]
+                self.assertTrue(any(o.find('property[@name="action-name"]').text == '.uno:' + command and
+                                    o.find('property[@name="visible"]').text == 'True' for o in buttons))
+            home = root.find('.//object[@id="Home"]')
+            self.assertIn('.uno:InsertSlide', [p.text for p in home.iter('property')])
+            # 图片、表格、母版、媒体等上下文页必须保留，扩展页不能被新页占用。
+            for name in ['Image','Table','Draw','Master','Media','Extension']:
+                self.assertIsNotNone(root.find(f'.//object[@id="{name} Tab"]'))
+
+    def test_version_selection_manifest(self):
+        entries = json.loads((ROOT / 'package/compatibility.json').read_text('utf8'))
+        self.assertEqual(len(entries), 2)
+        self.assertEqual(len({e['BuildId'] for e in entries}), len(entries))
+        for entry, (baseline, package) in zip(entries, PROFILES):
+            source = json.loads((baseline / 'SOURCE.json').read_text('utf8'))
+            self.assertEqual((entry['Version'], entry['BuildId']), (source['version'], source['buildid']))
+            self.assertEqual(package.resolve(), (ROOT / 'package' / entry['Bundle']).resolve())
+            self.assertTrue((package / 'profile-files.json').exists())
+            for module in ['swriter','scalc','sdraw','simpress']:
+                self.assertTrue((package / 'ui' / module / 'notebookbar.ui').exists())
+        self.assertNotEqual((PROFILES[0][1] / 'ui/swriter/notebookbar.ui').read_bytes(),
+                            (PROFILES[1][1] / 'ui/swriter/notebookbar.ui').read_bytes())
 
     def test_labels(self):
         labels = json.loads((ROOT / 'package/设置清单.json').read_text(encoding='utf-8'))
@@ -159,9 +189,17 @@ class PackageTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             folder = Path(temp)
             (folder / name).write_bytes(data)
-            (folder / 'release.json').write_text(json.dumps({'commit':'a' * 40, 'sha256':digest, 'file':name, 'version':version}), 'utf8')
+            metadata = {'commit':'a' * 40, 'sha256':digest, 'file':name, 'version':version,
+                        'compatibility': json.loads((ROOT / 'package/compatibility.json').read_text('utf8'))}
+            (folder / 'release.json').write_text(json.dumps(metadata), 'utf8')
             (folder / 'SHA256SUMS.txt').write_text(f'{digest}  {name}\n', 'utf8')
             verify(folder, 'a' * 40)
+            metadata['compatibility'] = []
+            (folder / 'release.json').write_text(json.dumps(metadata), 'utf8')
+            with self.assertRaises(AssertionError):
+                verify(folder, 'a' * 40)
+            metadata['compatibility'] = json.loads((ROOT / 'package/compatibility.json').read_text('utf8'))
+            (folder / 'release.json').write_text(json.dumps(metadata), 'utf8')
             with self.assertRaises(AssertionError):
                 verify(folder, 'b' * 40)
             (folder / 'unexpected.txt').write_text('private', 'utf8')
@@ -177,38 +215,39 @@ class PackageTests(unittest.TestCase):
                 verify(folder, 'a' * 40)
 
     def test_popup_commands_and_groups(self):
-        ns = '{http://openoffice.org/2001/menu}'
-        specs = json.loads((ROOT / 'config/popups.json').read_text('utf8'))
-        labels = json.loads((ROOT / 'config/popup-labels.json').read_text('utf8'))
-        manifest = json.loads((ROOT / 'package/profile-files.json').read_text('utf8'))
-        self.assertEqual(len(manifest), len(specs))
-        for entry in manifest:
-            path = entry['Path']
-            self.assertRegex(path, r'^config/soffice.cfg/modules/(swriter|scalc|sdraw|simpress)/popupmenu/[a-z0-9_]+\.xml$')
-            module, name = entry['Module'], Path(path).stem
-            source = ET.parse(ROOT / 'vendor/libreoffice' / module / 'popupmenu' / (name + '.xml')).getroot()
-            output = ET.parse(ROOT / 'package/profile' / path).getroot()
-            commands = lambda menu: Counter(n.get(ns + 'id') for n in menu.iter() if n.get(ns + 'id'))
-            self.assertEqual(commands(source), commands(output), path)
-            for node in output.iter():
-                command = node.get(ns + 'id', '').removeprefix('.uno:')
-                if command in labels:
-                    self.assertEqual(node.get(ns + 'label'), labels[command])
-            for menu in output.iter(ns + 'menupopup'):
-                tags = [c.tag for c in menu]
-                if tags:
-                    self.assertNotEqual(tags[0], ns + 'menuseparator')
-                    self.assertNotEqual(tags[-1], ns + 'menuseparator')
-                self.assertFalse(any(a == b == ns + 'menuseparator' for a,b in zip(tags,tags[1:])))
-            expected = ['.uno:' + c for g in specs[module + '/' + name]['groups'] for c in g]
-            actual = [c.get(ns + 'id') for c in output if c.get(ns + 'id') in expected]
-            self.assertEqual(actual, [c for c in expected if c in actual])
-            # 动态菜单必须仍为空，由原生控制器按选区生成。
-            for node in source.iter(ns + 'menu'):
-                if not list(node):
-                    dynamic = output.find('.//*[@' + ns + 'id="' + node.get(ns + 'id') + '"]')
-                    self.assertIsNotNone(dynamic)
-                    self.assertEqual(list(dynamic), [])
+        for baseline, package in PROFILES:
+            ns = '{http://openoffice.org/2001/menu}'
+            specs = json.loads((ROOT / 'config/popups.json').read_text('utf8'))
+            labels = json.loads((ROOT / 'config/popup-labels.json').read_text('utf8'))
+            manifest = json.loads((package / 'profile-files.json').read_text('utf8'))
+            self.assertEqual(len(manifest), len(specs))
+            for entry in manifest:
+                path = entry['Path']
+                self.assertRegex(path, r'^config/soffice.cfg/modules/(swriter|scalc|sdraw|simpress)/popupmenu/[a-z0-9_]+\.xml$')
+                module, name = entry['Module'], Path(path).stem
+                source = ET.parse(baseline / module / 'popupmenu' / (name + '.xml')).getroot()
+                output = ET.parse(package / 'profile' / path).getroot()
+                commands = lambda menu: Counter(n.get(ns + 'id') for n in menu.iter() if n.get(ns + 'id'))
+                self.assertEqual(commands(source), commands(output), path)
+                for node in output.iter():
+                    command = node.get(ns + 'id', '').removeprefix('.uno:')
+                    if command in labels:
+                        self.assertEqual(node.get(ns + 'label'), labels[command])
+                for menu in output.iter(ns + 'menupopup'):
+                    tags = [c.tag for c in menu]
+                    if tags:
+                        self.assertNotEqual(tags[0], ns + 'menuseparator')
+                        self.assertNotEqual(tags[-1], ns + 'menuseparator')
+                    self.assertFalse(any(a == b == ns + 'menuseparator' for a,b in zip(tags,tags[1:])))
+                expected = ['.uno:' + c for g in specs[module + '/' + name]['groups'] for c in g]
+                actual = [c.get(ns + 'id') for c in output if c.get(ns + 'id') in expected]
+                self.assertEqual(actual, [c for c in expected if c in actual])
+                # 动态菜单必须仍为空，由原生控制器按选区生成。
+                for node in source.iter(ns + 'menu'):
+                    if not list(node):
+                        dynamic = output.find('.//*[@' + ns + 'id="' + node.get(ns + 'id') + '"]')
+                        self.assertIsNotNone(dynamic)
+                        self.assertEqual(list(dynamic), [])
 
     def test_templates(self):
         templates=list((ROOT/'package/templates').glob('*'))

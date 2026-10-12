@@ -34,7 +34,7 @@ if ($Restore) {
     $controls.StatusMessage.Text = '选择模块后点击“开始恢复”，检查结果会逐项显示。'
 }
 $controls.StatusTitle.Text = "准备$operation"
-$controls.Details.Text = if ($Restore) { '先保存文档并退出软件；将还原所选模块的首次备份。' } else { '适配 LibreOffice 26.2.5.2 已验证构建。先保存文档并退出软件；不兼容时检查会阻止安装。' }
+$controls.Details.Text = if ($Restore) { '先保存文档并退出软件；将还原所选模块的首次备份。' } else { '自动识别 LibreOffice 版本并选择专属界面。先保存文档并退出软件；未适配的版本会阻止安装。' }
 $state = [hashtable]::Synchronized(@{ Update=@{ Percent=0; Message='正在启动配置程序…' }; Checks=@(); Failure=$null })
 $checkTitles = @('运行环境','安装目录','版本兼容','运行状态','用户配置','目录写入','配置包文件','首次备份')
 function Refresh-Checks {

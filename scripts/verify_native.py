@@ -36,6 +36,11 @@ def main():
     def open_doc(url):
         doc=desktop.loadComponentFromURL(url,'_blank',0,properties(Hidden=True,AsTemplate=True))
         docs.append(doc)
+        # 26.8 的 Calc 格式命令需初始化视图。headless 实例只有虚拟窗口，不能替代真实点击验收。
+        doc.CurrentController.Frame.ContainerWindow.setVisible(True)
+        doc.CurrentController.Frame.ComponentWindow.setFocus()
+        desktop.setActiveFrame(doc.CurrentController.Frame)
+        doc.CurrentController.Frame.activate()
         return doc
     def check(module,name,condition):
         results.append({'模块':module,'操作':name,'通过':bool(condition)})

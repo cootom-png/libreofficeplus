@@ -1,15 +1,18 @@
 LibreOfficePlus
 
-基于 LibreOffice 26.2.5.2 的 Writer / Calc / Draw / Impress notebookbar.ui 和 popupmenu XML 修改。
+基于 LibreOffice 26.2.5.2 与 26.8.1.1 的 Writer / Calc / Draw / Impress notebookbar.ui 和 popupmenu XML 分别修改。
 原始项目：The Document Foundation / LibreOffice contributors
 上游：https://github.com/LibreOffice/core
 构建：cd7284b4cbbfeb507e630c1aac019f4157393acb
 原始文件：sw/uiconfig/swriter/ui/notebookbar.ui、sc/uiconfig/scalc/ui/notebookbar.ui、sd/uiconfig/sdraw/ui/notebookbar.ui、sd/uiconfig/simpress/ui/notebookbar.ui
-具体基线校验值见 vendor/libreoffice/SOURCE.json。
+新版构建：bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1
+具体基线校验值见 vendor/libreoffice/SOURCE.json 与 vendor/libreoffice/26.8.1/SOURCE.json。
+新版官方安装文件：https://download.documentfoundation.org/libreoffice/stable/26.8.1/win/x86_64/LibreOffice_26.8.1_Win_x86-64.msi
+其 SHA-256：c6298b10cfa1748bcbedad94c62ce771e240e5021bfd6d7a967cd571b04b5312
 
 本项目修改选项卡顺序、常用按钮布局和中文名称，并增加安装、恢复、构建与验证脚本。
 许可证：Mozilla Public License 2.0，完整文本见 LICENSE（安装包中为 LICENSE.txt）。
-安装包内 ui/ 为修改后的源文件；完整构建源码：https://github.com/cootom-png/libreofficeplus
+安装包内 ui/ 与 variants/26.8.1/ui/ 为各版本修改后的源文件，菜单源文件分别位于对应 profile/；完整构建源码：https://github.com/cootom-png/libreofficeplus
 
 WPS 名称用于说明习惯参考；未分发 WPS 图标、程序或服务。
 

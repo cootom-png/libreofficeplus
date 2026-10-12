@@ -2,7 +2,7 @@
 
 为习惯 WPS 的用户提供 **LibreOffice Writer（文字）、Calc（表格）、Draw（绘图）、Impress（演示）**的中文功能区、常用操作和可恢复的一键配置包。
 
-当前版本 **v6.5.0，演示模块操作习惯适配版**。参考常见办公操作习惯，调整按钮顺序、分组、常用菜单和键位；Draw 沿用相同的字体、形状、排列与属性栏习惯。界面由本项目独立组织，使用 LibreOffice 原生命令、Colibre 图标与文档引擎。
+当前版本 **v6.6.0，新旧版本兼容版**。同时适配本机原有的 **26.2.5.2** 与官方最新稳定版 **26.8.1（完整版本 26.8.1.1）**，各自使用对应原生界面文件。参考常见办公操作习惯，调整按钮顺序、分组、常用菜单和键位；四模块使用 LibreOffice 原生命令、Colibre 图标与文档引擎。官方版本核实日期：2026-10-12，[官方下载页](https://www.libreoffice.org/download/)。
 
 2026-10-12 安装入口更新：修复 `'d'`、`'rshell.exe' 命令截断，并新增图形进度窗口。请重新下载并解压完整配置包，双击新的 `安装.vbs`；原来的首次备份会继续保留。
 
@@ -10,7 +10,7 @@
 
 **[下载正式发布的配置包](https://github.com/cootom-png/libreofficeplus/releases/latest)**，选择 `LibreOfficePlus.zip`。同页提供 `SHA256SUMS.txt` 和 `release.json`，可核对文件校验值与完整提交。也可[下载 main 已合入版本](https://github.com/cootom-png/libreofficeplus/raw/refs/heads/main/dist/LibreOfficePlus-WPS%E7%95%8C%E9%9D%A2%E9%85%8D%E7%BD%AE%E5%8C%85.zip)。仓库旧 ZIP 文件名为保持下载兼容继续保留；正式发布使用 ASCII 文件名，避免平台自动改名造成清单不一致。
 
-1. 安装 Windows 版 **LibreOffice 26.2.5.2**，构建 ID 必须为 `cd7284b4cbbfeb507e630c1aac019f4157393acb`。
+1. 使用 Windows x86-64 版 **LibreOffice 26.2.5.2 或 26.8.1.1**，已验证构建见下表；本包配置界面，不安装或升级 LibreOffice 本体。
 2. 首次使用时，先启动并关闭一次 LibreOffice，让软件生成用户配置。
 3. 保存文档，完全退出 LibreOffice。后台仍有进程时安装程序会拒绝修改，不会强制关闭文档。
 4. 解压整个 ZIP，进入 `LibreOfficePlus` 文件夹，双击 **`安装.vbs`**。选择模块、查看字体提示及安装路径，点击“开始配置”，再查看逐项环境检查和进度。
@@ -20,7 +20,7 @@
 
 图形安装和恢复使用蓝白窗口，显示实际操作阶段、进度和完成结果；出现问题时在窗口中说明原因。操作期间请等待完成后再关闭窗口或打开 LibreOffice。`安装.vbs`、`恢复原界面.vbs` 使用 Windows Script Host 启动，不弹出黑色控制台；`.cmd` 保留为命令行入口。若电脑禁用了 Windows Script Host，可继续使用 `.cmd`，无需修改安全策略。
 
-v6.1 在安装过程中逐项显示运行环境、安装目录、版本兼容、软件运行状态、用户配置、目录写入、配置包文件与首次备份，结果保留到关闭窗口。兼容检查展示当前版本和适配版本，仍要求精确匹配 26.2.5.2 的已验证构建；失败项标红并给出处理方法，未执行项明确显示“未检查”。恢复时版本与安装目录显示“不适用”，便于软件升级或卸载后还原原界面。目录写入检查只创建并清理一个临时文件，不代表已诊断所有安全软件策略。
+安装过程中逐项显示运行环境、安装目录、版本兼容、软件运行状态、用户配置、目录写入、配置包文件与首次备份，结果保留到关闭窗口。兼容检查展示实际版本和选用的专属界面，同时核对程序版本及构建；未知版本、文件缺失或新旧模块混用会停止并提示原因。失败项标红，未执行项明确显示“未检查”。恢复不要求版本匹配；目录写入检查不代表已诊断所有安全软件策略。
 
 ![模块选择界面的 WPF 渲染预览](docs/installer-setup-preview.png)
 
@@ -46,6 +46,19 @@ powershell.exe -NoProfile -STA -ExecutionPolicy Bypass -WindowStyle Hidden -File
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\configure.ps1 -Modules Writer,Calc,Draw,Impress -LibreOfficePath "D:\Apps\LibreOffice"
 ```
+
+## v6.6 版本兼容
+
+| LibreOffice 完整版本 | 已验证构建 | 专属界面 |
+| --- | --- | --- |
+| 26.2.5.2 | `cd7284b4cbbfeb507e630c1aac019f4157393acb` | `ui/`、`profile/` |
+| 26.8.1.1（官方显示 26.8.1） | `bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1` | `variants/26.8.1/` |
+
+升级 LibreOffice 前先保存文件并退出；升级完成后，首次打开文档前运行本版配置包，**同时勾选以前配置过的所有模块**。降级也按同样方法重新配置。首次备份继续保留；只想恢复原界面时使用本版恢复入口，无需匹配软件版本。
+
+新版开始页保留新的原生网格、字体字号、段落、数字和样式控件；沿用项目的选项卡习惯、格式刷入口及常用菜单。新版额外主题页和扩展页继续保留，布局不承诺与旧版或 WPS 完全相同。每版分别构建并检查四模块 UI 与 24 类右键菜单；快捷键和可选模板共享。
+
+详见 [版本兼容与验证边界](docs/版本兼容.md)。新版未完成真实窗口逐项点击、全屏放映与所有缩放排版检查；复杂文档应先用副本核对。
 
 ## v6.5 演示模块
 
@@ -197,8 +210,8 @@ PowerShell 测试使用独立目录、合成设置和固定 v4 备份生成器�
 | `package/`、`dist/` | 解压安装文件和 ZIP |
 | `tests/`、`docs/` | 自动检查、实际预览、差异与验收记录 |
 
-修改后重新构建并提交 `package/` 和 `dist/`。适配其他构建版本须更新基线、构建限制和实际验收，不能只去掉版本检查。
+修改后重新构建并提交 `package/` 和 `dist/`。适配其他构建版本须添加原生基线、`config/versions.json` 和实际验收，不能只去掉版本检查。构建生成 `compatibility.json`；发布清单包含同一份兼容矩阵，安装自动选用对应文件。
 
 ## 许可与来源
 
-[Mozilla Public License 2.0](LICENSE)。原生 UI 来自 The Document Foundation / LibreOffice contributors 的 LibreOffice 26.2.5.2 Windows 安装文件，上游构建 [`cd7284b4`](https://github.com/LibreOffice/core/tree/cd7284b4cbbfeb507e630c1aac019f4157393acb)，校验值见 [SOURCE.json](vendor/libreoffice/SOURCE.json)。配置包包含修改后的 XML 源文件、许可证和来源说明。WPS 截图仅作习惯参考，未分发 WPS 图标或程序文件。
+[Mozilla Public License 2.0](LICENSE)。原生 UI 来自 The Document Foundation / LibreOffice contributors 的两个版本 Windows 安装文件，上游构建与逐文件校验值见 [26.2.5.2 来源](vendor/libreoffice/SOURCE.json) 和 [26.8.1.1 来源](vendor/libreoffice/26.8.1/SOURCE.json)。配置包包含修改后的 XML 源文件、许可证和来源说明。WPS 截图仅作习惯参考，未分发 WPS 图标或程序文件。
