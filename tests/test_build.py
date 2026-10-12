@@ -135,8 +135,8 @@ class PackageTests(unittest.TestCase):
     def test_release_scope(self):
         sys.path.insert(0, str(ROOT / 'scripts'))
         from check_release import verify
-        name = 'LibreOfficePlus-WPS界面配置包.zip'
-        data = (ROOT / 'dist' / name).read_bytes()
+        name = 'LibreOfficePlus.zip'
+        data = (ROOT / 'dist/LibreOfficePlus-WPS界面配置包.zip').read_bytes()
         digest = hashlib.sha256(data).hexdigest()
         version = json.loads((ROOT / 'package/version.json').read_text('utf8'))['Version']
         with tempfile.TemporaryDirectory() as temp:
@@ -152,6 +152,10 @@ class PackageTests(unittest.TestCase):
                 verify(folder, 'a' * 40)
             (folder / 'unexpected.txt').unlink()
             (folder / name).write_bytes(data + b'changed')
+            with self.assertRaises(AssertionError):
+                verify(folder, 'a' * 40)
+            (folder / name).write_bytes(data)
+            (folder / name).rename(folder / 'renamed.zip')
             with self.assertRaises(AssertionError):
                 verify(folder, 'a' * 40)
 

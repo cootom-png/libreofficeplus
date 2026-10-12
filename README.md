@@ -2,13 +2,13 @@
 
 为习惯 WPS 的用户提供 **LibreOffice Writer（文字）、Calc（表格）、Draw（绘图）**的中文功能区、常用操作和可恢复的一键配置包。
 
-当前版本 **v6.4.0，常用操作与安装体验改进版**。参考常见办公操作习惯，调整按钮顺序、分组、常用菜单和键位；Draw 沿用相同的字体、形状、排列与属性栏习惯。界面由本项目独立组织，使用 LibreOffice 原生命令、Colibre 图标与文档引擎。
+当前版本 **v6.4.1，常用操作与安装体验改进版**。参考常见办公操作习惯，调整按钮顺序、分组、常用菜单和键位；Draw 沿用相同的字体、形状、排列与属性栏习惯。界面由本项目独立组织，使用 LibreOffice 原生命令、Colibre 图标与文档引擎。
 
 2026-10-12 安装入口更新：修复 `'d'`、`'rshell.exe' 命令截断，并新增图形进度窗口。请重新下载并解压完整配置包，双击新的 `安装.vbs`；原来的首次备份会继续保留。
 
 ## 下载与安装
 
-**[下载正式发布的配置包](https://github.com/cootom-png/libreofficeplus/releases/latest)**，同页提供 `SHA256SUMS.txt` 和 `release.json`，可核对文件校验值与完整提交。也可[下载 main 已合入版本](https://github.com/cootom-png/libreofficeplus/raw/refs/heads/main/dist/LibreOfficePlus-WPS%E7%95%8C%E9%9D%A2%E9%85%8D%E7%BD%AE%E5%8C%85.zip)。旧 ZIP 文件名为保持下载兼容继续保留。
+**[下载正式发布的配置包](https://github.com/cootom-png/libreofficeplus/releases/latest)**，选择 `LibreOfficePlus.zip`。同页提供 `SHA256SUMS.txt` 和 `release.json`，可核对文件校验值与完整提交。也可[下载 main 已合入版本](https://github.com/cootom-png/libreofficeplus/raw/refs/heads/main/dist/LibreOfficePlus-WPS%E7%95%8C%E9%9D%A2%E9%85%8D%E7%BD%AE%E5%8C%85.zip)。仓库旧 ZIP 文件名为保持下载兼容继续保留；正式发布使用 ASCII 文件名，避免平台自动改名造成清单不一致。
 
 1. 安装 Windows 版 **LibreOffice 26.2.5.2**，构建 ID 必须为 `cd7284b4cbbfeb507e630c1aac019f4157393acb`。
 2. 首次使用时，先启动并关闭一次 LibreOffice，让软件生成用户配置。
