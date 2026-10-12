@@ -1,0 +1,134 @@
+[
+  {
+    "模块": "com.sun.star.text.TextDocument",
+    "快捷键": "D_MOD1",
+    "恢复命令": ".uno:UnderlineDouble",
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.text.TextDocument",
+    "快捷键": "F12",
+    "恢复命令": ".uno:DefaultNumbering",
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.text.TextDocument",
+    "快捷键": "F4",
+    "恢复命令": ".uno:GraphicDialog",
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.text.TextDocument",
+    "快捷键": "G_SHIFT_MOD1",
+    "恢复命令": null,
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.text.TextDocument",
+    "快捷键": "EQUAL_MOD1",
+    "恢复命令": null,
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.text.TextDocument",
+    "快捷键": "EQUAL_SHIFT_MOD1",
+    "恢复命令": null,
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.text.TextDocument",
+    "快捷键": "1_MOD1",
+    "恢复命令": ".uno:StyleApply?Style:string=Heading 1&FamilyName:string=ParagraphStyles",
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.text.TextDocument",
+    "快捷键": "2_MOD1",
+    "恢复命令": ".uno:StyleApply?Style:string=Heading 2&FamilyName:string=ParagraphStyles",
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.text.TextDocument",
+    "快捷键": "E_SHIFT_MOD1",
+    "恢复命令": ".uno:JumpToFootnoteOrAnchor",
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.text.TextDocument",
+    "快捷键": "V_MOD1_MOD2",
+    "恢复命令": null,
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.sheet.SpreadsheetDocument",
+    "快捷键": "F12",
+    "恢复命令": ".uno:Group",
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.sheet.SpreadsheetDocument",
+    "快捷键": "R_MOD1",
+    "恢复命令": ".uno:AlignRight",
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.sheet.SpreadsheetDocument",
+    "快捷键": "G_MOD1",
+    "恢复命令": ".uno:RepeatSearch",
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.sheet.SpreadsheetDocument",
+    "快捷键": "F5",
+    "恢复命令": ".uno:Navigator",
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.sheet.SpreadsheetDocument",
+    "快捷键": "F11",
+    "恢复命令": ".uno:DesignerDialog",
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.sheet.SpreadsheetDocument",
+    "快捷键": "V_MOD1_MOD2",
+    "恢复命令": null,
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.sheet.SpreadsheetDocument",
+    "快捷键": "EQUAL_MOD2",
+    "恢复命令": null,
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.sheet.SpreadsheetDocument",
+    "快捷键": "EQUAL_SHIFT_MOD1",
+    "恢复命令": null,
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.drawing.DrawingDocument",
+    "快捷键": "G_MOD1",
+    "恢复命令": null,
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.drawing.DrawingDocument",
+    "快捷键": "G_SHIFT_MOD1",
+    "恢复命令": ".uno:FormatGroup",
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.drawing.DrawingDocument",
+    "快捷键": "F12",
+    "恢复命令": null,
+    "通过": true
+  },
+  {
+    "模块": "com.sun.star.drawing.DrawingDocument",
+    "快捷键": "V_MOD1_MOD2",
+    "恢复命令": null,
+    "通过": true
+  }
+]

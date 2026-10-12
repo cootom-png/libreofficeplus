@@ -14,7 +14,7 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--pipe',required=True)
     parser.add_argument('--output',type=Path,required=True)
-    parser.add_argument('--configured',action='store_true',help='验证已安装本包的独立配置中的 Writer 快捷键')
+    parser.add_argument('--configured',action='store_true',help='验证已安装本包的独立配置中的三模块快捷键')
     args=parser.parse_args()
     args.output.mkdir(parents=True,exist_ok=True)
     local=uno.getComponentContext()
@@ -42,6 +42,11 @@ def main():
         if not condition: raise AssertionError(f'{module}: {name}')
     def dispatch(doc,command):
         helper.executeDispatch(doc.CurrentController.Frame,'.uno:'+command,'',0,())
+    def dispatch_key(doc,module,key):
+        from verify_shortcuts import key_event
+        supplier=manager.createInstanceWithContext('com.sun.star.ui.ModuleUIConfigurationManagerSupplier',context)
+        command=supplier.getUIConfigurationManager(module).getShortCutManager().getCommandByKeyEvent(key_event(key))
+        helper.executeDispatch(doc.CurrentController.Frame,command,'',0,())
     def export(doc,module,filter_name):
         dest=args.output/(module+'.pdf')
         doc.storeToURL(uno.systemPathToFileUrl(str(dest.resolve())),properties(FilterName=filter_name,Overwrite=True))
@@ -49,11 +54,8 @@ def main():
     try:
         writer=open_doc('private:factory/swriter')
         if args.configured:
-            supplier=manager.createInstanceWithContext('com.sun.star.ui.ModuleUIConfigurationManagerSupplier',context)
-            shortcuts=supplier.getUIConfigurationManager('com.sun.star.text.TextDocument').getShortCutManager()
-            for name,key,mods,command in [('Ctrl+D','D',2,'FontDialog'),('F12','F12',0,'SaveAs'),('F4','F4',0,'Repeat')]:
-                event=uno.createUnoStruct('com.sun.star.awt.KeyEvent',KeyCode=uno.getConstantByName('com.sun.star.awt.Key.'+key),Modifiers=mods)
-                check('Writer','快捷键 '+name,shortcuts.getCommandByKeyEvent(event)=='.uno:'+command)
+            from verify_shortcuts import verify
+            results.extend(verify(context))
         writer.Text.String='WPS habit test'
         cursor=writer.Text.createTextCursor(); cursor.gotoEnd(True); writer.CurrentController.select(cursor)
         check('Writer','输入文字',writer.Text.String=='WPS habit test')
@@ -67,6 +69,17 @@ def main():
         cursor.CharFontName='宋体'; check('Writer','字体设置',cursor.CharFontName=='宋体')
         cursor.CharHeight=10.5; check('Writer','五号字号',cursor.CharHeight==10.5)
         dispatch(writer,'ResetAttributes'); check('Writer','清除直接格式',cursor.CharWeight==100)
+        if args.configured:
+            for key,height in [('1_MOD1',100),('2_MOD1',200)]:
+                dispatch_key(writer,'com.sun.star.text.TextDocument',key)
+                check('Writer','行距键位 '+key,cursor.ParaLineSpacing.Height==height)
+            for key,positive in [('EQUAL_MOD1',False),('EQUAL_SHIFT_MOD1',True)]:
+                dispatch_key(writer,'com.sun.star.text.TextDocument',key)
+                check('Writer','上下标键位 '+key,cursor.CharEscapement>0 if positive else cursor.CharEscapement<0)
+            dispatch(writer,'ResetAttributes')
+            dispatch_key(writer,'com.sun.star.text.TextDocument','E_SHIFT_MOD1')
+            check('Writer','修订键位',writer.RecordChanges)
+            dispatch_key(writer,'com.sun.star.text.TextDocument','E_SHIFT_MOD1')
         writer.CurrentController.ViewCursor.gotoEnd(False)
         dispatch(writer,'InsertPagebreak'); check('Writer','插入分页符',writer.CurrentController.ViewCursor.Page==2)
         dispatch(writer,'Undo'); check('Writer','撤销分页',writer.CurrentController.ViewCursor.Page==1)

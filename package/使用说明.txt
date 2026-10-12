@@ -2,7 +2,7 @@
 
 为习惯 WPS 的用户提供 **LibreOffice Writer（文字）、Calc（表格）、Draw（绘图）**的中文功能区、常用操作和可恢复的一键配置包。
 
-当前版本 **v6.1，安装检查增强版**。以用户提供的 WPS 文字、表格截图为参考，重点调整按钮顺序、分组、常用菜单和键位；Draw 沿用相同的字体、形状、排列与属性栏习惯。它仍使用 LibreOffice 原生界面和文档引擎，**不是 WPS 的逐像素复刻**。
+当前版本 **v6.2，快捷键适配版**。以用户提供的 WPS 文字、表格截图为参考，重点调整按钮顺序、分组、常用菜单和键位；Draw 沿用相同的字体、形状、排列与属性栏习惯。它仍使用 LibreOffice 原生界面和文档引擎，**不是 WPS 的逐像素复刻**。
 
 2026-10-12 安装入口更新：修复 `'d'`、`'rshell.exe' 命令截断，并新增图形进度窗口。请重新下载并解压完整配置包，双击新的 `安装.vbs`；原来的首次备份会继续保留。
 
@@ -44,6 +44,12 @@ powershell.exe -NoProfile -STA -ExecutionPolicy Bypass -WindowStyle Hidden -File
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\configure.ps1 -Modules Writer,Calc,Draw -LibreOfficePath "D:\Apps\LibreOffice"
 ```
+
+## v6.2 快捷键适配
+
+配置 22 个键位，并验证 25 个保留的原生键位。Writer 增加字数统计、上下标、单倍/双倍行距和修订；Calc 增加向右填充、名称框定位、插入单元格、自动求和和图表向导；Draw 使用 Ctrl+G 组合、Ctrl+Shift+G 取消组合。三个模块统一 F12 另存为、Ctrl+Alt+V 选择性粘贴。
+
+新增键位也使用 LibreOffice 能读取的 Key 集合格式，支持旧备份升级、重复安装和按模块恢复。包内附“快捷键对照表.csv”，具体替换的动作与边界见 [操作习惯](docs/操作习惯.md)。**Calc 的 Alt+Enter 换行、Ctrl+Enter 批量输入，Writer 的 Ctrl+Shift+C/V 格式复制，以及 WPS 多文档标签切换尚未完整对齐。** Calc 的 F4 保留公式引用切换，图表与定位继续使用原生向导和名称框。
 
 ## v6 弹出菜单与弹窗入口
 
@@ -126,9 +132,9 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\configure.ps1 -Modules
 - [按钮对应表](package/按钮对应表.csv)：命令、逻辑分组、组内顺序和状态；不是像素坐标或全部功能通过记录。
 - [按钮差异](docs/按钮差异.md)、[操作习惯](docs/操作习惯.md)：名称、菜单、右键和键位的实际差异。
 - [适配计划与进度](docs/适配计划.md)：本版交付、技术限制和下一步验收要求。
-- [验收记录](docs/验收记录.md)、[原生操作结果](docs/原生命令验收.json)：每个组件 15 项文档操作、三种模板和三个 Writer 键位，共 51 项。
+- [验收记录](docs/验收记录.md)、[v6.2 检查结果](docs/快捷键验收.json)：48 项操作/模板、47 项键位读取、5 项按映射派发，共 100 项；另有 [22 键恢复复检](docs/快捷键恢复验收.json)。
 
-51 项验证包含 UNO 命令、文档属性和导出结果，**不等于逐个点击 51 个按钮，也不证明全部菜单都正确**。实际窗口检查单独记录。宏、保护、复杂 DOCX/XLSX、所有公式、真实打印及所有显示缩放尚未完整验收。
+100 项验证包含配置读取、UNO 命令、文档属性和导出结果，**不等于逐个点击 100 个按钮，也不证明全部菜单都正确**。实际窗口与键盘抽检单独记录。宏、保护、复杂 DOCX/XLSX、所有公式、真实打印及所有显示缩放尚未完整验收。
 
 本包不修改现有文档、默认保存格式或宏安全设置。WPS AI、会员、云服务、素材中心、SmartArt、COM/WPS 加载项、跨文档顶部标签、WPS 专属右键菜单及完整函数分类菜单未实现。部分页面按钮会打开同一个原生页面格式窗口；这不能等同于 WPS 的直接开关。
 

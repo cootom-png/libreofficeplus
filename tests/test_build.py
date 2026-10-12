@@ -1,5 +1,6 @@
 """检查配置包中的 UI 结构、引用完整性和可重复构建。"""
 import hashlib
+import csv
 from collections import Counter
 import json
 import os
@@ -175,6 +176,18 @@ class PackageTests(unittest.TestCase):
                 self.assertTrue(archive.read('mimetype').endswith(b'-template'))
                 for name in ['content.xml','styles.xml','META-INF/manifest.xml']:
                     ET.fromstring(archive.read(name))
+
+    def test_shortcuts(self):
+        entries = json.loads((ROOT / 'config/shortcuts.json').read_text('utf8'))
+        self.assertEqual(len({e['Path'] for e in entries}), len(entries))
+        self.assertEqual(len(entries), 22)
+        for entry in entries:
+            self.assertRegex(entry['Path'], r'^/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com\.sun\.star\.(text\.TextDocument|sheet\.SpreadsheetDocument|drawing\.DrawingDocument)/[A-Z0-9]+(?:_(?:SHIFT|MOD1|MOD2))*$')
+            self.assertTrue(entry['Value'].startswith('.uno:'))
+            self.assertEqual(entry['Language'], 'en-US')
+        with (ROOT / 'package/快捷键对照表.csv').open(encoding='utf-8-sig', newline='') as file:
+            rows = list(csv.reader(file))
+        self.assertEqual(len(rows), len(entries) + 1)
 
     def test_reproducible_archive(self):
         path = ROOT / 'dist/LibreOfficePlus-WPS界面配置包.zip'

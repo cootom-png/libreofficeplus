@@ -15,6 +15,10 @@ $initial = @'
 <item oor:path="/org.openoffice.Office.UI.ToolbarMode"><prop oor:name="ActiveWriter" oor:op="fuse"><value>original.ui</value></prop><prop oor:name="Unrelated" oor:op="fuse"><value>keep</value></prop></item>
 <item oor:path="/org.openoffice.Office.UI.WriterCommands/UserInterface/Commands/.uno:FormatPaintbrush"><prop oor:name="Label" oor:op="fuse"><value xml:lang="zh-CN">原始名称</value><value xml:lang="en-US">Custom name</value></prop></item>
 <item oor:path="/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/org.openoffice.Office.Accelerators:Module['com.sun.star.text.TextDocument']/org.openoffice.Office.Accelerators:Key['D_MOD1']/Command"><value xml:lang="en-US">.uno:UnderlineDouble</value><value xml:lang="zh-CN">.uno:CustomFont</value></item>
+<item oor:path="/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.sheet.SpreadsheetDocument/R_MOD1"><prop oor:name="Command" oor:op="fuse"><value xml:lang="en-US">.uno:CustomCalcRight</value></prop></item>
+<item oor:path="/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.drawing.DrawingDocument/G_SHIFT_MOD1"><prop oor:name="Command" oor:op="fuse"><value xml:lang="en-US">.uno:CustomDrawGroup</value></prop></item>
+<item oor:path="/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.drawing.DrawingDocument"><node oor:name="G_MOD1" oor:op="replace"><prop oor:name="Command" oor:op="fuse"><value xml:lang="en-US">.uno:CustomGroup</value></prop></node><node oor:name="H_MOD1" oor:op="replace"><prop oor:name="Command" oor:op="fuse"><value xml:lang="en-US">.uno:CustomSibling</value></prop></node></item>
+<item oor:path="/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/K_MOD1"><prop oor:name="Command" oor:op="fuse"><value xml:lang="en-US">.uno:CustomPersonalKey</value></prop></item>
 </oor:items>
 '@
 [IO.File]::WriteAllText($config,$initial,[Text.UTF8Encoding]::new($false))
@@ -32,19 +36,20 @@ New-Item -ItemType Directory -Path (Split-Path $writerMenu) -Force | Out-Null
 [IO.File]::WriteAllText($writerMenu,$oldMenu)
 function Semantic($text) {
     [xml]$xml = $text
-    @($xml.DocumentElement.SelectNodes('item') | ForEach-Object {
-        $path = [regex]::Replace($_.GetAttribute('path',$ns), "[^/:\[\]]+:[^/:\[\]]+\['([^']*)'\]", '$1')
-        $props=@($_.SelectNodes('prop'))
-        if (!$props.Count) {
-            $name=$path.Substring($path.LastIndexOf('/')+1); $path=$path.Substring(0,$path.LastIndexOf('/'))
-            $props=@($_)
-        }
-        foreach ($prop in $props) {
-            if ($prop.LocalName -eq 'prop') { $name=$prop.GetAttribute('name',$ns) }
+    function Values($node,$path) {
+        $path=[regex]::Replace($path, "[^/:\[\]]+:[^/:\[\]]+\['([^']*)'\]", '$1')
+        foreach ($prop in $node.SelectNodes('prop')) {
             $values=@($prop.SelectNodes('value') | ForEach-Object { "$($_.GetAttribute('lang','http://www.w3.org/XML/1998/namespace'))=$($_.InnerText)" }) -join ';'
-            "$path|$name|$values"
+            "$path|$($prop.GetAttribute('name',$ns))|$values"
         }
-    } | Sort-Object)
+        if (@($node.SelectNodes('value')).Count) {
+            $name=$path.Substring($path.LastIndexOf('/')+1); $parent=$path.Substring(0,$path.LastIndexOf('/'))
+            $values=@($node.SelectNodes('value') | ForEach-Object { "$($_.GetAttribute('lang','http://www.w3.org/XML/1998/namespace'))=$($_.InnerText)" }) -join ';'
+            "$parent|$name|$values"
+        }
+        foreach ($child in $node.SelectNodes('node')) { Values $child "$path/$($child.GetAttribute('name',$ns))" }
+    }
+    @($xml.DocumentElement.SelectNodes('item') | ForEach-Object { Values $_ ($_.GetAttribute('path',$ns)) } | Sort-Object)
 }
 function Simulate-NativeSave {
     [xml]$xml=Get-Content -LiteralPath $config -Raw -Encoding UTF8
@@ -89,6 +94,10 @@ try {
     [xml]$installed = Get-Content -LiteralPath $config -Raw -Encoding UTF8
     if (!@($installed.SelectNodes('//value') | Where-Object { $_.GetAttribute('lang','http://www.w3.org/XML/1998/namespace') -eq 'zh-CN' -and $_.InnerText -eq '格式刷' }).Count) { throw '中文名称未写入' }
     if (!@($installed.SelectNodes('//value') | Where-Object { $_.GetAttribute('lang','http://www.w3.org/XML/1998/namespace') -eq 'en-US' -and $_.InnerText -eq '.uno:FontDialog' }).Count) { throw 'WPS 快捷键未写入' }
+    foreach ($entry in (Get-Content (Join-Path $repo 'config/shortcuts.json') -Raw -Encoding UTF8 | ConvertFrom-Json)) {
+        $expected="$($entry.Path)|Command|en-US=$($entry.Value)"
+        if ($expected -notin (Semantic $installed.OuterXml)) { throw "快捷键配置未写入：$($entry.Path)" }
+    }
     $hash = (Get-FileHash -LiteralPath $backup).Hash
     $menuHash = (Get-FileHash -LiteralPath (Join-Path $fixture 'LibreOffice\wps-ui-files-backup\swriter-text.xml')).Hash
     if (!(Test-Path -LiteralPath $calcMenu) -or !(Test-Path -LiteralPath $drawMenu)) { throw '所选模块的菜单未安装' }
@@ -119,11 +128,16 @@ try {
     [xml]$drawOnly=Get-Content -LiteralPath $config -Raw -Encoding UTF8
     if (@($drawOnly.SelectNodes('/*/item/prop') | Where-Object { $_.GetAttribute('name',$ns) -eq 'ActiveCalc' }).Count) { throw 'Draw 安装写入 Calc 设置' }
     if (@($drawOnly.SelectNodes('//value') | Where-Object { $_.InnerText -eq '.uno:FontDialog' }).Count) { throw 'Draw 安装修改 Writer 快捷键' }
+    if (!@($drawOnly.SelectNodes('//value') | Where-Object { $_.InnerText -eq '.uno:CustomCalcRight' }).Count -or
+        !@($drawOnly.SelectNodes('//value') | Where-Object { $_.InnerText -eq '.uno:FormatUngroup' }).Count) { throw 'Draw 键位未按模块隔离' }
     & $installer -Modules 'Writer,Calc' -LibreOfficePath $fakeInstall
     Simulate-NativeSave
     $writerHash=(Get-FileHash -LiteralPath $writerUi).Hash
     $calcHash=(Get-FileHash -LiteralPath $calcUi).Hash
     & $installer -Modules Draw -Restore
+    [xml]$partiallyRestored=Get-Content -LiteralPath $config -Raw -Encoding UTF8
+    if (!@($partiallyRestored.SelectNodes('//value') | Where-Object { $_.InnerText -eq '.uno:CustomDrawGroup' }).Count -or
+        !@($partiallyRestored.SelectNodes('//value') | Where-Object { $_.InnerText -eq '.uno:FillRight' }).Count) { throw '恢复 Draw 键位修改了 Calc' }
     if ((Test-Path -LiteralPath $drawMenu) -or !(Test-Path -LiteralPath $calcMenu)) { throw '菜单部分恢复范围不正确' }
     if ((Test-Path -LiteralPath $drawUi) -or (Get-FileHash -LiteralPath $writerUi).Hash -ne $writerHash -or (Get-FileHash -LiteralPath $calcUi).Hash -ne $calcHash) { throw '部分恢复修改了其他模块' }
     & $installer -Modules Writer -Restore
@@ -177,6 +191,7 @@ try {
     Write-Host '通过：第二个 UI 写入失败时撤回第一个 UI，保留配置和恢复能力。'
 
     # 前面的 notebookbar 与文字菜单已经写入后，第二类菜单失败也须完整撤回。
+    $before = (Get-FileHash -LiteralPath $config).Hash
     function Copy-Item {
         param([string]$LiteralPath,[string]$Destination,[switch]$Force)
         if ($Destination -eq $calcMenu) { throw '模拟菜单写入失败' }

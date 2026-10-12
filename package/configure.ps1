@@ -70,8 +70,8 @@ if ($checkFailures.Count) { throw ($checkFailures -join "`n") }
 & $OnProgress 15 '已读取当前用户配置，正在检查配置包…'
 function Scope($path, $name) {
     if ($path -match 'Writer|com.sun.star.text.TextDocument' -or $name -eq 'ActiveWriter') { return 'Writer' }
-    if ($path -match 'Calc' -or $name -eq 'ActiveCalc') { return 'Calc' }
-    if ($path -match 'Draw' -or $name -eq 'ActiveDraw') { return 'Draw' }
+    if ($path -match 'Calc|com.sun.star.sheet.SpreadsheetDocument' -or $name -eq 'ActiveCalc') { return 'Calc' }
+    if ($path -match 'Draw|com.sun.star.drawing.DrawingDocument' -or $name -eq 'ActiveDraw') { return 'Draw' }
     return 'Shared'
 }
 function Canonical-Path($path) {
@@ -82,6 +82,16 @@ function Find-Settings($xml, $path, $name) {
     $canonical = Canonical-Path $path
     foreach ($item in @($xml.DocumentElement.SelectNodes('item'))) {
         $itemPath = Canonical-Path ($item.GetAttribute('path',$ns))
+        # 新建快捷键保存为模块 item 下的 Key 集合节点，统一成单键 item 读取和备份。
+        foreach ($keyNode in @($item.SelectNodes('node'))) {
+            if ("$itemPath/$($keyNode.GetAttribute('name',$ns))" -ne $canonical) { continue }
+            $replacement=$xml.CreateElement('item'); $replacement.SetAttribute('path',$ns,$canonical) | Out-Null
+            foreach ($property in @($keyNode.SelectNodes('prop'))) { $replacement.AppendChild($property.CloneNode($true)) | Out-Null }
+            $xml.DocumentElement.AppendChild($replacement) | Out-Null
+            $item.RemoveChild($keyNode) | Out-Null
+            if (!$item.HasChildNodes) { $xml.DocumentElement.RemoveChild($item) | Out-Null }
+            $item=$replacement; $itemPath=$canonical
+        }
         # 本地化属性会保存为 item 路径末尾的属性名与直属 value，统一成 prop 形式再处理。
         if ($itemPath -eq "$canonical/$name" -and @($item.SelectNodes('value')).Count) {
             $replacement = $xml.CreateElement('item'); $replacement.SetAttribute('path',$ns,$canonical) | Out-Null
@@ -94,6 +104,17 @@ function Find-Settings($xml, $path, $name) {
         }
         if ($itemPath -eq $canonical -and @($item.SelectNodes('prop') | Where-Object { $_.GetAttribute('name',$ns) -eq $name }).Count) { $item }
     }
+}
+function Append-Setting($xml, $item) {
+    $path=Canonical-Path ($item.GetAttribute('path',$ns))
+    if ($path -match '^(/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/[^/]+)/([^/]+)$') {
+        $container=$xml.CreateElement('item'); $container.SetAttribute('path',$ns,$Matches[1]) | Out-Null
+        $keyNode=$xml.CreateElement('node'); $keyNode.SetAttribute('name',$ns,$Matches[2]) | Out-Null
+        $keyNode.SetAttribute('op',$ns,'replace') | Out-Null
+        foreach ($property in @($item.SelectNodes('prop'))) { $keyNode.AppendChild($property.CloneNode($true)) | Out-Null }
+        $container.AppendChild($keyNode) | Out-Null; $item=$container
+    }
+    $xml.DocumentElement.AppendChild($item) | Out-Null
 }
 function Remove-Setting($xml, $path, $name) {
     foreach ($item in (Find-Settings $xml $path $name)) {
@@ -225,7 +246,7 @@ foreach ($change in $changes) {
         foreach ($item in (Find-Settings $saved $change[0] $change[1])) {
             $copy=$doc.ImportNode($item,$true)
             foreach ($prop in @($copy.ChildNodes)) { if ($prop.GetAttribute('name',$ns) -ne $change[1]) { $copy.RemoveChild($prop) | Out-Null } }
-            $doc.DocumentElement.AppendChild($copy) | Out-Null
+            Append-Setting $doc $copy
         }
     } else {
         $item = $doc.CreateElement('item'); $item.SetAttribute('path',$ns,$change[0]) | Out-Null
@@ -236,7 +257,7 @@ foreach ($change in $changes) {
             $lang.Value = if ($change.Count -gt 4 -and $change[4]) { $change[4] } else { 'zh-CN' }
             $value.Attributes.Append($lang) | Out-Null
         }
-        $prop.AppendChild($value) | Out-Null; $item.AppendChild($prop) | Out-Null; $doc.DocumentElement.AppendChild($item) | Out-Null
+        $prop.AppendChild($value) | Out-Null; $item.AppendChild($prop) | Out-Null; Append-Setting $doc $item
     }
 }
 $temp = "$config.wps-ui.tmp"; $doc.Save($temp)
@@ -297,5 +318,5 @@ if ($Restore) {
         if (Test-Path -LiteralPath $uiState) { Remove-Item -LiteralPath $uiState }
     }
     Write-Host "已恢复模块：$($selected -join '、')。"
-} else { Write-Host "已安装 LibreOfficePlus v6.1：$($selected -join '、')。请重新打开所选模块。" }
+} else { Write-Host "已安装 LibreOfficePlus v6.2：$($selected -join '、')。请重新打开所选模块。" }
 & $OnProgress 100 '所有步骤已完成。'
