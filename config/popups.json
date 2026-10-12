@@ -145,5 +145,82 @@
       ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
       ["InsertPage", "DuplicatePage", "DeletePage", "RenamePage"]
     ]
+  },
+  "simpress/draw": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["FormatArea", "FormatLine", "TransformDialog", "TextAttributes"],
+      ["ArrangeMenu", "ArrangeFrameMenu", "ObjectAlign", "DistributeSelection", "FormatGroup", "FormatUngroup", "EnterGroup", "LeaveGroup", "RotateFlipMenu", "MirrorMenu", "FlipMenu", "ToggleObjectRotateMode"],
+      ["CustomAnimation", "AnimationEffects", "ExecuteAnimationEffect"]
+    ]
+  },
+  "simpress/drawtext": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["FontDialog", "ParagraphDialog", "CharacterMenu", "ParagraphMenu", "NumberingMenu", "OutlineBullet", "FormatPaintbrush", "ResetAttributes", "SetDefault"],
+      ["TextAttributes"],
+      ["InsertHyperlink", "OpenHyperlinkOnCursor", "EditHyperlink", "CopyHyperlinkLocation", "RemoveHyperlink"],
+      ["CustomAnimation", "AnimationEffects", "ExecuteAnimationEffect"]
+    ]
+  },
+  "simpress/graphic": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["Crop", "ChangePicture", "CompressGraphic", "SaveGraphic", "ExternalEdit", "OriginalSize", "FitCellSize", "ProtectGraphicMenu"],
+      ["TransformDialog", "FormatLine"],
+      ["ArrangeMenu", "ArrangeFrameMenu", "ObjectAlign", "DistributeSelection", "FormatGroup", "FormatUngroup", "EnterGroup", "LeaveGroup", "RotateFlipMenu", "MirrorMenu", "FlipMenu", "ToggleObjectRotateMode"],
+      ["CustomAnimation", "AnimationEffects", "ExecuteAnimationEffect"]
+    ]
+  },
+  "simpress/table": {
+    "lift": ["FontDialog", "ParagraphDialog"],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["TableInsertMenu", "TableDeleteMenu", "MergeCells", "SplitCell", "TableAutoFitMenu", "TableDialog"],
+      ["FontDialog", "ParagraphDialog", "CharacterMenu", "ParagraphMenu", "NumberingMenu", "OutlineBullet", "FormatPaintbrush", "ResetAttributes", "SetDefault"],
+      ["InsertHyperlink", "OpenHyperlinkOnCursor", "EditHyperlink", "CopyHyperlinkLocation", "RemoveHyperlink"],
+      ["InsertAnnotation", "EditAnnotation", "DeleteNote", "ShowNote", "HideNote", "AcceptTrackedChange", "RejectTrackedChange", "ReinstateTrackedChange", "NextTrackedChange", "PreviousTrackedChange"],
+      ["CustomAnimation", "AnimationEffects", "ExecuteAnimationEffect"]
+    ]
+  },
+  "simpress/group": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["FormatArea", "FormatLine", "TransformDialog", "TextAttributes"],
+      ["ArrangeMenu", "ArrangeFrameMenu", "ObjectAlign", "DistributeSelection", "FormatGroup", "FormatUngroup", "EnterGroup", "LeaveGroup", "RotateFlipMenu", "MirrorMenu", "FlipMenu", "ToggleObjectRotateMode"],
+      ["CustomAnimation", "AnimationEffects", "ExecuteAnimationEffect"]
+    ]
+  },
+  "simpress/multiselect": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste", "PasteSpecialMenu", "PasteSpecial", "PasteUnformatted"],
+      ["FormatArea", "FormatLine", "TransformDialog", "TextAttributes"],
+      ["ArrangeMenu", "ArrangeFrameMenu", "ObjectAlign", "DistributeSelection", "FormatGroup", "FormatUngroup", "EnterGroup", "LeaveGroup", "RotateFlipMenu", "MirrorMenu", "FlipMenu", "ToggleObjectRotateMode"],
+      ["CustomAnimation", "AnimationEffects", "ExecuteAnimationEffect"]
+    ]
+  },
+  "simpress/pagepane": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste"],
+      ["InsertSlide", "DuplicateSlide", "DeleteSlide", "RenameSlide"],
+      ["SlideLayoutMenu", "PresentationLayout", "SlideSetup"],
+      ["HideSlide", "ShowSlide"],
+      ["NavigateMenu", "SlideMoveMenu"]
+    ]
+  },
+  "simpress/page": {
+    "lift": [],
+    "groups": [
+      ["Cut", "Copy", "Paste"],
+      ["SlideLayoutMenu", "PresentationLayout", "SlideSetup", "SlideChangeWindow", "SaveBackground"],
+      ["ShowRuler", "GridMenu", "SnapLinesMenu", "CapturePoint"],
+      ["NavigateMenu", "SlideMoveMenu"]
+    ]
   }
 }

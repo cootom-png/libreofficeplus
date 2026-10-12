@@ -1,15 +1,15 @@
-﻿param([switch]$Restore, [string]$Modules = 'Writer,Calc,Draw',
+﻿param([switch]$Restore, [string]$Modules = 'Writer,Calc,Draw,Impress',
       [string]$LibreOfficePath = (Join-Path $env:ProgramFiles 'LibreOffice'),
       [scriptblock]$OnProgress = { param($Percent, $Message) },
       [scriptblock]$OnCheck = { param($Result) Write-Host "[$($Result.State)] $($Result.Title)：$($Result.Message)" })
 $ErrorActionPreference = 'Stop'
 & $OnProgress 5 '正在检查环境与所选模块…'
-$moduleIds = @{ Writer='swriter'; Calc='scalc'; Draw='sdraw' }
-$moduleNames = @{ swriter='文字'; scalc='表格'; sdraw='绘图' }
+$moduleIds = @{ Writer='swriter'; Calc='scalc'; Draw='sdraw'; Impress='simpress' }
+$moduleNames = @{ swriter='文字'; scalc='表格'; sdraw='绘图'; simpress='演示' }
 $selected = @($Modules.Split(',') | ForEach-Object { $_.Trim() } | Select-Object -Unique)
 if (!$selected.Count -or @($selected | Where-Object { !$moduleIds.ContainsKey($_) }).Count) {
-    & $OnCheck @{Title='所选模块';State='需处理';Message='只接受 Writer、Calc、Draw，多个模块用英文逗号分隔。'}
-    throw 'Modules 只接受 Writer、Calc、Draw，多个模块用英文逗号分隔。'
+    & $OnCheck @{Title='所选模块';State='需处理';Message='只接受 Writer、Calc、Draw、Impress，多个模块用英文逗号分隔。'}
+    throw 'Modules 只接受 Writer、Calc、Draw、Impress，多个模块用英文逗号分隔。'
 }
 $selectedIds = @($selected | ForEach-Object { $moduleIds[$_] })
 $base = Join-Path $env:APPDATA 'LibreOffice'
@@ -72,6 +72,7 @@ function Scope($path, $name) {
     if ($path -match 'Writer|com.sun.star.text.TextDocument' -or $name -eq 'ActiveWriter') { return 'Writer' }
     if ($path -match 'Calc|com.sun.star.sheet.SpreadsheetDocument' -or $name -eq 'ActiveCalc') { return 'Calc' }
     if ($path -match 'Draw|com.sun.star.drawing.DrawingDocument' -or $name -eq 'ActiveDraw') { return 'Draw' }
+    if ($path -match 'Impress|com.sun.star.presentation.PresentationDocument' -or $name -eq 'ActiveImpress') { return 'Impress' }
     return 'Shared'
 }
 function Canonical-Path($path) {
@@ -158,7 +159,11 @@ $defaults = @(
     @('/org.openoffice.Office.UI.ToolbarMode/Applications/Calc/Modes/Tabbed','Sidebar','Arrow'),
     @('/org.openoffice.Office.UI.ToolbarMode','ActiveDraw','notebookbar.ui'),
     @("/org.openoffice.Office.UI.ToolbarMode/Applications/org.openoffice.Office.UI.ToolbarMode:Application['Draw']",'Active','notebookbar.ui'),
-    @('/org.openoffice.Office.UI.ToolbarMode/Applications/Draw/Modes/Tabbed','Sidebar','Opened')
+    @('/org.openoffice.Office.UI.ToolbarMode/Applications/Draw/Modes/Tabbed','Sidebar','Opened'),
+    @('/org.openoffice.Office.UI.ToolbarMode','ActiveImpress','notebookbar.ui'),
+    @("/org.openoffice.Office.UI.ToolbarMode/Applications/org.openoffice.Office.UI.ToolbarMode:Application['Impress']",'Active','notebookbar.ui'),
+    @('/org.openoffice.Office.UI.ToolbarMode/Applications/Impress/Modes/Tabbed','Sidebar','Opened'),
+    @('/org.openoffice.Office.Impress/MultiPaneGUI/SlideSorterBar/Visible','ImpressView','true')
 )
 $changes = @($defaults | Where-Object { (Scope $_[0] $_[1]) -in ($selected + 'Shared') })
 $labels = ConvertFrom-Json -InputObject (Get-Content -LiteralPath (Join-Path $PSScriptRoot '设置清单.json') -Raw -Encoding UTF8)

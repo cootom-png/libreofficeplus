@@ -1,10 +1,10 @@
 LibreOfficePlus
 
-基于 LibreOffice 26.2.5.2 的 Writer / Calc / Draw notebookbar.ui 和 popupmenu XML 修改。
+基于 LibreOffice 26.2.5.2 的 Writer / Calc / Draw / Impress notebookbar.ui 和 popupmenu XML 修改。
 原始项目：The Document Foundation / LibreOffice contributors
 上游：https://github.com/LibreOffice/core
 构建：cd7284b4cbbfeb507e630c1aac019f4157393acb
-原始文件：sw/uiconfig/swriter/ui/notebookbar.ui、sc/uiconfig/scalc/ui/notebookbar.ui、sd/uiconfig/sdraw/ui/notebookbar.ui
+原始文件：sw/uiconfig/swriter/ui/notebookbar.ui、sc/uiconfig/scalc/ui/notebookbar.ui、sd/uiconfig/sdraw/ui/notebookbar.ui、sd/uiconfig/simpress/ui/notebookbar.ui
 具体基线校验值见 vendor/libreoffice/SOURCE.json。
 
 本项目修改选项卡顺序、常用按钮布局和中文名称，并增加安装、恢复、构建与验证脚本。
@@ -15,4 +15,4 @@ WPS 名称用于说明习惯参考；未分发 WPS 图标、程序或服务。
 
 本项目与 WPS、The Document Foundation 均无隶属或官方合作关系。安装界面与新增分组由本项目独立设计；不加入 WPS 商标图形、专有图标、字体、程序代码或截图。现有截图仅为项目自建测试文档与 LibreOffice 界面。涉及 LibreOffice 原生资源的修改继续遵循上述 MPL 2.0 来源与许可要求。
 
-菜单原始资源：sw/uiconfig/swriter/popupmenu、sc/uiconfig/scalc/popupmenu、sd/uiconfig/sdraw/popupmenu 中 SOURCE.json 列出的文件，均保留固定版本来源和校验值。
+菜单原始资源：sw/uiconfig/swriter/popupmenu、sc/uiconfig/scalc/popupmenu、sd/uiconfig/sdraw/popupmenu、sd/uiconfig/simpress/popupmenu 中 SOURCE.json 列出的文件，均保留固定版本来源和校验值。

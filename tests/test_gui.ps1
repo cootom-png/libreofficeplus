@@ -11,7 +11,7 @@ foreach ($name in 'configure.ps1','installer-ui.ps1') {
 Add-Type -AssemblyName PresentationFramework
 [xml]$layout=Get-Content -LiteralPath (Join-Path $package 'installer.xaml') -Raw -Encoding UTF8
 $window=[Windows.Markup.XamlReader]::Load([Xml.XmlNodeReader]::new($layout))
-foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','StatusMessage','Step1','Step2','Step3','Checks','Details','Footer','CloseButton','VersionLabel','SelectionPanel','ModuleWriter','ModuleCalc','ModuleDraw','ApplicationPath','FontNotice','TemplatesButton','StartButton') {
+foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','StatusMessage','Step1','Step2','Step3','Checks','Details','Footer','CloseButton','VersionLabel','SelectionPanel','ModuleWriter','ModuleCalc','ModuleDraw','ModuleImpress','ApplicationPath','FontNotice','TemplatesButton','StartButton') {
     if (!$window.FindName($name)) { throw "界面控件缺失：$name" }
 }
 if (!$window.FindName('CloseButton').IsEnabled) { throw '开始前应允许取消' }
@@ -55,7 +55,7 @@ $source=[IO.File]::ReadAllText($controller)
 $start=@'
 $window.Add_ContentRendered({
     if (Test-Path -LiteralPath (Join-Path $PSScriptRoot 'empty-selection')) {
-        foreach ($module in 'Writer','Calc','Draw') { $controls["Module$module"].IsChecked=$false }
+        foreach ($module in 'Writer','Calc','Draw','Impress') { $controls["Module$module"].IsChecked=$false }
         $controls.StartButton.RaiseEvent([Windows.RoutedEventArgs]::new([Windows.Controls.Button]::ClickEvent))
         if ($ui.Handle -or $ui.Running -or $controls.StatusMessage.Text -ne '请至少选择一个模块。') { throw '空模块选择没有阻止操作' }
         [IO.File]::WriteAllText((Join-Path $PSScriptRoot 'empty-result'),'blocked')
@@ -110,6 +110,10 @@ try {
     $result=Get-Content -LiteralPath (Join-Path $bundle 'ui-result.json') -Raw -Encoding UTF8 | ConvertFrom-Json
     if ($result.Modules -ne 'Writer' -or (Test-Path -LiteralPath (Join-Path $profile 'config\soffice.cfg\modules\scalc\ui\notebookbar.ui'))) { throw '模块选择未隔离' }
     Run-UI '仅文字恢复' '-Restore -Modules Writer' ''
+    Run-UI '仅演示模块' '-Modules Impress' ''
+    $result=Get-Content -LiteralPath (Join-Path $bundle 'ui-result.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+    if ($result.Modules -ne 'Impress' -or !(Test-Path -LiteralPath (Join-Path $profile 'config\soffice.cfg\modules\simpress\ui\notebookbar.ui')) -or (Test-Path -LiteralPath (Join-Path $profile 'config\soffice.cfg\modules\swriter\ui\notebookbar.ui'))) { throw '演示图形模块选择未隔离' }
+    Run-UI '仅演示恢复' '-Restore -Modules Impress' ''
     $before=(Get-FileHash -LiteralPath $config).Hash
     [IO.File]::WriteAllText((Join-Path $bundle 'empty-selection'),'')
     $process=Start-Process -FilePath "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -ArgumentList ('-NoProfile -STA -ExecutionPolicy Bypass -File "' + $controller + '"') -WindowStyle Hidden -PassThru

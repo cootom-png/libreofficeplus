@@ -11,7 +11,10 @@
     "Tools": "工具",
     "Dev": "工具",
     "File": "文件",
-    "Page": "页面"
+    "Page": "页面",
+    "Transition": "切换",
+    "Animation": "动画",
+    "Slide Show": "放映"
   },
   "modules": {
     "swriter": {
@@ -1048,6 +1051,374 @@
           },
           {
             "label": "自定义",
+            "command": ".uno:ConfigureDialog"
+          }
+        ]
+      ]
+    },
+    "simpress": {
+      "Insert": [
+        [
+          {
+            "label": "新建幻灯片",
+            "command": ".uno:InsertSlide"
+          },
+          {
+            "label": "从文件导入幻灯片…",
+            "command": ".uno:ImportSlideFromFile"
+          }
+        ],
+        [
+          {
+            "label": "表格",
+            "command": ".uno:InsertTable"
+          },
+          {
+            "label": "图片",
+            "command": ".uno:InsertGraphic"
+          },
+          {
+            "label": "相册…",
+            "command": ".uno:PhotoAlbumDialog"
+          },
+          {
+            "label": "图表",
+            "command": ".uno:InsertObjectChart"
+          }
+        ],
+        [
+          {
+            "label": "文本框",
+            "command": ".uno:Text"
+          },
+          {
+            "label": "艺术字",
+            "command": ".uno:FontworkGalleryFloater"
+          },
+          {
+            "label": "形状",
+            "command": ".uno:BasicShapes"
+          },
+          {
+            "label": "连接符",
+            "command": ".uno:ConnectorToolbox"
+          }
+        ],
+        [
+          {
+            "label": "音频或视频…",
+            "command": ".uno:InsertAVMedia"
+          },
+          {
+            "label": "超链接…",
+            "command": ".uno:HyperlinkDialog"
+          },
+          {
+            "label": "符号…",
+            "command": ".uno:CharmapControl"
+          },
+          {
+            "label": "公式…",
+            "command": ".uno:InsertMath"
+          }
+        ],
+        [
+          {
+            "label": "页眉页脚…",
+            "command": ".uno:HeaderAndFooter"
+          },
+          {
+            "label": "幻灯片编号",
+            "command": ".uno:InsertSlideField"
+          },
+          {
+            "label": "批注",
+            "command": ".uno:InsertAnnotation"
+          },
+          {
+            "label": "嵌入对象…",
+            "command": ".uno:InsertObject"
+          }
+        ]
+      ],
+      "Layout": [
+        [
+          {
+            "label": "幻灯片大小…",
+            "command": ".uno:SlideSetup"
+          },
+          {
+            "label": "背景设置…",
+            "command": ".uno:SlideSetup"
+          }
+        ],
+        [
+          {
+            "label": "幻灯片版式",
+            "command": ".uno:AssignLayout"
+          },
+          {
+            "label": "母版设计…",
+            "command": ".uno:PresentationLayout"
+          }
+        ],
+        [
+          {
+            "label": "幻灯片母版",
+            "command": ".uno:SlideMasterPage"
+          },
+          {
+            "label": "母版元素…",
+            "command": ".uno:MasterLayouts"
+          },
+          {
+            "label": "关闭母版视图",
+            "command": ".uno:CloseMasterView"
+          }
+        ],
+        [
+          {
+            "label": "显示母版背景",
+            "command": ".uno:DisplayMasterBackground"
+          },
+          {
+            "label": "显示母版对象",
+            "command": ".uno:DisplayMasterObjects"
+          }
+        ]
+      ],
+      "Transition": [
+        [
+          {
+            "label": "切换效果",
+            "command": ".uno:SlideChangeWindow"
+          }
+        ],
+        [
+          {
+            "label": "从当前页放映",
+            "command": ".uno:PresentationCurrentSlide"
+          },
+          {
+            "label": "排练计时",
+            "command": ".uno:RehearseTimings"
+          }
+        ]
+      ],
+      "Animation": [
+        [
+          {
+            "label": "动画窗格",
+            "command": ".uno:CustomAnimation"
+          },
+          {
+            "label": "对象交互…",
+            "command": ".uno:AnimationEffects"
+          }
+        ],
+        [
+          {
+            "label": "从当前页放映",
+            "command": ".uno:PresentationCurrentSlide"
+          }
+        ]
+      ],
+      "Slide Show": [
+        [
+          {
+            "label": "从头开始",
+            "command": ".uno:Presentation"
+          },
+          {
+            "label": "从当前页开始",
+            "command": ".uno:PresentationCurrentSlide"
+          }
+        ],
+        [
+          {
+            "label": "设置放映…",
+            "command": ".uno:PresentationDialog"
+          },
+          {
+            "label": "自定义放映…",
+            "command": ".uno:CustomShowDialog"
+          },
+          {
+            "label": "排练计时",
+            "command": ".uno:RehearseTimings"
+          }
+        ],
+        [
+          {
+            "label": "隐藏幻灯片",
+            "command": ".uno:HideSlide"
+          },
+          {
+            "label": "取消隐藏",
+            "command": ".uno:ShowSlide"
+          }
+        ]
+      ],
+      "Review": [
+        [
+          {
+            "label": "拼写检查…",
+            "command": ".uno:SpellDialog"
+          },
+          {
+            "label": "自动拼写检查",
+            "command": ".uno:SpellOnline"
+          },
+          {
+            "label": "简繁转换…",
+            "command": ".uno:ChineseConversion"
+          }
+        ],
+        [
+          {
+            "label": "新建批注",
+            "command": ".uno:InsertAnnotation"
+          },
+          {
+            "label": "删除批注",
+            "command": ".uno:DeleteAnnotation"
+          },
+          {
+            "label": "上一条批注",
+            "command": ".uno:PreviousAnnotation"
+          },
+          {
+            "label": "下一条批注",
+            "command": ".uno:NextAnnotation"
+          },
+          {
+            "label": "显示批注",
+            "command": ".uno:ShowAnnotations"
+          }
+        ]
+      ],
+      "View": [
+        [
+          {
+            "label": "普通视图",
+            "command": ".uno:NormalMultiPaneGUI"
+          },
+          {
+            "label": "大纲视图",
+            "command": ".uno:OutlineMode"
+          },
+          {
+            "label": "幻灯片浏览",
+            "command": ".uno:DiaMode"
+          },
+          {
+            "label": "备注页",
+            "command": ".uno:NotesMode"
+          },
+          {
+            "label": "讲义视图",
+            "command": ".uno:HandoutMode"
+          }
+        ],
+        [
+          {
+            "label": "幻灯片母版",
+            "command": ".uno:SlideMasterPage"
+          },
+          {
+            "label": "备注母版",
+            "command": ".uno:NotesMasterPage"
+          },
+          {
+            "label": "关闭母版视图",
+            "command": ".uno:CloseMasterView"
+          }
+        ],
+        [
+          {
+            "label": "缩略图窗格",
+            "command": ".uno:LeftPaneImpress"
+          },
+          {
+            "label": "侧边栏",
+            "command": ".uno:Sidebar"
+          },
+          {
+            "label": "标尺",
+            "command": ".uno:ShowRuler"
+          },
+          {
+            "label": "网格线",
+            "command": ".uno:GridVisible"
+          },
+          {
+            "label": "参考线",
+            "command": ".uno:HelplinesVisible"
+          }
+        ],
+        [
+          {
+            "label": "显示比例…",
+            "command": ".uno:Zoom"
+          },
+          {
+            "label": "适合窗口",
+            "command": ".uno:ZoomPage"
+          },
+          {
+            "label": "100%",
+            "command": ".uno:Zoom100Percent"
+          }
+        ]
+      ],
+      "Tools": [
+        [
+          {
+            "label": "对齐",
+            "command": ".uno:ObjectAlign"
+          },
+          {
+            "label": "分布…",
+            "command": ".uno:DistributeSelection"
+          },
+          {
+            "label": "位置和大小…",
+            "command": ".uno:TransformDialog"
+          }
+        ],
+        [
+          {
+            "label": "组合",
+            "command": ".uno:FormatGroup"
+          },
+          {
+            "label": "取消组合",
+            "command": ".uno:FormatUngroup"
+          },
+          {
+            "label": "置于顶层",
+            "command": ".uno:BringToFront"
+          },
+          {
+            "label": "置于底层",
+            "command": ".uno:SendToBack"
+          }
+        ],
+        [
+          {
+            "label": "导出 PDF…",
+            "command": ".uno:ExportToPDF"
+          },
+          {
+            "label": "加载项…",
+            "command": ".uno:ExtensionManager"
+          },
+          {
+            "label": "选项…",
+            "command": ".uno:OptionsTreeDialog"
+          },
+          {
+            "label": "自定义…",
             "command": ".uno:ConfigureDialog"
           }
         ]

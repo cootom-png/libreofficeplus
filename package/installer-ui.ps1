@@ -1,4 +1,4 @@
-﻿param([switch]$Restore, [string]$Modules = 'Writer,Calc,Draw',
+﻿param([switch]$Restore, [string]$Modules = 'Writer,Calc,Draw,Impress',
       [string]$LibreOfficePath = (Join-Path $env:ProgramFiles 'LibreOffice'))
 $ErrorActionPreference = 'Stop'
 try {
@@ -13,7 +13,7 @@ try {
     exit 1
 }
 $controls = @{}
-foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','StatusMessage','Step1','Step2','Step3','Checks','Details','Footer','CloseButton','VersionLabel','SelectionPanel','ModuleWriter','ModuleCalc','ModuleDraw','ApplicationPath','FontNotice','TemplatesButton','StartButton') {
+foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','StatusMessage','Step1','Step2','Step3','Checks','Details','Footer','CloseButton','VersionLabel','SelectionPanel','ModuleWriter','ModuleCalc','ModuleDraw','ModuleImpress','ApplicationPath','FontNotice','TemplatesButton','StartButton') {
     $controls[$name] = $window.FindName($name)
 }
 $operation = if ($Restore) { '恢复' } else { '安装' }
@@ -22,7 +22,7 @@ $window.MaxHeight = [Windows.SystemParameters]::WorkArea.Height
 $window.Height = [Math]::Min($window.Height,$window.MaxHeight)
 $controls.VersionLabel.Text = 'v' + $version.Version
 $controls.ApplicationPath.Text = $LibreOfficePath
-foreach ($module in 'Writer','Calc','Draw') { $controls["Module$module"].IsChecked = $Modules.Split(',').Trim() -contains $module }
+foreach ($module in 'Writer','Calc','Draw','Impress') { $controls["Module$module"].IsChecked = $Modules.Split(',').Trim() -contains $module }
 $hasFont = @([Windows.Media.Fonts]::SystemFontFamilies | Where-Object { $_.Source -in @('SimSun','宋体') }).Count -gt 0
 $controls.FontNotice.Text = if ($hasFont) { '模板字体：宋体已安装。' } else { '模板字体：未检测到宋体，打开模板时可能使用替代字体。本包不附带字体。' }
 if ($Restore) {
@@ -31,9 +31,10 @@ if ($Restore) {
     $controls.ApplicationPath.IsEnabled = $false
     $controls.FontNotice.Text = '恢复用户配置无需匹配软件版本或模板字体。'
     $controls.StartButton.Content = '开始恢复'
+    $controls.StatusMessage.Text = '选择模块后点击“开始恢复”，检查结果会逐项显示。'
 }
 $controls.StatusTitle.Text = "准备$operation"
-$controls.Details.Text = '适配 LibreOffice 26.2.5.2 已验证构建。先保存文档并退出软件；不兼容时检查会阻止安装。'
+$controls.Details.Text = if ($Restore) { '先保存文档并退出软件；将还原所选模块的首次备份。' } else { '适配 LibreOffice 26.2.5.2 已验证构建。先保存文档并退出软件；不兼容时检查会阻止安装。' }
 $state = [hashtable]::Synchronized(@{ Update=@{ Percent=0; Message='正在启动配置程序…' }; Checks=@(); Failure=$null })
 $checkTitles = @('运行环境','安装目录','版本兼容','运行状态','用户配置','目录写入','配置包文件','首次备份')
 function Refresh-Checks {
@@ -118,7 +119,7 @@ $controls.TemplatesButton.Add_Click({ Start-Process -FilePath 'explorer.exe' -Ar
 $window.Add_Closing({ param($sender,$event) if ($ui.Running) { $event.Cancel=$true } })
 $controls.StartButton.Add_Click({
     if ($ui.Handle) { return }
-    $selected = @('Writer','Calc','Draw' | Where-Object { $controls["Module$_"].IsChecked })
+    $selected = @('Writer','Calc','Draw','Impress' | Where-Object { $controls["Module$_"].IsChecked })
     if (!$selected.Count) { $controls.StatusMessage.Text = '请至少选择一个模块。'; return }
     $ui.Modules = $selected -join ','
     $null = $job.AddScript($worker.ToString()).AddArgument((Join-Path $PSScriptRoot 'configure.ps1')).AddArgument($state).AddArgument($Restore.IsPresent).AddArgument($ui.Modules).AddArgument($controls.ApplicationPath.Text.Trim())

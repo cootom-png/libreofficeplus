@@ -97,6 +97,51 @@
       "path": "sdraw/popupmenu/pagepane.xml",
       "sha256": "d012fc7fa72a122fce1b7219510dc6fa4f9671043cbd0eca67cdc7572e346a16",
       "upstream_reference": "https://github.com/LibreOffice/core/blob/cd7284b4cbbfeb507e630c1aac019f4157393acb/sd/uiconfig/sdraw/popupmenu/pagepane.xml"
+    },
+    "simpress": {
+      "path": "simpress/notebookbar.ui",
+      "sha256": "d00d7b6e8ff0d35feb0271266331bf8f28a85ee6bb4290a221036647a4e00b6d",
+      "upstream_reference": "https://github.com/LibreOffice/core/blob/cd7284b4cbbfeb507e630c1aac019f4157393acb/sd/uiconfig/simpress/ui/notebookbar.ui"
+    },
+    "simpress/page": {
+      "path": "simpress/popupmenu/page.xml",
+      "sha256": "94479ddefe974fdca13e4a6b9e85be303290cd3ac94329488533bd867f5dcbb2",
+      "upstream_reference": "https://github.com/LibreOffice/core/blob/cd7284b4cbbfeb507e630c1aac019f4157393acb/sd/uiconfig/simpress/popupmenu/page.xml"
+    },
+    "simpress/pagepane": {
+      "path": "simpress/popupmenu/pagepane.xml",
+      "sha256": "b1536e43ecbd40dc7666a82a9eb9cec31202d888cce0400d838652281a2fee7e",
+      "upstream_reference": "https://github.com/LibreOffice/core/blob/cd7284b4cbbfeb507e630c1aac019f4157393acb/sd/uiconfig/simpress/popupmenu/pagepane.xml"
+    },
+    "simpress/draw": {
+      "path": "simpress/popupmenu/draw.xml",
+      "sha256": "771b42eff98eccdfc0d7f0181a6f3924d39fdbdbf7a93eaa11ff7a47c35f65d6",
+      "upstream_reference": "https://github.com/LibreOffice/core/blob/cd7284b4cbbfeb507e630c1aac019f4157393acb/sd/uiconfig/simpress/popupmenu/draw.xml"
+    },
+    "simpress/drawtext": {
+      "path": "simpress/popupmenu/drawtext.xml",
+      "sha256": "f5c125899bc77ad97904a88ad79012e7e026912daa069667393baf57d059cac8",
+      "upstream_reference": "https://github.com/LibreOffice/core/blob/cd7284b4cbbfeb507e630c1aac019f4157393acb/sd/uiconfig/simpress/popupmenu/drawtext.xml"
+    },
+    "simpress/graphic": {
+      "path": "simpress/popupmenu/graphic.xml",
+      "sha256": "cac6999deb8332addd18adfc8d17d2a1f905c67a4458c43ab603d83bc82c49a8",
+      "upstream_reference": "https://github.com/LibreOffice/core/blob/cd7284b4cbbfeb507e630c1aac019f4157393acb/sd/uiconfig/simpress/popupmenu/graphic.xml"
+    },
+    "simpress/table": {
+      "path": "simpress/popupmenu/table.xml",
+      "sha256": "c0f504bae8d232f9f1fc622b85a4f45fa78d35e312ceef4a6128604e32155019",
+      "upstream_reference": "https://github.com/LibreOffice/core/blob/cd7284b4cbbfeb507e630c1aac019f4157393acb/sd/uiconfig/simpress/popupmenu/table.xml"
+    },
+    "simpress/group": {
+      "path": "simpress/popupmenu/group.xml",
+      "sha256": "17bd8c56e9308b762c6ba0b3f21ef83db4b5db460b6a9aad465e1e52fa6ec481",
+      "upstream_reference": "https://github.com/LibreOffice/core/blob/cd7284b4cbbfeb507e630c1aac019f4157393acb/sd/uiconfig/simpress/popupmenu/group.xml"
+    },
+    "simpress/multiselect": {
+      "path": "simpress/popupmenu/multiselect.xml",
+      "sha256": "6664f4ce068b3dd851eadcedd825887816cd615219e9c3f7ce45e1e913b5871e",
+      "upstream_reference": "https://github.com/LibreOffice/core/blob/cd7284b4cbbfeb507e630c1aac019f4157393acb/sd/uiconfig/simpress/popupmenu/multiselect.xml"
     }
   }
 }

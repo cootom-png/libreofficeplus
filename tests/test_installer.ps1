@@ -19,17 +19,20 @@ $initial = @'
 <item oor:path="/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.drawing.DrawingDocument/G_SHIFT_MOD1"><prop oor:name="Command" oor:op="fuse"><value xml:lang="en-US">.uno:CustomDrawGroup</value></prop></item>
 <item oor:path="/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.drawing.DrawingDocument"><node oor:name="G_MOD1" oor:op="replace"><prop oor:name="Command" oor:op="fuse"><value xml:lang="en-US">.uno:CustomGroup</value></prop></node><node oor:name="H_MOD1" oor:op="replace"><prop oor:name="Command" oor:op="fuse"><value xml:lang="en-US">.uno:CustomSibling</value></prop></node></item>
 <item oor:path="/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.text.TextDocument/K_MOD1"><prop oor:name="Command" oor:op="fuse"><value xml:lang="en-US">.uno:CustomPersonalKey</value></prop></item>
+<item oor:path="/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com.sun.star.presentation.PresentationDocument/M_MOD1"><prop oor:name="Command" oor:op="fuse"><value xml:lang="en-US">.uno:CustomImpressKey</value></prop></item>
 </oor:items>
 '@
 [IO.File]::WriteAllText($config,$initial,[Text.UTF8Encoding]::new($false))
 $oldUi = '<interface><object class="GtkBox" id="original"/></interface>'
 $writerUi = Join-Path $profile 'config\soffice.cfg\modules\swriter\ui\notebookbar.ui'
 $calcUi = Join-Path $profile 'config\soffice.cfg\modules\scalc\ui\notebookbar.ui'
+$impressUi = Join-Path $profile 'config\soffice.cfg\modules\simpress\ui\notebookbar.ui'
 $drawUi = Join-Path $profile 'config\soffice.cfg\modules\sdraw\ui\notebookbar.ui'
 New-Item -ItemType Directory -Path (Split-Path $writerUi) -Force | Out-Null
 [IO.File]::WriteAllText($writerUi,$oldUi)
 $writerMenu = Join-Path $profile 'config\soffice.cfg\modules\swriter\popupmenu\text.xml'
 $calcMenu = Join-Path $profile 'config\soffice.cfg\modules\scalc\popupmenu\cell.xml'
+$impressMenu = Join-Path $profile 'config\soffice.cfg\modules\simpress\popupmenu\pagepane.xml'
 $drawMenu = Join-Path $profile 'config\soffice.cfg\modules\sdraw\popupmenu\draw.xml'
 $oldMenu = '<menu:menupopup xmlns:menu="http://openoffice.org/2001/menu"><menu:menuitem menu:id=".uno:Copy"/></menu:menupopup>'
 New-Item -ItemType Directory -Path (Split-Path $writerMenu) -Force | Out-Null
@@ -71,6 +74,7 @@ function Simulate-NativeSave {
 function Check-Restore {
     if ((Get-Content -LiteralPath $writerUi -Raw) -ne $oldUi) { throw '原界面未恢复' }
     if (Test-Path -LiteralPath $calcUi) { throw '新增界面未删除' }
+    if ((Test-Path -LiteralPath $impressUi) -or (Test-Path -LiteralPath $impressMenu)) { throw '演示模块未恢复' }
     if (Test-Path -LiteralPath $drawUi) { throw '新增 Draw 界面未删除' }
     if ((Get-Content -LiteralPath $writerMenu -Raw) -ne $oldMenu) { throw '首次自定义菜单未恢复' }
     if ((Test-Path -LiteralPath $calcMenu) -or (Test-Path -LiteralPath $drawMenu)) { throw '新增菜单未删除' }
@@ -146,6 +150,28 @@ try {
     Check-Restore
     Write-Host '通过：独立安装、追加安装、逐模块恢复与共享设置最后恢复。'
 
+    # 三模块 v6 备份结构追加 Impress，首次备份与已有界面必须保留。
+    & $installer -Modules 'Writer,Calc,Draw' -LibreOfficePath $fakeInstall
+    $writerHash=(Get-FileHash -LiteralPath $writerUi).Hash
+    $backupHash=(Get-FileHash -LiteralPath (Join-Path (Split-Path $backup) 'wps-ui-files-backup\swriter.ui')).Hash
+    & $installer -Modules Impress -LibreOfficePath $fakeInstall
+    if (!(Test-Path -LiteralPath $impressUi) -or !(Test-Path -LiteralPath $impressMenu)) { throw '演示界面或菜单缺失' }
+    if ((Get-FileHash -LiteralPath $writerUi).Hash -ne $writerHash -or (Get-FileHash -LiteralPath (Join-Path (Split-Path $backup) 'wps-ui-files-backup\swriter.ui')).Hash -ne $backupHash) { throw '追加演示覆盖已有模块或首次备份' }
+    [xml]$withImpress=Get-Content -LiteralPath $config -Raw -Encoding UTF8
+    if (!@($withImpress.SelectNodes('//value') | Where-Object { $_.InnerText -eq '.uno:InsertPage' }).Count) { throw '演示键位未配置' }
+    & $installer -Modules Impress -Restore
+    if ((Get-FileHash -LiteralPath $writerUi).Hash -ne $writerHash) { throw '恢复演示修改文字模块' }
+    [xml]$withoutImpress=Get-Content -LiteralPath $config -Raw -Encoding UTF8
+    if (!@($withoutImpress.SelectNodes('//value') | Where-Object { $_.InnerText -eq '.uno:CustomImpressKey' }).Count) { throw '演示首次快捷键未还原' }
+    if (!@($withoutImpress.SelectNodes('//value') | Where-Object { $_.InnerText -eq 'colibre' }).Count) { throw '部分恢复提前还原共享设置' }
+    & $installer -Modules 'Writer,Calc,Draw' -Restore
+    Check-Restore
+    & $installer -Modules Impress -LibreOfficePath $fakeInstall
+    if ((Get-Content -LiteralPath $writerUi -Raw) -ne $oldUi -or (Test-Path -LiteralPath $calcUi) -or (Test-Path -LiteralPath $drawUi)) { throw '演示独立安装影响其他模块' }
+    & $installer -Modules Impress -Restore
+    Check-Restore
+    Write-Host '通过：演示独立安装、三模块升级追加、首次键位与共享设置恢复。'
+
     # 使用仓库 main 的真实 v4 安装程序创建旧备份，验证升级和部分恢复。
     $v4dir=Join-Path $fixture 'v4'; New-Item -ItemType Directory -Path $v4dir | Out-Null
     foreach ($file in @('设置界面.ps1','设置清单.json')) {
@@ -156,7 +182,7 @@ try {
     & (Join-Path $v4dir '设置界面.ps1') -LibreOfficePath $fakeInstall
     & $installer -LibreOfficePath $fakeInstall
     & $installer -Modules Draw -Restore
-    & $installer -Modules 'Writer,Calc' -Restore
+    & $installer -Modules 'Writer,Calc,Impress' -Restore
     Check-Restore
     Write-Host '通过：真实 v4 备份升级到 v6 并分模块恢复。'
 

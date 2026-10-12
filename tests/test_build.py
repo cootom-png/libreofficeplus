@@ -79,7 +79,7 @@ class PackageTests(unittest.TestCase):
             self.assertEqual(hashlib.sha256((ROOT / 'vendor/libreoffice' / item['path']).read_bytes()).hexdigest(), item['sha256'])
 
     def test_ui_structure(self):
-        for module in ["swriter", "scalc", "sdraw"]:
+        for module in ["swriter", "scalc", "sdraw", "simpress"]:
             root = ET.parse(ROOT / "package/ui" / module / "notebookbar.ui").getroot()
             ids = [n.get("id") for n in root.iter("object")]
             self.assertEqual(len(ids), len(set(ids)), module)
@@ -126,6 +126,23 @@ class PackageTests(unittest.TestCase):
         for command in ['FillDown','FillRight','FillUp','FillLeft','FillSeries','FreezePanesRow','FreezePanesColumn']:
             self.assertTrue(any(p.text=='.uno:'+command for p in root.iter('property')))
 
+    def test_impress_navigation(self):
+        root = ET.parse(ROOT / 'package/ui/simpress/notebookbar.ui').getroot()
+        notebook = root.find('.//object[@id="ContextContainer"]')
+        self.assertEqual([c.find('object').get('id') for c in notebook.findall('child')[::2]][:10],
+                         [name + ' Tab' for name in ['File','Home','Insert','Layout','Transition','Animation','Slide Show','Review','View','Tools']])
+        self.assertEqual(root.find('.//object[@id="LayoutLabel"]/property[@name="label"]').text, '设计')
+        for name, command in [('Transition','SlideChangeWindow'),('Animation','CustomAnimation')]:
+            tab = root.find(f'.//object[@id="{name} Tab"]')
+            buttons = [o for o in tab.iter('object') if o.find('property[@name="action-name"]') is not None]
+            self.assertTrue(any(o.find('property[@name="action-name"]').text == '.uno:' + command and
+                                o.find('property[@name="visible"]').text == 'True' for o in buttons))
+        home = root.find('.//object[@id="Home"]')
+        self.assertIn('.uno:InsertSlide', [p.text for p in home.iter('property')])
+        # 图片、表格、母版、媒体等上下文页必须保留，扩展页不能被新页占用。
+        for name in ['Image','Table','Draw','Master','Media','Extension']:
+            self.assertIsNotNone(root.find(f'.//object[@id="{name} Tab"]'))
+
     def test_labels(self):
         labels = json.loads((ROOT / 'package/设置清单.json').read_text(encoding='utf-8'))
         keys = [(x['Path'], x['Name']) for x in labels]
@@ -167,7 +184,7 @@ class PackageTests(unittest.TestCase):
         self.assertEqual(len(manifest), len(specs))
         for entry in manifest:
             path = entry['Path']
-            self.assertRegex(path, r'^config/soffice.cfg/modules/(swriter|scalc|sdraw)/popupmenu/[a-z0-9_]+\.xml$')
+            self.assertRegex(path, r'^config/soffice.cfg/modules/(swriter|scalc|sdraw|simpress)/popupmenu/[a-z0-9_]+\.xml$')
             module, name = entry['Module'], Path(path).stem
             source = ET.parse(ROOT / 'vendor/libreoffice' / module / 'popupmenu' / (name + '.xml')).getroot()
             output = ET.parse(ROOT / 'package/profile' / path).getroot()
@@ -195,7 +212,7 @@ class PackageTests(unittest.TestCase):
 
     def test_templates(self):
         templates=list((ROOT/'package/templates').glob('*'))
-        self.assertEqual({p.suffix for p in templates},{'.ott','.ots','.otg'})
+        self.assertEqual({p.suffix for p in templates},{'.ott','.ots','.otg','.otp'})
         for file in templates:
             with ZipFile(file) as archive:
                 self.assertEqual(archive.namelist()[0],'mimetype')
@@ -207,9 +224,9 @@ class PackageTests(unittest.TestCase):
     def test_shortcuts(self):
         entries = json.loads((ROOT / 'config/shortcuts.json').read_text('utf8'))
         self.assertEqual(len({e['Path'] for e in entries}), len(entries))
-        self.assertEqual(len(entries), 22)
+        self.assertEqual(len(entries), 28)
         for entry in entries:
-            self.assertRegex(entry['Path'], r'^/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com\.sun\.star\.(text\.TextDocument|sheet\.SpreadsheetDocument|drawing\.DrawingDocument)/[A-Z0-9]+(?:_(?:SHIFT|MOD1|MOD2))*$')
+            self.assertRegex(entry['Path'], r'^/org.openoffice.Office.Accelerators/PrimaryKeys/Modules/com\.sun\.star\.(text\.TextDocument|sheet\.SpreadsheetDocument|drawing\.DrawingDocument|presentation\.PresentationDocument)/[A-Z0-9]+(?:_(?:SHIFT|MOD1|MOD2))*$')
             self.assertTrue(entry['Value'].startswith('.uno:'))
             self.assertEqual(entry['Language'], 'en-US')
         with (ROOT / 'package/快捷键对照表.csv').open(encoding='utf-8-sig', newline='') as file:
