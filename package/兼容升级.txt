@@ -10,7 +10,7 @@ v6.7.0 安装配置时关闭当前用户的 LibreOffice 自动检查提醒、自
 
 来源：[官方在线更新说明](https://help.libreoffice.org/latest/en-US/text/shared/optionen/online_update.html)、[26.8.1.1 更新配置定义](https://github.com/LibreOffice/core/blob/bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1/officecfg/registry/schema/org/openoffice/Office/Update.xcs)、[26.2.5.2 更新配置定义](https://github.com/LibreOffice/core/blob/cd7284b4cbbfeb507e630c1aac019f4157393acb/officecfg/registry/schema/org/openoffice/Office/Update.xcs)。新更新器是独立开关，只关闭旧提醒不足以关闭增量更新。
 
-这些是可恢复的用户设置，不删除更新组件、不修改安装目录或系统策略。首次值纳入原有备份；部分模块恢复时保持关闭，最后一个模块恢复时才还原原值。用户手动改回、企业策略、其他用户、软件管理器或直接运行安装程序仍可更新本体。已有正在运行的更新不会被强制终止。
+这些是可恢复的用户设置，不删除更新组件、不修改安装目录或系统策略。首次值纳入原有备份；部分模块恢复时保持关闭，最后一个模块恢复时才还原原值。用户手动改回、企业策略、其他用户、软件管理器或直接运行安装程序仍可更新本体。安装、恢复和兼容升级入口会检查独立更新程序，正在运行时停止配置并提示；不会强制终止已有更新。
 
 ## 用户操作
 

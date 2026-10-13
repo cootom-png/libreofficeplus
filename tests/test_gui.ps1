@@ -24,7 +24,7 @@ $bundle=Join-Path $fixture 'bundle'
 New-Item -ItemType Directory -Path $bundle -Force | Out-Null
 Get-ChildItem -LiteralPath $package | Copy-Item -Destination $bundle -Recurse -Force
 $core=Join-Path $bundle 'configure.ps1'
-$source=[IO.File]::ReadAllText($core).Replace("(Get-Process -Name 'soffice','soffice.bin' -ErrorAction SilentlyContinue)","(Test-Path -LiteralPath (Join-Path `$PSScriptRoot 'simulate-running'))")
+$source=[IO.File]::ReadAllText($core).Replace("(Get-Process -Name 'soffice','soffice.bin','updater' -ErrorAction SilentlyContinue)","(Test-Path -LiteralPath (Join-Path `$PSScriptRoot 'simulate-running'))")
 [IO.File]::WriteAllText($core,$source,[Text.UTF8Encoding]::new($true))
 $controller=Join-Path $bundle 'installer-ui.ps1'
 $source=[IO.File]::ReadAllText($controller)

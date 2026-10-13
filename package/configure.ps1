@@ -55,9 +55,9 @@ if ($Restore) {
         }
     } catch { Check '版本兼容' '需处理' "无法读取版本信息：$($_.Exception.Message)。请检查安装文件和读取权限。" }
 }
-if (Get-Process -Name 'soffice','soffice.bin' -ErrorAction SilentlyContinue) {
-    Check '运行状态' '需处理' '请先保存文档并完全退出 LibreOffice，再运行此配置包。不会强制结束进程。'
-} else { Check '运行状态' '通过' 'LibreOffice 已退出，可以处理用户配置。' }
+if (Get-Process -Name 'soffice','soffice.bin','updater' -ErrorAction SilentlyContinue) {
+    Check '运行状态' '需处理' '请先保存文档并完全退出 LibreOffice 及其更新程序，再运行此配置包。不会强制结束进程。'
+} else { Check '运行状态' '通过' 'LibreOffice 及其更新程序已退出，可以处理用户配置。' }
 try {
     if (!(Test-Path -LiteralPath $config -PathType Leaf)) { throw '请先启动并关闭一次 LibreOffice，生成用户配置。' }
     [xml]$doc = Get-Content -LiteralPath $config -Raw -Encoding UTF8
