@@ -1,0 +1,5 @@
+[
+  {"Path": "/org.openoffice.Office.Jobs/Jobs/UpdateCheck/Arguments", "Name": "AutoCheckEnabled", "Value": "false", "Type": "xs:boolean"},
+  {"Path": "/org.openoffice.Office.Jobs/Jobs/UpdateCheck/Arguments", "Name": "AutoDownloadEnabled", "Value": "false", "Type": "xs:boolean"},
+  {"Path": "/org.openoffice.Office.Update/Update", "Name": "Enabled", "Value": "false", "Type": "xs:boolean"}
+]

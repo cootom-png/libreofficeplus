@@ -96,6 +96,10 @@ try {
         if ($progress[$index] -lt $progress[$index-1] -or $progress[$index] -gt 100) { throw '安装进度倒退或越界' }
     }
     [xml]$installed = Get-Content -LiteralPath $config -Raw -Encoding UTF8
+    foreach ($name in 'AutoCheckEnabled','AutoDownloadEnabled','Enabled') {
+        $props=@($installed.SelectNodes('//prop') | Where-Object { $_.GetAttribute('name',$ns) -eq $name })
+        if ($props.Count -ne 1 -or $props[0].value -ne 'false' -or $props[0].GetAttribute('type',$ns) -ne 'xs:boolean') { throw "未按布尔类型关闭官方更新设置：$name" }
+    }
     if (!@($installed.SelectNodes('//value') | Where-Object { $_.GetAttribute('lang','http://www.w3.org/XML/1998/namespace') -eq 'zh-CN' -and $_.InnerText -eq '格式刷' }).Count) { throw '中文名称未写入' }
     if (!@($installed.SelectNodes('//value') | Where-Object { $_.GetAttribute('lang','http://www.w3.org/XML/1998/namespace') -eq 'en-US' -and $_.InnerText -eq '.uno:FontDialog' }).Count) { throw 'WPS 快捷键未写入' }
     foreach ($entry in (Get-Content (Join-Path $repo 'config/shortcuts.json') -Raw -Encoding UTF8 | ConvertFrom-Json)) {
@@ -112,6 +116,18 @@ try {
     & $installer -Restore
     Check-Restore
     Write-Host '通过：安装、重复安装、首次备份、中文名称、多语言恢复、UI 文件还原。'
+    $policyInitial=$initial.Replace('</oor:items>',@'
+<item oor:path="/org.openoffice.Office.Jobs/Jobs/org.openoffice.Office.Jobs:Job['UpdateCheck']/Arguments"><prop oor:name="AutoCheckEnabled" oor:op="fuse"><value>true</value></prop><prop oor:name="AutoDownloadEnabled" oor:op="fuse"><value>true</value></prop></item>
+<item oor:path="/org.openoffice.Office.Update/Update"><prop oor:name="Enabled" oor:op="fuse"><value>true</value></prop></item>
+</oor:items>
+'@)
+    [IO.File]::WriteAllText($config,$policyInitial)
+    & $installer -Modules Writer -LibreOfficePath $fakeInstall -OnCheck { param($Result) }
+    & $installer -Modules Writer -LibreOfficePath $fakeInstall -OnCheck { param($Result) }
+    & $installer -Modules Writer -Restore -OnCheck { param($Result) }
+    if (Compare-Object (Semantic $policyInitial) (Semantic (Get-Content -LiteralPath $config -Raw -Encoding UTF8))) { throw '官方更新设置的首次值未恢复' }
+    [IO.File]::WriteAllText($config,$initial)
+    Write-Host '通过：官方提醒、自动下载与 MAR 更新原值恢复、重复配置及带类型路径。'
 
     # 模拟 v3 已安装的配置及首次备份，验证升级后仍回到 v3 安装前。
     [xml]$legacy = $initial
@@ -164,6 +180,7 @@ try {
     [xml]$withoutImpress=Get-Content -LiteralPath $config -Raw -Encoding UTF8
     if (!@($withoutImpress.SelectNodes('//value') | Where-Object { $_.InnerText -eq '.uno:CustomImpressKey' }).Count) { throw '演示首次快捷键未还原' }
     if (!@($withoutImpress.SelectNodes('//value') | Where-Object { $_.InnerText -eq 'colibre' }).Count) { throw '部分恢复提前还原共享设置' }
+    if (@($withoutImpress.SelectNodes('//prop') | Where-Object { $_.GetAttribute('name',$ns) -eq 'Enabled' })[0].value -ne 'false') { throw '部分恢复提前重新启用自动更新' }
     & $installer -Modules 'Writer,Calc,Draw' -Restore
     Check-Restore
     & $installer -Modules Impress -LibreOfficePath $fakeInstall

@@ -1,7 +1,7 @@
 ﻿$ErrorActionPreference = 'Stop'
 $repo = Split-Path $PSScriptRoot
 $package = Join-Path $repo 'package'
-foreach ($name in 'configure.ps1','installer-ui.ps1') {
+foreach ($name in 'configure.ps1','installer-ui.ps1','upgrade.ps1') {
     $tokens=$null; $parseErrors=$null
     [Management.Automation.Language.Parser]::ParseFile((Join-Path $package $name),[ref]$tokens,[ref]$parseErrors) | Out-Null
     if ($parseErrors.Count) { throw ($parseErrors | Out-String) }
@@ -11,7 +11,7 @@ foreach ($name in 'configure.ps1','installer-ui.ps1') {
 Add-Type -AssemblyName PresentationFramework
 [xml]$layout=Get-Content -LiteralPath (Join-Path $package 'installer.xaml') -Raw -Encoding UTF8
 $window=[Windows.Markup.XamlReader]::Load([Xml.XmlNodeReader]::new($layout))
-foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','StatusMessage','Step1','Step2','Step3','Checks','Details','Footer','CloseButton','VersionLabel','SelectionPanel','ModuleWriter','ModuleCalc','ModuleDraw','ModuleImpress','ApplicationPath','FontNotice','TemplatesButton','StartButton') {
+foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','StatusMessage','Step1','Step2','Step3','Checks','Details','Footer','CloseButton','VersionLabel','SelectionPanel','ModuleWriter','ModuleCalc','ModuleDraw','ModuleImpress','ApplicationPath','FontNotice','TemplatesButton','StartButton','ModuleHeading','UpgradeButton','PackageButton') {
     if (!$window.FindName($name)) { throw "界面控件缺失：$name" }
 }
 if (!$window.FindName('CloseButton').IsEnabled) { throw '开始前应允许取消' }
@@ -130,6 +130,7 @@ try {
     [IO.File]::Delete((Join-Path $bundle 'empty-selection'))
     if ((Get-FileHash -LiteralPath $config).Hash -ne $before) { throw '空选择修改了设置' }
     Write-Host '通过：空模块选择阻止配置。'
+    Run-UI '升级版本识别失败' '-Upgrade' '升级结果'
     [IO.File]::WriteAllText("$fakeApp\program\version.ini",'buildid=unsupported')
     Run-UI '不兼容版本' '' '版本兼容'
     [IO.File]::WriteAllText("$fakeApp\program\version.ini",'buildid=cd7284b4cbbfeb507e630c1aac019f4157393acb')

@@ -412,7 +412,7 @@ def main():
                  'set "result=%errorlevel%"', "popd", "pause", "exit /b %result%"]
         (PACKAGE / name).write_bytes(("\r\n".join(lines) + "\r\n").encode("ascii"))
     # WScript 在创建 PowerShell 时即隐藏控制台；作为默认双击入口。
-    for name, options in [("安装.vbs", ""), ("恢复原界面.vbs", " -Restore")]:
+    for name, options in [("安装.vbs", ""), ("恢复原界面.vbs", " -Restore"), ("兼容升级.vbs", " -Upgrade")]:
         lines = ['Option Explicit', 'Dim shell, files, scriptPath, command',
                  'Set shell = CreateObject("WScript.Shell")',
                  'Set files = CreateObject("Scripting.FileSystemObject")',
@@ -425,12 +425,17 @@ def main():
                  '  WScript.Quit 1', 'End If']
         (PACKAGE / name).write_bytes(("\r\n".join(lines) + "\r\n").encode("ascii"))
     build_templates(PACKAGE)
-    compatibility, records = [], []
+    compatibility, shared_builds, records = [], [], []
     for entry in json.loads((ROOT / 'config/versions.json').read_text('utf8')):
         source, package = ROOT / entry['Source'], PACKAGE / entry['Bundle']
         metadata = json.loads((source / 'SOURCE.json').read_text('utf8'))
         compatibility.append({'Version': metadata['version'], 'DisplayVersion': metadata.get('display_version', metadata['version']),
                               'BuildId': metadata['buildid'], 'Bundle': entry['Bundle']})
+        for compatible in metadata.get('compatible_builds', []):
+            if {key: value['sha256'] for key, value in compatible['files'].items()} != {key: value['sha256'] for key, value in metadata['files'].items()}:
+                raise ValueError('共用界面的构建必须具有完全一致的原生来源')
+            shared_builds.append({'Version': compatible['version'], 'DisplayVersion': compatible['version'],
+                                  'BuildId': compatible['buildid'], 'Bundle': entry['Bundle']})
         package.mkdir(parents=True, exist_ok=True)
         profile_files = build_popups(ROOT, package, source)
         (package / "profile-files.json").write_text(json.dumps(profile_files, indent=2) + '\n', encoding="utf-8", newline='\n')
@@ -448,13 +453,14 @@ def main():
                 writer = csv.writer(file, lineterminator='\n')
                 writer.writerow(['模块', '选项卡', 'LibreOffice命令', '配置文字或控件ID', '逻辑分组', '组内顺序或菜单所在行', '状态'])
                 writer.writerows(profile_records)
+    compatibility.extend(shared_builds)
     (PACKAGE / 'compatibility.json').write_text(json.dumps(compatibility, ensure_ascii=False, indent=2) + '\n', 'utf8', newline='\n')
     with (PACKAGE / "按钮对应表.csv").open("w", encoding="utf-8-sig", newline="") as f:
         writer = csv.writer(f, lineterminator='\n')
         writer.writerow(["模块", "选项卡", "LibreOffice命令", "配置文字或控件ID", "逻辑分组", "组内顺序或菜单所在行", "状态"])
         writer.writerows(records)
     settings = []
-    for name in ['labels', 'shortcuts', 'appearance']:
+    for name in ['labels', 'shortcuts', 'appearance', 'updates']:
         settings.extend(json.loads((ROOT / f'config/{name}.json').read_text(encoding='utf-8')))
     (PACKAGE / "设置清单.json").write_text(json.dumps(settings, ensure_ascii=False, indent=2) + '\n', encoding="utf-8", newline='\n')
     modules = {'com.sun.star.text.TextDocument': 'Writer 文字', 'com.sun.star.sheet.SpreadsheetDocument': 'Calc 表格',
@@ -472,6 +478,7 @@ def main():
                          ("docs/适配计划.md", "适配计划.txt"),
                          ("docs/演示适配.md", "演示适配.txt"),
                          ("docs/版本兼容.md", "版本兼容.txt"),
+                         ("docs/兼容升级.md", "兼容升级.txt"),
                          ("docs/弹窗菜单设计.md", "弹窗菜单设计.txt")]:
         if (ROOT / source).exists():
             (PACKAGE / dest).write_bytes((ROOT / source).read_bytes())
