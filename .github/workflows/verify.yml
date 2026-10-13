@@ -9,6 +9,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      - name: 上游间距补丁来源及适用性检查（不含本体编译）
+        shell: powershell
+        run: python scripts/check_upstream_spacing.py
       - name: 构建与结构检查
         shell: powershell
         run: |
