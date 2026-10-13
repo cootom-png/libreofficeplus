@@ -1,0 +1,24 @@
+[
+  {
+    "version": "26.2.6.1",
+    "stage": "configured",
+    "settings_passed": 42,
+    "modules_loaded": 4
+  },
+  {
+    "version": "26.2.6.1",
+    "stage": "restored",
+    "settings_passed": 42
+  },
+  {
+    "version": "26.8.1.1",
+    "stage": "configured",
+    "settings_passed": 42,
+    "modules_loaded": 4
+  },
+  {
+    "version": "26.8.1.1",
+    "stage": "restored",
+    "settings_passed": 42
+  }
+]

@@ -11,9 +11,10 @@ foreach ($name in 'configure.ps1','installer-ui.ps1','upgrade.ps1') {
 Add-Type -AssemblyName PresentationFramework
 [xml]$layout=Get-Content -LiteralPath (Join-Path $package 'installer.xaml') -Raw -Encoding UTF8
 $window=[Windows.Markup.XamlReader]::Load([Xml.XmlNodeReader]::new($layout))
-foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','StatusMessage','Step1','Step2','Step3','Checks','Details','Footer','CloseButton','VersionLabel','SelectionPanel','ModuleWriter','ModuleCalc','ModuleDraw','ModuleImpress','ApplicationPath','FontNotice','TemplatesButton','StartButton','ModuleHeading','UpgradeButton','PackageButton') {
+foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','ProgressPanel','StatusMessage','Step1','Step2','Step3','Checks','Details','Footer','CloseButton','VersionLabel','SelectionPanel','ModuleWriter','ModuleCalc','ModuleDraw','ModuleImpress','ApplicationPath','FontNotice','TemplatesButton','StartButton','ModuleHeading','UpgradeButton','PackageButton') {
     if (!$window.FindName($name)) { throw "界面控件缺失：$name" }
 }
+if ($window.FindName('Checks').Visibility -ne 'Collapsed' -or $window.FindName('ProgressPanel').Visibility -ne 'Collapsed') { throw '开始前不应显示等待中的检查与进度' }
 if (!$window.FindName('CloseButton').IsEnabled) { throw '开始前应允许取消' }
 $window.Close()
 Write-Host '通过：Windows PowerShell 5.1 语法、中文编码、WPF 界面加载和必要控件。'
@@ -33,7 +34,7 @@ if (!$source.Contains($needle)) { throw '图形验收插入点不存在' }
 $capture=@'
     $controls.Checks.UpdateLayout()
     $window.UpdateLayout()
-    $record=@{Title=$controls.StatusTitle.Text;Percent=$controls.Percent.Text;Progress=$controls.Progress.Value;Failure=$state.Failure;Checks=@($controls.Checks.ItemsSource);Modules=$ui.Modules;Version=$controls.VersionLabel.Text}
+    $record=@{Title=$controls.StatusTitle.Text;Percent=$controls.Percent.Text;Progress=$controls.Progress.Value;Failure=$state.Failure;ProgressVisible=($controls.ProgressPanel.Visibility -eq 'Visible');ChecksVisible=($controls.Checks.Visibility -eq 'Visible');Checks=@($controls.Checks.ItemsSource);Modules=$ui.Modules;Version=$controls.VersionLabel.Text}
     [IO.File]::WriteAllText((Join-Path $PSScriptRoot 'ui-result.json'),($record | ConvertTo-Json -Depth 5),[Text.UTF8Encoding]::new($true))
     # 公开预览仅替换合成安装目录的显示文字；实际检查记录保留原值。
     $controls.Checks.ItemsSource=@($controls.Checks.ItemsSource | ForEach-Object {
@@ -91,11 +92,12 @@ function Run-UI($name,$arguments,$badTitle) {
     if (!$process.WaitForExit(30000)) { throw "图形检查超时：$name" }
     $result=Get-Content -LiteralPath (Join-Path $bundle 'ui-result.json') -Raw -Encoding UTF8 | ConvertFrom-Json
     $expectedVersion='v' + (Get-Content -LiteralPath (Join-Path $bundle 'version.json') -Raw -Encoding UTF8 | ConvertFrom-Json).Version
+    if (!$result.ProgressVisible -or !$result.ChecksVisible) { throw '开始后未显示进度和检查列表' }
     if ($result.Version -ne $expectedVersion) { throw '安装窗口版本号不正确' }
     if ($badTitle) {
         if ($process.ExitCode -ne 1 -or !$result.Failure -or $result.Progress -eq 100 -or $result.Percent -ne '需要处理') { throw "图形失败状态不正确：$name" }
         $row=$result.Checks | Where-Object { $_.Title -eq $badTitle }
-        if ($row.State -ne '需处理' -or $row.Color -ne '#C83939') { throw "图形检查项未标红：$name" }
+        if ($row.State -ne '需处理' -or $row.Color -ne '#B3261E') { throw "图形检查项未标红：$name" }
     } elseif ($process.ExitCode -ne 0 -or $result.Failure -or $result.Progress -ne 100 -or $result.Checks.Count -ne 8 -or @($result.Checks | Where-Object { $_.State -notin @('通过','不适用') }).Count) { throw "图形成功状态不正确：$name" }
     Copy-Item -LiteralPath (Join-Path $bundle 'ui-result.json') -Destination (Join-Path $fixture "$name.json")
     Copy-Item -LiteralPath (Join-Path $bundle 'ui-preview.png') -Destination (Join-Path $fixture "$name.png")

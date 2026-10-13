@@ -128,6 +128,23 @@ try {
     if (Compare-Object (Semantic $policyInitial) (Semantic (Get-Content -LiteralPath $config -Raw -Encoding UTF8))) { throw '官方更新设置的首次值未恢复' }
     [IO.File]::WriteAllText($config,$initial)
     Write-Host '通过：官方提醒、自动下载与 MAR 更新原值恢复、重复配置及带类型路径。'
+    $materialInitial=$initial.Replace('</oor:items>',@'
+<item oor:path="/org.openoffice.Office.Common/Appearance"><prop oor:name="LibreOfficeTheme" oor:op="fuse"><value>0</value></prop><prop oor:name="ApplicationAppearance" oor:op="fuse"><value>2</value></prop></item>
+<item oor:path="/org.openoffice.Office.UI/ColorScheme"><prop oor:name="CurrentColorScheme" oor:op="fuse"><value>COLOR_SCHEME_LIBREOFFICE_DARK</value></prop></item>
+<item oor:path="/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/AccentColor"><prop oor:name="Color" oor:op="fuse"><value>1193046</value></prop></item>
+</oor:items>
+'@)
+    [IO.File]::WriteAllText($config,$materialInitial)
+    & $installer -Modules Writer -LibreOfficePath $fakeInstall -OnCheck { param($Result) }
+    & $installer -Modules Calc -LibreOfficePath $fakeInstall -OnCheck { param($Result) }
+    & $installer -Modules Writer -Restore -OnCheck { param($Result) }
+    [xml]$partialTheme=Get-Content -LiteralPath $config -Raw -Encoding UTF8
+    $mode=@($partialTheme.SelectNodes('//prop') | Where-Object { $_.GetAttribute('name',$ns) -eq 'ApplicationAppearance' })
+    if ($mode.Count -ne 1 -or $mode[0].value -ne '1') { throw '部分恢复提前还原全局外观' }
+    & $installer -Modules Calc -Restore -OnCheck { param($Result) }
+    if (Compare-Object (Semantic $materialInitial) (Semantic (Get-Content -LiteralPath $config -Raw -Encoding UTF8))) { throw '首次主题、深浅模式或自定义颜色未完整恢复' }
+    [IO.File]::WriteAllText($config,$initial)
+    Write-Host '通过：自定义浅色颜色、原有深色方案与全局主题部分/完整恢复。'
 
     # 模拟 v3 已安装的配置及首次备份，验证升级后仍回到 v3 安装前。
     [xml]$legacy = $initial

@@ -1,0 +1,118 @@
+[
+  {
+    "version": "26.2.6.1",
+    "settings_passed": 42,
+    "styles": [
+      {
+        "module": "swriter",
+        "values": {
+          "FaceColor": 16317181,
+          "WindowColor": 16317181,
+          "MenuColor": 16777215,
+          "MenuTextColor": 2039583,
+          "MenuHighlightColor": 30932,
+          "MenuHighlightTextColor": 16777215,
+          "FieldColor": 16777215
+        },
+        "verified": true
+      },
+      {
+        "module": "scalc",
+        "values": {
+          "FaceColor": 16317181,
+          "WindowColor": 16317181,
+          "MenuColor": 16777215,
+          "MenuTextColor": 2039583,
+          "MenuHighlightColor": 30932,
+          "MenuHighlightTextColor": 16777215,
+          "FieldColor": 16777215
+        },
+        "verified": true
+      },
+      {
+        "module": "sdraw",
+        "values": {
+          "FaceColor": 16317181,
+          "WindowColor": 16317181,
+          "MenuColor": 16777215,
+          "MenuTextColor": 2039583,
+          "MenuHighlightColor": 30932,
+          "MenuHighlightTextColor": 16777215,
+          "FieldColor": 16777215
+        },
+        "verified": true
+      },
+      {
+        "module": "simpress",
+        "values": {
+          "FaceColor": 16317181,
+          "WindowColor": 16317181,
+          "MenuColor": 16777215,
+          "MenuTextColor": 2039583,
+          "MenuHighlightColor": 30932,
+          "MenuHighlightTextColor": 16777215,
+          "FieldColor": 16777215
+        },
+        "verified": true
+      }
+    ]
+  },
+  {
+    "version": "26.8.1.1",
+    "settings_passed": 42,
+    "styles": [
+      {
+        "module": "swriter",
+        "values": {
+          "FaceColor": 16317181,
+          "WindowColor": 16317181,
+          "MenuColor": 16777215,
+          "MenuTextColor": 2039583,
+          "MenuHighlightColor": 30932,
+          "MenuHighlightTextColor": 16777215,
+          "FieldColor": 16777215
+        },
+        "verified": true
+      },
+      {
+        "module": "scalc",
+        "values": {
+          "FaceColor": 16317181,
+          "WindowColor": 16317181,
+          "MenuColor": 16777215,
+          "MenuTextColor": 2039583,
+          "MenuHighlightColor": 30932,
+          "MenuHighlightTextColor": 16777215,
+          "FieldColor": 16777215
+        },
+        "verified": true
+      },
+      {
+        "module": "sdraw",
+        "values": {
+          "FaceColor": 16317181,
+          "WindowColor": 16317181,
+          "MenuColor": 16777215,
+          "MenuTextColor": 2039583,
+          "MenuHighlightColor": 30932,
+          "MenuHighlightTextColor": 16777215,
+          "FieldColor": 16777215
+        },
+        "verified": true
+      },
+      {
+        "module": "simpress",
+        "values": {
+          "FaceColor": 16317181,
+          "WindowColor": 16317181,
+          "MenuColor": 16777215,
+          "MenuTextColor": 2039583,
+          "MenuHighlightColor": 30932,
+          "MenuHighlightTextColor": 16777215,
+          "FieldColor": 16777215
+        },
+        "verified": true
+      }
+    ]
+  }
+]

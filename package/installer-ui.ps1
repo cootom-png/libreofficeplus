@@ -13,7 +13,7 @@ try {
     exit 1
 }
 $controls = @{}
-foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','StatusMessage','Step1','Step2','Step3','Checks','Details','Footer','CloseButton','VersionLabel','SelectionPanel','ModuleWriter','ModuleCalc','ModuleDraw','ModuleImpress','ApplicationPath','FontNotice','TemplatesButton','StartButton','ModuleHeading','UpgradeButton','PackageButton') {
+foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','ProgressPanel','StatusMessage','Step1','Step2','Step3','Checks','Details','Footer','CloseButton','VersionLabel','SelectionPanel','ModuleWriter','ModuleCalc','ModuleDraw','ModuleImpress','ApplicationPath','FontNotice','TemplatesButton','StartButton','ModuleHeading','UpgradeButton','PackageButton') {
     $controls[$name] = $window.FindName($name)
 }
 $operation = if ($Upgrade) { '升级' } elseif ($Restore) { '恢复' } else { '安装' }
@@ -46,7 +46,7 @@ if ($Upgrade) {
     $controls.Step3.Text = '03  核验与配置'
 }
 $controls.StatusTitle.Text = "准备$operation"
-$controls.Details.Text = if ($Restore) { '先保存文档并退出软件；将还原所选模块的首次备份。' } else { '自动识别 LibreOffice 版本并选择专属界面。先保存文档并退出软件；未适配的版本会阻止安装。' }
+$controls.Details.Text = if ($Restore) { '先保存文档并退出软件；将还原所选模块的首次备份。' } else { '保留熟悉的功能区与快捷键，应用 Material 浅色外观。自动核对软件版本和首次备份；未适配版本会停止。' }
 if ($Upgrade) { $controls.Details.Text = '升级不会强制关闭文档，不会自动降级。失败或要求重启时保留缓存与备份，再次运行本入口继续；不自动回滚软件本体。' }
 if ($Upgrade -or $Restore) { $controls.UpgradeButton.Visibility='Collapsed' }
 $state = [hashtable]::Synchronized(@{ Update=@{ Percent=0; Message='正在启动配置程序…' }; Checks=@(); Failure=$null; Finished=$false })
@@ -60,7 +60,7 @@ function Refresh-Checks {
         $status = if ($result) { $result.State } elseif ($state.Finished -and !$state.Failure) { '不适用' } else { '未检查' }
         [pscustomobject]@{
             Title=$title; State=$status; Message=$(if ($result) { $result.Message } elseif ($state.Failure) { '前置检查未通过，本次未执行。' } elseif ($state.Finished) { '本次无需执行。' } else { '等待前面的检查完成。' })
-            Color=$(switch ($status) { '通过' { '#128562' }; '需处理' { '#C83939' }; default { '#8795A9' } })
+            Color=$(switch ($status) { '通过' { '#146C2E' }; '需处理' { '#B3261E' }; default { '#444746' } })
         }
     })
 }
@@ -100,7 +100,7 @@ $timer.Add_Tick({
     if ($ui.CheckCount -ne $state.Checks.Count) { Refresh-Checks; $ui.CheckCount=$state.Checks.Count }
     $stage = if ($update.Percent -lt 30) { 1 } elseif ($update.Percent -lt 95) { 2 } else { 3 }
     foreach ($number in 1..3) {
-        $controls["Step$number"].Foreground = if ($number -le $stage) { '#2563EB' } else { '#8795A9' }
+        $controls["Step$number"].Foreground = if ($number -le $stage) { '#0B57D0' } else { '#747775' }
     }
     if (!$ui.Handle.IsCompleted) { return }
     $timer.Stop()
@@ -116,20 +116,20 @@ $timer.Add_Tick({
         $controls.StatusTitle.Text = "未能完成$operation"
         $controls.StatusMessage.Text = '请查看检查结果及下方原因，处理后重新运行。'
         $controls.Details.Text = $state.Failure
-        $controls.Progress.Foreground = '#DC4C4C'
+        $controls.Progress.Foreground = '#B3261E'
         $controls.Percent.Text = '需要处理'
-        $controls.Percent.Foreground = '#DC4C4C'
+        $controls.Percent.Foreground = '#B3261E'
         $controls.Footer.Text = '处理问题后可重新运行；已有备份请保留'
         $controls.CloseButton.Content = '关闭'
     } else {
         $ui.ExitCode = 0
         $controls.StatusTitle.Text = "$($operation)完成"
         $controls.Progress.Value = 100
-        $controls.Progress.Foreground = '#12A47B'
+        $controls.Progress.Foreground = '#146C2E'
         $controls.Percent.Text = '100%'
-        $controls.Percent.Foreground = '#12A47B'
+        $controls.Percent.Foreground = '#146C2E'
         $controls.StatusMessage.Text = if ($Upgrade) { $state.Update.Message } else { '现在可以重新打开 LibreOffice，查看你的界面。' }
-        $controls.Details.Text = if ($Restore) { "已恢复：$($ui.Modules)`n所选模块已还原到首次安装前的设置；全部恢复后还原升级设置。" } else { "已配置：$($ui.Modules)`n官方升级提醒、自动下载与自动更新已关闭。首次备份已保留，可通过兼容升级入口更新。" }
+        $controls.Details.Text = if ($Restore) { "已恢复：$($ui.Modules)`n所选模块已恢复；全部恢复后还原通用外观和升级设置。" } else { "已配置：$($ui.Modules)`nMaterial 浅色外观已应用，官方自动更新已关闭。首次备份已保留，可通过兼容升级入口更新。" }
         if ($Upgrade) { $controls.Details.Text = '兼容版本与构建核验结果见上方。首次恢复备份继续保留；本包没有更高兼容版本时，请先获取新版配置包。' }
         if (!$Restore -and !$Upgrade) { $controls.TemplatesButton.Visibility = 'Visible' }
         $controls.Footer.Text = '已完成 · 可以关闭此窗口'
@@ -152,6 +152,8 @@ $controls.StartButton.Add_Click({
     $null = $job.AddScript($worker.ToString()).AddArgument((Join-Path $PSScriptRoot $coreName)).AddArgument($state).AddArgument($Restore.IsPresent).AddArgument($ui.Modules).AddArgument($controls.ApplicationPath.Text.Trim())
     $ui.Running = $true
     $controls.SelectionPanel.Visibility = 'Collapsed'
+    $controls.ProgressPanel.Visibility = 'Visible'
+    $controls.Checks.Visibility = 'Visible'
     $controls.StartButton.Visibility = 'Collapsed'
     $controls.CloseButton.IsEnabled = $false
     $controls.UpgradeButton.IsEnabled = $false

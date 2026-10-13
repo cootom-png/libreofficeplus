@@ -1002,6 +1002,253 @@
     "Value": "false"
   },
   {
+    "Path": "/org.openoffice.Office.Common/Appearance",
+    "Name": "LibreOfficeTheme",
+    "Value": "1",
+    "Type": "xs:short"
+  },
+  {
+    "Path": "/org.openoffice.Office.Common/Appearance",
+    "Name": "ApplicationAppearance",
+    "Value": "1",
+    "Type": "xs:short"
+  },
+  {
+    "Path": "/org.openoffice.Office.Common/Appearance",
+    "Name": "UseOnlyWhiteDocBackground",
+    "Value": "true",
+    "Type": "xs:boolean"
+  },
+  {
+    "Path": "/org.openoffice.Office.Common/Appearance",
+    "Name": "UseBmpForAppBack",
+    "Value": "false",
+    "Type": "xs:boolean"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme",
+    "Name": "CurrentColorScheme",
+    "Value": "COLOR_SCHEME_LIBREOFFICE_LIGHT",
+    "Type": "xs:string"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/AppBackground",
+    "Name": "Color",
+    "Value": "15791353",
+    "Type": "xs:int",
+    "Color": "#F0F4F9"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/WindowColor",
+    "Name": "Color",
+    "Value": "16317181",
+    "Type": "xs:int",
+    "Color": "#F8FAFD"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/WindowTextColor",
+    "Name": "Color",
+    "Value": "2039583",
+    "Type": "xs:int",
+    "Color": "#1F1F1F"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/BaseColor",
+    "Name": "Color",
+    "Value": "16777215",
+    "Type": "xs:int",
+    "Color": "#FFFFFF"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/ButtonColor",
+    "Name": "Color",
+    "Value": "15331062",
+    "Type": "xs:int",
+    "Color": "#E9EEF6"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/ButtonTextColor",
+    "Name": "Color",
+    "Value": "2039583",
+    "Type": "xs:int",
+    "Color": "#1F1F1F"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/AccentColor",
+    "Name": "Color",
+    "Value": "743376",
+    "Type": "xs:int",
+    "Color": "#0B57D0"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/DisabledColor",
+    "Name": "Color",
+    "Value": "14935011",
+    "Type": "xs:int",
+    "Color": "#E3E3E3"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/DisabledTextColor",
+    "Name": "Color",
+    "Value": "7632757",
+    "Type": "xs:int",
+    "Color": "#747775"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/ShadowColor",
+    "Name": "Color",
+    "Value": "14343392",
+    "Type": "xs:int",
+    "Color": "#DADCE0"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/SeparatorColor",
+    "Name": "Color",
+    "Value": "12896197",
+    "Type": "xs:int",
+    "Color": "#C4C7C5"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/FaceColor",
+    "Name": "Color",
+    "Value": "16317181",
+    "Type": "xs:int",
+    "Color": "#F8FAFD"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/ActiveColor",
+    "Name": "Color",
+    "Value": "13886461",
+    "Type": "xs:int",
+    "Color": "#D3E3FD"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/ActiveTextColor",
+    "Name": "Color",
+    "Value": "269897",
+    "Type": "xs:int",
+    "Color": "#041E49"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/ActiveBorderColor",
+    "Name": "Color",
+    "Value": "743376",
+    "Type": "xs:int",
+    "Color": "#0B57D0"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/FieldColor",
+    "Name": "Color",
+    "Value": "16777215",
+    "Type": "xs:int",
+    "Color": "#FFFFFF"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/MenuBarColor",
+    "Name": "Color",
+    "Value": "16317181",
+    "Type": "xs:int",
+    "Color": "#F8FAFD"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/MenuBarTextColor",
+    "Name": "Color",
+    "Value": "2039583",
+    "Type": "xs:int",
+    "Color": "#1F1F1F"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/MenuBarHighlightColor",
+    "Name": "Color",
+    "Value": "743376",
+    "Type": "xs:int",
+    "Color": "#0B57D0"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/MenuBarHighlightTextColor",
+    "Name": "Color",
+    "Value": "16777215",
+    "Type": "xs:int",
+    "Color": "#FFFFFF"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/MenuColor",
+    "Name": "Color",
+    "Value": "16777215",
+    "Type": "xs:int",
+    "Color": "#FFFFFF"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/MenuTextColor",
+    "Name": "Color",
+    "Value": "2039583",
+    "Type": "xs:int",
+    "Color": "#1F1F1F"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/MenuHighlightColor",
+    "Name": "Color",
+    "Value": "743376",
+    "Type": "xs:int",
+    "Color": "#0B57D0"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/MenuHighlightTextColor",
+    "Name": "Color",
+    "Value": "16777215",
+    "Type": "xs:int",
+    "Color": "#FFFFFF"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/MenuBorderColor",
+    "Name": "Color",
+    "Value": "12896197",
+    "Type": "xs:int",
+    "Color": "#C4C7C5"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/InactiveColor",
+    "Name": "Color",
+    "Value": "15791353",
+    "Type": "xs:int",
+    "Color": "#F0F4F9"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/InactiveTextColor",
+    "Name": "Color",
+    "Value": "4474694",
+    "Type": "xs:int",
+    "Color": "#444746"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/InactiveBorderColor",
+    "Name": "Color",
+    "Value": "12896197",
+    "Type": "xs:int",
+    "Color": "#C4C7C5"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/CalcGrid",
+    "Name": "Color",
+    "Value": "14935011",
+    "Type": "xs:int",
+    "Color": "#E3E3E3"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/CalcCellFocus",
+    "Name": "Color",
+    "Value": "743376",
+    "Type": "xs:int",
+    "Color": "#0B57D0"
+  },
+  {
+    "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/DrawGrid",
+    "Name": "Color",
+    "Value": "14343392",
+    "Type": "xs:int",
+    "Color": "#DADCE0"
+  },
+  {
     "Path": "/org.openoffice.Office.Jobs/Jobs/UpdateCheck/Arguments",
     "Name": "AutoCheckEnabled",
     "Value": "false",

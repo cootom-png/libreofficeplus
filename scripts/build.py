@@ -479,6 +479,7 @@ def main():
                          ("docs/演示适配.md", "演示适配.txt"),
                          ("docs/版本兼容.md", "版本兼容.txt"),
                          ("docs/兼容升级.md", "兼容升级.txt"),
+                         ("docs/Material外观.md", "Material外观.txt"),
                          ("docs/弹窗菜单设计.md", "弹窗菜单设计.txt")]:
         if (ROOT / source).exists():
             (PACKAGE / dest).write_bytes((ROOT / source).read_bytes())
