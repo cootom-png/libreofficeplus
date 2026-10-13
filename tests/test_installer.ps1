@@ -352,6 +352,14 @@ try {
     try { & $installer -Restore -OnCheck { param($Result) $checks.Add($Result) } } catch { $refused = $true }
     if (!$refused -or (Get-FileHash -LiteralPath $config).Hash -ne $before) { throw '运行中防护未生效' }
     if (($checks | Where-Object { $_.Title -eq '运行状态' }).State -ne '需处理') { throw '运行中状态未显示' }
+    function Get-Process { param($Name,$ErrorAction) if ($Name -contains 'updater') { [pscustomobject]@{ ProcessName='updater' } } }
+    foreach ($restoreMode in @($false,$true)) {
+        $checks.Clear(); $refused=$false
+        try { & $installer -Restore:$restoreMode -LibreOfficePath $fakeInstall -OnCheck { param($Result) $checks.Add($Result) } } catch { $refused=$true }
+        $running=$checks | Where-Object { $_.Title -eq '运行状态' }
+        if (!$refused -or $running.State -ne '需处理' -or $running.Message -notmatch '更新程序' -or (Get-FileHash -LiteralPath $config).Hash -ne $before -or (Test-Path -LiteralPath $backup)) { throw '独立更新程序运行时仍修改了配置或恢复记录' }
+    }
+    Write-Host '通过：独立更新程序运行时阻止安装与恢复，未修改设置和备份。'
     Write-Host '通过：版本、程序缺失、配置损坏和运行状态提示，恢复不受安装版本限制。'
 } finally {
     $env:APPDATA = $originalAppData
