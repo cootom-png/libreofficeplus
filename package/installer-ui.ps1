@@ -1,4 +1,4 @@
-﻿param([switch]$Restore, [string]$Modules = 'Writer,Calc,Draw,Impress',
+﻿param([switch]$Restore, [switch]$Upgrade, [string]$Modules = 'Writer,Calc,Draw,Impress',
       [string]$LibreOfficePath = (Join-Path $env:ProgramFiles 'LibreOffice'))
 $ErrorActionPreference = 'Stop'
 try {
@@ -13,10 +13,10 @@ try {
     exit 1
 }
 $controls = @{}
-foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','StatusMessage','Step1','Step2','Step3','Checks','Details','Footer','CloseButton','VersionLabel','SelectionPanel','ModuleWriter','ModuleCalc','ModuleDraw','ModuleImpress','ApplicationPath','FontNotice','TemplatesButton','StartButton') {
+foreach ($name in 'Heading','Subtitle','StatusTitle','Percent','Progress','StatusMessage','Step1','Step2','Step3','Checks','Details','Footer','CloseButton','VersionLabel','SelectionPanel','ModuleWriter','ModuleCalc','ModuleDraw','ModuleImpress','ApplicationPath','FontNotice','TemplatesButton','StartButton','ModuleHeading','UpgradeButton','PackageButton') {
     $controls[$name] = $window.FindName($name)
 }
-$operation = if ($Restore) { '恢复' } else { '安装' }
+$operation = if ($Upgrade) { '升级' } elseif ($Restore) { '恢复' } else { '安装' }
 $window.Title = "LibreOfficePlus · $operation"
 $window.MaxHeight = [Windows.SystemParameters]::WorkArea.Height
 $window.Height = [Math]::Min($window.Height,$window.MaxHeight)
@@ -33,18 +33,33 @@ if ($Restore) {
     $controls.StartButton.Content = '开始恢复'
     $controls.StatusMessage.Text = '选择模块后点击“开始恢复”，检查结果会逐项显示。'
 }
+if ($Upgrade) {
+    $controls.Heading.Text = '兼容确认后，再升级'
+    $controls.Subtitle.Text = '缓存官方安装包 · 保留备份 · 自动重新配置原有模块'
+    foreach ($module in 'Writer','Calc','Draw','Impress') { $controls["Module$module"].Visibility='Collapsed' }
+    $controls.ModuleHeading.Text = '自动沿用原有模块，无需重新选择'
+    $controls.FontNotice.Text = '仅升级到本包已适配的版本。下载会核对官方安装包的校验值和数字签名。'
+    $controls.StartButton.Content = '检查并开始升级'
+    $controls.StatusMessage.Text = '保存文档并退出软件后开始。已缓存的合格安装包可断网复用；Windows 可能要求管理员授权。'
+    $controls.Step1.Text = '01  兼容与缓存'
+    $controls.Step2.Text = '02  备份与升级'
+    $controls.Step3.Text = '03  核验与配置'
+}
 $controls.StatusTitle.Text = "准备$operation"
 $controls.Details.Text = if ($Restore) { '先保存文档并退出软件；将还原所选模块的首次备份。' } else { '自动识别 LibreOffice 版本并选择专属界面。先保存文档并退出软件；未适配的版本会阻止安装。' }
-$state = [hashtable]::Synchronized(@{ Update=@{ Percent=0; Message='正在启动配置程序…' }; Checks=@(); Failure=$null })
+if ($Upgrade) { $controls.Details.Text = '升级不会强制关闭文档，不会自动降级。失败或要求重启时保留缓存与备份，再次运行本入口继续；不自动回滚软件本体。' }
+if ($Upgrade -or $Restore) { $controls.UpgradeButton.Visibility='Collapsed' }
+$state = [hashtable]::Synchronized(@{ Update=@{ Percent=0; Message='正在启动配置程序…' }; Checks=@(); Failure=$null; Finished=$false })
 $checkTitles = @('运行环境','安装目录','版本兼容','运行状态','用户配置','目录写入','配置包文件','首次备份')
+if ($Upgrade) { $checkTitles=@('版本兼容','运行状态','安装包验证','升级前备份','升级结果') }
 function Refresh-Checks {
     $snapshot = @($state.Checks)
     $titles = @($checkTitles) + @($snapshot | Where-Object { $_.Title -notin $checkTitles } | ForEach-Object { $_.Title } | Select-Object -Unique)
     $controls.Checks.ItemsSource = @(foreach ($title in $titles) {
         $result = $snapshot | Where-Object { $_.Title -eq $title } | Select-Object -Last 1
-        $status = if ($result) { $result.State } else { '未检查' }
+        $status = if ($result) { $result.State } elseif ($state.Finished -and !$state.Failure) { '不适用' } else { '未检查' }
         [pscustomobject]@{
-            Title=$title; State=$status; Message=$(if ($result) { $result.Message } elseif ($state.Failure) { '前置检查未通过，本次未执行。' } else { '等待前面的检查完成。' })
+            Title=$title; State=$status; Message=$(if ($result) { $result.Message } elseif ($state.Failure) { '前置检查未通过，本次未执行。' } elseif ($state.Finished) { '本次无需执行。' } else { '等待前面的检查完成。' })
             Color=$(switch ($status) { '通过' { '#128562' }; '需处理' { '#C83939' }; default { '#8795A9' } })
         }
     })
@@ -56,16 +71,20 @@ $worker = {
     $mutex = [Threading.Mutex]::new($false,('Local\LibreOfficePlus-Installer-' + [Security.Principal.WindowsIdentity]::GetCurrent().User.Value))
     $acquired = $false
     try {
-        try { $acquired = $mutex.WaitOne(0) }
-        catch [Threading.AbandonedMutexException] { $acquired = $true }
-        if (!$acquired) { throw '另一个配置窗口正在操作，请等待它完成后再试。' }
-        & $CorePath -Restore:$RestoreMode -Modules $SelectedModules -LibreOfficePath $ApplicationPath -OnProgress {
+        if ((Split-Path $CorePath -Leaf) -eq 'configure.ps1') {
+            try { $acquired = $mutex.WaitOne(0) }
+            catch [Threading.AbandonedMutexException] { $acquired = $true }
+            if (!$acquired) { throw '另一个配置窗口正在操作，请等待它完成后再试。' }
+        }
+        $arguments = @{ LibreOfficePath=$ApplicationPath; OnProgress={
             param($Percent, $Message)
             $State.Update = @{ Percent=$Percent; Message=$Message }
-        } -OnCheck {
+        }; OnCheck={
             param($Result)
             $State.Checks = @($State.Checks) + @($Result)
-        } | Out-Null
+        } }
+        if ((Split-Path $CorePath -Leaf) -eq 'configure.ps1') { $arguments.Restore=$RestoreMode; $arguments.Modules=$SelectedModules }
+        & $CorePath @arguments | Out-Null
     } catch { $State.Failure = $_.Exception.Message }
     finally { if ($acquired) { $mutex.ReleaseMutex() }; $mutex.Dispose() }
 }
@@ -88,6 +107,7 @@ $timer.Add_Tick({
     try { $job.EndInvoke($ui.Handle) | Out-Null }
     catch { if (!$state.Failure) { $state.Failure = $_.Exception.Message } }
     $job.Dispose()
+    $state.Finished=$true
     Refresh-Checks
     $ui.Running = $false
     $controls.CloseButton.IsEnabled = $true
@@ -108,25 +128,33 @@ $timer.Add_Tick({
         $controls.Progress.Foreground = '#12A47B'
         $controls.Percent.Text = '100%'
         $controls.Percent.Foreground = '#12A47B'
-        $controls.StatusMessage.Text = '现在可以重新打开 LibreOffice，查看你的界面。'
-        $controls.Details.Text = if ($Restore) { "已恢复：$($ui.Modules)`n所选模块已还原到首次安装前的设置。" } else { "已配置：$($ui.Modules)`n首次备份已保留，双击 恢复原界面.vbs 即可恢复。" }
-        if (!$Restore) { $controls.TemplatesButton.Visibility = 'Visible' }
+        $controls.StatusMessage.Text = if ($Upgrade) { $state.Update.Message } else { '现在可以重新打开 LibreOffice，查看你的界面。' }
+        $controls.Details.Text = if ($Restore) { "已恢复：$($ui.Modules)`n所选模块已还原到首次安装前的设置；全部恢复后还原升级设置。" } else { "已配置：$($ui.Modules)`n官方升级提醒、自动下载与自动更新已关闭。首次备份已保留，可通过兼容升级入口更新。" }
+        if ($Upgrade) { $controls.Details.Text = '兼容版本与构建核验结果见上方。首次恢复备份继续保留；本包没有更高兼容版本时，请先获取新版配置包。' }
+        if (!$Restore -and !$Upgrade) { $controls.TemplatesButton.Visibility = 'Visible' }
         $controls.Footer.Text = '已完成 · 可以关闭此窗口'
     }
 })
 $controls.CloseButton.Add_Click({ $window.Close() })
 $controls.TemplatesButton.Add_Click({ Start-Process -FilePath 'explorer.exe' -ArgumentList ('"' + (Join-Path $PSScriptRoot 'templates') + '"') })
+$controls.PackageButton.Add_Click({ Start-Process 'https://github.com/cootom-png/libreofficeplus/releases/latest' })
+$controls.UpgradeButton.Add_Click({
+    Start-Process -FilePath "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -ArgumentList ('-NoProfile -STA -ExecutionPolicy Bypass -WindowStyle Hidden -File "' + $PSCommandPath + '" -Upgrade -LibreOfficePath "' + $controls.ApplicationPath.Text.Trim() + '"') -WindowStyle Hidden
+    $window.Close()
+})
 $window.Add_Closing({ param($sender,$event) if ($ui.Running) { $event.Cancel=$true } })
 $controls.StartButton.Add_Click({
     if ($ui.Handle) { return }
     $selected = @('Writer','Calc','Draw','Impress' | Where-Object { $controls["Module$_"].IsChecked })
-    if (!$selected.Count) { $controls.StatusMessage.Text = '请至少选择一个模块。'; return }
+    if (!$Upgrade -and !$selected.Count) { $controls.StatusMessage.Text = '请至少选择一个模块。'; return }
     $ui.Modules = $selected -join ','
-    $null = $job.AddScript($worker.ToString()).AddArgument((Join-Path $PSScriptRoot 'configure.ps1')).AddArgument($state).AddArgument($Restore.IsPresent).AddArgument($ui.Modules).AddArgument($controls.ApplicationPath.Text.Trim())
+    $coreName = if ($Upgrade) { 'upgrade.ps1' } else { 'configure.ps1' }
+    $null = $job.AddScript($worker.ToString()).AddArgument((Join-Path $PSScriptRoot $coreName)).AddArgument($state).AddArgument($Restore.IsPresent).AddArgument($ui.Modules).AddArgument($controls.ApplicationPath.Text.Trim())
     $ui.Running = $true
     $controls.SelectionPanel.Visibility = 'Collapsed'
     $controls.StartButton.Visibility = 'Collapsed'
     $controls.CloseButton.IsEnabled = $false
+    $controls.UpgradeButton.IsEnabled = $false
     $controls.CloseButton.Content = '正在配置…'
     $ui.Handle = $job.BeginInvoke()
     $timer.Start()

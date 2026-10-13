@@ -1,0 +1,18 @@
+{
+  "version": "26.2.6.1",
+  "buildid": "d1ee4fa77ef37aa4cfa80ea6fd156dcae5d60263",
+  "checks": {
+    "native": {
+      "passed": 114,
+      "pending": 0
+    },
+    "impress": {
+      "passed": 102,
+      "pending": 2
+    },
+    "menus": {
+      "passed": 30,
+      "pending": 0
+    }
+  }
+}

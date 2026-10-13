@@ -10,5 +10,11 @@
     "DisplayVersion": "26.8.1",
     "BuildId": "bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1",
     "Bundle": "variants/26.8.1"
+  },
+  {
+    "Version": "26.2.6.1",
+    "DisplayVersion": "26.2.6.1",
+    "BuildId": "d1ee4fa77ef37aa4cfa80ea6fd156dcae5d60263",
+    "Bundle": "."
   }
 ]

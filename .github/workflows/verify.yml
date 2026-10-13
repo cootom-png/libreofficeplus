@@ -25,6 +25,9 @@ jobs:
       - name: 图形安装界面检查
         shell: powershell
         run: .\tests\test_gui.ps1
+      - name: 兼容升级与缓存检查（隔离模拟，不安装软件）
+        shell: powershell
+        run: .\tests\test_upgrade.ps1
       - name: 检查生成文件同步
         shell: powershell
         run: git diff --exit-code -- package dist

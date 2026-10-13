@@ -18,6 +18,21 @@ PROFILES = [(ROOT / e['Source'], ROOT / 'package' / e['Bundle'])
 
 
 class PackageTests(unittest.TestCase):
+    def test_update_policy_and_targets(self):
+        settings = json.loads((ROOT / 'config/updates.json').read_text('utf8'))
+        self.assertEqual({(s['Path'], s['Name'], s['Value']) for s in settings}, {
+            ('/org.openoffice.Office.Jobs/Jobs/UpdateCheck/Arguments', 'AutoCheckEnabled', 'false'),
+            ('/org.openoffice.Office.Jobs/Jobs/UpdateCheck/Arguments', 'AutoDownloadEnabled', 'false'),
+            ('/org.openoffice.Office.Update/Update', 'Enabled', 'false')})
+        matrix = json.loads((ROOT / 'package/compatibility.json').read_text('utf8'))
+        targets = json.loads((ROOT / 'package/upgrade-targets.json').read_text('utf8'))
+        self.assertEqual(len({t['Version'] for t in targets}), len(targets))
+        for target in targets:
+            self.assertIn((target['Version'], target['BuildId']), [(p['Version'], p['BuildId']) for p in matrix])
+            self.assertRegex(target['SHA256'], r'^[0-9a-f]{64}$')
+            self.assertEqual(target['Url'], 'https://downloadarchive.documentfoundation.org/libreoffice/old/'
+                             f"{target['Version']}/win/x86_64/LibreOffice_{target['Version']}_Win_x86-64.msi")
+
     @unittest.skipUnless(os.name == 'nt', '图形入口检查需要 Windows Script Host')
     def test_graphical_launchers(self):
         with tempfile.TemporaryDirectory(prefix='LOPlus 图形入口 ') as temp:
@@ -26,11 +41,11 @@ class PackageTests(unittest.TestCase):
             folder = Path(temp) / 'LibreOfficePlus'
             marker = folder / 'gui-probe.json'
             (folder / 'installer-ui.ps1').write_text(
-                'param([switch]$Restore)\n'
-                '@{Restore=[bool]$Restore;Apartment=[Threading.Thread]::CurrentThread.ApartmentState.ToString()} | '
+                'param([switch]$Restore,[switch]$Upgrade)\n'
+                '@{Restore=[bool]$Restore;Upgrade=[bool]$Upgrade;Apartment=[Threading.Thread]::CurrentThread.ApartmentState.ToString()} | '
                 'ConvertTo-Json | Set-Content -LiteralPath (Join-Path $PSScriptRoot "gui-probe.json") -Encoding UTF8\n',
                 encoding='utf-8-sig')
-            for name, restore in [('安装.vbs', False), ('恢复原界面.vbs', True)]:
+            for name, restore, upgrade in [('安装.vbs', False, False), ('恢复原界面.vbs', True, False), ('兼容升级.vbs', False, True)]:
                 marker.unlink(missing_ok=True)
                 data = (folder / name).read_bytes()
                 data.decode('ascii')
@@ -41,7 +56,7 @@ class PackageTests(unittest.TestCase):
                                          '//nologo', str(folder / name)], capture_output=True, timeout=30)
                 self.assertEqual(result.returncode, 0, repr(result.stdout + result.stderr))
                 self.assertTrue(marker.exists(), repr(result.stdout + result.stderr))
-                self.assertEqual(json.loads(marker.read_text('utf-8-sig')), {'Restore': restore, 'Apartment': 'STA'})
+                self.assertEqual(json.loads(marker.read_text('utf-8-sig')), {'Restore': restore, 'Upgrade': upgrade, 'Apartment': 'STA'})
 
     @unittest.skipUnless(os.name == 'nt', '实际入口检查需要 Windows cmd.exe')
     def test_windows_launchers(self):
@@ -161,7 +176,9 @@ class PackageTests(unittest.TestCase):
 
     def test_version_selection_manifest(self):
         entries = json.loads((ROOT / 'package/compatibility.json').read_text('utf8'))
-        self.assertEqual(len(entries), 2)
+        shared = [(build, baseline, package) for baseline, package in PROFILES
+                  for build in json.loads((baseline / 'SOURCE.json').read_text('utf8')).get('compatible_builds', [])]
+        self.assertEqual(len(entries), len(PROFILES) + len(shared))
         self.assertEqual(len({e['BuildId'] for e in entries}), len(entries))
         for entry, (baseline, package) in zip(entries, PROFILES):
             source = json.loads((baseline / 'SOURCE.json').read_text('utf8'))
@@ -172,6 +189,11 @@ class PackageTests(unittest.TestCase):
                 self.assertTrue((package / 'ui' / module / 'notebookbar.ui').exists())
         self.assertNotEqual((PROFILES[0][1] / 'ui/swriter/notebookbar.ui').read_bytes(),
                             (PROFILES[1][1] / 'ui/swriter/notebookbar.ui').read_bytes())
+        for entry, (build, baseline, package) in zip(entries[len(PROFILES):], shared):
+            self.assertEqual((entry['Version'], entry['BuildId']), (build['version'], build['buildid']))
+            self.assertEqual((ROOT / 'package' / entry['Bundle']).resolve(), package.resolve())
+            for item in build['files'].values():
+                self.assertEqual(hashlib.sha256((baseline / item['path']).read_bytes()).hexdigest(), item['sha256'])
 
     def test_labels(self):
         labels = json.loads((ROOT / 'package/设置清单.json').read_text(encoding='utf-8'))

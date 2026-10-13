@@ -176,7 +176,7 @@ $defaults = @(
 $changes = @($defaults | Where-Object { (Scope $_[0] $_[1]) -in ($selected + 'Shared') })
 $labels = ConvertFrom-Json -InputObject (Get-Content -LiteralPath (Join-Path $PSScriptRoot '设置清单.json') -Raw -Encoding UTF8)
 foreach ($setting in $labels) {
-    if ((Scope $setting.Path $setting.Name) -in ($selected + 'Shared')) { $changes += ,@($setting.Path,$setting.Name,$setting.Value,$setting.Localized,$setting.Language) }
+    if ((Scope $setting.Path $setting.Name) -in ($selected + 'Shared')) { $changes += ,@($setting.Path,$setting.Name,$setting.Value,$setting.Localized,$setting.Language,$setting.Type) }
 }
 if (!$Restore) {
     foreach ($file in $packageFiles | Where-Object { $_.Path -like 'popupmenu/*' }) {
@@ -277,6 +277,10 @@ foreach ($change in $changes) {
     } else {
         $item = $doc.CreateElement('item'); $item.SetAttribute('path',$ns,$change[0]) | Out-Null
         $prop = $doc.CreateElement('prop'); $prop.SetAttribute('name',$ns,$change[1]) | Out-Null; $prop.SetAttribute('op',$ns,'fuse') | Out-Null
+        if ($change.Count -gt 5 -and $change[5]) {
+            $doc.DocumentElement.SetAttribute('xmlns:xs','http://www.w3.org/2001/XMLSchema') | Out-Null
+            $prop.SetAttribute('type',$ns,$change[5]) | Out-Null
+        }
         $value = $doc.CreateElement('value'); $value.InnerText = $change[2]
         if ($change.Count -gt 3 -and $change[3]) {
             $lang = $doc.CreateAttribute('xml','lang','http://www.w3.org/XML/1998/namespace')
