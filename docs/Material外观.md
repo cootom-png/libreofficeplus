@@ -30,3 +30,7 @@
 - LibreOffice 的外观主题是当前用户的全局设置，配置一个模块也会影响其他组件的通用外观。部分恢复不会提前还原全局颜色；全部恢复才恢复首次值。
 
 来源：[Google Material 颜色说明](https://m3.material.io/styles/color/overview)、[LibreOffice 外观说明](https://help.libreoffice.org/latest/en-US/text/shared/optionen/01012000.html)、[固定版本主题状态与外观枚举](https://github.com/LibreOffice/core/blob/d1ee4fa77ef37aa4cfa80ea6fd156dcae5d60263/include/vcl/themecolors.hxx)。本包只使用用户配置能力，不覆盖软件安装目录。
+
+## v6.8.1 菜单选中配色
+
+菜单选中背景使用浅蓝 `#D3E3FD`、选中文字使用黑色 `#000000`。Windows 原生菜单可能仍使用系统蓝色，例如 `#0078D4` 或 `#3399FF`；黑色文字在这两种背景上均达到 4.5 的对比度。避免在较浅的系统蓝色上强制白色文字；不修改用户的 Windows 主题。26.2.6.3 的原生读数与恢复检查另见 [26.2.6.3兼容验收.json](26.2.6.3兼容验收.json)，前面的双版本记录为 v6.8.0 当时结果。

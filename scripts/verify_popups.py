@@ -41,7 +41,7 @@ def verify(context, package=ROOT / 'package'):
         arg = uno.createUnoStruct('com.sun.star.beans.PropertyValue', Name='nodepath', Value=setting['Path'])
         access = provider.createInstanceWithArguments('com.sun.star.configuration.ConfigurationAccess', (arg,))
         actual = access.getPropertyValue(setting['Name'])
-        if str(actual).lower() != setting['Value']:
+        if str(actual).lower() != setting['Value'].lower():
             raise AssertionError(setting['Name'])
         records.append({'设置': setting['Name'], '通过': True, '有效值': actual})
     return records

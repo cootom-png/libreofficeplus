@@ -2,6 +2,7 @@
       [scriptblock]$OnProgress = { param($Percent, $Message) },
       [scriptblock]$OnCheck = { param($Result) Write-Host "[$($Result.State)] $($Result.Title)：$($Result.Message)" })
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'process-check.ps1')
 $root = Join-Path $env:LOCALAPPDATA 'LibreOfficePlus\upgrades'
 $pendingFile = Join-Path $root 'pending.json'
 $moduleIds = @{ swriter='Writer'; scalc='Calc'; sdraw='Draw'; simpress='Impress' }
@@ -22,7 +23,8 @@ function Read-Application {
     [pscustomobject]@{ Version=$version; BuildId=$lines[0].Substring(8) }
 }
 function Require-Closed {
-    if (Get-Process -Name 'soffice','soffice.bin','updater' -ErrorAction SilentlyContinue) { throw '请保存文档并完全退出 LibreOffice 及其更新程序，再运行兼容升级。不会强制结束进程。' }
+    $running = @(Get-LibreOfficeProcesses $LibreOfficePath)
+    if ($running.Count) { throw ("请保存文档并完全退出 LibreOffice 及其更新程序，再运行兼容升级。不会强制结束进程。检测到：" + (Format-LibreOfficeProcesses $running)) }
 }
 function Report($title, $message) { & $OnCheck @{Title=$title;State='通过';Message=$message} }
 function Save-Pending($record) {

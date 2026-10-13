@@ -188,16 +188,16 @@
   {
     "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/MenuBarHighlightColor",
     "Name": "Color",
-    "Value": "743376",
+    "Value": "13886461",
     "Type": "xs:int",
-    "Color": "#0B57D0"
+    "Color": "#D3E3FD"
   },
   {
     "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/MenuBarHighlightTextColor",
     "Name": "Color",
-    "Value": "16777215",
+    "Value": "0",
     "Type": "xs:int",
-    "Color": "#FFFFFF"
+    "Color": "#000000"
   },
   {
     "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/MenuColor",
@@ -216,16 +216,16 @@
   {
     "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/MenuHighlightColor",
     "Name": "Color",
-    "Value": "743376",
+    "Value": "13886461",
     "Type": "xs:int",
-    "Color": "#0B57D0"
+    "Color": "#D3E3FD"
   },
   {
     "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/MenuHighlightTextColor",
     "Name": "Color",
-    "Value": "16777215",
+    "Value": "0",
     "Type": "xs:int",
-    "Color": "#FFFFFF"
+    "Color": "#000000"
   },
   {
     "Path": "/org.openoffice.Office.UI/ColorScheme/ColorSchemes/COLOR_SCHEME_LIBREOFFICE_LIGHT/MenuBorderColor",
