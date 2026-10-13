@@ -4,6 +4,7 @@ import json
 import time
 from pathlib import Path
 import uno
+from com.sun.star.document.MacroExecMode import USE_CONFIG_REJECT_CONFIRMATION
 from com.sun.star.lang import DisposedException
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,7 +62,8 @@ def main():
         if args.configured:
             for module in ['swriter', 'scalc', 'sdraw', 'simpress']:
                 doc = desktop.loadComponentFromURL('private:factory/' + module, '_blank', 0,
-                    (uno.createUnoStruct('com.sun.star.beans.PropertyValue', Name='Hidden', Value=True),))
+                    (uno.createUnoStruct('com.sun.star.beans.PropertyValue', Name='Hidden', Value=True),
+                     uno.createUnoStruct('com.sun.star.beans.PropertyValue', Name='MacroExecutionMode', Value=USE_CONFIG_REJECT_CONFIRMATION)))
                 documents.append(doc)
                 doc.setTitle('LibreOfficePlus Material Preview ' + module)
                 if args.visible:
@@ -71,7 +73,7 @@ def main():
                 # 可见 Windows 实例还核验实际绘制使用的样式，不能只检查磁盘配置。
                 if args.visible or args.native_styles:
                     # Windows 原生菜单的选中颜色仍可能由系统绘制，单独记录，不冒充已统一。
-                    for name, color in {'FaceColor': 'F8FAFD', 'WindowColor': 'F8FAFD', 'MenuColor': 'FFFFFF', 'MenuTextColor': '1F1F1F', 'FieldColor': 'FFFFFF', 'MenuHighlightTextColor': 'FFFFFF'}.items():
+                    for name, color in {'FaceColor': 'F8FAFD', 'WindowColor': 'F8FAFD', 'MenuColor': 'FFFFFF', 'MenuTextColor': '1F1F1F', 'FieldColor': 'FFFFFF', 'MenuHighlightTextColor': '000000'}.items():
                         assert values[name] == int(color, 16), (module, name, values[name], color)
                     assert contrast(values['MenuHighlightColor'], values['MenuHighlightTextColor']) >= 4.5, (module, '菜单选中文字对比度不足')
                 result['styles'].append({'module': module, 'values': values, 'verified': args.visible or args.native_styles})
@@ -80,8 +82,14 @@ def main():
             print('可见窗口配色检查通过，正在保留独立预览。', flush=True)
             time.sleep(min(max(args.hold, 0), 180))
     finally:
+        for doc in documents:
+            try:
+                doc.setModified(False)
+            except DisposedException:
+                pass
         try:
-            desktop.terminate()
+            if not desktop.terminate():
+                raise RuntimeError('独立预览未能退出，请检查测试实例')
         except DisposedException:
             pass
 

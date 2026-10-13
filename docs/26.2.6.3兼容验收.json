@@ -1,0 +1,82 @@
+{
+  "version": "26.2.6.3",
+  "buildid": "8221e31b3ac356a1623c672912a3d2b492f7e3d1",
+  "native_resources_matched": 28,
+  "checks": {
+    "native": {
+      "passed": 114,
+      "pending": 0
+    },
+    "impress": {
+      "passed": 102,
+      "pending": 2
+    },
+    "menus": {
+      "passed": 66,
+      "pending": 0
+    },
+    "updates": {
+      "passed": 3,
+      "pending": 0
+    },
+    "appearance": {
+      "settings_passed": 42,
+      "modules": 4,
+      "restore_passed": 42
+    }
+  },
+  "native_styles": [
+    {
+      "module": "swriter",
+      "values": {
+        "FaceColor": 16317181,
+        "WindowColor": 16317181,
+        "MenuColor": 16777215,
+        "MenuTextColor": 2039583,
+        "MenuHighlightColor": 3381759,
+        "MenuHighlightTextColor": 0,
+        "FieldColor": 16777215
+      },
+      "verified": true
+    },
+    {
+      "module": "scalc",
+      "values": {
+        "FaceColor": 16317181,
+        "WindowColor": 16317181,
+        "MenuColor": 16777215,
+        "MenuTextColor": 2039583,
+        "MenuHighlightColor": 3381759,
+        "MenuHighlightTextColor": 0,
+        "FieldColor": 16777215
+      },
+      "verified": true
+    },
+    {
+      "module": "sdraw",
+      "values": {
+        "FaceColor": 16317181,
+        "WindowColor": 16317181,
+        "MenuColor": 16777215,
+        "MenuTextColor": 2039583,
+        "MenuHighlightColor": 3381759,
+        "MenuHighlightTextColor": 0,
+        "FieldColor": 16777215
+      },
+      "verified": true
+    },
+    {
+      "module": "simpress",
+      "values": {
+        "FaceColor": 16317181,
+        "WindowColor": 16317181,
+        "MenuColor": 16777215,
+        "MenuTextColor": 2039583,
+        "MenuHighlightColor": 3381759,
+        "MenuHighlightTextColor": 0,
+        "FieldColor": 16777215
+      },
+      "verified": true
+    }
+  ]
+}
