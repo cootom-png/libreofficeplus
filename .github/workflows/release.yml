@@ -35,10 +35,13 @@ jobs:
           if ($LASTEXITCODE -ne 0 -or $head -cne $env:RELEASE_SHA -or $head -cne $main) { throw '发布提交必须是最新 main' }
           $version = (Get-Content package/version.json -Raw | ConvertFrom-Json).Version
           if ($version -cnotmatch '^\d+\.\d+\.\d+$') { throw '版本号不正确' }
+          if (!(Test-Path -LiteralPath "docs/发布说明-v$version.md")) { throw '缺少当前版本发布说明' }
           "tag=v$version" >> $env:GITHUB_OUTPUT
       - name: 构建和验收
         shell: powershell
         run: |
+          python scripts/check_upstream_spacing.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python scripts/build.py
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python -m unittest discover -s tests
@@ -91,7 +94,7 @@ jobs:
           # 已有标签或版本一律拒绝覆盖，保留可验证的回退包。
           gh api "repos/$GITHUB_REPOSITORY/git/matching-refs/tags/$RELEASE_TAG" > release-tags.json
           python -c 'import json; assert not json.load(open("release-tags.json")), "发布标签已存在"'
-          gh release create "$RELEASE_TAG" release/* --target "$RELEASE_SHA" --title "LibreOfficePlus $RELEASE_TAG · 新旧版本兼容" --notes-file docs/发布说明-v6.6.md --latest
+          gh release create "$RELEASE_TAG" release/* --target "$RELEASE_SHA" --title "LibreOfficePlus $RELEASE_TAG" --notes-file "docs/发布说明-$RELEASE_TAG.md" --latest
           published=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq .object.sha)
           test "$published" = "$RELEASE_SHA"
           gh release download "$RELEASE_TAG" --dir published
