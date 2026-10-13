@@ -468,6 +468,7 @@ def main():
                          ("NOTICE", "来源说明.txt"), ("docs/验收记录.md", "验证记录.txt"),
                          ("docs/操作习惯.md", "操作习惯.txt"), ("docs/按钮差异.md", "按钮差异.txt"),
                          ("docs/布局排查.md", "布局排查.txt"),
+                         ("docs/界面间距说明.md", "界面间距说明.txt"),
                          ("docs/适配计划.md", "适配计划.txt"),
                          ("docs/演示适配.md", "演示适配.txt"),
                          ("docs/版本兼容.md", "版本兼容.txt"),

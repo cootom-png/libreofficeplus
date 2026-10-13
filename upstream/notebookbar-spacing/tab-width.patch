@@ -1,0 +1,294 @@
+diff --git a/vcl/source/control/tabctrl.cxx b/vcl/source/control/tabctrl.cxx
+--- a/vcl/source/control/tabctrl.cxx
++++ b/vcl/source/control/tabctrl.cxx
+@@ -2295,32 +2295,13 @@
+     const tools::Long nHamburgerWidth = m_pOpenMenu->GetSizePixel().Width();
+     tools::Long nMaxWidth = nWidth - nHamburgerWidth;
+     tools::Long nShortcutsWidth = m_pShortcuts != nullptr ? m_pShortcuts->GetSizePixel().getWidth() + 1 : 0;
+-    tools::Long nFullWidth = nShortcutsWidth;
+ 
+     const tools::Long nOffsetX = 2 + nShortcutsWidth;
+     const tools::Long nOffsetY = 2;
+ 
+-    //fdo#66435 throw Knuth/Tex minimum raggedness algorithm at the problem
+-    //of ugly bare tabs on lines of their own
+-
+-    for (auto & item : mpTabCtrlData->maItemList)
+-    {
+-        tools::Long nTabWidth = 0;
+-        if (item.m_bVisible)
+-        {
+-            nTabWidth = ImplGetItemSize(&item, nMaxWidth).getWidth();
+-            if (!item.maText.isEmpty() && nTabWidth < 100)
+-                nTabWidth = 100;
+-        }
+-        nFullWidth += nTabWidth;
+-    }
+-
+     tools::Long nX = nOffsetX;
+     tools::Long nY = nOffsetY;
+ 
+-    tools::Long nLineWidthAry[100];
+-    nLineWidthAry[0] = 0;
+-
+     for (auto & item : mpTabCtrlData->maItemList)
+     {
+         if (!item.m_bVisible)
+@@ -2328,10 +2309,7 @@
+ 
+         Size aSize = ImplGetItemSize( &item, nMaxWidth );
+ 
+-        // set minimum tab size
+-        if( nFullWidth < nMaxWidth && !item.maText.isEmpty() && aSize.getWidth() < 100)
+-            aSize.setWidth( 100 );
+-
++        // Width follows the text and native padding; retain the minimum header height.
+         if( !item.maText.isEmpty() && aSize.getHeight() < 28 )
+             aSize.setHeight( 28 );
+ 
+@@ -2343,7 +2321,6 @@
+         item.mnLine = 0;
+         item.mbFullVisible = true;
+ 
+-        nLineWidthAry[0] += aSize.Width();
+         nX += aSize.Width();
+     }
+ 
+diff --git a/vcl/Module_vcl.mk b/vcl/Module_vcl.mk
+--- a/vcl/Module_vcl.mk
++++ b/vcl/Module_vcl.mk
+@@ -228,2 +228,3 @@
+     CppunitTest_vcl_lifecycle \
++    CppunitTest_vcl_notebookbar \
+     CppunitTest_vcl_bitmap_test \
+diff --git a/vcl/CppunitTest_vcl_notebookbar.mk b/vcl/CppunitTest_vcl_notebookbar.mk
+new file mode 100644
+--- /dev/null
++++ b/vcl/CppunitTest_vcl_notebookbar.mk
+@@ -0,0 +1,60 @@
++# -*- Mode: makefile-gmake; tab-width: 4; indent-tabs-mode: t -*-
++#
++# This file is part of the LibreOffice project.
++#
++# This Source Code Form is subject to the terms of the Mozilla Public
++# License, v. 2.0. If a copy of the MPL was not distributed with this
++# file, You can obtain one at http://mozilla.org/MPL/2.0/.
++#
++
++$(eval $(call gb_CppunitTest_CppunitTest,vcl_notebookbar))
++
++$(eval $(call gb_CppunitTest_set_include,vcl_notebookbar,\
++    $$(INCLUDE) \
++    -I$(SRCDIR)/vcl/inc \
++))
++
++$(eval $(call gb_CppunitTest_add_exception_objects,vcl_notebookbar, \
++	vcl/qa/cppunit/notebookbar \
++))
++
++$(eval $(call gb_CppunitTest_use_externals,vcl_notebookbar,boost_headers))
++
++$(eval $(call gb_CppunitTest_use_libraries,vcl_notebookbar, \
++	comphelper \
++	cppu \
++	cppuhelper \
++	sal \
++	svt \
++	test \
++	tk \
++	tl \
++	unotest \
++	vcl \
++))
++
++$(eval $(call gb_CppunitTest_add_defs,vcl_notebookbar,\
++    -DVCL_INTERNALS \
++))
++
++$(eval $(call gb_CppunitTest_use_sdk_api,vcl_notebookbar))
++
++$(eval $(call gb_CppunitTest_use_ure,vcl_notebookbar))
++$(eval $(call gb_CppunitTest_use_vcl,vcl_notebookbar))
++
++$(eval $(call gb_CppunitTest_use_components,vcl_notebookbar,\
++	configmgr/source/configmgr \
++	i18npool/util/i18npool \
++	ucb/source/core/ucb1 \
++	ucb/source/ucp/file/ucpfile1 \
++	framework/util/fwk \
++	sfx2/util/sfx \
++))
++
++$(eval $(call gb_CppunitTest_use_configuration,vcl_notebookbar))
++
++$(eval $(call gb_CppunitTest_use_uiconfigs,vcl_notebookbar, \
++    vcl \
++))
++
++# vim: set noet sw=4 ts=4:
+diff --git a/vcl/qa/cppunit/notebookbar.cxx b/vcl/qa/cppunit/notebookbar.cxx
+new file mode 100644
+--- /dev/null
++++ b/vcl/qa/cppunit/notebookbar.cxx
+@@ -0,0 +1,161 @@
++/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
++/*
++ * This file is part of the LibreOffice project.
++ *
++ * This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
++ */
++
++#include <sal/config.h>
++#include <test/bootstrapfixture.hxx>
++#include <vcl/font.hxx>
++#include <vcl/tabctrl.hxx>
++#include <vcl/toolbox.hxx>
++#include <vcl/wrkwin.hxx>
++
++#include <array>
++
++namespace
++{
++class MeasuringTabControl final : public TabControl
++{
++public:
++    explicit MeasuringTabControl(vcl::Window* pParent)
++        : TabControl(pParent)
++    {
++    }
++
++    bool placeTabs(tools::Long nWidth) { return ImplPlaceTabs(nWidth); }
++};
++
++class MeasuringNotebookbar final : public NotebookbarTabControlBase
++{
++public:
++    explicit MeasuringNotebookbar(vcl::Window* pParent)
++        : NotebookbarTabControlBase(pParent)
++    {
++    }
++
++    bool placeTabs(tools::Long nWidth)
++    {
++        calculateRequisition();
++        return ImplPlaceTabs(nWidth);
++    }
++};
++}
++
++class NotebookbarTest : public test::BootstrapFixture
++{
++public:
++    NotebookbarTest()
++        : BootstrapFixture(true, false)
++    {
++    }
++
++    void testTextWidths();
++    void testResizeWithShortcuts();
++    void testHiddenTabWidths();
++
++    CPPUNIT_TEST_SUITE(NotebookbarTest);
++    CPPUNIT_TEST(testTextWidths);
++    CPPUNIT_TEST(testResizeWithShortcuts);
++    CPPUNIT_TEST(testHiddenTabWidths);
++    CPPUNIT_TEST_SUITE_END();
++};
++
++void NotebookbarTest::testTextWidths()
++{
++    ScopedVclPtrInstance<WorkWindow> xWindow(nullptr, WB_APP);
++    ScopedVclPtrInstance<MeasuringTabControl> xReference(xWindow.get());
++    ScopedVclPtrInstance<MeasuringNotebookbar> xNotebookbar(xWindow.get());
++    const std::array<OUString, 4> aLabels
++        = { u"开始"_ustr, u"Insert"_ustr, u"Formatting and editing tools"_ustr, u""_ustr };
++    for (sal_uInt16 nPage = 1; nPage <= aLabels.size(); ++nPage)
++    {
++        xReference->InsertPage(nPage, aLabels[nPage - 1]);
++        xNotebookbar->InsertPage(nPage, aLabels[nPage - 1]);
++    }
++
++    // Use the normal tab measurement as the oracle, including native padding.
++    // Vary the font size without assuming a particular system font or DPI.
++    for (tools::Long nHeight : { 10, 16, 24 })
++    {
++        vcl::Font aFont;
++        aFont.SetFontSize(Size(0, nHeight));
++        xReference->SetControlFont(aFont);
++        xNotebookbar->SetControlFont(aFont);
++        CPPUNIT_ASSERT(xReference->placeTabs(8192));
++        CPPUNIT_ASSERT(xNotebookbar->placeTabs(8192));
++        if (nHeight == 10)
++            CPPUNIT_ASSERT(xReference->GetTabBounds(2).GetWidth() < 100);
++        for (sal_uInt16 nPage = 1; nPage <= aLabels.size(); ++nPage)
++        {
++            CPPUNIT_ASSERT_EQUAL(xReference->GetTabBounds(nPage).GetWidth(),
++                                 xNotebookbar->GetTabBounds(nPage).GetWidth());
++        }
++    }
++}
++
++void NotebookbarTest::testResizeWithShortcuts()
++{
++    ScopedVclPtrInstance<WorkWindow> xWindow(nullptr, WB_APP);
++    ScopedVclPtrInstance<MeasuringNotebookbar> xNotebookbar(xWindow.get());
++    ScopedVclPtrInstance<ToolBox> xShortcuts(xNotebookbar.get());
++    vcl::Font aFont;
++    aFont.SetFontSize(Size(0, 10));
++    xNotebookbar->SetControlFont(aFont);
++    xShortcuts->SetSizePixel(Size(120, 24));
++    xNotebookbar->SetToolBox(xShortcuts.get());
++    for (sal_uInt16 nPage = 1; nPage <= 3; ++nPage)
++        xNotebookbar->InsertPage(nPage, u"Tab"_ustr);
++
++    // Cross the old 100-pixel-per-tab threshold while all natural widths fit.
++    const tools::Long nThreshold = 3 * 100 + xShortcuts->GetSizePixel().Width() + 1
++                                  + xNotebookbar->GetOpenMenu()->GetSizePixel().Width();
++    CPPUNIT_ASSERT(xNotebookbar->placeTabs(nThreshold - 1));
++    const tools::Long nWidth = xNotebookbar->GetTabBounds(1).GetWidth();
++    CPPUNIT_ASSERT(nWidth < 100);
++    CPPUNIT_ASSERT(xNotebookbar->placeTabs(nThreshold + 1));
++    for (sal_uInt16 nPage = 1; nPage <= 3; ++nPage)
++        CPPUNIT_ASSERT_EQUAL(nWidth, xNotebookbar->GetTabBounds(nPage).GetWidth());
++
++    CPPUNIT_ASSERT(xNotebookbar->GetTabBounds(1).Left()
++                   > xShortcuts->GetPosPixel().X() + xShortcuts->GetSizePixel().Width());
++    CPPUNIT_ASSERT(xNotebookbar->GetTabBounds(3).Right()
++                   < xNotebookbar->GetOpenMenu()->GetPosPixel().X());
++}
++
++void NotebookbarTest::testHiddenTabWidths()
++{
++    ScopedVclPtrInstance<WorkWindow> xWindow(nullptr, WB_APP);
++    ScopedVclPtrInstance<MeasuringNotebookbar> xNotebookbar(xWindow.get());
++    vcl::Font aFont;
++    aFont.SetFontSize(Size(0, 10));
++    xNotebookbar->SetControlFont(aFont);
++    for (sal_uInt16 nPage = 1; nPage <= 3; ++nPage)
++        xNotebookbar->InsertPage(nPage, u"Tab"_ustr);
++    xNotebookbar->SetCurPageId(1);
++
++    // Hiding a contextual tab must not expand the remaining tabs to 100 pixels.
++    const tools::Long nWidth = 250 + xNotebookbar->GetOpenMenu()->GetSizePixel().Width();
++    CPPUNIT_ASSERT(xNotebookbar->placeTabs(nWidth));
++    const tools::Long nTabWidth = xNotebookbar->GetTabBounds(1).GetWidth();
++    CPPUNIT_ASSERT(nTabWidth < 100);
++    xNotebookbar->SetPageVisible(3, false);
++    CPPUNIT_ASSERT(xNotebookbar->placeTabs(nWidth));
++    CPPUNIT_ASSERT(xNotebookbar->GetTabBounds(3).IsEmpty());
++    CPPUNIT_ASSERT_EQUAL(nTabWidth, xNotebookbar->GetTabBounds(1).GetWidth());
++    CPPUNIT_ASSERT_EQUAL(nTabWidth, xNotebookbar->GetTabBounds(2).GetWidth());
++    CPPUNIT_ASSERT_EQUAL(sal_uInt16(1), xNotebookbar->GetCurPageId());
++
++    xNotebookbar->SetPageVisible(3, true);
++    CPPUNIT_ASSERT(xNotebookbar->placeTabs(nWidth));
++    CPPUNIT_ASSERT_EQUAL(nTabWidth, xNotebookbar->GetTabBounds(3).GetWidth());
++    CPPUNIT_ASSERT_EQUAL(sal_uInt16(3), xNotebookbar->GetPageCount());
++}
++
++CPPUNIT_TEST_SUITE_REGISTRATION(NotebookbarTest);
++CPPUNIT_PLUGIN_IMPLEMENT();
++
++/* vim:set shiftwidth=4 softtabstop=4 expandtab: */

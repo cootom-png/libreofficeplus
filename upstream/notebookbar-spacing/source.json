@@ -1,0 +1,38 @@
+{
+  "repository": "https://github.com/LibreOffice/core",
+  "license": "MPL-2.0",
+  "checked_on": "2026-10-13",
+  "patch": "tab-width.patch",
+  "changed_paths": [
+    "vcl/source/control/tabctrl.cxx",
+    "vcl/Module_vcl.mk",
+    "vcl/CppunitTest_vcl_notebookbar.mk",
+    "vcl/qa/cppunit/notebookbar.cxx"
+  ],
+  "bases": [
+    {
+      "name": "master",
+      "commit": "05700030c524742e408656375d8e34e00fe4df1a",
+      "files": {
+        "vcl/source/control/tabctrl.cxx": "1ce60b50ad4908a0881c4c51e68ca2a451dd1770d71f2b74058c479b7bb29298",
+        "vcl/Module_vcl.mk": "9d9fa0825695cabc5a29c0300f2197daf0132cb9e6c055648311729a1b3d6443"
+      }
+    },
+    {
+      "name": "26.2.5.2",
+      "commit": "cd7284b4cbbfeb507e630c1aac019f4157393acb",
+      "files": {
+        "vcl/source/control/tabctrl.cxx": "5f3cf2e2398ba990a9848a3b875264fc20b16c38dddc3b6baee114ac3fbef660",
+        "vcl/Module_vcl.mk": "06fa6f332ce021fa571a1aac1035f2d972fd5d22699c038bb5af9f8502263f79"
+      }
+    },
+    {
+      "name": "26.8.1.1",
+      "commit": "bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1",
+      "files": {
+        "vcl/source/control/tabctrl.cxx": "1ce60b50ad4908a0881c4c51e68ca2a451dd1770d71f2b74058c479b7bb29298",
+        "vcl/Module_vcl.mk": "20fc4444b85c6c1143688feee8f63c8abf9b324ff35e13f736bd2a9015003902"
+      }
+    }
+  ]
+}
