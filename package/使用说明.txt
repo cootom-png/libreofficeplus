@@ -12,7 +12,17 @@
 
 ## 下载与安装
 
-**[下载正式发布的配置包](https://github.com/cootom-png/libreofficeplus/releases/latest)**，选择 `LibreOfficePlus.zip`。同页提供 `SHA256SUMS.txt` 和 `release.json`，可核对文件校验值与完整提交。也可[下载 main 已合入版本](https://github.com/cootom-png/libreofficeplus/raw/refs/heads/main/dist/LibreOfficePlus-WPS%E7%95%8C%E9%9D%A2%E9%85%8D%E7%BD%AE%E5%8C%85.zip)。仓库旧 ZIP 文件名为保持下载兼容继续保留；正式发布使用 ASCII 文件名，避免平台自动改名造成清单不一致。
+**[直接下载最新安装包 ZIP](https://github.com/cootom-png/libreofficeplus/releases/latest/download/LibreOfficePlus.zip)** · [查看版本说明和历史下载](https://github.com/cootom-png/libreofficeplus/releases)
+
+当前正式版为 **[v6.8.1](https://github.com/cootom-png/libreofficeplus/releases/tag/v6.8.1)**，发布于 **2026-10-13**。这是界面配置包，包含图形安装、恢复与兼容升级入口；首次使用仍需先安装下表支持的 LibreOffice 本体。
+
+| 发布文件 | 用途 |
+| --- | --- |
+| [LibreOfficePlus.zip](https://github.com/cootom-png/libreofficeplus/releases/download/v6.8.1/LibreOfficePlus.zip) | v6.8.1 完整配置包，解压后运行 `LibreOfficePlus/安装.vbs` |
+| [SHA256SUMS.txt](https://github.com/cootom-png/libreofficeplus/releases/download/v6.8.1/SHA256SUMS.txt) | 正式 ZIP 的 SHA-256 校验值 |
+| [release.json](https://github.com/cootom-png/libreofficeplus/releases/download/v6.8.1/release.json) | 版本、完整源码提交、校验值及精确兼容构建清单 |
+
+正式发布文件使用 ASCII 文件名，便于核对校验清单。仓库 `dist/` 中的旧 ZIP 文件名继续保留，供源码构建使用；安装时使用上面的正式发布入口。
 
 1. 使用 Windows x86-64 版 **LibreOffice 26.2.5.2、26.2.6.1、26.2.6.3 或 26.8.1.1**，已验证构建见下表；初次使用仍须已安装本体；兼容升级入口只提供已适配版本之间的升级。
 2. 首次使用时，先启动并关闭一次 LibreOffice，让软件生成用户配置。
@@ -50,6 +60,16 @@ powershell.exe -NoProfile -STA -ExecutionPolicy Bypass -WindowStyle Hidden -File
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\configure.ps1 -Modules Writer,Calc,Draw,Impress -LibreOfficePath "D:\Apps\LibreOffice"
 ```
+
+### 安装问题排查
+
+| 遇到的情况 | 处理方式 |
+| --- | --- |
+| 26.2.6.3 显示不兼容 | 下载并完整解压 v6.8.1 或更新的适配包，确认安装窗口右上角版本号。未知构建仍需等待适配，不能仅按主版本判断兼容。 |
+| 已退出软件，旧窗口仍提示运行中 | 失败窗口保留上次检查结果；关闭后重新运行。新检查会列出实际进程名、PID 和路径，保存文档后退出对应软件；路径无法核验时会保守停止。 |
+| 更新配置包后提示模块版本混用 | 同时选择此前安装过的全部模块，再开始配置；原来的首次恢复备份继续保留。 |
+
+本配置包不依赖文档宏，也不会降低宏安全级别。实际含宏文档继续使用 LibreOffice 自身的安全检查。
 
 ## 版本兼容
 
