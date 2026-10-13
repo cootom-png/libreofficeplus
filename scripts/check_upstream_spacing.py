@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import urllib.request
 
@@ -41,6 +42,7 @@ def verify(base, manifest, cache):
 
 
 def main():
+    sys.stdout.reconfigure(encoding='utf-8')
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cache', type=Path, help='使用按基线名称存放的源码，仍核对 SHA-256')
     args = parser.parse_args()
