@@ -260,7 +260,7 @@ try {
     try { & $installer -LibreOfficePath $fakeInstall } catch { $failed=$true }
     finally { Remove-Item Function:\Move-Item }
     if (!$failed -or (Get-FileHash -LiteralPath $config).Hash -ne $before -or (Get-FileHash -LiteralPath $writerUi).Hash -ne $uiBefore -or (Get-FileHash -LiteralPath $statePath).Hash -ne $stateBefore) { throw '版本记录失败后未撤回设置、界面和构建记录' }
-    foreach ($buildId in 'bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1','8221e31b3ac356a1623c672912a3d2b492f7e3d1','cd7284b4cbbfeb507e630c1aac019f4157393acb') {
+    foreach ($buildId in 'bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1','8221e31b3ac356a1623c672912a3d2b492f7e3d1','0229ac93fcf0d7cbc6376066c6f35021cef002dc','cd7284b4cbbfeb507e630c1aac019f4157393acb') {
         [IO.File]::WriteAllText("$fakeInstall\program\version.ini","buildid=$buildId")
         $checks.Clear()
         & $installer -LibreOfficePath $fakeInstall -OnCheck { param($Result) $checks.Add($Result) }
@@ -274,6 +274,7 @@ try {
         }
         if ((Get-FileHash -LiteralPath $backup).Hash -ne $firstBackup -or (Get-FileHash -LiteralPath (Join-Path (Split-Path $statePath) 'swriter.ui')).Hash -ne $firstUi) { throw '切换版本覆盖首次备份' }
         if ($buildId -like 'bf6*' -and ($checks | Where-Object { $_.Title -eq '版本兼容' }).Message -notmatch '26.8.1.1') { throw '未显示新版兼容状态' }
+        if ($buildId -like '0229*' -and ($checks | Where-Object { $_.Title -eq '版本兼容' }).Message -notmatch '26.2.4.2') { throw '未显示 26.2.4.2 兼容状态' }
     }
     & $installer -Restore
     Check-Restore

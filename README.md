@@ -2,9 +2,11 @@
 
 为习惯 WPS 的用户提供 **LibreOffice Writer（文字）、Calc（表格）、Draw（绘图）、Impress（演示）**的中文功能区、常用操作和可恢复的一键配置包。
 
-当前版本 **v6.8.1，安装兼容与进程检查修复**。适配 **26.2.5.2、26.2.6.1、26.2.6.3** 与 **26.8.1（完整版本 26.8.1.1）**，按构建选用对应原生界面文件。参考常见办公操作习惯，调整按钮顺序、分组、常用菜单和键位；四模块使用 LibreOffice 原生命令、Colibre 图标与文档引擎。支持版本核实日期：2026-10-13，[官方下载页](https://www.libreoffice.org/download/)。
+当前版本 **v6.8.2，补充 26.2.4.2 兼容**。适配 **26.2.4.2、26.2.5.2、26.2.6.1、26.2.6.3** 与 **26.8.1（完整版本 26.8.1.1）**，按构建选用对应原生界面文件。参考常见办公操作习惯，调整按钮顺序、分组、常用菜单和键位；四模块使用 LibreOffice 原生命令、Colibre 图标与文档引擎。支持版本补验日期：2026-10-16，[官方下载页](https://www.libreoffice.org/download/)。
 
 本版以 Google Material 风格重设计安装、恢复与升级窗口，并通过原生浅色主题统一四模块的功能区、侧栏、菜单和工作区颜色；保留原有 WPS 习惯按钮分组、位置和快捷键。详见 [Material 外观](docs/Material外观.md)。继续关闭官方自动更新，并提供 **`兼容升级.vbs`**：只缓存已适配版本的官方安装包，验证校验值和数字签名，升级后重新配置原有模块。详见[兼容升级](docs/兼容升级.md)。已有[界面间距说明](docs/界面间距说明.md)继续保留，**本版没有改变顶部选项卡宽度**。后续更新仅在本仓库维护和发布，不向 LibreOffice 官方提报；需要本体代码修改的项目列为当前限制。[本体补丁参考](upstream/notebookbar-spacing/README.md)仅供开发研究，不会由安装程序应用。
+
+2026-10-16 兼容补充：增加 26.2.4.2 的精确构建支持，四模块沿用现有 WPS 习惯布局与 Material 外观；安装、恢复和兼容升级继续核对完整版本及构建。验证边界见 [26.2.4.2 兼容说明](docs/版本兼容.md#26242-兼容补验2026-10-16)。
 
 2026-10-13 安装修复：补充 26.2.6.3 精确构建支持；其他应用的同名 `updater.exe` 不再误判为 LibreOffice 更新程序。失败窗口保留上次检查结果，关闭软件后请重新运行安装入口；仍未退出或路径无法核验的相关进程会列出名称、PID 与路径。外观预览脚本也改为遵循宏安全设置，不降低用户安全级别。
 
@@ -14,17 +16,17 @@
 
 **[直接下载最新安装包 ZIP](https://github.com/cootom-png/libreofficeplus/releases/latest/download/LibreOfficePlus.zip)** · [查看版本说明和历史下载](https://github.com/cootom-png/libreofficeplus/releases)
 
-当前正式版为 **[v6.8.1](https://github.com/cootom-png/libreofficeplus/releases/tag/v6.8.1)**，发布于 **2026-10-13**。这是界面配置包，包含图形安装、恢复与兼容升级入口；首次使用仍需先安装下表支持的 LibreOffice 本体。
+当前正式版为 **[v6.8.2](https://github.com/cootom-png/libreofficeplus/releases/tag/v6.8.2)**，发布于 **2026-10-16**。这是界面配置包，包含图形安装、恢复与兼容升级入口；首次使用仍需先安装下表支持的 LibreOffice 本体。
 
 | 发布文件 | 用途 |
 | --- | --- |
-| [LibreOfficePlus.zip](https://github.com/cootom-png/libreofficeplus/releases/download/v6.8.1/LibreOfficePlus.zip) | v6.8.1 完整配置包，解压后运行 `LibreOfficePlus/安装.vbs` |
-| [SHA256SUMS.txt](https://github.com/cootom-png/libreofficeplus/releases/download/v6.8.1/SHA256SUMS.txt) | 正式 ZIP 的 SHA-256 校验值 |
-| [release.json](https://github.com/cootom-png/libreofficeplus/releases/download/v6.8.1/release.json) | 版本、完整源码提交、校验值及精确兼容构建清单 |
+| [LibreOfficePlus.zip](https://github.com/cootom-png/libreofficeplus/releases/download/v6.8.2/LibreOfficePlus.zip) | v6.8.2 完整配置包，解压后运行 `LibreOfficePlus/安装.vbs` |
+| [SHA256SUMS.txt](https://github.com/cootom-png/libreofficeplus/releases/download/v6.8.2/SHA256SUMS.txt) | 正式 ZIP 的 SHA-256 校验值 |
+| [release.json](https://github.com/cootom-png/libreofficeplus/releases/download/v6.8.2/release.json) | 版本、完整源码提交、校验值及精确兼容构建清单 |
 
 正式发布文件使用 ASCII 文件名，便于核对校验清单。仓库 `dist/` 中的旧 ZIP 文件名继续保留，供源码构建使用；安装时使用上面的正式发布入口。
 
-1. 使用 Windows x86-64 版 **LibreOffice 26.2.5.2、26.2.6.1、26.2.6.3 或 26.8.1.1**，已验证构建见下表；初次使用仍须已安装本体；兼容升级入口只提供已适配版本之间的升级。
+1. 使用 Windows x86-64 版 **LibreOffice 26.2.4.2、26.2.5.2、26.2.6.1、26.2.6.3 或 26.8.1.1**，已验证构建见下表；初次使用仍须已安装本体；兼容升级入口只提供已适配版本之间的升级。
 2. 首次使用时，先启动并关闭一次 LibreOffice，让软件生成用户配置。
 3. 保存文档，完全退出 LibreOffice。后台仍有 LibreOffice 进程时安装程序会拒绝修改，并列出名称、编号和可读取的路径，不会强制关闭文档。
 4. 解压整个 ZIP，进入 `LibreOfficePlus` 文件夹，双击 **`安装.vbs`**。选择模块、查看字体提示及安装路径，点击“开始配置”，再查看逐项环境检查和进度。
@@ -65,6 +67,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\configure.ps1 -Modules
 
 | 遇到的情况 | 处理方式 |
 | --- | --- |
+| 26.2.4.2 显示不兼容 | 下载并完整解压 v6.8.2 或更新的适配包；仍严格匹配构建 `0229ac93fcf0d7cbc6376066c6f35021cef002dc`。 |
 | 26.2.6.3 显示不兼容 | 下载并完整解压 v6.8.1 或更新的适配包，确认安装窗口右上角版本号。未知构建仍需等待适配，不能仅按主版本判断兼容。 |
 | 已退出软件，旧窗口仍提示运行中 | 失败窗口保留上次检查结果；关闭后重新运行。新检查会列出实际进程名、PID 和路径，保存文档后退出对应软件；路径无法核验时会保守停止。 |
 | 更新配置包后提示模块版本混用 | 同时选择此前安装过的全部模块，再开始配置；原来的首次恢复备份继续保留。 |
@@ -75,12 +78,13 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\configure.ps1 -Modules
 
 | LibreOffice 完整版本 | 已验证构建 | 专属界面 |
 | --- | --- | --- |
+| 26.2.4.2 | `0229ac93fcf0d7cbc6376066c6f35021cef002dc` | 原生文件一致，共用 `ui/`、`profile/` |
 | 26.2.5.2 | `cd7284b4cbbfeb507e630c1aac019f4157393acb` | `ui/`、`profile/` |
 | 26.2.6.1 | `d1ee4fa77ef37aa4cfa80ea6fd156dcae5d60263` | 原生文件一致，共用 `ui/`、`profile/` |
 | 26.2.6.3 | `8221e31b3ac356a1623c672912a3d2b492f7e3d1` | 原生文件一致，共用 `ui/`、`profile/` |
 | 26.8.1.1（官方显示 26.8.1） | `bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1` | `variants/26.8.1/` |
 
-建议使用 **`兼容升级.vbs`**：保存文件并退出后，按本包兼容清单升级，自动重新配置原有全部模块。当前允许 26.2.5.2、26.2.6.1 或 26.2.6.3 → 26.8.1.1，已是最高兼容版本时不重复安装；未适配版本不放行。升级失败或要求重启时保留缓存和备份，再次运行入口继续；本助手不自动回滚本体。手动升级或降级后，首次打开文档前仍须运行安装入口，**同时勾选以前配置过的所有模块**。首次备份继续保留；只想恢复原界面时使用本版恢复入口，无需匹配软件版本。
+建议使用 **`兼容升级.vbs`**：保存文件并退出后，按本包兼容清单升级，自动重新配置原有全部模块。当前允许 26.2.4.2、26.2.5.2、26.2.6.1 或 26.2.6.3 → 26.8.1.1，已是最高兼容版本时不重复安装；未适配版本不放行。升级失败或要求重启时保留缓存和备份，再次运行入口继续；本助手不自动回滚本体。手动升级或降级后，首次打开文档前仍须运行安装入口，**同时勾选以前配置过的所有模块**。首次备份继续保留；只想恢复原界面时使用本版恢复入口，无需匹配软件版本。
 
 新版开始页保留新的原生网格、字体字号、段落、数字和样式控件；沿用项目的选项卡习惯、格式刷入口及常用菜单。新版额外主题页和扩展页继续保留，布局不承诺与旧版或 WPS 完全相同。每版分别构建并检查四模块 UI 与 24 类右键菜单；快捷键和可选模板共享。
 
