@@ -1,17 +1,18 @@
 # 新旧版本兼容
 
-核实日期：2026-10-12。LibreOffice [官方下载页](https://www.libreoffice.org/download/)列出的最新稳定版为 **26.8.1**，Windows x86-64 完整产品版本为 **26.8.1.1**。本项目保留 **26.2.5.2**，并于 2026-10-13 补验 **26.2.6.1** 及本机更新后的 **26.2.6.3**。
+兼容补验日期：2026-10-16。本项目支持以下 Windows x86-64 精确构建；本轮增加 **26.2.4.2**，此前已适配版本继续保留。**26.8.1.1** 继续作为本包已适配的升级目标，其他新版本需另行核验。
 
 ## 支持矩阵
 
 | 完整版本 | 构建 ID | 来源与专属资源 |
 | --- | --- | --- |
+| 26.2.4.2 | `0229ac93fcf0d7cbc6376066c6f35021cef002dc` | `SOURCE.json` 的 `compatible_builds`，28 个原生文件一致，共用旧版资源 |
 | 26.2.5.2 | `cd7284b4cbbfeb507e630c1aac019f4157393acb` | `vendor/libreoffice/SOURCE.json` → `package/ui/`、`package/profile/` |
 | 26.2.6.1 | `d1ee4fa77ef37aa4cfa80ea6fd156dcae5d60263` | `SOURCE.json` 的 `compatible_builds`，28 个原生文件一致，共用旧版资源 |
 | 26.2.6.3 | `8221e31b3ac356a1623c672912a3d2b492f7e3d1` | 官方标签与本机构建匹配，28 个原生文件一致，共用旧版资源 |
 | 26.8.1.1 | `bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1` | `vendor/libreoffice/26.8.1/SOURCE.json` → `package/variants/26.8.1/` |
 
-两套资源覆盖四个明确构建的 Writer、Calc、Draw、Impress。只支持表中验证过的 Windows 构建，不自动放行同系列其他补丁、其他平台或自编译版本；这不表示其他版本一定无法使用。
+两套资源覆盖五个明确构建的 Writer、Calc、Draw、Impress。只支持表中验证过的 Windows 构建，不自动放行同系列其他补丁、其他平台或自编译版本；这不表示其他版本一定无法使用。
 
 新版 MSI 来自[官方镜像清单](https://download.documentfoundation.org/libreoffice/stable/26.8.1/win/x86_64/LibreOffice_26.8.1_Win_x86-64.msi.mirrorlist)，下载后核对 SHA-256：
 
@@ -66,3 +67,13 @@ c6298b10cfa1748bcbedad94c62ce771e240e5021bfd6d7a967cd571b04b5312
 本机完整产品版本为 26.2.6.3，`version.ini` 的构建与[官方版本标签](https://github.com/LibreOffice/core/tree/libreoffice-26.2.6.3)解析到的提交 `8221e31b3ac356a1623c672912a3d2b492f7e3d1` 一致。逐字核对四模块功能区与 24 个菜单，全部与旧基线一致，沿用同一套资源；来源与校验值记录在 `SOURCE.json` 的 `compatible_builds`。这不放行其他未验证构建。原生与安装恢复验证见 [26.2.6.3兼容验收.json](26.2.6.3兼容验收.json)。
 
 安装、恢复及兼容升级共用进程检查：文档后台进程继续阻止操作；更新器按安装目录与 LibreOffice 用户配置/缓存目录识别，明确属于其他应用的同名更新器不阻止。路径无法读取时保守停止，并展示名称、PID 和无法核验的原因。失败窗口显示上次检查结果，关闭程序后须重新运行入口；不会在窗口中强制结束进程。
+
+## 26.2.4.2 兼容补验（2026-10-16）
+
+支持 Windows x86-64 官方构建 `0229ac93fcf0d7cbc6376066c6f35021cef002dc`，与[官方版本标签](https://github.com/LibreOffice/core/tree/libreoffice-26.2.4.2)一致。[官方 MSI](https://downloadarchive.documentfoundation.org/libreoffice/old/26.2.4.2/win/x86_64/LibreOffice_26.2.4.2_Win_x86-64.msi)下载后核对[官方 SHA-256](https://downloadarchive.documentfoundation.org/libreoffice/old/26.2.4.2/win/x86_64/LibreOffice_26.2.4.2_Win_x86-64.msi.sha256)为 `202f26cda071c5aa4996a5a28412fddceb3891dceb0366982c62650456c0730f`，The Document Foundation 数字签名有效。仅将 MSI 内的 CAB 纯文件解包到独立测试目录，未调用系统安装服务或更改本机 LibreOffice 本体。
+
+官方源码与分发中的四套功能区和 24 个菜单均与 26.2.5.2 基线逐字一致，因此沿用根目录资源，不另复制一套相同界面。新增精确构建记录；安装与兼容升级继续核对完整版本和构建。
+
+独立用户配置实测：114 项原生命令/文档/模板/键位检查、102 项演示检查、66 项菜单/外观读取通过；42 项外观设置安装与恢复、四模块原生样式读取，以及三个更新开关关闭和恢复通过。另有 2 项演示可见选区检查继续待完成。检查存在重叠，不相加作为独立功能总数。公开结果见 [26.2.4.2兼容验收.json](26.2.4.2兼容验收.json)。
+
+原生运行测试仅在受保护的配置副本中替换进程探测，让用户已有文档继续运行；真实安装器的进程检查仍由独立回归验证。安装、重复配置、版本切换、恢复、首次备份保留、图形窗口及从 26.2.4.2 到 26.8.1.1 的隔离模拟升级检查通过。未执行真实 MSI 安装、管理员授权或重启；真实窗口逐按钮、不同 DPI、复杂旧文档与全屏动画仍保留前述边界。

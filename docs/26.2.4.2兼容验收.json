@@ -1,0 +1,240 @@
+{
+  "version": "26.2.4.2",
+  "buildid": "0229ac93fcf0d7cbc6376066c6f35021cef002dc",
+  "verified_on": "2026-10-16",
+  "isolation": "官方 MSI 仅纯文件解包；使用独立用户配置和合成文档。进程探测仅在受保护的测试副本中替换，不结束用户进程、不修改个人配置。",
+  "binary": {
+    "msi_sha256": "202f26cda071c5aa4996a5a28412fddceb3891dceb0366982c62650456c0730f",
+    "signer": "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, L=Berlin, S=Berlin, C=DE",
+    "msi_url": "https://downloadarchive.documentfoundation.org/libreoffice/old/26.2.4.2/win/x86_64/LibreOffice_26.2.4.2_Win_x86-64.msi",
+    "signature_status": "Valid",
+    "product_version": "26.2.4.2",
+    "buildid": "0229ac93fcf0d7cbc6376066c6f35021cef002dc",
+    "native_resources_matched": 28,
+    "extraction": "只读 MSI 数据库与 CAB 纯文件解包，未执行安装动作。",
+    "files": [
+      {
+        "path": "swriter/ui/notebookbar.ui",
+        "sha256": "b5d3949bd1239874e1d0c0049b1c1d5075e215db2217ebf6234af50980394d2f",
+        "matched": true
+      },
+      {
+        "path": "scalc/ui/notebookbar.ui",
+        "sha256": "95663027bb4325d46522b19259fe47fc85b837b6f92558f6568942b58d535804",
+        "matched": true
+      },
+      {
+        "path": "sdraw/ui/notebookbar.ui",
+        "sha256": "8952c4df2b5755c94991a5854c4adc05626cf5833a7e258db20797a0bb1690a3",
+        "matched": true
+      },
+      {
+        "path": "swriter/popupmenu/text.xml",
+        "sha256": "5ef8f6322e53d0bfb684c63ed2b7f97b2aeeb718ee0b674e4ed7585f682da939",
+        "matched": true
+      },
+      {
+        "path": "swriter/popupmenu/table.xml",
+        "sha256": "17818f908f90c73cf99325f05f869fc57727ba4098a489e51e6334f8bc19c6b0",
+        "matched": true
+      },
+      {
+        "path": "swriter/popupmenu/graphic.xml",
+        "sha256": "6f16b3a5c5b94c9fc845949bad5041548ce9524e5868c25e335ed3fcd936ce07",
+        "matched": true
+      },
+      {
+        "path": "scalc/popupmenu/cell.xml",
+        "sha256": "06ec4d72473721b77e637ad66687169dc52a8dd52f25be15e81fd05c3893decf",
+        "matched": true
+      },
+      {
+        "path": "scalc/popupmenu/rowheader.xml",
+        "sha256": "05ecb923e1f4246462b0bb3ac9af448c75fe41cc8cc9e7f3986aa2deadc7ddac",
+        "matched": true
+      },
+      {
+        "path": "scalc/popupmenu/colheader.xml",
+        "sha256": "4c2b4db22bbfb0ce0b0b9beadfc4a559381dd16154bc81373b10ad568077c97b",
+        "matched": true
+      },
+      {
+        "path": "scalc/popupmenu/sheettab.xml",
+        "sha256": "a7ab4f18a4123a266b434f740028b4654b1d4ec26ff7a8ee48f567e9d21e0eb5",
+        "matched": true
+      },
+      {
+        "path": "scalc/popupmenu/draw.xml",
+        "sha256": "f791537b80d29d61fc12bfd220f9ddcbbcf5eaf28c3110cae13bc118e35c2a9b",
+        "matched": true
+      },
+      {
+        "path": "scalc/popupmenu/graphic.xml",
+        "sha256": "d590149eafa9d927e73ed6eeb2915f9623526bef48ff90b50064189ade8bf42a",
+        "matched": true
+      },
+      {
+        "path": "sdraw/popupmenu/draw.xml",
+        "sha256": "f6fe6c9e47f7c83e5c1ab5ffab13aa787d323d1f794b9fd186043ba7f46714d0",
+        "matched": true
+      },
+      {
+        "path": "sdraw/popupmenu/drawtext.xml",
+        "sha256": "d992dcd1fa4ebb658ce387f439fcd877f4d3638d87a30863a847939faa9774c6",
+        "matched": true
+      },
+      {
+        "path": "sdraw/popupmenu/graphic.xml",
+        "sha256": "3e2b17145a8190593608bb96a4c5770046c1cd88c782df2735859b56a7d0a613",
+        "matched": true
+      },
+      {
+        "path": "sdraw/popupmenu/group.xml",
+        "sha256": "c4c32ef725965e28885becc2595d5f3aa25f74263b4734d5a6f02ecf4e8d87e1",
+        "matched": true
+      },
+      {
+        "path": "sdraw/popupmenu/multiselect.xml",
+        "sha256": "bd52a2a480c28430fa61a21b713c7b569cb3aaab97e7115650c49c26a596800f",
+        "matched": true
+      },
+      {
+        "path": "sdraw/popupmenu/page.xml",
+        "sha256": "6c1489d643cc64238b692e1da6fffd22488fb82ab8c0231bb57f065b267c8326",
+        "matched": true
+      },
+      {
+        "path": "sdraw/popupmenu/pagepane.xml",
+        "sha256": "d012fc7fa72a122fce1b7219510dc6fa4f9671043cbd0eca67cdc7572e346a16",
+        "matched": true
+      },
+      {
+        "path": "simpress/ui/notebookbar.ui",
+        "sha256": "d00d7b6e8ff0d35feb0271266331bf8f28a85ee6bb4290a221036647a4e00b6d",
+        "matched": true
+      },
+      {
+        "path": "simpress/popupmenu/page.xml",
+        "sha256": "94479ddefe974fdca13e4a6b9e85be303290cd3ac94329488533bd867f5dcbb2",
+        "matched": true
+      },
+      {
+        "path": "simpress/popupmenu/pagepane.xml",
+        "sha256": "b1536e43ecbd40dc7666a82a9eb9cec31202d888cce0400d838652281a2fee7e",
+        "matched": true
+      },
+      {
+        "path": "simpress/popupmenu/draw.xml",
+        "sha256": "771b42eff98eccdfc0d7f0181a6f3924d39fdbdbf7a93eaa11ff7a47c35f65d6",
+        "matched": true
+      },
+      {
+        "path": "simpress/popupmenu/drawtext.xml",
+        "sha256": "f5c125899bc77ad97904a88ad79012e7e026912daa069667393baf57d059cac8",
+        "matched": true
+      },
+      {
+        "path": "simpress/popupmenu/graphic.xml",
+        "sha256": "cac6999deb8332addd18adfc8d17d2a1f905c67a4458c43ab603d83bc82c49a8",
+        "matched": true
+      },
+      {
+        "path": "simpress/popupmenu/table.xml",
+        "sha256": "c0f504bae8d232f9f1fc622b85a4f45fa78d35e312ceef4a6128604e32155019",
+        "matched": true
+      },
+      {
+        "path": "simpress/popupmenu/group.xml",
+        "sha256": "17bd8c56e9308b762c6ba0b3f21ef83db4b5db460b6a9aad465e1e52fa6ec481",
+        "matched": true
+      },
+      {
+        "path": "simpress/popupmenu/multiselect.xml",
+        "sha256": "6664f4ce068b3dd851eadcedd825887816cd615219e9c3f7ce45e1e913b5871e",
+        "matched": true
+      }
+    ]
+  },
+  "checks": {
+    "native": {
+      "passed": 114,
+      "pending": 0
+    },
+    "impress": {
+      "passed": 102,
+      "pending": 2
+    },
+    "menus": {
+      "passed": 66,
+      "pending": 0
+    },
+    "appearance": {
+      "settings_passed": 42,
+      "modules": 4,
+      "restore_passed": 42
+    },
+    "updates": {
+      "settings_passed": 3,
+      "restore_passed": 3
+    }
+  },
+  "native_styles": [
+    {
+      "module": "swriter",
+      "values": {
+        "FaceColor": 16317181,
+        "WindowColor": 16317181,
+        "MenuColor": 16777215,
+        "MenuTextColor": 2039583,
+        "MenuHighlightColor": 3381759,
+        "MenuHighlightTextColor": 0,
+        "FieldColor": 16777215
+      },
+      "verified": true
+    },
+    {
+      "module": "scalc",
+      "values": {
+        "FaceColor": 16317181,
+        "WindowColor": 16317181,
+        "MenuColor": 16777215,
+        "MenuTextColor": 2039583,
+        "MenuHighlightColor": 3381759,
+        "MenuHighlightTextColor": 0,
+        "FieldColor": 16777215
+      },
+      "verified": true
+    },
+    {
+      "module": "sdraw",
+      "values": {
+        "FaceColor": 16317181,
+        "WindowColor": 16317181,
+        "MenuColor": 16777215,
+        "MenuTextColor": 2039583,
+        "MenuHighlightColor": 3381759,
+        "MenuHighlightTextColor": 0,
+        "FieldColor": 16777215
+      },
+      "verified": true
+    },
+    {
+      "module": "simpress",
+      "values": {
+        "FaceColor": 16317181,
+        "WindowColor": 16317181,
+        "MenuColor": 16777215,
+        "MenuTextColor": 2039583,
+        "MenuHighlightColor": 3381759,
+        "MenuHighlightTextColor": 0,
+        "FieldColor": 16777215
+      },
+      "verified": true
+    }
+  ],
+  "limits": [
+    "未穷尽真实窗口逐按钮、不同 DPI、复杂旧文档与全屏动画。",
+    "演示隐藏/显示幻灯片的 2 项可见选区复核仍待完成。",
+    "未执行真实本体安装、管理员授权或重启；兼容升级调用通过隔离模拟检查。"
+  ]
+}

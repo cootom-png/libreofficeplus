@@ -40,7 +40,7 @@ function Start-Process {
     }
     [pscustomobject]@{ExitCode=$testState.InstallExit}
 }
-function New-Case($name) {
+function New-Case($name, $version='26.2.5.2', $buildId='cd7284b4cbbfeb507e630c1aac019f4157393acb') {
     $case=Join-Path $fixture $name
     $env:APPDATA=Join-Path $case 'roaming'; $env:LOCALAPPDATA=Join-Path $case 'local'
     $testState.FakeApp=Join-Path $case 'app'
@@ -49,8 +49,8 @@ function New-Case($name) {
     New-Item -ItemType Directory -Path (Split-Path $testState.Config),"$($testState.FakeApp)\program" -Force | Out-Null
     $bytes=New-Object byte[] 128; $bytes[0]=0x4d; $bytes[1]=0x5a; $bytes[60]=64; $bytes[64]=0x50; $bytes[65]=0x45; $bytes[68]=0x64; $bytes[69]=0x86
     [IO.File]::WriteAllBytes("$($testState.FakeApp)\program\soffice.exe",$bytes)
-    [IO.File]::WriteAllText("$($testState.FakeApp)\program\product.txt",'26.2.5.2')
-    [IO.File]::WriteAllText("$($testState.FakeApp)\program\version.ini",'buildid=cd7284b4cbbfeb507e630c1aac019f4157393acb')
+    [IO.File]::WriteAllText("$($testState.FakeApp)\program\product.txt",$version)
+    [IO.File]::WriteAllText("$($testState.FakeApp)\program\version.ini","buildid=$buildId")
     [IO.File]::WriteAllText($testState.Config,'<oor:items xmlns:oor="http://openoffice.org/2001/registry"/>')
     $testState.Running=$false; $testState.BadSignature=$false; $testState.NetworkFailure=$false
     $testState.Downloads=0; $testState.Installs=0; $testState.InstallExit=0; $testState.ApplyInstall=$true
@@ -67,6 +67,14 @@ try {
     $before=(Get-FileHash $testState.Config).Hash
     $plan=& $upgrade -CheckOnly -LibreOfficePath $testState.FakeApp
     if ($plan.Current.Version -ne '26.2.5.2' -or $plan.Target.Version -ne '26.8.1.1' -or ($plan.Modules -join ',') -ne 'Writer,Calc' -or (Test-Path $testState.UpgradeRoot) -or (Get-FileHash $testState.Config).Hash -ne $before) { throw '只读兼容预检不正确' }
+    New-Case '26.2.4.2' '26.2.4.2' '0229ac93fcf0d7cbc6376066c6f35021cef002dc'
+    $before=(Get-FileHash $testState.Config).Hash
+    $plan=& $upgrade -CheckOnly -LibreOfficePath $testState.FakeApp
+    if ($plan.Current.Version -ne '26.2.4.2' -or $plan.Target.Version -ne '26.8.1.1' -or (Test-Path $testState.UpgradeRoot) -or (Get-FileHash $testState.Config).Hash -ne $before) { throw '26.2.4.2 升级预检或只读状态不正确' }
+    $firstBackup=(Get-FileHash (Join-Path $env:APPDATA 'LibreOffice\wps-ui-backup.xml')).Hash
+    Run-Upgrade
+    $state=ConvertFrom-Json -InputObject (Get-Content (Join-Path $env:APPDATA 'LibreOffice\wps-ui-files-backup\state.json') -Raw)
+    if ($testState.Downloads -ne 1 -or $testState.Installs -ne 1 -or (Test-Path (Join-Path $testState.UpgradeRoot 'pending.json')) -or @($state | Where-Object { $_.BuildId -ne 'bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1' }).Count -or (Get-FileHash (Join-Path $env:APPDATA 'LibreOffice\wps-ui-backup.xml')).Hash -ne $firstBackup) { throw '26.2.4.2 升级后重新配置或首次备份不正确' }
     New-Case 'success'
     $firstBackup=(Get-FileHash (Join-Path $env:APPDATA 'LibreOffice\wps-ui-backup.xml')).Hash
     Run-Upgrade
